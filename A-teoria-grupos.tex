@@ -1,0 +1,661 @@
+%\subsection{Definiciones y propiedades básicas}
+%\begin{definition}[Grupo]
+%Un conjunto $G$ y una función (total) $\circ : G \times
+%G \to G$ forman un grupo si:
+%\begin{enumerate}
+%	\item Para cada $a,b,c \in G$: $(a \circ b) \circ c = a \circ (b
+%\circ c)$
+
+%	\item Existe $e \in G$ tal que para cada $a \in G$: $a \circ e = e \circ a = a$
+
+%   \item Para cada $a \in G$, existe $b \in G$: $a \circ b 	= b \circ a = e$
+%\end{enumerate}
+%\end{definition}
+%\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
+\begin{definition}[Grupo]
+Una tupla $(G,\circ)$, dónde $G$ es un conjunto y $\circ :G\times G\to G$ una función (total) forman un grupo si:
+\begin{enumerate}
+	\item Para cada $a,b,c \in G$: $(a \circ b) \circ c = a \circ (b
+\circ c)$
+
+	\item Existe $e \in G$ tal que para cada $a \in G$: $a \circ e = e \circ a = a$
+
+   \item Para cada $a \in G$, existe $b \in G$: $a \circ b 	= b \circ a = e$
+\end{enumerate}
+Decimos que $(G,\circ)$ es un grupo abeliano si además de ser un grupo, se cumple que $\circ$ es conmutativo, es decir, para todo $a,b\in G$ se tiene que $a\circ b = b\circ a$.
+\end{definition}
+
+%Una propiedad que se cumple en los grupos es que
+El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen
+la condición 2 de la definición anterior, entonces $e_1= e_2$.  Otra
+propiedad que podemos derivar de la definición anterior es que el
+inverso de cada elemento $a$ es único: si $a \circ b = b \circ a= e$ y
+$a \circ c = c \circ a = e$, entonces $b = c$. La demostración de
+estas propiedades se deja como ejercicio para el lector.
+
+
+Habiéndo definido esta estructura algebraica, nos interesa describir a los grupos que podemos encontrar dentro de otros grupos: los subgrupos.
+%--------------------------------------
+\begin{definition}
+$(H, \circ)$ es un subgrupo de un grupo $(G, \circ)$, para $H \subseteq G$, si $(H, \circ)$ es un grupo.
+\end{definition}
+
+Dos propiedades básicas que relacionan grupos con sus subgrupos son las que enunciamos y demostramos a continuación.
+
+\begin{proposition}
+Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones se cumplen.
+	\begin{enumerate}
+		\item Si $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$, entonces $e_1 = e_2$
+
+		\item Para cada $a \in H$, si $b$ es el inverso de $a$ en $(G, \circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$, entonces $c = b$
+	\end{enumerate}
+\end{proposition}
+
+
+
+
+%--------
+%A continuación demostraremos la proposición.
+\begin{proof}
+\text{ }
+	\begin{enumerate}
+	\item Supongamos que $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$. Vamos a demostrar que $e_1 = e_2$.
+Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, entonces se cumple $e_2 \circ e_1 = e_2$.
+Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo tanto $e_2 \circ e_2 = e_2$
+(notemos que se usa la misma operación en $H$ y $G$).
+De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$.
+Sea $e^{-1}_2$ el inverso de $e_2$ en $(G, \circ)$. Entonces:
+\begin{eqnarray*}
+e_2 \circ e_1 = e_2 \circ e_2 & \Rightarrow & e^{-1}_2 \circ (e_2
+\circ e_1) =  e^{-1}_2 \circ (e_2 \circ e_2)\\
+& \Rightarrow & (e^{-1}_2 \circ e_2) \circ e_1 =  (e^{-1}_2 \circ e_2)
+\circ e_2\\ 
+& \Rightarrow & e_1 \circ e_1 =  e_1 \circ e_2\\ 
+& \Rightarrow & e_1 = e_2
+\end{eqnarray*}
+
+%\qed
+
+	
+	\item
+	Sea $a \in H$, y suponga que $b$ es el inverso de $a$ en $(G,
+\circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$. Vamos a demostrar que $b = c$.
+Por la primera propiedad, sabemos que $(G, \circ)$ y $(H,
+\circ)$ tienen el mismo neutro. Sea $e$ el neutro en $(G, \circ)$ y $(H, \circ)$. 
+Dado que $b$ es el inverso de $a$ en $(G, \circ)$, entonces $a \circ b = e$. Además, dado que $c$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ c = e$. De lo anterior concluimos que $a \circ b = a \circ c$.
+Como sabemos que $b$ es el inverso de $a$ en $(G, \circ)$, tenemos que:
+%. Entonces:
+
+\begin{eqnarray*}
+a \circ b = a \circ c & \Rightarrow & b \circ (a
+\circ b) =  b \circ (a \circ c)\\
+& \Rightarrow & (b \circ a) \circ b =  (b \circ a)
+\circ c\\ 
+& \Rightarrow & e \circ b =  e \circ c\\ 
+& \Rightarrow & b = c
+\end{eqnarray*}
+	\end{enumerate}
+\end{proof}
+
+%----------
+A continuación enunciamos el Teorema de Lagrange para teoría de grupos. Este importante resultado relaciona el orden de un grupo finito con el orden de cualquiera de sus subgrupos.
+\begin{theorem}[{\bf Lagrange}]
+\label{teo:lagrange}
+Si $(G, \circ)$ es un grupo finito y $(H, \circ)$ es un subgrupo de $(G, \circ)$, entonces $|H|$ divide a $|G|$.
+\end{theorem}
+
+Para demostrar el teorema \ref{teo:lagrange} vamos a introducir una relación binaria que nos será de gran utilidad. Sea $(G, \circ)$ un grupo finito y $(H, \circ)$ un subgrupo de $(G, \circ)$. 
+Suponga que $e$ es el elemento neutro de $(G,\circ)$ y $a^{-1}$ es el inverso de $a$ en $(G, \circ)$.
+Sea entonces $\sim$ una relación binaria sobre $G$ definida
+como 
+\begin{center}
+	$a \sim b$ si y sólo si $b \circ a^{-1} \in H$
+\end{center}
+En base a esta relación, propondremos dos lemas que nos servirán para la demostración del teorema de Lagrange.
+
+\begin{lemma}\label{lema:rel bin}
+	$\sim$ es una relación de equivalencia.
+\end{lemma}
+\begin{proof}
+%[Demostración del lema \ref{lema:rel bin}.]
+Para demostrar que $\sim$ es una relación de equivalencia debemos demostrar que es refleja, simétrica y transitiva.
+Sabemos que $a \sim a$ ya que $a \circ a^{-1} = e$ y $e \in H$. Luego, la relación es refleja. 
+Supongamos ahora que $a \sim b$. Para demostrar que es simétrica tenemos que demostrar que $b \sim a$.
+Dado que $a \sim b$, entonces $b \circ a^{-1} \in H$. Tenemos que:
+%\comentarioin{Siempre antes de un eqnarray vamos a poner ``:''? Para ponerlo en todo el documento asi}
+%\comentarioin{Depende del contexto si corresponde usar ``:''. Cuando pienses si corresponde colocar ``:'', piensa si pondrías ``:'' si esto fuera un párrafo. Por ejemplo, ``El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' es parte del primer párrafo de esta sección, y ahí es claro que corresponde usar ``:''. Podríamos haber colocado la frase ``si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' en una linea separada, incluso con eqnarray, y en ese caso tendríamos que usar ``:''.}
+\begin{eqnarray*}
+(b \circ a^{-1}) \circ (a \circ b^{-1}) & = & (b \circ (a^{-1} \circ
+a)) \circ b^{-1}\\ 
+& = & (b \circ e) \circ b^{-1}\\ 
+& = & b \circ b^{-1}\\ 
+& = & e
+\end{eqnarray*}
+
+De forma análoga podemos llegar a que $(a \circ b^{-1}) \circ (b \circ
+a^{-1}) = e$.
+Así, podemos afirmar que $(b \circ a^{-1})^{-1} = a \circ b^{-1}$ y concluimos que $a \circ b^{-1}\in H$, ya que $(H, \circ)$ es un subgrupo de $(G, \circ)$ (en particular, el inverso de cada elemento de $H$ está en $H$). Luego, la relación es simétrica.
+Por último, debemos demostrar que la relación es transitiva. Para esto supongamos que $a \sim b$ y $b \sim c$, y debemos demostrar que $a \sim c$.
+Por la definición de $\sim$ sabemos que $b \circ a^{-1} \in H$ y $c \circ b^{-1} \in H$. %, y tenemos que demostrar que $c \circ a^{-1} \in H$.
+Pero $(c \circ b^{-1}) \circ (b \circ a^{-1}) = c \circ a^{-1}$ y sabemos que la operación
+$\circ$ es cerrada en $H$. Por lo tanto $c \circ a^{-1} \in H$, por lo que
+%significa que
+$a\sim c$. Luego, $\sim$ también es transitiva.
+
+\end{proof}
+
+%-----
+
+Sea $[a]_\sim$ la clase de equivalencia de $a \in G$ bajo la relación $\sim$. El siguiente lema relaciona este concepto con $H$ y $G$.
+\begin{lemma}\label{lema grupo 6}
+\hfill
+\begin{enumerate}
+\item $[e]_\sim = H$
+
+\item Para cada $a, b \in G$: $|[a]_\sim| = |[b]_\sim|$
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{proof}
+%[Demostración del lema \ref{lema grupo 6}.]
+\text{}
+\begin{enumerate}
+\item Se tiene que:
+
+\begin{center}
+\begin{tabular}{lcl}
+$a \in [e]_\sim$ & $\Leftrightarrow$ & $e \sim a$\\
+& $\Leftrightarrow$ & $a \circ e^{-1} \in H$\\
+& $\Leftrightarrow$ & $a \circ e \in H$\\
+& $\Leftrightarrow$ & $a \in H$
+\end{tabular}
+\end{center}
+
+\item Sean $a,b \in G$, y defina la función $f$ de la siguiente forma:
+\begin{eqnarray*}
+f(x) & = & x \circ (a^{-1} \circ b)
+\end{eqnarray*}
+
+Se tiene que:
+
+\begin{center}
+\begin{tabular}{lcl}
+$x \in [a]_\sim$ & $\Rightarrow$ & $a \sim x$\\
+& $\Rightarrow$ & $x \circ a^{-1} \in H$\\
+& $\Rightarrow$ & $(x \circ a^{-1}) \circ e \in H$\\
+& $\Rightarrow$ & $(x \circ a^{-1}) \circ (b \circ b^{-1}) \in H$\\
+& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $f(x) \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $b \sim f(x)$\\
+& $\Rightarrow$ & $f(x) \in [b]_\sim$
+\end{tabular}
+\end{center}
+
+
+Por lo tanto podemos afirmar que $f : [a]_\sim \to [b]_\sim$. Vamos a demostrar que $f$ es una biyección, de lo que podremos
+concluir que $|[a]_\sim| = |[b]_\sim|$.  
+Lo primero es mostrar que $f$ es inyectiva:
+
+\begin{center}
+\begin{tabular}{lcl}
+$f(x) = f(y)$ & $\Rightarrow$ & $x \circ (a^{-1} \circ b) = y \circ
+(a^{-1} \circ b)$\\
+%\comentarioin{Por qué no simplemente multiplicar por el inverso de $(a^{-1}\circ b$ aca?)}\\
+& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}
+= (y \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}$\\
+& $\Rightarrow$ & $x \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})
+= y \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})$\\
+& $\Rightarrow$ & $x \circ e = y \circ e$\\
+& $\Rightarrow$ & $x = y$
+\end{tabular}
+\end{center}
+
+Además, $f$ es sobreyectiva:
+
+\begin{center}
+\begin{tabular}{lcl}
+$y \in [b]_\sim$ & $\Rightarrow$ & $b \sim y$\\
+& $\Rightarrow$ & $y \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $(y \circ b^{-1}) \circ (a \circ a^{-1}) \in H$\\
+& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \circ a^{-1} \in H$\\
+& $\Rightarrow$ & $a \sim ((y \circ b^{-1}) \circ a)$\\
+& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \in [a]_\sim$
+\end{tabular}
+\end{center}
+
+Sea $x = ((y \circ b^{-1}) \circ a)$. Tenemos que:
+\begin{center}
+\begin{tabular}{lcl}
+$f(x)$ & $=$ & $x \circ (a^{-1} \circ b)$\\
+& $=$ & $((y \circ b^{-1}) \circ a) \circ (a^{-1} \circ b)$\\
+& $=$ & $y \circ (b^{-1} \circ (a \circ a^{-1}) \circ b)$\\
+& $=$ & $y \circ ((b^{-1} \circ e) \circ b)$\\
+& $=$ & $y \circ (b^{-1} \circ b)$\\
+& $=$ & $y \circ e$\\
+& $=$ & $y$ 
+\end{tabular}
+\end{center}
+
+\end{enumerate}
+
+\end{proof}
+A continuación demostraremos el teorema \ref{teo:lagrange} a partir del lema \ref{lema grupo 6}.
+\begin{proof}[Demostración del teorema \ref{teo:lagrange}.]
+Sea $E = \{[a]_{\sim}\mid a\in G\}$ el conjunto de todas las clases de equivalencia de $G$ bajo la relación $\sim$. Como $H = [e]_{\sim}$ y todas las clases de equivalencia tienen la misma cardinalidad, entonces $|G| = |[e]_{\sim}|\cdot |E| = |H|\cdot |E|$. Luego, $|H|$ divide a $|G|$. 
+
+\end{proof}
+
+%-------------------
+Otro concepto que nos interesa en teoría de grupos es el orden de los
+elementos en un grupo.  Dada un elemento $a$ en un grupo $(G,\circ)$ y
+$m \in \mathbb{Z}$, se define $a^m$ de la siguiente forma. Si $m > 0$,
+entonces $a^m$ es el resultado de operar $a$ consigo mismo $m$ veces
+bajo la operación $\circ$. Si $m = 0$, entonces $a^m = e$, donde $e$
+es el neutro en $(G,\circ)$. Si $m < 0$, entonces $a^m$ es el
+resultado de operar $a^{-1}$ consigo mismo $m$ veces bajo la operación
+$\circ$, donde $a^{-1}$ es el inverso de $a$ en $(G, \circ)$. Con esto
+tenemos que:
+
+\begin{definition}\label{def_orden}
+	El orden de un elemento $a$ de un grupo $(G,\circ)$ es el menor entero positivo $m$ tal que $a^m = e$, donde
+        %$a^m$ es el resultado de operar $a$ bajo $\circ$ en el grupo, y el elemento
+        $e$ es el elemento neutro del grupo. Si este valor $m$ no existe, decimos que $a$ tiene orden infinito. Denotamos al orden del elemento $a$ en $G$ como $O_G(a)$.
+\end{definition} 
+Nótese que utilizamos la misma notación de orden para denotar la cantidad de elementos de un grupo; sin embargo, esto no genera confusión ya que es claro cuando se habla de un grupo o de un elemento de un grupo. 
+A continuación definimos el conjunto generado por un elemento en un grupo, y veremos que está directamente relacionado con el orden del mismo. 
+ 
+\begin{definition}\label{def_gen}
+	El conjunto generado por un elemento $a$ en un grupo $(G,\circ)$ es el conjunto
+        \begin{eqnarray*}
+        \langle a\rangle & := & \{a^k\mid k\in\mathbb{Z}\}.
+        \end{eqnarray*}
+        Decimos que $a$ es el generador del grupo.
+\end{definition}
+
+Nótese que la definición del conjunto generado por un elemento $a$
+depende directamente del grupo $G$ al cual pertenece $a$. En
+particular, se tiene que $a^m\in G$ para cada número entero $m$, y
+por ende $\langle a\rangle\subseteq G$ (notar que utilizamos la misma
+operación $\circ$ en el grupo $G$ y la definición de $\langle
+a \rangle$). A continuación, mostraremos una propiedad fundamental de
+los conjuntos generados.
+
+
+\begin{proposition}\label{prop-generado}
+	Si $a$ es un elemento de un grupo $(G,\circ)$, entonces $(\langle a\rangle ,\circ)$ es un subgrupo de $(G,\circ)$. 
+%        A los grupos que pueden ser generados por un solo elemento los denominamos grupos cíclicos.
+\end{proposition} 
+
+
+\begin{proof}
+Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
+que $(\langle a\rangle,\circ)$ es un grupo. Nótese que la operación
+$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
+a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{Z}$,
+por lo que $b \circ c \in \langle a\rangle$ puesto que $b \circ c =
+a^{m+n}$ y $m+n \in \mathbb{Z}$. Tenemos que demostrar entonces los
+tres axiomas de grupos para $(\langle a\rangle, \circ)$. La
+asociatividad de la operación $\circ$ se cumple trivialmente puesto
+que $(G,\circ)$ es un grupo. Además, dado que $a^0 = e$, donde $e$ es
+el neutro de $(G, \circ)$, tenemos que $e \in \langle a\rangle$ y
+$(\langle a\rangle, \circ)$ tiene un elemento neutro. Finalmente, si
+$b \in \langle a\rangle$, se tiene que $b = a^n$ para
+$n \in \mathbb{Z}$, de lo cual deducimos que $b$ tiene inverso en
+$(\langle a\rangle, \circ)$ ya que $a^{-n} \in \langle
+a\rangle$ y $a^n \circ a^{-n} = a^{-n} \circ a^n = e$ por definición de la operación $a^n$.
+\end{proof}
+
+Si para un grupo $(G, \circ)$ existe un elemento $a \in G$ tal que
+$\langle a \rangle = G$, entonces decimos que $(G,\circ)$ es un grupo
+cíclico. Desde la proposición \ref{prop-generado}, podemos observar
+que para un grupo finito $(G, \circ)$ y un elemento $a \in G$, se
+tiene que $|\langle a\rangle |$ divide a $|G|$ por el teorema de
+Lagrange. En la siguiente proposición, establecemos para grupos
+finitos la relación directa que existe entre el orden de un elemento
+$a$ y el orden del grupo $\langle a \rangle$.
+
+\begin{proposition}\label{prop-orden}
+Sea $a$ un elemento de un grupo finito $(G,\circ)$, y sea $m =
+|\langle a \rangle|$. Entonces se tiene que $\langle a\rangle
+= \{a^0,\ldots,a^{m-1}\}$ y $O_G(a) = m$.
+\end{proposition}
+%\comentarioin{hablar sobre $a=e$ y tambien sobre grupo ciclico}
+\begin{proof}
+Dado que $G$ es un grupo finito, existen $i,j \in \mathbb{N}$ tales que
+$i < j$ y $a^i = a^j$. De esto concluimos que $a^{j-i} = e$, y sabemos
+que $O_G(a)$ es un número entero positivo. Sea $k = O_G(a)$. Tenemos
+entonces las siguientes propiedades.
+\begin{enumerate}
+\item
+$a^i \neq a^j$ para cada $i,j\in [0,k-1]$ tales que  $i \neq j$. Si
+suponemos que esto es falso, entonces existen $i,j\in [0,k-1]$ tales
+que $i < j$ y $a^i = a^j$. Pero esto implica que $a^{j-i} = e$, lo
+cual contradice la definición de $k$ puesto que $0 < j-i < k$.
+
+\item
+Para cada $i \in \mathbb{Z}$, existe $j \in [0,k-1]$ tal que $a^i =
+a^j$. Sabemos que $i = \alpha \cdot k + \beta$, con $\alpha \in \mathbb{Z}$
+y $0 \leq \beta < k$. Tenemos entonces que:
+\begin{eqnarray*}
+a^i & = & a^{\alpha \cdot k + \beta}\\
+& = & (a^k)^{\alpha} \circ a^{\beta}\\
+& = & e^{\alpha} \circ a^{\beta}\\
+& = & e \circ a^{\beta}\\
+& = & a^{\beta}.
+\end{eqnarray*}
+Por lo tanto se cumple la propiedad enunciada con $j = \beta$.
+\end{enumerate}
+De las dos propiedades anteriores deducimos que $\langle a \rangle
+= \{a^0, \ldots, a^{k-1}\}$ y $|\langle a \rangle| = |\{a^0, \ldots,
+a^{k-1}\}| = k$, lo cual concluye la demostración de la proposición
+puesto que $k = O_G(a)$.
+%Notemos que si $a=e$, donde $e$ es el neutro
+%de $(G, \circ)$, entonces la proposición se cumple puesto que $\langle
+%e \rangle = \{e\}$, $|\langle e \rangle| = 1$ y $O_G(e) =
+%1$. Supongamos que $a\neq e$.  Como $\langle a\rangle\subseteq G$ y
+%$G$ es finito, existe un número natural $k$ tal que $a^k = a^\ell$
+%para algún $\ell \in [0,k-1]$. Sea $k$ el número natural más pequeño
+%que cumple con la propiedad anterior.  Como $a\neq e$ se tiene que
+%$k\geq 2$.  A continuación mostraremos que necesariamente
+%$\ell=0$. Supongamos por contradicción que $\ell>0$. Entonces tenemos
+%que:
+%\begin{eqnarray}
+%	a^k\ = \ a^\ell
+%	&\Rightarrow & a^k\cdot a^{-\ell} \ = \ a^\ell\cdot a^{-\ell}\nonumber\\
+%	&\Rightarrow & a^{k-\ell} \ = \ a^0 \ = \ e \label{ecuacion contradiccion}
+%\end{eqnarray}
+%Como $0 < \ell < k$, tenemos que $k > k-\ell > 0$.
+%%Notemos que como $j<k$ entonces $k-j>k-k=0$. Por otro lado, como $j>0$ entonces $k-j< k-0 = k$.
+%Pero esto nos lleva a una contradicción, ya que \eqref{ecuacion
+%contradiccion} contradice nuestra elección de $k$. Así, concluimos que
+%$a^k=e$. Además, como $k$ es el menor número natural tal que $a^k
+%= a^\ell$ para algún $\ell \in [0,k-1]$,
+%%$k$ es el menor número natural que cumple esto,
+%se tiene $a^i\neq a^j$ para todo $i,j\in [0,k-1]$ con $i \neq j$.
+\end{proof}
+
+%Ahora estamos listos para demostrar la proposición \ref{prop-generado}.
+
+%\begin{proof}[Demostración proposición \ref{prop-generado}]
+%Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
+%que $(\langle a\rangle,\circ)$ es un grupo. Para esto primero debemos demostrar que Nótese que la operación
+%$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
+%a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{N}$,
+%por lo que $b \circ c \in \langle a\rangle$ ya que $b \circ c =
+%a^{m+n}$. Tenemos que demostrar entonces los tres axiomas de grupos
+%para $(\langle a\rangle, \circ)$. La asociatividad de la operación
+%$\circ$ se cumple trivialmente puesto que $(G,\circ)$ es un
+%grupo. Además, dado que $a^0 = e$, donde $e$ es el neutro de
+%$(G, \circ)$, tenemos que $e \in \langle a\rangle$ y $(\langle
+%a\rangle, \circ)$ tiene un elemento neutro. Solo nos queda demostrar
+%entonces que cada elemento de $\langle a\rangle$ tiene un inverso.
+%
+%Para esto demostramos los tres axiomas de los grupos.
+%\begin{enumerate}
+%	\item Para todo $b,c,d\in\langle a\rangle$ se cumple que $(b\circ c )\ci%rc d=b\circ (c \circ d)$:
+%	
+%	Sea $b,c,d\in \langle a \rangle$. Como $\langle a\rangle\subseteq G$ entonces $b,c,d\in G$. Así, como $(G,\circ)$ es un grupo, entonces en particular cumple con este axioma y podemos concluir que $(b\circ c )\circ d=b\circ (c \circ d)$.
+%	\item Existe un elemento neutro en $(\langle a \rangle,\circ)$:
+%	
+%	Por la definición de $\langle a\rangle$ sabemos que $a^0=e$ pertenece al conjunto. Como $(G,\circ)$ es un grupo, y $e$ es su elemento neutro, entonces para todo $b\in G$ se cumple que $b\circ e = b$. De este forma, como $\langle a\rangle \subseteq G$ entonces para todo $b\in \langle a\rangle$ se cumple que $b\circ e=b$.
+%	\item Cada elemento en $\langle a \rangle$ tiene inverso.
+%	
+%	Sea $b\in \langle a \rangle$, lo cual implica que $b = a^n$ para algún $n\in\mathbb{N}$. Como $n = \alpha k + (n\mods k)$, con $\alpha = \lfloor \frac{n}{k}\rfloor$, entonces 
+%	\begin{eqnarray*}
+%		a^n &=& a^{\alpha k + (n\mods k)}\\
+%		&=& (a^k)^{\alpha}\circ a^{(n\mods k)}\\
+%		&=& e^{\alpha}\circ a^{(n\mods k)}\\
+%               &=& a^{(n\mods k)} 	
+%	\end{eqnarray*}	 
+%	Luego, tomando $c = a^{k-(n\mod k)}$ tenemos que 	
+%	\comentarioin{el comando $\mod$ toma mucho espacio antes, quizas podriamos ajustar el comando}
+%        \comentarioin{existe el comando {\tt mods} para el caso en que queremos sacar el espacio que coloca {\tt mod}, lo usé en este caso.}
+%	\begin{eqnarray*}
+%		b\circ b^{-1} &=& a^{(n\mod k)} \circ a^{k-(n\mod k)}\\
+%		&=& a^{k}\\
+%		&=& e
+%	\end{eqnarray*}	
+%
+%\end{enumerate}
+%
+%\end{proof}
+
+Desde la proposición \ref{prop-generado} podemos observar que $O_G(a)
+= |\langle a\rangle |$ para un elemento $a$ de un grupo finito
+$(G,\circ)$, lo que nos dice que la notación de orden es consistente.
+%notacion es consistente
+%https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/05/Order-group-theory.pdf
+
+Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$ definido en \ref{eq-zn-star}, donde $\cdot$ corresponde a la
+multiplicación usual en módulo $n$. Este grupo juego un rol fundamental en este documento. 
+%Un caso particular de los grupos generados por un
+%elemento es cuando $(G,\circ) = (\mathbb{Z}_n^*,\cdot)$, donde $\cdot$
+%corresponde a la multiplicación usual.
+En este contexto, denotamos al grupo $\langle a \rangle$ generado por
+$a\in \mathbb{Z}_n^*$ como $\langle a\rangle_n$.
+%\begin{eqnarray*}
+%\langle a\rangle_n & := & \{a^k\mods n \mid k\in\mathbb{Z}\}.
+%\end{eqnarray*}
+Con este grupo, podemos definir un caso particular de los conceptos
+introducidos en las definiciones \ref{def_orden} y \ref{def_gen}: el
+orden multiplicativo. Este concepto se utiliza reiteradas veces a lo
+largo de este documento.
+
+%\comentario{sacar definicion siguiente y decirlo en un parrafo, dejarlo como ejercicio (ya se vio en la sección 2, en vez de hablar de $O_Z_r^*(a)$ hablamos de $O_r(a)$.}
+
+\begin{definition}\label{def_ord_mult}
+	 Sea $a\in \mathbb{Z}$ y $n\in \mathbb{N}$ tal que $n \geq 1$. Si $\MCD(a,n)=1$, decimos que el orden multiplicativo de $a$ en módulo $n$ es
+         \begin{eqnarray*}
+         O_n(a) & := & |\langle a\rangle _n|.
+         \end{eqnarray*}
+\end{definition}
+Nótese que en la definición anterior no nos restringimos solamente a
+los elementos $a\in\mathbb{Z}_n^*$, sino que también incluimos todos
+aquellos naturales tales que $(a \mods n) \in \mathbb{Z}_n^*$. Como $a \equiv (a\mods n) \modl n$, lo anterior es consistente y está bien
+definido.
+%Finalmente, nótese que $O_n(a)$ es el orden de un elemento
+%$a$ que pertenece al grupo $(\mathbb{Z}_n^*,\cdot)$, vale decir,
+%$O_n(a) = O_{\mathbb{Z}_n^*}(a)$.
+
+A continuación vamos a fijarnos en los elementos de los grupos abelianos, y enunciar dos propiedades que son útiles para este documento.
+%\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
+\begin{theorem}\label{orden del producto coprimos}
+	Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Si $m$ y $n$ son coprimos, entonces $a\circ b$ tiene orden $O_G(a\circ b)=mn$.
+\end{theorem}
+
+Antes de probar el teorema \ref{orden del producto coprimos} vamos a realizar una observación que ocuparemos repetidas veces en la demostración.
+\begin{observacion}\label{observacion orden}
+ Si $d=O_G(a)$ y $a^q =e$, donde $e$ es el neutro del grupo $G$, entonces necesariamente $d$ divide a $q$. Para ver esto, supongamos por contradicción que $d$ no divide a $q$. Esto quiere decir que $q = d\alpha + \beta$ con $0<\beta<d$. Luego, 
+\begin{eqnarray*}
+	e &=& a^q \\
+	 &=&  a^{d\alpha  + \beta} \\ 
+	 &=&  a^{d\alpha }\cdot a^{\beta}\\
+	 &=&  (a^{d})^{\alpha }\cdot a^{\beta}\\
+	 &=&  e^{\alpha}\cdot a^{\beta}\\
+	 &=&  a^{\beta} 
+\end{eqnarray*} 
+Lo que es una contradicción, ya que $0<\beta < d$ y $d = O_G(a)$ es el menor elemento mayor a cero tal que~$a^d = e$.   
+\end{observacion}
+\begin{proof}[Demostración del teorema \ref{orden del producto coprimos}]
+	Sea $r=O_G(a\circ b)$. Debemos demostrar que $r = mn$. Sabemos que 
+	\begin{eqnarray*}
+		(a\circ b)^{mn} &=& a^{mn}\circ b^{mn}\\
+                &=& (a^m)^n\circ (b^n)^m\\
+		&=&e^n\circ e^m \\
+		 &=&  e
+	\end{eqnarray*}
+Luego, por la observación \ref{observacion orden} tenemos que $r$ divide a $mn$ y por ende $r\leq mn$. Nos hace falta demostrar que $mn\leq r$. Para esto notemos que como $e \ = \ (a\circ b)^r$, entonces
+\begin{eqnarray*}
+	 e \ = \ e^n & =&  (a\circ b)^{rn} \\
+	 & = & a^{rn} \circ b^{rn}\\
+	 & = & a^{rn} \circ (b^{n})^{r}\\
+	 & = & a^{rn} \circ e^{r}\\
+	 &=& a^{rn}
+\end{eqnarray*}
+ De la misma forma tenemos que
+\begin{eqnarray*}
+	 e \ = \ e^m & =&  (a\circ b)^{rm} \\
+	 & = & a^{rm} \circ b^{rm}\\
+	 & = & (a^{m})^r \circ b^{rm}\\
+	 & = & e^{r} \circ b^{rm}\\
+	 &=& b^{rm}
+\end{eqnarray*}
+Luego $a^{rn}=e$ y $b^{rm} = e$. De esto podemos concluir por la observación \ref{observacion orden} que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, entonces necesariamente $m \divi r$ y $n\divi r$. Asi, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$, y por tanto $mn\leq r$. 
+\end{proof}
+
+Como consecuencia del teorema \ref{orden del producto coprimos} podemos mostrar el siguiente resultado, que es una versión generalizada del mismo.
+\begin{corollary}\label{corolario orden}
+Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Entonces existe un elemento $c\in G$ que tiene orden $O_G(c)=\MCM(m,n)$.
+\end{corollary}
+\begin{proof}
+Sean $p_1,...,p_k$ los divisores primos de $m$ o de $n$. Luego, podemos escribir $m$ y $n$ como 
+$$m \ = \ \prod\limits_{i=1}^k p_i^{\alpha_i} \ \quad\text{y}\quad \ n \ = \ \prod\limits_{i=1}^k p_i^{\beta_i}$$ donde $\alpha_i,\beta_i \geq 0$ (son iguales a 0 cuando el primo no es divisor del número). Defina
+$$m' \ = \ \prod\limits_{i\,:\,\alpha_i\geq \beta_i} p_i^{\alpha_i} \ \quad\text{y}\quad \ n' \ = \ \prod\limits_{i\,:\,\beta_i> \alpha_i} p_i^{\beta_i}$$
+Por ejemplo, si $m=2^3\cdot 3^2\cdot 5^1$ y $n=2^1\cdot 3^2\cdot 7^1$, $m' = 2^3\cdot 3^2\cdot 5^1$ y $n' = 7^1$. Notemos que las siguientes afirmaciones sobre $m'$ y $n'$ se cumplen:
+\begin{itemize}
+	\item $m'$ divide a $m$
+	\item $n'$ divide a $n$
+	\item $m'$ y $n'$ son coprimos
+	\item $\MCM(m,n) = m'n'$
+\end{itemize}
+Considere los elementos $a' = a^{\frac{m}{m'}}$ y $b' = b^{\frac{n}{n'}}$. Vamos a mostrar que $O_G(a')=m'$ y $O_G(b')=n'$. Primero, sea $k=O_G(a')$. Entonces $$e\ = \ (a')^k\ = \ (a^{\frac{m}{m'}})^k \ = \ a^{\frac{mk}{m'}}$$
+Por la observación \ref{observacion orden}, como $O_G(a) = m$ entonces $m$ divide a $\frac{mk}{m'}$, y por ende $m'$ debe dividir a $k$ (ya que $\frac{mk}{m'}\in \mathbb{Z}$). De esto concluimos que $m'\leq k$. Por otro lado, $$(a')^{m'} \ = \ (a^{\frac{m}{m'}})^{m'} \ = \ a^m \ = \ e$$ 
+%Nuevamente, por la observación \ref{observacion orden} necesariamente $k$ divide a $m'$, y
+Dado que $k=O_G(a')$, concluimos que se cumple $k\leq m'$. Luego, $O_G(a')=k=m'$. De forma análoga, se puede mostrar que $O_G(b')=n'$.
+
+%Una propiedad importante que se sigue del teorema \ref{orden del producto coprimos} y el corolario \ref{corolario orden} es la siguiente.
+
+Por último, defina $c=a'\circ b'$. Como sabemos que $(G,\circ)$ es un grupo abeliano, $a',b'\in G$ con $O_G(a') = m'$ y $O_G(b')= n'$, y $m'$, $n'$ son coprimos, se deduce por el teorema \ref{orden del producto coprimos} que $O_G(c) = m'n' = \MCM(m,n)$. Con esto concluimos la demostración.
+\end{proof}
+Como último resultado sobre teoría de grupos que será útil para este
+documento, presentamos y demostramos el teorema de Cauchy.
+\begin{theorem}[{\bf Cauchy}]\label{teo cauchy}
+Sea $p$ un número primo que divide el orden de un grupo finito
+$(G,\circ)$. Entonces existe un elemento de $G$ que tiene orden $p$.
+\end{theorem}
+Para demostrar el teorema \ref{teo cauchy}, vamos a demostrar el lema \ref{tcf}, que es una versión más fuerte del teorema de Cauchy.
+\begin{lemma}\label{tcf}
+Sea $p$ un número primo que divide el orden de un grupo finito
+$(G, \circ)$. Entonces $G$ tiene $p\cdot k$ elementos que son solución
+de la ecuación $$x^p=e,$$ donde $e$ es el neutro de $(G, \circ)$ y $k$
+es un número entero positivo.
+%\comentarioin{al parecer este es el teorema de cauchy original (?)}
+\end{lemma}
+%\comentarioin{hay que poner en la demostracion que estamos demostrando el lema A13? o se entiende?}
+\begin{proof}
+Sea $|G|= n $, y suponga que $p\divi n$, es decir, $n= p\cdot c$ con
+$c\in \mathbb{N}$. Definimos el conjunto
+\begin{eqnarray*}
+S & = & \{(g_0,g_1,\ldots,g_{p-1})\mid g_i\in G \text{ para cada }
+i \in [0,p-1] \text{ y } g_0 \cdot g_1 \cdot \ldots \cdot g_{p-1} =
+e\}.
+\end{eqnarray*}
+Notemos que si $(g_0,g_1,\ldots,g_{p-1})\in S$, entonces al escoger
+los elementos $g_0,\ldots,g_{p-2}$ el elemento $g_{p-1}$ queda
+únicamente determinado: como $g_0 \cdot \ldots \cdot g_{p-2}\cdot
+g_{p-1}=e$, entonces necesariamente $g_{p-1} = (g_0 \cdot \ldots \cdot
+g_{p-2})^{-1}$. De esto podemos concluir que $|S|=n^{p-1}$, usando el
+argumento que para cada $i\in [0,p-2]$, $g_i\in G$, y tenemos $n$
+posibles elementos que podemos escoger. Definamos la relación binaria
+$\sim$ sobre las tuplas de $S$ de la siguiente forma:
+\begin{multline*}
+(g_0,g_1,\ldots,g_{p-1})\sim (h_0,h_1,\ldots,h_{p-1}) \ \ \text{si y solo si} \\
+(h_0,h_1,\ldots,h_{p-1})\text{ es una permutación cíclica de } (g_0,g_1\ldots,g_{p-1}), 
+\end{multline*}
+es decir, si $(h_0,h_1,\ldots,h_{p-1}) = (g_{(0+k) \mods p},
+g_{(1+k) \mods p}, \ldots g_{(p-1+k) \mods p})$ para algún $k\in
+[0,p-1]$. Demostrar que $\sim$ es una relación de equivalencia es un
+ejercicio sencillo y queda propuesto para el lector.  Ya que $\sim$
+satisface esta propiedad, podemos analizar las clases de equivalencia
+bajo esta relación.  Podemos ver que existen dos tipos de tuplas en
+$S$.  El tipo I ocurre cuando todos los elementos de la tupla son el
+mismo, en cuyo caso tenemos que $|[(g_0,\ldots,g_{p-1})]_{\sim}|=1$
+(al hacer permutaciones cíclicas obtenemos la misma tupla).  El tipo
+II occure cuando en la tupla existen elementos distintos. Nótese que, en general, si permutamos una tupla del tipo II podríamos eventualmente obtener la misma tupla. Por ejemplo, si nuestra tupla es $(a,b,a,b)$, entonces podemos hacer una permutación cíclica de dos hacia la izquierda (vale decir, $k = 2$) y obtenemos la misma tupla $(a,b,a,b)$. En la afirmación \ref{afirmacion-perm-cicl} demostramos que
+%si el tamaño de la tupla es un número primo (como en nuestro caso)
+en nuestro caso no sucede lo anterior porque $p$ es un número primo.
+%entonces no sucede lo anterior, en cuyo caso 
+De esta forma concluimos que $|[(g_0,\ldots,g_{p-1})]_{\sim}|=p$.
+
+
+\begin{afirmacion}\label{afirmacion-perm-cicl}
+%Sea $p$ un número primo.
+Si $(g_0, g_1, \ldots, g_{p-1}) = (g_{(0+k) \mods p}, g_{(1+k) \mods
+p}, \ldots, g_{(p-1+k) \mods p})$ para algún $k \in [1,p-1]$, entonces
+$g_0 = g_1 = \cdots = g_{p-1}$.
+\end{afirmacion}
+
+\begin{proof}
+Suponga que $(g_0, g_1, \ldots, g_{p-1}) = (g_{(0+k) \mods p},
+g_{(1+k) \mods p}, \ldots, g_{(p-1+k) \mods p})$ para algún $k \in
+[1,p-1]$. Así, tenemos que $g_i = g_{(i+k) \mods p}$ para cada
+$i \in [0,p-1]$. Nótese que de esto se deduce que $g_{((j\mods p) +k)\mods p} = g_{(j+k)\mods p}$, de lo cual se concluye que
+\begin{align}\label{eq-lem-perm-cicl}
+g_0 = g_k = g_{(2\cdot k) \mods p} = g_{(3\cdot k) \mods p} = \cdots = g_{((k-1) \cdot k) \mods p}.
+\end{align}
+Por lo tanto, si demostramos que
+\begin{eqnarray*}
+(i \cdot k) \mods p & \neq & (j \cdot k) \mods p
+\end{eqnarray*}
+para cada $i,j \in [0,p-1]$ tales que $i < j$, entonces concluimos que
+$g_0 = g_1 = \cdots = g_{p-1}$ ya que todos los elementos de la tupla
+$(g_0, g_1, \ldots, g_{p-1})$ son mencionados
+en \eqref{eq-lem-perm-cicl}. Por el contrario, supongamos que $(i \cdot
+k) \mods p \ = \ (j \cdot k) \mods p$ para algún par $i,j \in [0,p-1]$ tal
+que $i < j$. Tenemos entonces que $i \cdot k \equiv j \cdot k \modl
+p$, vale decir, $(j-i) \cdot k \equiv 0 \modl p$. Así, dado que $k \in
+[1,p-1]$ y $p$ es un número primo, concluimos que $(j-i) \equiv
+0 \modl p$. Pero $0 < j-i < p$, por lo que obtenemos una
+contradicción.
+\end{proof}
+
+Continuando entonces con la demostración del lema \ref{tcf},
+supongamos que hay $r$ clases de equivalencia de tuplas del tipo I y
+$q$ clases de equivalencia de tuplas del tipo II, y observemos que
+$r\geq 1$ ya que $(e,e,\ldots,e)$ es de tipo I. Luego, como todas las
+tuplas de $S$ caen en una clase de equivalencia de $\sim$, se cumple
+que $r\cdot 1 \ + \ q\cdot p = |S|$. Además, tenemos que:
+\begin{eqnarray*}
+r\cdot 1 \ + \ q\cdot p \ = \ |S| &\Rightarrow&  r \ + \ q\cdot p \ = \ n^{p-1}\\ 
+	&\Rightarrow& r \ = \ n^{p-1} \ - \ q\cdot p\\
+	&\Rightarrow& r \ = \ (p \cdot c)^{p-1} - q \cdot p \quad\quad\quad \text{dado que } n= p\cdot c\\
+	&\Rightarrow& r \ = \ p\cdot (c\cdot (p \cdot c)^{p-2}-q).
+\end{eqnarray*}
+Sea $k = c\cdot (p \cdot c)^{p-2}-q$. Dado que $p\geq 2$, tenemos que
+$k \in \mathbb{Z}$. Así, dado que $r = p \cdot k$ y $r \geq 1$,
+concluimos que $k$ es un número entero positivo.
+%entonces
+%necesariamente $k\geq 1$ (un número natural).
+Luego, existen $r = p\cdot k$ tuplas de tipo I,
+%que sus clases de equivalencia son del primer
+%tipo,
+es decir, $r=p\cdot k$ elementos distintos $g\in G$ tales que $g \cdot
+g \cdot \ldots \cdot g = g^p = e$, los cuales corresponden a las
+soluciones de la ecuación $x^p=e$.
+\end{proof}
+Habiéndo demostrado el lema \ref{tcf}, podemos hacer la demostración del teorema de Cauchy.
+\begin{proof}[Demostración del teorema \ref{teo cauchy}]
+Supongamos que $(G,\circ)$ es un grupo finito, y $p$ es un número
+primo que divide el orden de $G$. Por el lema \ref{tcf}, sabemos que
+$G$ tiene $p\cdot k$ soluciones de la ecuación $x^p=e$, donde $e$ es
+el neutro de $(G,\circ)$ y $k$ es un número entero positivo. Como
+$p\cdot k \geq 2$, entonces existe un elemento $a\in G$ tal que $a\neq
+e$ y $a^p=e$. Supongamos que $O_G(a)=m$ con $m<p$. Nótese que $m > 1$
+puesto que $a \neq e$, y $e = a^m = a^p$. Usando el hecho de que
+podemos escribir $p=\alpha \cdot m+\beta$, con $\alpha \in \mathbb{N}$
+y $\beta = p \mods m$, concluimos que
+\begin{eqnarray*}
+	e & = & a^p \\
+	&=& a^{\alpha \cdot m + \beta}\\
+	&=& (a^{m})^{\alpha} \circ a^{\beta}\\
+	&=& e^{\alpha}\circ a^{\beta}\\
+	&=& a^{\beta}
+\end{eqnarray*} 
+Como $p$ es primo, $1<m<p$ y $\beta = p \mods m$, tenemos que
+$\beta \in [1,m-1]$. Pero esto contradice el hecho que $O_G(a) = m$,
+puesto que $a^{\beta}=e$. De esta forma concluimos que $O_G(a) = p$,
+lo que demuestra que existe un elemento de $G$ que tiene orden $p$.
+\end{proof}
+%\comentarioin{Bernardo: hay que cerrar de alguna forma este preliminar? o se corta aqui nomas?}

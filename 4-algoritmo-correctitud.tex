@@ -1,0 +1,1173 @@
+En el algoritmo \ref{alg-aks} presentamos el algoritmo propuesto en \cite{AKS04}. 
+A continuación, se demostrará que este algoritmo es correcto y funciona en tiempo polinomial. Nótese que desde ahora en adelante usaremos el término $\poly(x_1, \ldots, x_k)$ para denotar un  polinomio arbitrario en las variables $x_1$, $\ldots$, $x_k$. También utilizaremos esta notación con sub-índices para referirnos a polinomios distintos, por ejemplo $\poly_1(x,y)$ y $\poly_2(z)$. 
+%La demostración consiste en una serie de lemas que permitirán, en conjunto, probar que, dado un número natural $n > 1$, el algoritmo retorna $\PRIMO$ cuando $n$ es primo, y $\COMPUESTO$ en el caso contrario.
+
+
+\begin{algorithm}[h]
+\caption{\quad Test de primalidad \AKS}
+\label{alg-aks}
+\hspace*{\algorithmicindent} \textbf{Input:} un número natural $n>1$\\
+\hspace*{\algorithmicindent} \textbf{Output:} $\PRIMO$ si $n$ es primo, $\COMPUESTO$ si $n$ no es primo
+\begin{algorithmic}[1]
+   \IF {$n=a^b$ para $a,b\in \mathbb{N}$ y $b>1$}\label{alg-1} 
+      \RETURN \COMPUESTO \label{alg-r1}
+   \ELSE
+      \STATE encontrar el número natural $r > 1$ más pequeño tal que $O_r(n)>\log ^2n$ \label{alg-2}
+      \IF {$1<\MCD(a,n)<n$ para algún $a \in \{2, \ldots, r\}$} \label{alg-3}
+        		\RETURN \COMPUESTO \label{alg-r3}
+      \ELSE
+         \IF {$n\leq r$} \label{alg-4}
+         \RETURN \PRIMO \label{alg-r4}
+         \ELSE
+            \FOR {$a=1$ \TO $\lfloor \sqrt{\phi(r)} \log n\rfloor$} \label{alg-5-for}
+            	\IF {$(X+a)^n \not\equiv X^n+a \modulo$} \label{alg-5}
+	           \RETURN \COMPUESTO \label{alg-r5}
+	        \ENDIF
+            \ENDFOR
+            \RETURN \PRIMO \label{alg-6}
+         \ENDIF
+      \ENDIF      
+   \ENDIF
+\end{algorithmic}
+\end{algorithm}
+	
+%	\begin{algorithmic}
+%		%\setstretch{1.25}
+%		%\caption{Test de primalidad} 
+%		%Input: Un entero $n>1$.
+%		%\begin{enumerate}
+%			%\label{alg-1} 
+%			\IF {$(n=a^b$ para $a\in \mathbb{N}$ y $b>1)$} 
+%				\STATE \RETURN \COMPUESTO
+%%			\item \label{alg-2} Encontrar el $r$ más pequeño tal que $O_r(n)>\log ^2n$.
+%%			\item \label{alg-3} If $1<\MCD(a,n)<n$ para algún $a\leq r$, return COMPUESTO.
+%%			\item \label{alg-4} If $n\leq r$, return PRIMO.
+%%			\item \label{alg-5} For $a=1$ to $\lfloor \sqrt{\phi(r)} \log n\rfloor$ hacer:
+%%			
+%%		\hspace*{1cm}If ($(X+a)^n \neq X^n+a \modulo$), return COMPUESTO.
+%%		\item \label{alg-6} return PRIMO.
+%%		\end{enumerate}
+%	\end{algorithmic}
+	%\comentario{hacer nuevo comando PRIMO usando rm primo}
+	
+	\begin{theorem} \label{teo-4.1}
+		Dado un número natural $n > 1$, el algoritmo \ref{alg-aks} con entrada $n$ retorna $\PRIMO$ 
+		si, y solo si, $n$ es un número primo. Además, el algoritmo \ref{alg-aks} funciona en tiempo $O(\poly(\log n))$, vale decir, en tiempo polinomial en el largo de la entrada $n$. 
+	\end{theorem}
+	La demostración del teorema se divide en dos partes. En primer lugar vamos a mostrar que el algoritmo retorna $\PRIMO$ o $\COMPUESTO$ para cualquier entrada en tiempo polinomial, es decir, el algoritmo termina, y en segundo lugar, veremos que retorna $\PRIMO$ cuando la entrada es un número primo, y $\COMPUESTO$ cuando la entrada es un número compuesto. 
+	\begin{proposition}\label{prop-lem-1}
+		El algoritmo termina y retorna $\PRIMO$ o $\COMPUESTO$ para cualquier entrada entera $n>1$. Además, el algoritmo funciona en tiempo $O(\poly(\log n))$.
+				%Además, el algoritmo demora tiempo polinomial en retornar en el peor caso, respecto al largo de la entrada.
+	\end{proposition}
+	La demostración de la proposición anterior consiste principalmente en mostrar la existencia del número $r$ que buscamos en el paso \ref{alg-2} del algoritmo, para cualquier entrada $n$, ya que en todos los otros pasos se hace una cantidad finita de operaciones. Además de mostrar la existencia del número $r$, mostraremos que podemos encontrarlo en tiempo polinomial (con respecto al largo de la entrada), lo que, junto con un desarrollo adicional, nos permitirá afirmar que el algoritmo termina en tiempo polinomial en cualquier caso. 
+	\begin{lemma}\label{prop-1}
+		Para cada $n > 1$, existe $r \leq \max\{3,\lceil \log ^5 n\rceil\}$ tal que $O_r(n)>\log ^2 n$.
+	\end{lemma}
+	\begin{proof}
+		Lo primero que podemos notar es que cuando $n=2$, se tiene que $\log^2 2 =1$. Si calculamos los órdenes multiplicativos de 2 cuando $r=1$ y $r=3$:
+		%$r$ toma los valores 1 y 3:
+		\begin{eqnarray*}
+			&&O_1(2) \ = \ 1 \ \not> \ \log ^2 2 \ =\ 1\\
+			&&O_3(2) \ = \ 2  \ > \ \log ^2 2 \ =\ 1,
+		\end{eqnarray*}
+		podemos ver que si escogemos $r=3$ entonces se cumple el lema para $n=2$. De forma análoga, podemos concluir que si $n = 3$, el lema se cumple para $r = 5$, y si $n=4$, entonces el lema se cumple para $r= 11$.
+		%\comentario{definicion de orden multiplicativo/puse en minuscula el podemos}
+		Ahora supongamos que $n \geq 5$. Sea $B = \lceil \log^5 n \rceil$. Como la función logarítmo es creciente, podemos observar que $B \geq \lceil \log ^5 5\rceil = 68 > 7$. Esto nos permite usar el lema \ref{lem-mcm} con $n = B\geq 7$, lo cual nos dice que $\MCM(B) \geq 2^{B}$.
+		Sea
+\begin{eqnarray*}
+		N &=& n^{\lfloor\log B\rfloor} \cdot\prod_{i=1}^{\lfloor \log ^2n \rfloor} (n^i-1)
+\end{eqnarray*}
+%\comentarioin{Aca hay que referenciar el resultado de math stackexchange ya que el paper original tenia un error en esta parte}
+A continuación la demostración se dividirá en tres partes.\footnote{La
+  demostración del lema \ref{prop-1} en \cite{AKS04} contiene un
+  error, como es mencionado por los mismos autores en una versión
+  posterior de este artículo (ver \url{https://www.cse.iitk.ac.in/users/manindra/algebra/primality_v6.pdf}). La demostración corregida presentada aquí está basada en \url{https://math.stackexchange.com/questions/119573/on-proof-of-aks-primality-test-algorithm}.}
+Primero, mostrar la existencia de un número natural
+ %\comentario{naturales? en plural?} 
+ $r\leq B$ tal que $r$ no divide a $N$,  segundo, probar que podemos escoger un valor $r$ del paso anterior tal que $O_r(n)$ esté bien definido, y por último, mostrar que $O_r(n)>\log ^2 n$. Notemos que si encontramos un $r$ con estas características, habremos demostrado el lema \ref{prop-1}.
+
+Primero, demostraremos que existe un valor $r\leq B$ que no divide a $N$. Supongamos por contradicción que para todo $1\leq r\leq B$, $r$ divide a $N$. De esto podemos decir que $N$ es un múltiplo común de los primeros $B$ naturales positivos, por lo que $\MCM(B)\leq N$ por definición de mínimo común múltiplo. Notemos que para $n\geq 5$,
+\begin{eqnarray*}
+	N&=& n^{\lfloor \log B\rfloor}\cdot\prod_{i=1}^{ \lfloor\log ^2n\rfloor} (n^i-1)\\
+	&<& n^{\lfloor \log B\rfloor}\cdot\prod_{i=1}^{\lfloor\log ^2n\rfloor} n^i\\
+	&=& n^{\lfloor \log B\rfloor + 1+2+\cdots + \lfloor\log ^2n\rfloor}\\
+	&=& n^{\lfloor \log B\rfloor + \frac{\lfloor\log ^2 n\rfloor(1+\lfloor\log ^2 n\rfloor)}{2}}\\
+	&\leq & n^{\lfloor \log B\rfloor +\frac{(\log ^2 n)(1+\log ^2 n)}{2}}\\ 
+	& = & n^{\frac{2\lfloor \log B\rfloor +\log ^2 n + \log ^4 n}{2}}\\
+	&\leq & n^{\frac{\log^4 n + \log^4 n}{2}} \quad\quad\text{(por Apéndice \ref{app-prop-1})}\\
+	&=& n^{\log^4 n}\\
+	&=& (2^{\log n})^{\log^4 n}\\
+	&=& 2^{\log^5 n}\\
+	&\leq& 2^{\lceil\log^5 n\rceil } \ = \ 2^{B}
+\end{eqnarray*}
+%comentario{por apendice arreglar en eqnarray (ya agregue al apendice la demostracion de la cota)}
+De lo anterior, concluimos que $N<2^{B}\leq \MCM(B)$ (por el lema \ref{lem-mcm}), lo cual nos lleva a una contradicción, ya que sabíamos que $\MCM(B)\leq N$. De esta forma, hemos demostrado que existe un valor $r\leq B$ que no divide a $N$.
+
+Sea $r$ el menor natural positivo que cumple con lo anterior, es decir, $r \nodiv N$ y para todo valor $r'\in\{1,...,r-1\}$ se cumple que $r'\divi N$.
+% tal que $1\leq r'\leq B$ y $r' \nodiv N$, se cumple que $r \leq r'$.
+% que no divide a $N$, se cumple que $r\leq r'$. 
+ Antes de comenzar la segunda parte de la demostración, observemos que si $m\geq 2$ y $m^k\leq B$, tenemos que 
+\begin{eqnarray*}
+m^k \ \leq \ B &\Rightarrow& k\log m \ \leq \ \log B\\
+	&\Rightarrow& k\ \leq \ \frac{\log B}{\log m}
+	\ \leq \ \frac{\log B}{\log 2} \ = \ \log B
+\end{eqnarray*}
+De lo anterior podemos ver que el entero $k$ más grande que cumple con estas restricciones es $k = \lfloor \log B\rfloor$ (para cualquier $m\geq 2$ que cumpla con $m^k\leq B$). Esta observación la utilizaremos a continuación.
+
+%Con el objetivo de demostrar que $r$ y $n$ son coprimos, 
+Nuestro objetivo ahora es demostrar que $\MCD(r,n) =1 $, ya que esto implicaría que $O_r(n)$ está bien definido. 
+Para esto comenzaremos observando que $\MCD(r,n)$ no es divisible por todos los primos que dividen a $r$. Dicho de otra forma, existen factores primos de $r$ que no son factores primos de $n$. Esto puede ser demostrado como sigue. Sea $r=q_1^{e_1}\cdots q_{\ell}^{e_{\ell}}$ la factorización prima de $r$.
+Para todo $i\in [1, \ell]$, se cumple que $1<q_i^{e_i}\leq r\leq B$, y por la observación anterior se cumple que $e_i\leq \lfloor\log B\rfloor$ (aquí usamos $k=e_i$). De esto, podemos concluir que $q_i^{e_i}$ divide a $q_i^{\lfloor\log B\rfloor}$.
+ Supongamos por contradicción que para todo $i\in [1, \ell]$, se cumple que $q_i$ divide a $\MCD(r,n)$. Como $q_i$ es primo, entonces también debe ser un factor primo de $n$. Luego, podemos afirmar que $n=\alpha\cdot q_1\cdots q_{\ell}$, donde $\alpha$ es un entero positivo. Elevando ambos lados de la igualdad por $\lfloor\log B\rfloor$, tenemos que $n^{\lfloor\log B\rfloor}=\alpha^{\lfloor\log B\rfloor}\cdot q_1^{\lfloor\log B\rfloor}\cdots q_{\ell}^{\lfloor\log B\rfloor}$, y como $q_i^{e_i}$ divide a $q_i^{\lfloor\log B\rfloor}$ para todo $i\in [1, \ell]$, concluimos que $r$ divide a $n^{\lfloor\log B\rfloor}$. Tenemos entonces que $r \divi N$ por definición de $N$, 
+ %y por consiguiente a $N$, 
+ lo cual es una contradicción ya que sabemos que $r$ no divide a $N$. Es por esto que no todos los factores primos de $r$ dividen a $\MCD(r,n)$. De esta forma, podemos escribir la factorización prima de $r$ como $r = a\cdot b$, donde
+ \begin{eqnarray*}
+ 	a&=& p_1^{\alpha_1}\cdots p_k^{\alpha_k},\hspace{0.5cm}p_i\text{ es primo y $p_i$ divide a }\MCD(r,n)\\
+ 	b&=& s_1^{\beta_1}\cdots s_k^{\beta_{k'}},\hspace{0.5cm}s_i\text{ es primo y $s_i$ no divide a }\MCD(r,n)
+ \end{eqnarray*}
+ %y $r = p_1^{\alpha_1}\cdots p_k^{\alpha_k} \cdot  s_1^{\beta_1}\cdots s_k^{\beta_{k'}}$ es la descomposición prima de $r$.
+Lo primero que podemos observar es que necesariamente $a$ divide a $n^{\lfloor \log B\rfloor}$, ya que de la misma forma que antes, se debe cumplir que $\alpha_i\leq \lfloor \log B\rfloor$ (ya que $p_i^{\alpha_i}\leq B$) para todo $i \in \{1, \ldots, k\}$, y como $p_i$ es también un factor primo de $n$, entonces $p_i^{\alpha_i}$ debe dividir a $n^{\lfloor \log B\rfloor}$. Por otro lado, tenemos que $\MCD(b,n) = 1$, ya que suponiendo que no fuera así, existiría un primo $s_i$ que divide a $b$ y a $n$, y por ende divide a $\MCD(r,n)$ ya que $r=ab$. Sin embargo, esto no puede ser cierto por como hemos construido $b$. Lo anterior nos dice que $b$ y $n$ no tienen factores primos en común, por lo que también se cumplirá que $\MCD(b,n^{\lfloor \log B\rfloor}) = 1$. Por último, como sabemos que $a$ divide a $n^{\lfloor \log B\rfloor}$ y $\MCD(b,n^{\lfloor \log B\rfloor})=1$, podemos afirmar que $b$ no divide a $\prod_{i=1}^{\lfloor \log ^2n \rfloor} (n^i-1)$, ya que de lo contrario $r = ab$ dividiría a $N$, lo cual contradice nuestra elección del valor $r$. De todo esto podemos concluir que $b$ no divide a $N$, y como $b\leq r$ y $r$ es el menor número que no divide a $N$, entonces se debe cumplir que $r = b$. Luego,  como $\MCD(b,n)=1$, se tiene que $\MCD(r,n) = 1$ y $O_r(n)$ está bien definido (este número existe).
+
+Por último, supongamos por contradicción que para este mismo valor $r$ se tiene que $O_r(n) \leq \log^2 n$. Dado que $O_r(n)$ es un número entero, concluimos que $O_r(n) \leq \lfloor\log^2 n\rfloor$.
+Desarrollando entonces a partir de la definición de orden multiplicativo tenemos
+\begin{eqnarray*}
+	n^{O_r(n)} \ \equiv \ 1 \modl r & \Leftrightarrow & n^{O_r(n)} - 1 \ \equiv \ 0 \modl r \\
+	& \Leftrightarrow & r\ \divi \ n^{O_r(n)} - 1\\
+	&\Rightarrow & r \ \divi \ \prod_{i=1}^{ \lfloor\log ^2n\rfloor} (n^i-1) \quad\quad \text{puesto que }O_r(n) \leq \lfloor \log^2 n \rfloor\\	
+	&\Rightarrow & r\ \divi \ N 
+\end{eqnarray*}
+Lo anterior es una contradicción ya que escogimos al valor $r$ de tal manera que no dividiera a $N$. Con esto podemos afirmar que necesariamente $O_r(n) > \log^2 n$. Esto concluye la demostración del lema. 
+	\end{proof}
+	%\comentario{Marcelo: llegué hasta este punto}
+	Con la información que obtuvimos a partir del lema anterior, nos gustaría demostrar la proposición~\ref{prop-lem-1}. Para esto, mostraremos que en cada paso, el algoritmo demora tiempo polinomial respecto al largo de la entrada.
+	\begin{itemize}
+	\item En el paso \ref{alg-1}, el algoritmo debe verificar si $n$ es potencia (no trivial) de otro número natural, lo cual puede ser hecho en tiempo $O(\poly_1(\log n))$, vale decir, en tiempo polinomial respecto al largo de $n$ (ver algoritmo \ref{alg:es_potencia} 
+	%(para más detalles del análisis de complejidad ir a
+	en el apéndice \ref{app-es_potencia}).
+	
+	\item De acuerdo al lema \ref{prop-1}, el algoritmo debe calcular en el paso \ref{alg-2} los valores $O_r(n)$ para cada $r \in \{2, \ldots, \max\{3,\lceil \log^5 n\rceil\}$. Notemos que para calcular $O_r(n)$ podemos utilizar un algoritmo  que tiene complejidad $O(\poly_2(\log n, r))$ (ver algoritmo \ref{alg:mult_ord} en el apéndice \ref{app-orden_multiplicativo}).
+	%en el cual supusimos que las operaciones aritméticas y de comparación son operaciones de costo 1.\comentario{Sin embargo, en la vida real son $\log n$ o $r$?....}  
+	De lo anterior y usando el lema \ref{prop-1}, concluimos que calcular el valor $r$ pedido en el paso \ref{alg-2} del algoritmo toma tiempo $O(\lceil \log^5 n\rceil \cdot \poly_2(\log n, \lceil \log^5 n\rceil))$, vale decir, toma tiempo $O(\poly_3(\log n))$. 
+%	$O_r(n)$ toma tiempo $O(\log n +\log ^5 n) = O(\log^5 n)$. 
+	Es por esto que esta línea del algoritmo también demora una cantidad polinomial de pasos en relación al largo de la entrada $n$.
+	%\comentario{asi esta bien? o falta un poco de explicacion}
+	%\comentarioin{Marcelo: fuera del apéndice no es correcto decir que calcular $O_r(n)$ toma tiempo $O(\log(\max\{n,r\}) + r)$ (está fuera del ámbito de los supuestos del apéndice). Sería mejor decir $O((\log(\max\{n,r\}) + r) \cdot p(\log n, r))$, donde $p(\log n, r)$ es un polinomio que depende de $\log n$ y $r$.}
+%\comentarioin{Entonces en todos los algoritmos debemos decir que es $O((\textbf{complejidad del apendice})*p(\log n,r))$ para ser mas consistentes?\\Por qué sería $\log n$ y $r$ en vez de $\log n$ y $\log r$? Ahi tambien tenemos que argumentar: todas las operaciones a un elemento de largo $x$ se hacen en $p(\log x)$?}
+	
+	\item En el paso \ref{alg-3} del algoritmo calculamos el máximo común divisor entre $n$ y $a\leq r$, un total de $r$ veces en el peor de los casos. El máximo común divisor entre $n$ y $a$ puede ser calculado por un algoritmo que funciona en tiempo $O(\max\{\log n, \log a\})$ (ver algoritmo \ref{alg:mcd} en la sección \ref{app-mcd} del apéndice). De esta forma, el paso \ref{alg-3} del algoritmo toma tiempo $O(r \cdot \max\{\log n, \log r\})$. Dado que $r\leq \max\{3,\lceil \log ^5 n\rceil\}$, concluimos que el paso \ref{alg-3} del algoritmo toma tiempo $O(\lceil \log ^5 n\rceil \cdot \max\{\log n, \log \lceil \log ^5 n\rceil\})$, vale decir, tiempo $O(\poly_4(\log n))$ como era esperado. 
+%Esto lo podemos hacer con el algoritmo \ref{alg:mcd} realizando un total de $O(r\cdot \log n)$ pasos. Como $r\leq Max\{3,\lceil \log ^5 n\rceil\}$, entonces esta línea termina en a lo más $O(\log^6 n)$ pasos. 
+	
+	%\item En el paso \ref{alg-4} hacemos verificamos si $n \leq r$,  lo cual claramente toma tiempo polinomial ya que $r\leq \max\{3,\lceil \log ^5 n\rceil\}$. 
+	
+	\item En los pasos \ref{alg-5-for} y \ref{alg-5} del algoritmo debemos verificar $\lfloor \sqrt{\phi(r)} \log n\rfloor$ veces si dos polinomios son distintos en módulo $(X^r-1,n)$. A primera vista, no sabemos si la cantidad de veces que se debe repetir la verificación en el paso \ref{alg-5}
+	%si esta cantidad de operaciones 
+	es polinomial con respecto al largo de $n$. Sin embargo, sabemos que $\alpha = O_r(n)$ es el menor valor tal que $n^{\alpha}\equiv 1$ en módulo $r$, y como $n^{\phi(r)}\equiv 1$ en módulo $r$, entonces necesariamente $O_r(n)\leq \phi(r)$. Además, sabemos que $\phi(r)\leq r$, por lo que tenemos que $O_r(n)\leq r$. Así, dado que $\log^2 n < O_r(n)$ por el paso \ref{alg-2} del algoritmo, concluimos que:
+	% podemos concluir que, dado que $\log^2 n < O_r(n)$, entonces 
+	\begin{eqnarray}\label{cota-ell}
+		\lfloor \sqrt{\phi(r)} \log n\rfloor \ \leq \ \sqrt{\phi(r)} \log n
+		\ \leq \ \sqrt{r}\sqrt{O_r(n)} \ \leq \ \sqrt{r}\sqrt{r}
+		\ = \ r
+	\end{eqnarray}
+	%\comentario{(5)esto lo vamos a usar mas adelante y puedo referenciar la ecuacion}
+	Luego, se tiene que $\lfloor \sqrt{\phi(r)} \log n\rfloor\leq r \leq  \max\{3,\lceil \log ^5 n\rceil\}$, de lo cual concluimos que el número de veces que debemos hacer la verificación de la equivalencia de polinomios en el paso \ref{alg-5} es $O(\poly_5(\log n))$. Además, para verificar si $(X+a)^n \not\equiv X^n+a \modulo$, podemos utilizar un algoritmo que calcula $(X+a)^n \!\! \modulo$ y luego comparar el resultado con el polinomio $X^n+a$. En el apéndice \ref{app-fast_exp_mod} presentamos un algoritmo que calcula $(X+a)^n \!\! \modulo$ en tiempo $O(\poly_6(\log n, \grado(X+a), r, \log n))$, donde $\grado(X+a) = 1$.
+        %$\gradop(X)) = 1$ es el grado del polynomio $p(X)$ ($\grado(X+a)=1$).
+        Dado que $r \leq  \max\{3,\lceil \log ^5 n\rceil\}$, concluimos que la condición $(X+a)^n \not\equiv X^n+a \modulo$ puede ser verificada en tiempo $O(\poly_6(\log n, 1, \lceil \log ^5 n\rceil, \log n))$, vale decir, en tiempo $O(\poly_7(\log n))$. Finalmente, combinando los resultados anteriores, concluimos que los pasos \ref{alg-5-for} y \ref{alg-5} del algoritmo pueden ser realizados en tiempo $O(\poly_5(\log n) \cdot \poly_7(\log n))$, vale decir, en tiempo polinomial en el largo de la entrada $n$.
+%	 Además, debemos ser capaces de calcular $(X+a)^n$ en módulo $(X^r-1,n)$, lo cual lo podemos realizar mediante el algoritmo \ref{alg:fast_exp_mod} presentado en el apéndice \ref{app-fast_exp_mod} en $O(\log n \cdot r^2 \cdot deg(q))= O(\log n \cdot r^2)$. Luego, en esta etapa realizamos a los más $O(\log^5 n\cdot\log n \cdot r^2)\leq O(\log^6 n \cdot (\lceil \log^5n\rceil)^2)$, lo que es una cantidad polinomial de pasos respecto al largo de $n$. 
+	\end{itemize}
+		
+%	En el paso \ref{alg-4} hacemos una comparación, para lo cual claramente nos demoramos tiempo polinomial, y en el paso \ref{alg-5} debemos decidir $\lfloor \sqrt{\phi(r)} \log n\rfloor$ veces si dos polinomios son distintos en módulo $(X^r-1,n)$. A primera vista, no sabemos si esta cantidad de operaciones es polinomial con respecto al largo de $n$. Sin embargo, sabemos que $\alpha = O_r(n)$ es el menor valor tal que $n^{\alpha}\equiv 1$ en módulo $r$, y como $n^{\phi(r)}\equiv 1$ en módulo $r$, entonces necesariamente $O_r(n)\leq \phi(r)$. Además, sabemos que $\phi(r)\leq r$, entonces $O_r(n)\leq r$. De todo esto podemos decir que, dado que $\log^2 n < O_r(n)$, entonces 
+%	\begin{eqnarray}
+%		\lfloor \sqrt{\phi(r)} \log n\rfloor &<&\sqrt{\phi(r)} \log n\nonumber\\
+%		&\leq & \sqrt{r}\sqrt{r}\nonumber\\
+%		&=& r\label{cota-ell}
+%	\end{eqnarray}\comentario{(5)esto lo vamos a usar mas adelante y puedo referenciar la ecuacion}Luego $\lfloor \sqrt{\phi(r)} \log n\rfloor\leq \log^5 n$. Además, debemos ser capaces de calcular $(X+a)^n$ en módulo $(X^r-1,n)$, lo cual lo podemos realizar mediante el algoritmo \ref{alg:fast_exp_mod} presentado en el apéndice \ref{app-fast_exp_mod} en $O(\log n \cdot r^2 \cdot deg(q))= O(\log n \cdot r^2)$. Luego, en esta etapa realizamos a los más $O(\log^5 n\cdot\log n \cdot r^2)\leq O(\log^6 n \cdot (\lceil \log^5n\rceil)^2)$, lo que es una cantidad polinomial de pasos respecto al largo de $n$.  
+	
+%	Por último, en el paso \ref{alg-6} solamente retornamos, por lo que también es de orden polinomial.
+	
+	Si observamos el algoritmo, el peor caso es cuando retorna en el paso \ref{alg-6}, ya que pasamos por todos los otros pasos. Como vimos que el tiempo para ejecutar cada paso es polinomial con respecto al largo de la entrada $n$, entonces necesariamente la suma de los tiempos de cada paso también será polinomial. Con esto concluimos la demostración de la
+        proposición~\ref{prop-lem-1},
+        %lema \ref{lem-1},
+        ya que 
+	%afirmando que 
+	el algoritmo siempre termina y funciona en tiempo~$O(\poly(\log n))$.
+	%un tiempo polinomial con respecto al largo de la entrada.  
+	
+	Las siguientes proposiciones nos hablan de la correctitud del algoritmo. Para la demostración, nos fijaremos en cada uno de sus pasos, y veremos que lo que retorna es correcto.
+	%  paso, entonces retorna el resultado correcto.
+	% correctamente.\comentario{decir que lo mas dificil es el paso 6? Para que no lleguen al paso 5 preguntandose por que les falta la mitad del documento} 
+	Supondremos para cada paso que la entrada es un entero $n>1$.
+	
+	\begin{proposition}
+		Si el algoritmo \AKS\ retorna en el paso \ref{alg-r1}, entonces $n$ es compuesto. 
+	\end{proposition}
+	\begin{proof}
+	Si el algoritmo retorna en este paso, entonces el algoritmo encontró números naturales $a$ y $b>1$ tales que $n=a^b$. Luego, $n$ es compuesto.
+	%, y el algoritmo correctamente retorna 
+	% Es por esto que el algoritmo no se equivocó al retornar 
+	%COMPUESTO.
+	\end{proof}
+	
+	\begin{proposition}
+		Si el algoritmo \AKS\ retorna en el paso \ref{alg-r3}, entonces $n$ es compuesto. 
+	\end{proposition}
+	\begin{proof}
+	Si el algoritmo retorna en el paso \ref{alg-r3}, entonces existe $a \leq r$ tal que $1<\MCD(a,n)<n$. A partir de esto se concluye que $n$ es un número compuesto, puesto que $\MCD(a,n) \divi n$. 
+	%De esta forma, sabemos que el algoritmo correctamente retorna 
+	%COMPUESTO en este paso.
+	%Supongamos por contradicción que el algoritmo retornó en este paso, pero $n$ resulta ser primo. De esta forma, vamos a tener que para cualquier $a$ (en particular para $a\leq r$), se cumple que $\MCD(a,n)=1$ si $n$ no divide a $a$, y $\MCD(a,n)=n$ si $n$ divide a $a$. Así, el algoritmo no pudo haber retornado en esta lí­nea del código, ya que no existe un $a\leq r$ tal que $1<\MCD(a,n)<n$. Por lo tanto, nuestra suposición de que $n$ era primo no es válida, ya que nos lleva a una contradicción. De esto concluimos que $n$ debe ser compuesto.
+	\end{proof}
+	\begin{proposition}
+	Si el algoritmo \AKS\ retorna en el paso \ref{alg-r4}, entonces $n$ es primo. 
+	\end{proposition}
+	\begin{proof}
+	  Si el algoritmo retorna en este paso, entonces sabemos por su definición
+          %construcción del algoritmo,
+          que $n\leq r$. Si suponemos por contradicción que $n$ es compuesto, entonces existe un divisor $p$ de $n$ tal que $1 < p < n$. De esta forma, se tiene que $1 < \MCD(p,n) < n$ y $p < n \leq r$, por lo que el algoritmo habría retornado en el paso \ref{alg-r3}.
+	%, ya que hubiera encontrado un divisor $p\leq n\leq r$ no trivial de $n$. Al no haber retornado en \ref{alg-r3}, tenemos una contradicción, y $n$ necesariamente debe ser primo. 
+	Como esto contradice el supuesto de que el algoritmo retorna en el paso \ref{alg-r4}, no existe tal divisor $p$ y el número $n$ es primo. 
+	%Concluimos 
+	\end{proof}
+	\begin{proposition}
+		Si el algoritmo \AKS\ retorna en el paso \ref{alg-r5}, entonces $n$ es compuesto.
+	\end{proposition}
+	\begin{proof}
+	En el paso \ref{alg-5}, el algoritmo revisa para $a\in \{1, \ldots, \lfloor \sqrt{\phi(r)} \log n\rfloor\}$ si $(X+a)^n \not\equiv X^n+a$ en módulo $(X^r-1,n)$. Si suponemos por contradicción que $n$ es primo, por el lema \ref{lem-2.1} sabemos que $(X+a)^n \equiv X^n+a$ en módulo $n$ para todo $a \in \mathbb{Z}$ (nótese que esta equivalencia se cumple trivialmente si $a\mods n = 0$), por lo que $(X+a)^n \equiv X^n+a$ en módulo $(X^r-1,n)$ para todo $a \in \mathbb{Z}$. De esta forma, si $n$ es primo, la condición en el paso \ref{alg-5} sería falsa para todo  $a\in \{1, \ldots, \lfloor \sqrt{\phi(r)} \log n\rfloor\}$, y el algoritmo no retorna COMPUESTO en el paso \ref{alg-r5}. Como esto contradice nuestro supuesto inicial, concluimos que $n$ es un número compuesto.
+%	esta igualdad se cumple para cualquiera de estos $a$, y al hacer módulo ($X^r-1,n$) nos restringimos a todos los $a$ tales que $1\leq a< n$. Luego, no podría haber retornado en \ref{alg-r5}, ya que para hacerlo, algún $a$ debería no cumplir la igualdad. Por lo que $n$ debe ser compuesto.
+	\end{proof}
+	
+	\begin{proposition}\label{prop:paso_final}
+		Si el algoritmo \AKS\ retorna en el paso \ref{alg-6}, entonces $n$ es primo.
+	\end{proposition}
+	Solo nos falta ver la correctitud de este paso para ver la correctitud total del algoritmo.
+	Sin embargo, para demostrar esta proposición necesitaremos de más trabajo y de un mayor número de herramientas más complejas que las ya consideradas.
+	%con mayor alcance en comparación con 
+	%las anteriores. 
+	Es por esto que usaremos una serie de lemas
+        %\comentarioin{Lemas, proposiciones ¿y definiciones?(si existe alguna proposicion)}
+        para lograr demostrar la proposición \ref{prop:paso_final}.
+	Con el fin de obtener una contradicción, en el resto de esta sección vamos a suponer 	
+	%Para el resto de esta sección, vamos a suponer para obtener una contradicción 
+	%(por contradicción), por el resto de esta sección, 
+	que el algoritmo retorna primo en el paso \ref{alg-6}, pero $n$ es compuesto.	
+%\comentario{Marcelo: hasta aquí revisé.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% hasta aquí cambia el nuevo orden
+	
+	
+	Siguiendo esta línea, lo primero que podemos notar es que, ya que $n$ es compuesto, debe existir un primo $p$ que divide a $n$. Podemos observar que se debe cumplir que $r<p<n$, ya que si fuera cierto que $p\leq r$, el algoritmo hubiera retornado en el paso \ref{alg-r3}, 
+		%o en el paso \ref{alg-r4}, 
+		pero no lo hizo (retornó en el paso \ref{alg-6}). Por otro lado, también sabemos que 
+		%$\MCD(n,r)=1$, ya que si $1<\MCD(n,r)<n$, el algoritmo hubiera retornado en el paso \ref{alg-r3}. De lo anterior tenemos que 
+		$n\in\mathbb{Z}_r^*$ ya que $O_r(n)$ está definido. Como $n=p\cdot m$ para algún número natural $m > 1$, sabemos que si $\MCD(p,r)\neq 1$, entonces $\MCD(n,r)\neq 1$. De esto concluimos que $\MCD(p,r)=1$, y $p\in \mathbb{Z}_r^*$.
+	Además de esto, podemos afirmar que se cumple que $O_r(p)>1$, lo que demostraremos por contradicción a continuación (nótese que $O_r(p)$ está definido ya que $p \in \mathbb{Z}_r^*$). Supongamos que para todo $p$ primo divisor de $n$ se tiene que $O_r(p)=1$.	Sea la descomposición en primos de $n=p_1^{\alpha_1}\cdots p_t^{\alpha_t}=\prod_{i = 1}^t p_i^{\alpha_i}$. Luego, 
+	%para todo $i$ tal que $1\leq i\leq t$ 
+	se tiene que
+		\begin{eqnarray*}
+			O_r(p_i)=1 \ \text{ para todo } i \in \{1, \ldots, t\} &\Rightarrow &p_i^1 \equiv 1 \mods r \ \text{ para todo } i \in \{1, \ldots, t\}\\
+			&\Rightarrow &n^1= \prod_{i=1}^t p_i^{\alpha_i} =\prod_{i = 1}^t (p_i^1)^{\alpha_i}\equiv \prod_{i = 1}^t 1^{\alpha_i}\equiv 1 \mod r\\
+			&\Rightarrow &O_r(n)=1
+		\end{eqnarray*}		 
+		Esto es una contradicción, ya que $O_r(n)>\log^2n\geq 1$ cuando $n\geq 2$. Es por esto que debe existir al menos un primo $p$ divisor de $n$ tal que $O_r(p)>1$. 
+%		Podemos observar que el primo $p$ que cumple con lo anterior también cumple que $r<p<n$, ya que si fuera cierto que $p\leq r$, el algoritmo hubiera retornado en el paso \ref{alg-r3}, 
+%		%o en el paso \ref{alg-r4}, 
+%		pero no lo hizo ya que retornó en el paso \ref{alg-6}. Por otro lado, también sabemos que 
+%		%$\MCD(n,r)=1$, ya que si $1<\MCD(n,r)<n$, el algoritmo hubiera retornado en el paso \ref{alg-r3}. De lo anterior tenemos que 
+%		$n\in\mathbb{Z}_r^*$ ya que $O_r(n)$ está definido. Como $n=p\cdot m$ para algún número natural $m > 1$, sabemos que si $\MCD(p,r)\neq 1$ entonces $\MCD(n,r)\neq 1$. De esto concluimos que $\MCD(p,r)=1$, y $p\in \mathbb{Z}_r^*$.
+%		%\comentario{definir}.
+		
+	        %\comentarioin{Vamos a usar mod(algo) o 'en modulo algo' ?}
+                De ahora en adelante, vamos a fijar $p$ y $r$ con las propiedades descritas anteriormente (en particular, sabemos que $r < p < n$). Además, definimos $\ell=\lfloor \sqrt{\phi(r)}\log  n\rfloor$, de forma que podamos analizar el paso \ref{alg-5} del algoritmo donde el valor de $a$ varía entre 1 y $\ell$. Este paso 
+	%El paso \ref{alg-5} del algoritmo 
+	verifica $\ell$ ecuaciones de la forma $(X+a)^n \not\equiv X^n+a \modulo$.
+%	en el bucle\comentario{loop del for? o bucle?}. 
+	Podemos observar de $\eqref{cota-ell}$ que $\ell \leq r < p$, y, como no se retornó inmediatamente después de este paso, tenemos que $(X+a)^n\equiv X^n+a$ en módulo $(X^r -1,n)$, para  cada $a \in \{0, \ldots, \ell\}$ (si $a=0$, la ecuación se cumple trivialmente). Luego, para cada $a \in \{0, \ldots, \ell\}$ se tiene que:
+	\begin{align}
+		&\hspace{-5pt}(X+a)^n\equiv X^n+a \modulos \nonumber\\
+&\hspace{15pt}\Rightarrow\ (X+a)^n - (X^n+a) \equiv q(X)(X^r-1) \mod n \quad \text{ para } q(X)\in \mathbb{Z}[X]  \nonumber\\ 
+&\hspace{15pt}\Rightarrow\ (X+a)^n - (X^n+a) -q(X)(X^r-1)= n\cdot k \quad \text{ para } q(X)\in \mathbb{Z}[X]  \text{ y } k \in \mathbb{Z} \nonumber\\
+&\hspace{15pt}\Rightarrow\ (X+a)^n - (X^n+a) -q(X)(X^r-1)= p\cdot k_1 \quad \text{ para } q(X)\in \mathbb{Z}[X]  \text{ y } k_1 \in \mathbb{Z}, \text{ dado que } p \divi n \nonumber\\
+&\hspace{15pt}\Rightarrow\ (X+a)^n - (X^n+a) \equiv q(X)(X^r-1) \mod p \quad \text{ para } q(X)\in \mathbb{Z}[X]  \nonumber\\ 
+&\hspace{15pt}\Rightarrow\ (X+a)^n\equiv X^n+a \modulops \label{eq:7}
+\end{align}
+	Además, como $p$ es primo, 
+	%$p\geq 2$ y $p\in \mathbb{Z}$, 
+	por el lema \ref{lem-2.1} tenemos que para todo $a \in \mathbb{Z}$ tal que $\MCD(p,a)=1$, se tiene que $(X+a)^p \equiv X^p+a \mod p$. Así, dado que $\ell < p$ y esta congruencia se cumple trivialmente para $a = 0$, concluimos que para cada $a \in \{0, \ldots, \ell\}$:
+	\begin{eqnarray}
+		 %(X+a)^p &\equiv & X^p+a \modl p \hspace{0.5cm} \forall a \in \mathbb{Z} \text{ tal que } \MCD(p,a)=1  \nonumber\\
+		(X+a)^p&\equiv & X^p+a \modulop \label{eq:8}		
+	\end{eqnarray}
+%\comentario{aca esta medio descontinuado pero no se como conectar}
+		Las dos últimas ecuaciones, \eqref{eq:7} y \eqref{eq:8}, nos servirán para para demostrar la siguiente afirmación, la cual será útil para la demostración de la proposición \ref{prop:paso_final}:
+	\begin{eqnarray}
+		(X+a)^{\frac{n}{p}}&\equiv &X^{\frac{n}{p}}+a\modulop \quad\quad \text{para cada } a \in \{0, \ldots, \ell\}  \label{eq:9}
+	\end{eqnarray}
+	Para la demostración de \eqref{eq:9}, necesitaremos usar los lemas \ref{lema-a}, \ref{lema-b} y \ref{lema-polinomio_separable}, demostrados a continuación. %siguientes tres lemas:
+        %\comentarioin{Marcelo: aquí pondría la definición de polinomio irreducible y la idea de que un polinomio se puede escribir como una multiplicación de polinomios irreducibles.}
+Desde ahora en adelante vamos a trabajar con una estructura algebraica con buenas propiedades: los cuerpos. En caso de que el lector no esté familiarizado con esta materia puede dirigirse a la sección \ref{app-cuerpos} del apéndice, donde definimos y describimos las propiedades esenciales para leer este documento. Sea $(F,+,\cdot)$ un cuerpo, y desde ahora en adelante suponga que $\0$ y $\1$ son utilizados para denotar el nuetro de las operaciones $+$ y $\cdot$ en un cuerpo aarbitrario, respectivamente. Lo primero que haremos será introducir el concepto de polinomios irreducibles. Decimos que un polinomio $h(X)\in F[X]$ es irreducible si no puede ser factorizado por dos polinomios de menor grado en $F[X]$. Por ejemplo, en $\mathbb{R}[X]$ sabemos que el polinomio $X^2+1$ es irreducible, mientras que en $\mathbb{C}[X]$ no lo es, ya que $X^2+1 = (X+i)(X-i)$. Además, en $\mathbb{Z}_2[X]$ podemos ver que el mismo polinomio se puede escribir como \mbox{$X^2+1 \equiv (X+1)(X+1) \modl 2$}, y por lo tanto tampoco es irreducible. Nótese que irreducibilidad en $F[X]$ no es equivalente a que no hayan raíces en $F$: $(X^2+1)(X^2+1)$ no tiene raíces en $\mathbb{R}$ y sin embargo no es irreducible en $\mathbb{R}[X]$. Habiéndo introducido la noción de irreducibilidad, podemos hablar sobre la descomposición de polinomios en polinomios irreducibles. Dado un polinomio $q(X)\in F[X]$ podemos descomponerlo de la forma 
+\begin{eqnarray}
+	q(X) & = & \prod\limits_{i=1}^kr_i(X), \label{descomp pol}
+\end{eqnarray}
+donde cada $r_i(X)$ es un polinomio irreducible en $F[X]$.
+%\comentarioin{Asumo que no es trivial la existencia de esta descomposición (en el sentido que sea finita), justamente porque en otras estructuras no se cumple, es por eso que puse a continuación que podemos asumir esta propiedad} Podemos asumir que esta propiedad se cumple cuando $F$ es un cuerpo, ya que la demostración se escapa del objetivo del documento.
+%\comentarioin{igual esto es chanta (?)}
+Dada esta propiedad,
+%dado que $F$ es un cuerpo,
+podemos afirmar que siempre existe una descomposición de la
+forma
+\begin{eqnarray}
+  q(X) & = & c\cdot \prod\limits_{i=1}^k h_i(X), \label{descomp pol mon}
+\end{eqnarray}
+donde $c\in F$ y cada $h_i(X)$ es irreducible y mónico. Esto se debe a
+que podemos tomar la descomposición en polinomios irreducibles
+descrita en \eqref{descomp pol}, y multiplicar cada $r_i$ por el
+inverso del coeficiente del término de mayor grado. Por ejemplo, en
+$\mathbb{Z}_{5}[X]$ tenemos la siguiente descomposición del polinomio
+$2X^2 + 2$:
+\begin{eqnarray*}
+2X^2 + 2 & \equiv & (3X+1)(4X+2) \modl 5.
+\end{eqnarray*}
+Sabemos que 2 es el inverso de 3 en módulo 5, y 4 es el inverso de sí
+mismo en modulo 5. Usamos estos inversos para obtener una
+descomposición del polinomio $2X^2 + 2$ de la forma \eqref{descomp pol
+  mon}:
+\begin{eqnarray*}
+  2X^2 + 2 & \equiv & (3X+1)(4X+2) \modl 5\\
+  & \equiv & (2\cdot 3) \cdot (4 \cdot 4) \cdot (3X+1)(4X+2) \modl 5\\
+  & \equiv & (3 \cdot 4) \cdot (2 \cdot (3X+1))\cdot(4 \cdot (4X+2)) \modl 5\\
+  & \equiv & (3 \cdot 4) \cdot (X+2)(X+3) \modl 5\\
+    & \equiv & 2\cdot (X+2)(X+3) \modl 5.
+\end{eqnarray*}
+%el polinomio $3X+1$ es irreducible pero no mónico,
+%pero si lo múltiplicamos por $3^{-1}$ obtenemos $3^{-1}\cdot (3X+1) =
+%X+3^{-1}$, el cual, además de ser irreducible, es mónico, y sabemos
+%que pertenece a $\mathbb{R}[X]$.
+A continuación enunciamos los tres lemas que nos ayudarán a demostrar
+la ecuación \eqref{eq:9}.
+     
+	\begin{lemma}\label{lema-a}
+		Sean $a(X),b(X),r(X),s(X),t(X)\in \mathbb{Z}_p[X]$ tales que $r(X)$ y $s(X)$ no son nulos. Si
+		\begin{itemize}
+			\item[(i)] $r(X)$ y $s(X)$ son coprimos en $\mathbb{Z}_p[X]$ $($vale decir, $\MCD(r(X),s(X)) = 1$ en $\mathbb{Z}_p[X]$, como es definido en la sección~\ref{sec-notacion}$)$,
+			%\comentarioin{Preliminares: $\MCD$ de 2 polinomios}
+			
+			\item[(ii)] $t(X)= r(X)\cdot s(X)$,
+			\item[(iii)] $a(X)\equiv b(X)\modl (r(X),p)$, y
+			\item[(iv)] $a(X)\equiv b(X)\modl (s(X),p)$,
+		\end{itemize}
+		entonces
+		\begin{eqnarray}
+			a(X)&\equiv &b(X)\modl (t(X),p) \nonumber 
+		\end{eqnarray}
+	\end{lemma}
+        \begin{proof}
+De la condición (iii) concluimos que $r(X)$ divide a $a(X) - b(X)$ en
+$\mathbb{Z}_p[X]$, mientras que de la condición (iv) concluimos que
+$s(X)$ divide a $a(X) - b(X)$ en $\mathbb{Z}_p[X]$. De esta forma,
+concluimos que existen polinomios $\alpha(X), \beta(X) \in
+\mathbb{Z}_p[X]$ tales que:
+          \begin{eqnarray}\notag
+            \alpha(X) \cdot r(X) & \equiv & a(X) - b(X) \modl p\\            
+            \beta(X) \cdot s(X) & \equiv & a(X) - b(X) \modl p \label{eq-lema-a-1}
+          \end{eqnarray}
+          Así, tenemos que
+          \begin{eqnarray}\label{eq-lema-a}
+            \alpha(X) \cdot r(X) & \equiv & \beta(X) \cdot s(X) \modl p 
+            \end{eqnarray}
+Dado que $r(X)$ es un polinomio no nulo en $\mathbb{Z}_p[X]$ y $p$ es
+un número primo, podemos obtener la siguiente descomposición del polinomio:
+            \begin{eqnarray*}
+            r(X) & \equiv & c \cdot \prod_{i=1}^k h_i(X) \mod p,
+            \end{eqnarray*}
+donde $k \geq 0$, $c \in \{1, \ldots, p-1\}$ y cada $h_i(X)$ es un
+polinomio mónico de grado mayor a 0 e irreducible en $\mathbb{Z}_p[X]$. Dado
+la condición \eqref{eq-lema-a}, podemos concluir existe un polinomio
+$\gamma(X) \in \mathbb{Z}_p[X]$ tal que
+\begin{eqnarray}\label{eq-lem-prod-irr}
+            \beta(X) \cdot s(X) & \equiv & \gamma(X) \cdot \prod_{i=1}^k h_i(X)\mod p
+            \end{eqnarray}
+Por la condición (i) sabemos que $\MCD(r(X),s(X)) = 1$, por lo que
+para cada $i \in \{1, \ldots, k\}$, el polinomio $h_i(X)$ no puede ser
+parte de una descomposición de $s(X)$ como producto de irreducibles en
+$\mathbb{Z}_p[X]$ (puesto que $h_i(X)$ es un polinomio mónico de grado
+mayor a 0 y $h_i(X)$ divide a $r(X)$ en $\mathbb{Z}_p[X]$). Así, desde
+\eqref{eq-lem-prod-irr} concluimos que existe un polinomio $\delta(X)
+\in \mathbb{Z}_p[X]$ tal que
+%\comentarioin{no entiendo por que dadas  esas codiciones se cumple lo siguiente}
+\begin{eqnarray*}
+            \beta(X) & \equiv & \delta(X) \cdot \prod_{i=1}^k h_i(X)\mod p,
+\end{eqnarray*}
+Además, sabemos que $c$ es invertible en módulo $p$ (ya que $c \in \{1,
+\ldots, p-1\}$ y $p$ es un número primo), por lo que existe $d \in
+\{1, \ldots, p-1\}$ tal que $c \cdot d \equiv 1 \modl p$. Por lo tanto,
+tenemos que:
+\begin{eqnarray*}
+  \beta(X) = \delta(X) \cdot \prod_{i=1}^k h_i(X) \mod p& \Rightarrow &
+  \beta(X) \equiv \delta(X) \cdot \prod_{i=1}^k h_i(X) \modl p\\
+  & \Rightarrow & \beta(X) \equiv \delta(X) \cdot d \cdot c \cdot \prod_{i=1}^k h_i(X) \modl p\\
+  & \Rightarrow & \beta(X) \equiv \delta(X) \cdot d \cdot r(X) \modl p\\
+  & \Rightarrow & \beta(X) \cdot s(X) \equiv \delta(X) \cdot d \cdot r(X) \cdot s(X) \modl p\\
+  & \Rightarrow & \beta(X) \cdot s(X) \equiv \delta(X) \cdot d \cdot t(X) \modl p \quad\quad\quad \text{por la condición (ii)}\\ 
+  & \Rightarrow & a(X) - b(X) \equiv \delta(X) \cdot d \cdot t(X) \modl p \quad\quad\quad \text{por \eqref{eq-lema-a-1}}
+\end{eqnarray*}
+Por lo tanto, concluimos que $a(X) \equiv b(X) \modl (t(X),p)$, que es lo que teníamos que demostrar.
+        \end{proof}
+        
+%	La demostración de este lema queda propuesta para el lector.
+        %(\textbf{Hint:} demuestre primero que la identidad de Bezout funciona en $\mathbb{Z}_p[X]$ y a partir de eso demuestre el lema).
+	%\comentario{deje propuesta la demostracion del lema}	
+	\begin{lemma}\label{lema-b}
+		Si se cumplen las ecuaciones $\eqref{eq:7}$ y $\eqref{eq:8}$, entonces para cada $i\in\mathbb{N}$ y $a \in \{0, \ldots, \ell\}$, se tiene que:
+		\begin{eqnarray*}
+			(X^{p^i}+a)^n&\equiv &(X^{p^i})^n + a \modulop
+		\end{eqnarray*}
+	\end{lemma} 
+%	\comentarioin{Lo siguiente puede estar mejor argumentado, mas que `` recuerde que en la demostracion del lema 2.1 si reemplazamos...'' o bien hacer un corolario justo despues del lema 2.1}
+        Para demostrar este lema, notemos que por la demostración del lema \ref{lem-2.1} sabemos que dado $q(X)\in \mathbb{Z}[X]$, como $p$ es primo, se tiene que 
+		\begin{eqnarray*}
+			(q(X)+a)^p&\equiv &q(X)^p + a \modl p
+		\end{eqnarray*}
+		Luego, si continuamos desarrollando esta expresión tenemos que
+		\begin{eqnarray}
+			(q(X)+a)^p\equiv q(X)^p + a \modl p\nonumber & \Leftrightarrow & (q(X)+a)^p - (q(X)^p + a)\equiv 0 \modl p\nonumber\\
+			%& \Rightarrow & (X^r-1)\divi  (q(X)+a)^p - (q(X)^p + a) \modl p\nonumber\\
+			& \Rightarrow & (q(X)+a)^p - (q(X)^p + a)\equiv 0 \modulop\nonumber\\
+			& \Leftrightarrow & (q(X)+a)^p\equiv q(X)^p+a \modulop\label{eq:corolario2.1}
+		\end{eqnarray}
+	A continuación demostraremos el lema \ref{lema-b} mediante inducción fuerte.
+	%\comentario{A lo mejor esta demostración va mejor en el apendice o demostraciones intermedias, y ver tema de continuidad de la oracion con las ecuaciones anteriores}
+	\begin{proof}[Demostración del lema \ref{lema-b}]
+		El caso base $i = 0$ se cumple por la ecuación \eqref{eq:7}. Para el paso inductivo, supongamos que $(X^{p^i}+a)^n\equiv (X^{p^i})^n + a \modulop$, a partir de lo cual obtenemos: 
+%Queremos demostrar que $P(i+1)$ se cumple.
+		\begin{align*}
+			&(X^{p^i}+a)^n\equiv (X^{p^i})^n + a \modulops\\
+			&\hspace{60pt}\Rightarrow \ ((X^{p^i}+a)^n)^p\equiv ((X^{p^i})^n + a)^p \modulops\\
+			&\hspace{60pt}\Rightarrow \ ((X^{p^i}+a)^p)^n\equiv ((X^{p^i})^n + a)^p \modulops\\
+			&\hspace{60pt}\Rightarrow \ (X^{p^{i+1}}+a)^n\equiv ((X^{p^i})^n)^p + a \modulop \quad\quad \text{por }\eqref{eq:corolario2.1}\\
+			&\hspace{60pt}\Rightarrow \ (X^{p^{i+1}}+a)^n\equiv (X^{p^{i+1}})^n + a \modulop
+		\end{align*}
+		Vale decir, mostramos que la propiedad se cumple para $i+1$, lo cual concluye la demostración del lema. 
+	\end{proof}
+
+%\comentarioin{Marcelo: llegué hasta aquí con la revisión (revisé el apéndice \ref{sec-app-alg-int} completo).}
+        
+	\begin{lemma}\label{lema-polinomio_separable}
+		Sea $K$ un cuerpo de característica $q$ y sea $m>1$
+                un entero no divisible por $q$.
+                %\comentarioin{aca por qué importa la característica?}
+		%\comentarioin{Respuesta: porque si $m$ es divisible por la característica, entonces al derivar $X^m-1$ nos queda $mX^{m-1} =X^{m-1}\cdot (1 + \cdots + 1)=X^{m-1}\cdot 0= 0$, pero no queremos eso}
+                Entonces podemos escribir:
+	\begin{eqnarray*}
+		X^m-\1 & = & \prod_{i=1}^{t}h_i(X), 
+		\end{eqnarray*}
+		donde cada $h_i(X)$ es un polinomio irreducible en $K[X]$,
+$h_i(X)\neq h_j(X)$ para $i\neq j$ y $\grado(h_i(X)) \geq 1$.		 
+	\end{lemma}
+Antes de hacer la demostración del lema, necesitamos introducir las
+nociones de raíces de la unidad, cuerpos de descomposición y cuerpo
+ciclotómico.        
+%\comentarioin{La siguiente definicion la puse en ambiente de definicion porque lo usamos despues y es necesario referenciarla. Me entra la duda si es muy horrible poner esa descripcion de la definicion: raices de la unidad, cuerpo....}
+\begin{definition}[Raíces de la unidad, cuerpo de descomposición y cuerpo ciclotómico]\label{c. de descomposicion, ciclotomico def}
+Sea $K$ un cuerpo. Decimos que $\eta\in K$ es una $m$-ésima raiz de la
+unidad en $K$ si $\eta^m=1$ para $m\geq 1$. El conjunto que contiene
+todas las $m$-raíces de la unidad es denotado por $E^{(m)}$.  Además,
+si $p(X)\in K[X]$ es un polinomio no constante, entonces decimos que
+el cuerpo de descomposición de $p(X)$ es la menor extensión de $K$ que
+contiene todas las raíces de $p(X)$. En particular, para un polinomio
+de la forma $p(X)=X^m-1$, el cuerpo de descomposición de $p(X)$ es
+llamado
+%lo anterior es válido y lo denominamos
+el $m$-ésimo cuerpo ciclotómico, el cual denotaremos como $K^{(m)}$.
+\end{definition}
+
+\begin{example}\label{exa-cuerpo-desc}
+El polinomio $X^2-2$ es irreducible en el cuerpo
+$(\mathbb{Q},+,\cdot)$, puesto que $\sqrt{2}$ es una de sus raíces y
+este no es un número racional. El cuerpo de descomposición de $X^2-2$
+puede ser definido de la siguiente forma (si no está familiarizado con
+la siguiente notación por favor vea el apéndice \ref{app-cuerpos}):
+\begin{eqnarray*}
+  \mathbb{Q}[X]/(X^2-2) & = & \{p(X) \mods (X^2-2)  \ \mid \  p(X)\in \mathbb{Q}[X]\}.
+\end{eqnarray*}
+Nótese que $\mathbb{Q}[X]/(X^2-2)$ extiende a $(\mathbb{Q},+,\cdot)$, puesto que:
+\begin{eqnarray*}
+  \mathbb{Q}[X]/(X^2-2) & = & \{a+bX  \mid  a,b \in \mathbb{Q}\}.
+\end{eqnarray*}
+Además, $X$ y $-X$ son raíces del polinomio $Y^2-2$ en $\mathbb{Q}[X]/(X^2-2)$ puesto que:
+\begin{eqnarray*}
+  X^2 - 2 & \equiv & 0 \modl X^2 - 2\\
+  (-X)^2 - 2 & \equiv & 0 \modl X^2 - 2
+\end{eqnarray*}
+De hecho el cuerpo $\mathbb{Q}[X]/(X^2-2)$ suele denotarse como
+$\mathbb{Q}(\sqrt{2})$, donde los elementos son de la forma $a +
+b\sqrt{2}$ para $a,b \in \mathbb{Q}$. Es decir, $\mathbb{Q}(\sqrt{2})$
+correspode al cuerpo $\mathbb{Q}[X]/(X^2-2)$ pero con la variable $X$
+reemplazada por~$\sqrt{2}$.
+
+Considere ahora el polinomio $(X^2-2)(X^2-3)$, el cual también es
+irreducible en el cuerpo $(\mathbb{Q},+,\cdot)$, puesto que ni
+$\sqrt{2}$ ni $\sqrt{3}$ son números racionales. Para construir el
+cuerpo de descomposición de $(X^2-2)(X^2-3)$, primero construimos el
+cuerpo $(\mathbb{Q}[X]/(X^2-2), +, \cdot)$. Luego notando que el
+polynomio $Y^2 - 3$ es irreducible en este cuerpo, construimos el
+siguiente cuerpo:
+\begin{eqnarray*}
+  (\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2) & = & \{p(Y) \mods (Y^2-3)  \ \mid \  p(Y)\in (\mathbb{Q}[X]/(X^2-2))[Y]\}
+\end{eqnarray*}
+Nótese que $((\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2),+,\cdot)$ extiende a
+$(\mathbb{Q}[X]/(X^2-2),+,\cdot)$ y  $(\mathbb{Q},+,\cdot)$, puesto
+que:
+\begin{eqnarray*}
+  (\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2) & = & \{(a+bX) + (c+dX)Y  \mid  a+bX, c+dX \in \mathbb{Q}[X]/(X^2-2)\}\\
+  & = & \{ a+ bX + cY + dXY  \mid  a,b,c,d \in \mathbb{Q}\}.
+\end{eqnarray*}
+Además, $Y$ y $-Y$ son raíces del polinomio $Y^2-3$ en
+$((\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2)$ puesto que:
+\begin{eqnarray*}
+  Y^2 - 3 & \equiv & 0 \modl Y^2 - 3\\
+  (-Y)^2 - 3 & \equiv & 0 \modl Y^2 - 3
+\end{eqnarray*}
+De hecho el cuerpo $((\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2)$ suele
+denotarse como $\mathbb{Q}(\sqrt{2},\sqrt{3})$, donde los
+elementos son de la forma $a + b\sqrt{2} + c\sqrt{3} + d \sqrt{6}$
+para $a,b,c,d \in \mathbb{Q}$. Es decir,
+$\mathbb{Q}(\sqrt{2},\sqrt{3})$ correspode al cuerpo
+$((\mathbb{Q}[X]/(X^2-2))[Y]/(Y^3-2)$ pero con las variables $X$ e $Y$
+reemplazadas por $\sqrt{2}$ y $\sqrt{3}$, respectivamente, de manera
+tal que $XY = \sqrt{2} \cdot \sqrt{3} = \sqrt{6}$.
+
+Finalmente considere el polinomio $X^3-2$, el cual también es
+irreducible en el cuerpo $(\mathbb{Q},+,\cdot)$, puesto que
+$\sqrt[3]{2}$ no es un número racional. Para construir el cuerpo de
+descomposición de $X^3-2$, primero construimos el cuerpo
+$(\mathbb{Q}[X]/(X^3-2), +, \cdot)$, donde:
+\begin{eqnarray*}
+  \mathbb{Q}[X]/(X^3-2) & = & \{p(X) \mods (X^3-2)  \ \mid \  p(X)\in \mathbb{Q}[X]\}.
+\end{eqnarray*}
+Nótese que $\mathbb{Q}[X]/(X^3-2)$ extiende a $(\mathbb{Q},+,\cdot)$ puesto que:
+\begin{eqnarray*}
+  \mathbb{Q}[X]/(X^3-2) & = & \{a+bX+cX^2  \mid  a,b,c \in \mathbb{Q}\}.
+\end{eqnarray*}
+Además, $X$ es una raíz del polinomio $Y^3-2$ en $\mathbb{Q}[X]/(X^3-2)$ puesto que:
+\begin{eqnarray*}
+  X^3 - 2 & \equiv & 0 \modl X^3 - 2
+\end{eqnarray*}
+De hecho, al igual que en los casos anteriores, el cuerpo
+$\mathbb{Q}[X]/(X^3-2)$ suele denotarse como
+$\mathbb{Q}(\sqrt[3]{2})$, donde los elementos son de la forma $a +
+b\sqrt[3]{2} + c(\sqrt[3]{2})^2$ para $a,b,c \in \mathbb{Q}$. Es
+decir, $\mathbb{Q}(\sqrt[3]{2})$ correspode al cuerpo
+$\mathbb{Q}[X]/(X^3-2)$ pero con la variable $X$ reemplazada
+por~$\sqrt{2}$, de manera tal que $X^2 = (\sqrt[3]{2})^2$.  Para saber
+si este es el cuerpo de descomposición de $X^3 - 2$, tenemos que
+averiguar si todas las raíces del polinomio $Y^3 - 2$ están en
+$\mathbb{Q}[X]/(X^3-2)$. Para hacer esto, observamos que en este cuerpo:
+\begin{eqnarray*}
+  Y^3 - 2 & \equiv (Y-X)(Y^2 + XY + X^2).
+  \end{eqnarray*}
+    Mirado desde el punto de vista de $\mathbb{Q}(\sqrt[3]{2})$, esto corresponde a decir que:
+\begin{eqnarray*}
+  Y^3 - 2 & \equiv (Y-\sqrt[3]{2})(Y^2 + \sqrt[3]{2}Y + (\sqrt[3]{2})^2).
+  \end{eqnarray*}    
+Se puede verificar que el polinomio $Y^2 + XY + X^2$ es irreducible en
+$(\mathbb{Q}[X]/(X^3-2))[Y]$, de la misma forma que el polinomio $Y^2 +
+\sqrt[3]{2}Y + (\sqrt[3]{2})^2$ es irreducible en
+$\mathbb{Q}(\sqrt[3]{2})[Y]$ (puesto que las raíces de este polinomio
+tienen una componente imaginaria). Así, para construir la menor
+extensión de $(\mathbb{Q}, +, \cdot)$ que incluye las raíces del
+polinomio $X^3 -2$, tenemos que considerar el cuerpo
+$((\mathbb{Q}[X]/(X^3-2))[Y]/(Y^2 + XY + X^2),+,\cdot)$, lo cual es
+equivalente a consider el cuerpo $(\mathbb{Q}(\sqrt[3]{2})[Y]/(Y^2 +
+\sqrt[3]{2}Y + (\sqrt[3]{2})^2),+,\cdot)$. Nótese que
+$(\mathbb{Q}[X]/(X^3-2))[Y]/(Y^2 + XY + X^2)$ extiende a
+$(\mathbb{Q}[X]/(X^3-2),+,\cdot)$ y $(\mathbb{Q},+,\cdot)$ puesto que:
+\begin{eqnarray*}
+  (\mathbb{Q}[X]/(X^3-2))[Y]/(Y^2 + XY + X^2) & = & \{(a+bX+cX^2) +
+  (a'+b'X+c'X^2)Y \mid a+bX+cX^2,\\ && \hspace{111pt} a'+b'X+c'X^2 \in
+  \mathbb{Q}[X]/(X^3-2)\}\\ & = & \{ a+ bX + cX^2 + a'Y + b'XY + c'X^2Y
+  \mid a,b,c,a',b',c' \in \mathbb{Q}\}.
+\end{eqnarray*}
+Como comentario final, cabe destacar que el cuerpo
+$((\mathbb{Q}[X]/(X^3-2))[Y]/(Y^2 + XY + X^2),+,\cdot)$ suele
+denotarse como
+\begin{align*}
+  \mathbb{Q}\bigg(\sqrt[3]{2}, \frac{-1+i\sqrt{3}}{(\sqrt[3]{2})^2}\bigg),
+\end{align*}
+donde las variables $X$ e $Y$ han sido reemplazadas por $\sqrt[3]{2}$
+y $\frac{-1+i\sqrt{3}}{(\sqrt[3]{2})^2}$, respectivamente, puesto que
+este último valor es una raiz del polinomio $Y^2 + \sqrt[3]{2}Y +
+(\sqrt[3]{2})^2$.  \qed
+\end{example}
+
+
+\begin{proof}[Demostración del lema \ref{lema-polinomio_separable}]
+  Considere el siguiente polinomio en $K[X]$:
+  \begin{eqnarray*}
+    f(X) & = & \sum_{i=0}^{k} a_iX^i.
+  \end{eqnarray*}
+  Defina entonces la función
+  %$D(f)(X):K[X] \to K[X]$
+  $D:K[X] \to K[X]$ de la siguiente manera:
+\begin{eqnarray*}
+	D(f(X)) &=& \sum_{i=1}^{k}i\cdot a_i X^{i-1}
+\end{eqnarray*}
+%Podemos ver que para dos polinomios $p(X)$ y $q(X)$ equivalentes en
+%$K[X]$ necesariamente $p'(X)\equiv q'(X)$, lo cual es fundamental para
+%que el mapeo esté bien definido.  También se puede verificar
+Dada la definición de $D$, se puede verificar rápidamente que si $f(X),g(X)\in K[X]$, $c\in K$ y $\ell$ es un número natural mayor a 0, se tiene que:
+%se cumplen las siguientes propiedades:
+\begin{itemize}
+%	\item $(f+g)'=f'+g'$
+%	\item $(f\cdot g)'=f'\cdot g + f\cdot g'$
+%	\item $(c\cdot f)'=c\cdot f'$
+%	\item $((X+c)^{\ell})'=\ell\cdot(X+c)^{\ell -1}$
+	\item $D(f(X)+g(X)) = D(f(X)) + D(g(X))$
+	\item $D(f(X) \cdot g(X)) = D(f(X)) \cdot g(X) + f(X) \cdot D(g(X))$
+	\item $D(c\cdot f(X)) = c\cdot D(f(X))$
+	\item $D((X+c)^{\ell}) = \ell\cdot(X+c)^{\ell -1}$
+\end{itemize}
+Las demostraciones de estas propiedades quedan propuestas como
+ejercicio para el lector (puede ser conveniente usar el teorema del
+binomio para la última propiedad).
+
+%Sea $m>1$ un entero no divisible por $q$.\comentarioin{aca nuevamente no se por que $m$ no puede ser multiplo de $q$, y creo que ya es redundante} 
+Sabemos que 
+\begin{eqnarray*}
+		X^m-1 & = & \prod_{i=1}^{t}h_i(X)^{\alpha_i}, 
+		\end{eqnarray*}
+donde cada $h_i(X)$ es un polinomio irreducible en $K[X]$, $h_i(X)\neq h_j(X)$ para $i\neq j$ y $\grado(h_i(X))=m_i$ con $m_i \geq 1$. Además cada $\alpha_i$ es un entero positivo.
+%\comentarioin{en vez de poner todo lo anterior, quizas decir que es la descomposicion en polinomios irreducibles en $K[X]$}
+Primero supongamos que todas las $m$-ésimas raíces de la unidad
+$\eta_i$ están en $K$. Esto quiere decir que podemos escribir
+$h_i(X)=(X-\eta_i)$ para cada $i$. Con el objetivo de demostrar que
+$\alpha_j = 1$ para todo $j\in\{1,...,t\}$, supongamos por
+contradicción que existe un $j$ tal que $\alpha_j>1$. Luego, en $K[X]$
+podemos escribir
+		\begin{eqnarray*}
+			 X^{m}-1  &=& (X-\eta_j)^{\alpha_j}\cdot g(X),
+	\end{eqnarray*}
+	        donde
+                \begin{eqnarray*}
+			 g(X) &=& \prod_{\substack{i=1\\ i\neq j}}^{t}h_i(X)^{\alpha_i}.
+	\end{eqnarray*}
+                Aplicando en ambos lados de la equivalencia la función $D$ introducido al inicio de la demostración, obtenemos:
+                %, nos queda
+	\begin{eqnarray}
+		m X^{m-1} & = & \alpha_j (X-\eta_j)^{\alpha_j -1}\cdot g(X)\ + \ (X-\eta_j)^{\alpha_j}\cdot D(g(X))\label{ecuacion derivada} 
+		\end{eqnarray}
+	Podemos observar en \eqref{ecuacion derivada} que $\eta_j$ no es una solución del polinomio de la izquierda, ya que $m$ no es un múltiplo de la característica de $K$
+        %\comentarioin{aca tenemos que explicar con mas detalle?}
+        y $\eta_j\neq \0$ (puesto que $\0^m\neq \0$). Además, notamos que $\eta_j$ sí es solución del polinomio de la derecha en \eqref{ecuacion derivada}, lo cual es una contradicción.   
+		%es una de las raíces del polinomio del lado derecho, pero no del izquierdo (notar que $\eta_j\neq 0$ ya que $0$ no es $m$-ésima raiz de la unidad), lo cual es una contradicción. 
+	De esto concluimos que si todas las $m$-ésimas raíces de la unidad son elementos de $K$, entonces la multiplicidad de cada una de estas es 1 y por ende $\alpha_i = 1$ para todo $i \in \{1, \ldots, t\}$, lo cual era lo que necesitabamos demostrar.
+        
+	Ahora supongamos que no todas las $m$-ésimas raíces de la unidad están en $K$ y que existe un $j$ tal que $\alpha_j>1$. Sabemos que $K$ está contenido en $K^{(m)}$, y además que $K^{(m)}$ es un cuerpo de característica $q$ (ver construcción de $K^{(m)}$ en ejemplo \ref{exa-cuerpo-desc}, y para más detalles revisar \cite{AlgebraLang}).
+%Se puede demostrar que cualquier cuerpo $K$ está contenido en $K^{(r)}$ (para más detalles revisar \cite{AlgebraLang}).
+        %\comentarioin{Cite el libro Algebra de Lang, pero no se si es necesario: ¿es facil ver que K tiene el cuerpo de extension finito con la raíces de la unidad? Creo que no}
+        Sabemos que $h_j(X)$ es irreducible en $K[X]$, pero en $K^{(m)}[X]$ podemos factorizarlo de la siguiente manera:
+		\begin{eqnarray*}
+			h_j(X) & = &\prod_{i=1}^{s} (X-\eta_{j,i})
+		\end{eqnarray*}
+Tomando cualquier $k\in [1,s]$, podemos escribir $X^m - 1$ en
+$K^{(m)}[X]$ de la siguiente forma:
+\begin{eqnarray*}
+	X^m-1 &=& (X-\eta_{j,k})^{\alpha_j}\cdot g(X).
+\end{eqnarray*}
+Así, suponiendo que $\alpha_j >1$ llegamos a la misma contradicción
+que en el primer caso de la demostración, y podemos afirmar que
+$h_j(X)$ no tiene raíces de multiplicidad mayor que 1. De lo anterior
+concluimos que en este caso también se cumple que $\alpha_j=1$ para
+cualquier $j\in \{1,...,t\}$, con lo cual queda demostrado el~lema.
+\end{proof}  
+
+%\comentarioin{Marcelo: revisé hasta aquí}
+
+	Ahora, usando los lemas \ref{lema-a}, \ref{lema-b} y \ref{lema-polinomio_separable} podemos demostrar la ecuación (\ref{eq:9}).
+	%\comentario{esta demostracion la queria poner de forma continua (sin el ambiente proof), pero es muy larga. quizas toda la demostracion de (\eqref{eq:9}) debe ir en el apendice?}
+	\begin{proof}[Demostración de la ecuación $(\ref{eq:9})$]
+	%\comentario{a lo mejor esto va en el apendice}
+		Defina $K = \mathbb{Z}_p$. Como $p$ y $r$ son coprimos, entonces $p$ no divide a $r$. Luego, por el lema \ref{lema-polinomio_separable} sabemos que 
+		\begin{eqnarray*}
+		X^r-1 & = & \prod_{i=1}^{t}h_i(X),
+		\end{eqnarray*}	
+		donde cada $h_i(X)$ es un polinomio irreducible en $\mathbb{Z}_p[X]$, $h_i(X)\neq h_j(X)$ para $i\neq j$, y $\grado(h_i(X))=m_i$ con $m_i\geq 1$. Sea $h(X) \in \{h_1(X),...,h_t(X)\}$, y suponga que $\grado(h(X))=m$ (en particular, $m \geq 1$).
+                %\comentarioin{ya sabemos que $h(X)$ tiene grado mayor
+                %igual a 1. Esto para que no sean una constante. Ojo
+                %que quizas haya que imponer un polinomio constante
+                %(solo 1)} ACA SABEMOS QUE TODOS LOS POLINOMIOS SON
+                %DISTINTOS.
+                Del lema \ref{lema-b}, si tomamos $i=m-1$ tenemos que $$(X^{p^{m-1}}+a)^n\equiv (X^{p^{m-1}})^n +a \modulops,$$ para cada $a \in \{0, \ldots, \ell\}$ (recuerde que $\ell=\lfloor \sqrt{\phi(r)}\log  n\rfloor$ en la la ecuación \eqref{eq:9}). Así, dado que $h(X)$ divide a $X^r-1$, concluimos que para cada $a \in \{0, \ldots, \ell\}$ se cumple lo siguiente:
+		\begin{eqnarray}
+%		   & & (X^{p^{m-1}}+a)^n\equiv (X^{p^{m-1}})^n +a \modulop,\hspace{0.5cm}\text{y como }h(X)\text{ divide a }  X^r-1 \nonumber\\
+		    (X^{p^{m-1}}+a)^n & \equiv & (X^{p^{m-1}})^n +a \modulohps \label{eq:ast} 
+		\end{eqnarray}
+		Por otro lado, si fijamos $q(X)=X^{p^{m-1}}$ en $\eqref{eq:corolario2.1}$, podemos afirmar que $$(X^{p^{m-1}}+a)^p\equiv X^{p^{m}} +a \modulop,$$ para cada $a \in \{0, \ldots, \ell\}$.  Al igual que antes, como $h(X)$ divide a $X^r-1$, concluimos que para cada $a \in \{0, \ldots, \ell\}$:
+		\begin{eqnarray}
+		    %& & (X^{p^{m-1}}+a)^p\equiv X^{p^{m}} +a \modulop,\hspace{0.5cm}\text{y como }h(X)\text{ divide a }  X^r-1 \nonumber\\
+		    (X^{p^{m-1}}+a)^p & \equiv & X^{p^{m}} +a \modulohps \label{eq:ast2} 
+		\end{eqnarray}
+		%\comentarioin{el párrafo siguiente contiene mucha información que va en preliminares: ¿Hay que refernciar mucho o puedo asumir que en este punto ya saben o leyeron el apéndice?}
+		%Para continuar con la demostración de la ecuación $\eqref{eq:9}$, utilizaremos algunas propiedades de cuerpos. 
+		Para continuar con la demostración definimos $F = \mathbb{Z}_p[X]/h(X)$. Nótese que nos interesa la estructura $F$ ya que estamos trabajando dentro de esta al operar en módulo $(h(X),p)$. Dado que $h(X)$ es un polinomio irreducible de grado $m\geq 1$, se tiene que $F$ es un cuerpo finito de cardinalidad $p^m$. Esto implica que $(F\setminus\{0\},\cdot)$ 
+		es un grupo de cardinalidad $p^m-1$.
+		Como $X^r\equiv 1 \modulops$, se tiene que $X^r\equiv 1 \modulohps$ puesto que $h(X)$ divide a $X^r-1$.
+		Sea $s \in \{1, \ldots, r\}$ el orden de $X$ en $(F\setminus\{0\},\cdot)$ (tenemos que $r > 1$).
+                %el menor número tal que $X^s\equiv 1 \modulohps$.
+		%+++++
+		% en módulo ($h(X),p$). 
+		 Como sabemos que el grupo  generado por $X$ en $(F\setminus\{0\},\cdot)$ es subgrupo de $(F\setminus\{0\},\cdot)$, entonces por el teorema de Lagrange obtenemos que $|\langle X\rangle |$ divide a $p^m-1$, vale decir, $s$ divide a $p^m-1$. Esto es equivalente a decir que $s \alpha = p^m -1$ para algún número $\alpha \in \mathbb{N}$. Luego, considerando que  %sumando 1 a ambos lados obtenemos que 
+		$p^m=s\alpha +1$, obtenemos para cada $a \in \{0, \ldots, \ell\}$ lo siguiente:
+		\begin{eqnarray}
+		    (X^{p^{m-1}}+a)^n & \equiv &((X^{p^{m-1}}+a)^p)^{\frac{n}{p}}\modulohps\nonumber\\
+		    & \equiv &(X^{p^{m}}+a)^{\frac{n}{p}}\modulohps \quad\quad \text{por }\eqref{eq:ast2} \nonumber\\
+		    & \equiv &(X^{s\alpha +1}+a)^{\frac{n}{p}}\modulohps\nonumber\\
+		    & \equiv &((X^{s})^{\alpha} \cdot X+a)^{\frac{n}{p}}\modulohps\nonumber\\
+		    & \equiv &(1^{\alpha} \cdot X+a)^{\frac{n}{p}}\modulohps\nonumber\\
+		    & \equiv &(X+a)^{\frac{n}{p}}\modulohps\label{eq:+}
+		\end{eqnarray}
+		Además, para cada $a \in \{0, \ldots, \ell\}$ tenemos que:
+		\begin{eqnarray}
+		    (X^{p^{m-1}}+a)^n & \equiv &(X^{p^{m-1}})^n + a\modulohps \quad\quad \text{por }\eqref{eq:ast} \nonumber\\
+		    & \equiv &((X^{p^{m-1}})^p)^{\frac{n}{p}} + a\modulohps\nonumber\\
+		    & \equiv &(X^{p^{m}})^{\frac{n}{p}} + a\modulohps\nonumber\\
+		    & \equiv &(X^{s\alpha+1})^{\frac{n}{p}} + a\modulohps\nonumber\\
+		    & \equiv &((X^{s})^{\alpha}\cdot X)^{\frac{n}{p}} + a\modulohps\nonumber\\
+		    & \equiv &(1^{\alpha}\cdot X)^{\frac{n}{p}} + a\modulohps\nonumber\\
+		    & \equiv & X^{\frac{n}{p}} + a\modulohps\label{eq:++}
+		\end{eqnarray}
+		%\comentario{será necesario poner todos los modulo(h,p)?}
+		De las ecuaciones $\eqref{eq:+}$ y $\eqref{eq:++}$, podemos concluir que para cada $a \in \{0, \ldots, \ell\}$:
+		\begin{eqnarray*}
+		    (X+a)^{\frac{n}{p}}&\equiv &X^{\frac{n}{p}} + a\modulohps
+		\end{eqnarray*}
+		
+		Finalmente, dado que $h(X)$ es un elemento arbitrario en $\{h_1(X),...,h_t(X)\}$ (y todos los polinomios son coprimos entre sí), concluimos por el lema \ref{lema-a} que para cada $a \in \{0, \ldots, \ell\}$:
+		\begin{eqnarray*}
+		    (X+a)^{\frac{n}{p}}&\equiv &X^{\frac{n}{p}} + a\modulops
+		\end{eqnarray*}
+		Esto concluye la demostración de la ecuación $(\ref{eq:9})$.
+	\end{proof}		
+%	\comentarioin{Marcelo: hasta aquí revisé} 
+	A continuación, definiremos una propiedad sobre polinomios que será fundamental para la demostración de la correctitud del algoritmo.
+	\begin{definition}
+	Para un polinomio $f(X)$ y un número $m\in \mathbb{N}$, decimos que $m$ es introspectivo para $f(X)$~si
+	\begin{eqnarray*}
+	[f(X)]^m & \equiv & f(X^m) \modulop
+	\end{eqnarray*}
+	\end{definition}
+Podemos ver de las ecuaciones $\eqref{eq:8}$ y $\eqref{eq:9}$ que $p$
+y $\frac{n}{p}$ son introspectivos para el polinomio $g(X) = X+a$
+cuando $a \in \{0, \ldots, \ell\}$.  El siguiente lema muestra que el
+conjunto de valores que son introspectivos para un polinomio $f(X)$ es
+cerrado bajo multiplicación.
+	\begin{lemma}\label{lema-4.7}
+		Si $m_1$ y $m_2$ son introspectivos para $f(X)$, entonces $m_1\cdot m_2$ es introspectivo para $f(X)$.
+	\end{lemma}
+	\begin{proof}
+Como $m_1$ es introspectivo para $f(X)$, entonces tenemos lo siguiente:
+			\begin{eqnarray}
+			[f(X)]^{m_1m_2}& \equiv &[f(X^{m_1})]^{m_2}\modulop\label{eq:izq_instrospectivo}
+			\end{eqnarray}
+Por otro lado, como $m_2$ también es introspectivo para el polinomio,
+entonces se debe cumplir lo siguiente:
+			\begin{eqnarray*}
+				[f(Y)]^{m_2} & \equiv & [f(Y^{m_2})] \moduloy
+		        \end{eqnarray*}
+Así, reemplazando $Y$ por $X^{m_1}$ obtenemos:                        
+			\begin{eqnarray}
+		          [f(X^{m_1})]^{m_2}\ \equiv \ f(X^{m_1m_2})\modulomr\label{eq:modulo m1r}
+		\end{eqnarray}
+		Como $X^{r} \equiv  1\modulop$, se tiene que $X^{m_1r}\equiv 1\modulop$. En otras palabras, esto significa que $X^r -1$ divide a $X^{m_1r}-1$ en $\mathbb{Z}_p[X]$. 
+			%&\Rightarrow &X^{m_1r}-1 \equiv (X^{r})^{m_1}-1 \equiv 1^{m_1}-1 \equiv 0  \hspace{0.4cm}(mod\hspace{0.1cm} X^{r}-1)\nonumber\\
+			%&\Leftrightarrow &X^r-1\divi  X^{m_1r}-1\nonumber
+De lo anterior y  de la ecuación \eqref{eq:modulo m1r} podemos afirmar lo siguiente:
+\begin{eqnarray*}
+  [f(X^{m_1})]^{m_2}&\equiv & f(X^{m_1m_2})\modulop
+  %\label{eq:der_introspectivo}
+		\end{eqnarray*}
+Desde esta ecuación y \eqref{eq:izq_instrospectivo} concluimos que
+\begin{eqnarray*}
+  [f(X)]^{m_1m_2} & \equiv & f(X^{m_1m_2})\modulop,
+\end{eqnarray*}
+vale decir, $m_1\cdot m_2$ es introspectivo para $f(X)$.	
+	\end{proof}
+	El siguiente lema muestra que, para un número natural $m$, el conjunto de polinomios para los cuales $m$ es introspectivo también es cerrado bajo multiplicación.
+	\begin{lemma}\label{lem-introspectivo_bajo mult}
+		Si $m$ es introspectivo para $f(X)$ y $g(X)$, entonces también lo es para $p(X) = f(X)\cdot g(X)$.
+	\end{lemma}
+	\begin{proof}Tenemos que:
+		\begin{eqnarray*}
+			[p(X)]^m &\equiv & [f(X)g(X)]^m \modulop\\
+			&\equiv &[f(X)]^m [g(X)]^m \modulop\\
+			&\equiv &f(X^m) g(X^m) \modulop\\
+			&\equiv &p(X^m) \modulop.
+		\end{eqnarray*}
+	\end{proof}
+	\comentarior{Marcelo: hasta aquí revisé} 
+	A continuación, definimos dos conjuntos:
+	\begin{eqnarray}
+		I&:=&\{(\frac{n}{p})^i\cdot p^j \tq i,j\in \mathbb{N}\}\nonumber\\
+		P&:=&\{\prod_{a=0}^{\ell }(X+a)^{e_a}\tq e_a\in \mathbb{N}\}\nonumber	
+	\end{eqnarray}
+	Observemos que las ecuaciones $\eqref{eq:8}$ y $\eqref{eq:9}$ y los lemas \ref{lema-4.7} y \ref{lem-introspectivo_bajo mult} nos permiten afirmar que cualquier elemento de $I$ es introspectivo para cualquier polinomio de $P$, ya que, en particular, se cumple para cada término de las multiplicaciones (y los conjuntos son cerrados bajo multiplicación).
+	
+	A continuación vamos a definir dos grupos, $G$ y $\mathcal{G}$, que están basados en $I$ y $P$ que van a ser muy importantes para el desarrollo de la demostración. Comenzamos definiendo $G$.
+		\begin{eqnarray}
+			G&:=& \{e\modl r\tq e\in I\}\nonumber
+		\end{eqnarray}
+	Observemos que cada elemento $e\in I$ es de la forma $(\frac{n}{p})^i\cdot p^j$ con $i,j\in \mathbb{N}$. Como sabemos que $n$ y $p$ son ambos coprimos de $r$, entonces $e$ también debe ser coprimo de $r$.
+	%Notemos que en la definición anterior, como $e\in I$, entonces $e$ es de la forma $(\frac{n}{p})^i\cdot p^j$ con $i,j\in \mathbb{N}$. Además, como $n$ y $p$ son ambos coprimos de $r$, entonces $e$ también es coprimo de $r$ para cualquier elemento $e\in I$. 
+	Esto se puede mostrar por contradicción: si existiera un $e\in I$ tal que $\MCD(e,r)\neq 1$, tendrí­amos que existe un primo $c$ divisor de $(\frac{n}{p})^i\cdot p^j$ y también divisor de $r$. Al ser $c$ primo, este dividiría a $\frac{n}{p}$ o a $p$. Como $c$ divide a $r$ tendríamos que $\MCD(n,r)\geq c>1$ o $\MCD(p,r)\geq c>1$, ambas contradicciones.
+	 Por último, como $G\subseteq I$, y cada elemento de $I$ es coprimo con $r$, entonces cada elemento de $G$ es coprimo con $r$, y por ende $G\subseteq \mathbb{Z}_r^*$. Lo anterior nos permite concluir que el grupo $(G,\cdot)$ es un subgrupo de $(\mathbb{Z}_r^*,\cdot)$, en donde la operación binaria $\cdot$ representa la multiplicación usual. La demostración de lo anterior queda propuesta para el lector (Hint: como ya sabemos que $G\subseteq \mathbb{Z}_r^*$, solo hace falta demostrar que $(G,\cdot)$ es un grupo).	
+%	\begin{proof}
+%	Demostraremos las tres propiedades:
+%		\begin{enumerate}
+%			\item PD: Tiene elemento identidad.
+%			Podemos notar que para cualquier $m$ en $G$, $e\cdot 1 =1\cdot e = e$\comentario{o mejor decir el elemento neutro $n=1$?}, por lo que hay que ver si $1$ es un elemento de $G$. Como $1 = (\frac{n}{p})^0\cdot p^0$, entonces es inmediato que $1$ pertenece a $G$.
+%			\item PD: Si $a,b$ son elementos de $G$, entonces $a\cdot b$ también está en $G$.
+%			Tomamos $a,b$ en $G$. Estos elementos tienen un representante en el conjunto $I$, es decir, existen $a_I$ y $b_I$ en $I$ tales que 
+%			\begin{align}
+%				\left \{ \begin{matrix} &a_I\modl r = a
+%\\ &b_I\modl r=b\end{matrix}\right. \nonumber\\
+%				\Leftrightarrow \left \{ \begin{matrix} &a_I\equiv a\modl r
+%\\ &b_I\equiv b\modl r\end{matrix}\right. \label{eq:corchete} 				
+%			\end{align}
+%			Sabemos que $a_I = (\frac{n}{p})^{i_1}\cdot p^{j_1}$ y que $b_I = (\frac{n}{p})^{i_2}\cdot p^{j_2}$. Al multiplicarlos obtenemos que $a_I\cdot b_I = (\frac{n}{p})^{i_3}\cdot p^{j_3}\in I$, donde $i_3 = i_1+i_2$ y $j_3 = j_1+j_2$. Luego, $a_I\cdot b_I$ están en $I$ y definimos $d=a_I\cdot b_I\modl r$. Aplicando módulo y usando $\eqref{eq:corchete}$, tenemos que 
+%			\begin{eqnarray}
+%				a\cdot b &\equiv & a_I\cdot b_I \nonumber\\
+%				&\equiv & d\modl r\nonumber 
+%			\end{eqnarray}
+%			En donde $d$ pertenece a $G$. Luego, la operación es cerrada en $G$.
+%			\item PD: Si $a$ pertenece a $G$, entonces existe un elemento inverso $a^{-1}$ en $G$ tal que $a\cdot a^{-1} = 1$.
+%			Sea $a$ en $G$, y sea $a_I$ su representante en $I$ como se definió en $\ref{eq:corchete}$ . Sabemos que el inverso multiplicativo de $a_I\modl r$ existe si, y solo si $\MCD(a_I,r)=1$. Como ya probamos que cualquier elemento de $I$ es coprimo de $r$, entonces podemos afirmar que existe un  $b_I$ en $I$ tal que $a_I\cdot b_I \equiv 1$ en módulo $r$. Sea $b=b_I\modl r$. Luego,
+%			\begin{eqnarray}
+%				a\cdot b &\equiv &a_I\cdot b_I  \modl r\nonumber\\
+%				&\equiv &1\modl r\nonumber
+%			\end{eqnarray}
+%		\end{enumerate}
+%		Con esto concluimo que $(G,\cdot)$ es un grupo, y además, como $G\subseteq \mathbb{Z}_r^*$, entonces $(G,\cdot)$ es subgrupo de $(\mathbb{Z}_r^*,\cdot)$.	
+%	\end{proof}
+	
+	Habiendo definido $G$, nos gustaría analizar su cardinalidad. Sea $|G| = t$. Sabemos que el grupo multiplicativo generado por $n$ en módulo $r$ se define de la siguiente forma \comentario{citar apendice?}:
+	\begin{eqnarray}
+		\langle n\rangle _r &:=& \{n^i\modl r \tq i\in \mathbb{N}\}\nonumber\\
+		&=&\{n^1\modl r,n^2\modl r,...,n^{O_r(n)}\modl r \}\nonumber\\
+		&=&\{(\frac{n}{p})^1\cdot p^1\modl r,(\frac{n}{p})^2\cdot p^2\modl r,...,(\frac{n}{p})^{O_r(n)}\cdot p^{O_r(n)}\modl r \}\nonumber
+	\end{eqnarray}
+Sabemos que como $n\in G$, entonces $(\langle n\rangle_r,\cdot)$ es subgrupo de $(G,\cdot)$	(véase \ref{prop-generado}).
+	%Como todos los elementos de $\langle n\rangle _r$ son de la forma $(\frac{n}{p})^i\cdot p^i\modl r$, entonces $\langle n\rangle _r\subseteq G$, y es más, se puede demostrar que $(\langle n\rangle _r,\cdot)$ es un subgrupo de $(G,\cdot)$. Esta demostración queda propuesta como ejercicio para el lector.
+%	\begin{enumerate}
+%		\item el elemento identidad es el $1$
+%		\item $\langle n\rangle _r$ es cerrado bajo la operacion $\cdot$
+%		\item para cualquier $a$ en $\langle n\rangle _r$, tenemos que $a$ es coprimo de $r$. Es más, si $a = n^i\modl r$, y tomamos $n^{O_r(n)-(i \modl O_r(n))}\modl r$, nos queda
+%		\begin{eqnarray}
+%			& &(n^i\modl r)\cdot (n^{O_r(n)-(i \modl O_r(n))})\modl r\nonumber\\
+%			&\equiv &n^i\cdot n^{O_r(n)-(i \modl O_r(n))}\modl r,\hspace{0.5cm}\text{y como } i = k\cdot O_r(n) + (i\modl O_r(n)),\text{ con }k\in \mathbb{Z}\nonumber\\
+%			&\equiv &n^{k\cdot O_r(n) + i\modl O_r(n) + O_r(n)-(i \modl O_r(n))}\modl r\nonumber\\
+%			&\equiv &n^{(k+1)\cdot O_r(n)}\modl r\nonumber\\
+%			&\equiv &(n^{O_r(n)})^{(k+1)}\modl r\nonumber\\
+%			&\equiv &1 \modl r \nonumber			  
+%		\end{eqnarray}
+%	\end{enumerate}\comentario{el ..y como i=... de la segunda linea del eqnarray no me convence}
+	Aplicando el teorema de Lagrange para grupos finitos, podemos afirmar que $|\langle n\rangle _r| = O_r(n)$ divide a $|G|=t$, y por lo tanto, $O_r(n)\leq t$. Como habí­amos escogido $r$ tal que $\log ^2n <O_r(n)$, entonces concluimos que $\log ^2 n <t=|G|$.
+
+	Para definir el segundo grupo, vamos a utilizar los conceptos de raiz de la unidad, cuerpo de descomposición y cuerpo ciclotómico (ver definición \ref{c. de descomposicion, ciclotomico def}).
+	%definiremos de forma secuencial algunos conceptos básicos de polinomios ciclotómicos sobre cuerpos finitos. %Esto lo haremos definiendo secuencialmente hasta llegar a lo que ocuparemos.	
+%		Comenzaremos hablando sobre cuerpos y sus extensiones. Habíamos visto que dado un cuerpo $K$ y un polinomio no constante $p(X)$ sobre $K$, el cuerpo de descomposición es la menor extensión del cuerpo $K$ que contiene todas las raí­ces de $p(X)$. En particular, para un cuerpo $K$ y un polinomio de la forma $p(X)=X^r-1$ lo anterior es válido, y se denomina el $r$-ésimo cuerpo ciclotómico, el cual lo denotaremos como $K^{(r)}$.
+%		A las raí­ces de $p(X)=X^r-1$ en $K^{(r)}$ se les llama las $r$-ésimas raí­ces de la unidad sobre $K$. Este conjunto se puede escribir como $E^{(r)}$. Por ejemplo, en los números complejos $E^{(r)}=\{e^{\frac{2i k\pi }{r}}\tq k\in \mathbb{N}\}$.\comentario{esta bien si escribo esto asi? Esto lo uso a continuación para demostrar que es ciclico} %y podemos ver que efectivamente $E^{(r)}$ contiene únicamente estas raí­ces.		
+%\comentarioin{VER QUE SACAR DE ESTE PARRAFO. TODO ESTE PARRAFO REVISAR: no usar primitivas en los complejos, sino que usar primitivas en general y teoremas introducidos en los apendices A y B. Partir del hecho que $w^1$ es una primitiva, ya que genera todas las demás}
+Supongamos que estamos trabajando en un cuerpo finito $K$ de caracterí­stica $p$. Por la definición \ref{c. de descomposicion, ciclotomico def} sabemos que $K^{(r)}$ es un cuerpo y contiene a todas las raíces de la unidad del polinomio $p(X)=X^r-1$ sobre $K[X]$, es decir $E^{(r)}\subseteq K^{(r)}$ (recordar que $E^{(r)}=\{\eta_1,...,\eta_r\}$, donde cada $\eta_i$ es una raiz de la unidad).\comentarioin{este conjunto tiene $r$ elementos? contando cada raiz de multiplicidad mayor que uno como elementos distintos}
+Es fácil ver que la estructura $(E^{(r)},\cdot)$ es un subgrupo de $(F\setminus \{\0\},\cdot)$ (la demostración queda propuesta para el lector). Por lo tanto, el teorema \ref{subgrupo de cuerpo es ciclico} nos dice que $(E^{(r)},\cdot)$ es cíclico, es decir, siempre existe al menos una $r$-ésima raiz de la unidad $\eta\in E^{(r)}$ tal que $\langle\eta\rangle = E^{(r)}$. A aquellas $r$-ésimas raíces de la unidad que cumplan con la propiedad anterior se les dice primitivas $r$-ésimas raíces de la unidad. Estas generan todas las $r$-ésimas raíces de la unidad.
+%, $r$ un entero positivo, ambos distintos de 1, y $\MCD(r,p) = 1$. Si $p$ no divide a $r$, entonces $E^{(r)}$ es un grupo cí­clico respecto a la multiplicación en $K^{(r)}$. Para ver esto, basta que una raí­z pueda generar todas las demás, y que $(E^{(r)},\cdot)$ sea un grupo. Sea $w = e^{\frac{2i\pi }{n}}$. Podemos ver que $w$ pertenece a $E^{(r)}$, y que $E^{(r)}=\{w^0,w^1,...,w^{n-1}\}$. Con esto podemos ver que es cí­clico. El hecho de que $E^{(r)}$ es un grupo, se deja propuesto como ejercicio para el lector. El generador de este grupo se llama primitiva $r$-ésima raí­z de la unidad sobre $K$ (esta raí­z está en $K^{(r)}$ pero no necesariamente en $K$). Las primitivas $r$-ésimas raí­ces de la unidad del $r$-ésimo cuerpo ciclotómico son de la forma $\eta = e^{\frac{2\pi i k}{r}}$, en donde $\MCD(r,k)=1$.\comentarioin{aca creo que estamos abusando de los isomorfismos entre cuerpos FINITOS} 
+\begin{afirmacion}\label{afirmacion relacion primitivas}
+Sea $\eta\in E^{(r)}$. Entonces $\eta$ es primitiva $r$-ésima raiz de la unidad si y solo si $\eta^s$ también es primitiva $r$-ésima raí­z de la unidad, para todo $s$ con $\MCD(s,r)=1$\comentarioin{Tengo que argumentar que si parto de una raiz primitiva, entonces llego a todas las raices primitivas}
+\comentarioin{Si tengo una raiz primitiva, entonces esa raiz  se va a ver como $\eta$ a la algo}
+\end{afirmacion}
+\begin{proof}
+Para el caso en que $r=1$ esto se cumple trivialmente, es por eso que supondremos que $r>1$. Sea $s$ tal que  $\MCD(s,r) = 1$ y $\eta$ una $r$-ésima raiz de la unidad. Para el sentido de izquierda a derecha supongamos que $\eta$ es una primitiva $r$-ésima raí­z de la unidad, es decir el orden multiplicativo de $\eta$ es $r$, y supongamos por contradicción que $\eta^s$ no lo es. Esto quiere decir que el orden de $\eta^s$ es igual a $k<r$. Observemos que 
+\begin{eqnarray*}
+	1 =  (\eta^{s})^{k}=\eta^{sk} &=& \eta^{\alpha r + \beta},\quad\quad\text{con $sk = \alpha r + \beta$ y $0\leq \beta<r$}\\
+	&=&  \eta^{\alpha r}\cdot \eta^{\beta}\\
+	&=& (\eta^{r})^{\alpha}\cdot \eta^{\beta}\\
+	&=& 1^{\alpha}\cdot \eta^{\beta}\\
+	&=& \eta^{\beta}
+\end{eqnarray*} 
+Lo anterior es una contradicción, ya que $0<\beta<s$ (como $r\neq 1$ entonces $\eta\neq 1$) y $s$ era el orden multiplicativo de $\eta$. De esta forma concluimos el primer sentido de la demostración. Para el sentido contrario supongamos que $\eta^s$ es primitiva $r$-ésima raiz de la unidad pero $\eta$ no lo es. Luego, $\eta$ tiene orden multiplicativo $k< r$. De esta forma tenemos que $$(\eta^{s})^k \ = \ (\eta^{k})^s \ = \ 1^s \ = \ 1$$
+Lo anterior es una contradicción ya que habíamos dicho que el orden de $\eta^{s}$ era $r$. Con esto concluimos la demostración.
+\end{proof} 
+\comentarioin{Bernardo 8/11/20}
+\comentarioin{Aca debo decir que $E^{(r)}$ es cíclico y por ende existe una primitiva} 
+Como $E^{(r)}$ es cíclico entonces siempre va a existir una primitiva $r$-ésima raiz de la unidad $\eta$. 
+Así, como $\eta$ genera $E^{(r)}$, entonces cualquier otra primitiva $r$-ésima raiz de la unidad es una potencia de $\eta$. Es más, por la afirmación \ref{afirmacion relacion primitivas} sabemos que el conjunto de todas las raíces de la unidad es $\{\eta^{s}\mid \MCD(s,r)=1\}$.
+De esto podemos concluir que existen $\phi (r)$ primitivas $r$-ésimas raí­ces de la unidad.
+	El siguiente lema será útil para la demostración:
+	
+	\begin{lemma} 
+	  %\comentarioin{STAND BY: estoy casi seguro que no necesitamos la dirección de izquierda a derecha, que es la que necesita isomorfismos}
+	  \comentarioin{Necesitamos la dirección $\Rightarrow$}
+          
+		Sea $\eta$ una primitiva $r$-ésima raí­z de la unidad arbitraria. Luego, $\eta$ es un elemento de $ F_{p^k} $ si, y solo si $ p^k\equiv 1$ en módulo $r$.
+	\end{lemma}
+	La demostración se hará en 2 pasos:\comentario{esto no se si se ve bien (enumerate)}
+	\begin{enumerate}
+		\item $\eta$ pertenece a $F_{p^k}$ si, y solo si $\eta^{p^k}=\eta$
+		\begin{proof}
+			\text{ }\\
+			"$\Rightarrow$"\\
+			Sabemos que 
+			\begin{eqnarray}
+				& &\eta \in F_{p^k}\nonumber\\
+				&\Rightarrow &\eta^{p^k-1} = 1, \hspace{0.5cm} \text{por el orden del conjunto}\nonumber\\
+				&\Rightarrow &\eta^{p^k}=\eta
+			\end{eqnarray}
+			"$\Leftarrow$"\\
+			Como los cuerpos finitos del mismo orden son isomorfos\comentario{ojo con esta propiedad}, entonces $\eta$ puede pertenecer a un cuerpo de orden múltiplo de $r$ (ya que el orden de $\eta$ es $r$). Si $\eta^{p^k}=\eta$, esto quiere decir que el orden de $\eta$ divide a $p^k-1$, entonces $\eta \in F_{p^k}$. 
+		\end{proof}
+		
+		\item $\eta^{p^k}=\eta\Leftrightarrow p^k\equiv 1 \modl r$
+		\begin{proof}
+			\text{ }\\
+			"$\Rightarrow$"\\
+			Sabemos que $\eta$ es primitiva $r$-ésima raí­z de la unidad. Esto implica que $\eta$ genera todas las otras raí­ces de $X^r-1$ en un ciclo de largo $r$, en donde $\eta^1=\eta^{cr+i}$, para $c\in \mathbb{N}$ y $i=1$, ya que para cualquier $c_1\in \mathbb{N}$, si existiera un  $i_1\neq 1$ con $0\leq i_1\leq r-1$ tal que $\eta=\eta^{c_1r+i_1}$, tendrí­amos que $\eta = \eta^{c_1r+i_1} =(\eta^{r})^{c_1}\cdot\eta^{i_1}=1^{c_1}\cdot\eta^{i_1}=\eta^{i_1}$, y luego, el orden de $\eta$ serí­a $i_1-1<r$. Además por la hipótesis, $\eta^1=\eta^{p^k}$, luego para un $\hat c\in \mathbb{N}$, tenemos que 
+			\begin{eqnarray}
+				& &p^k=\hat c r+1\nonumber\\
+				&\Rightarrow &p^k-1 = \hat c r\nonumber\\
+				&\Rightarrow &p^k-1\equiv 0\modl r\nonumber\\
+				&\Rightarrow &p^k\equiv 1\modl r\nonumber
+			\end{eqnarray}	
+			"$\Leftarrow$"\\
+			Como $\eta$ es $r$-ésima raí­z de la unidad, entonces $\eta^r = 1$. Sabemos que $p^k\equiv 1 \modl r \Leftrightarrow p^k-1 = cr$, para algún $c\in\mathbb{N}$. Luego,
+			\begin{eqnarray}
+				\eta^{p^k}&=& \eta^{p^k-1}\cdot\eta\nonumber\\
+				&=&\eta^{cr}\cdot\eta\nonumber\\
+				&=&(\eta^r)^c\cdot \eta \nonumber\\
+				&=& 1^c\cdot\eta \nonumber\\
+				&=& \eta\nonumber
+			\end{eqnarray}			 					
+		\end{proof}
+	\end{enumerate}
+	Con estas 2 partes, ya que la doble implicancia es transitiva, concluimos que 
+	\begin{eqnarray}
+		\eta \in F_{p^k} &\Leftrightarrow& p^k\equiv 1 \modl r\label{eq:propiedad}
+	\end{eqnarray}	 
+	
+	\begin{definition}%\comentario{mismo comentario que la definicion anterior(apendice) o a lo mejor cambiarle el nombre de definicion}
+		Sea $F_p$ un cuerpo finito de caracterí­stica $p$. Se define el $r$-ésimo polinomio ciclotómico $Q_r(X)$ sobre $F_p$ de la siguiente manera:
+		\comentarioin{Es posible que este polinomio no se pueda representar en este cuerpo?}
+		\begin{eqnarray}
+			Q_r(X) &=& \prod_{s=1,\MCD(r,s)=1}^{r}(X-\eta^s)\nonumber
+		\end{eqnarray}
+		En donde $\eta$ es primitiva $r$-ésima raí­z de la unidad. 
+		Como $\eta$ es primitiva $r$-ésima raí­z de la unidad, entonces $\eta^s$, con $\MCD(s,r)=1$ también lo es, entonces también podemos escribir el polinomio ciclotómico de la siguiente forma: 
+		\begin{eqnarray}
+			Q_r(X) &=& \prod_{i=1}^{\phi (r)}(X-\eta_i)\nonumber
+		\end{eqnarray}
+		En donde $\eta_i$ es primitiva $r$-ésima raí­z de la unidad.
+	\end{definition} 	
+		
+	Claramente, $Q_r(X)$ divide a $X^r -1$, ya que el $Q_r(X)$ es mónico y todas sus raí­ces son raí­ces de $X^r-1$. Es más, todas sus raí­ces son primitivas $r$-ésima raí­ces de la unidad.\\
+	A continuación demostraremos que el polinomio $Q_r(X)$ se factoriza en factores irreducibles $Q_r(X)=h_1(X)\cdot h_2(X)\cdots h_m(X)$ sobre $F_p$ con $deg(h_i(X))>1$, para $1\leq i \leq m$. 
+	\begin{proof}
+		Supongamos por contradicción que para algún $j\in \{1,...,m\}$, se tiene que $deg(h_j(X))=1$ sobre $F_p$. Esto implica que pudimos reducir un factor de $Q_r(X)$ a $h(X) = (X-\eta)$, en donde $\eta$ es primitiva $r$-ésima raí­z de la unidad. Por otro lado, sabemos por $\eqref{eq:propiedad}$ que $\eta \in F_{p^k} \Leftrightarrow p^k\equiv 1 \modl r$.\comentarioin{efectivamente aca solo necesitamos la implicancia de izquierda a derecha y nos ahorramos usar los isomorfismos entre cuerpos finitos} El $k$ más pequeño que satisface el lado derecho de la ecuación anterior es $k = O_r(p)$, por definición de orden multiplicativo. También podemos afirmar que $h(X)=(X-\eta)$ es reducible en $F_p$ si y solo si $\eta\in F_{p}=F_{p^{1}}$, ya que de otra forma no lo podrí­amos haber reducido. Esto implica que $\eqref{eq:propiedad}$ se cumple con $k=1$, lo que implica que $O_r(p)=1$, por definición de orden multiplicativo.($\rightarrow\leftarrow$).
+	\end{proof}
+	Hemos demostrado que $Q(X)$ se puede factorizar en factores irreducibles de grado mayor a 1 sobre $F_p$.\\
+	Otra propiedad que demostraremos sobre los polinomios ciclotómicos es la siguiente:
+	\begin{eqnarray}
+		\text{Si }h(X)\text{ es un factor de }Q_r(X)&\Rightarrow &h(X)\nodiv X^s-1 \text{ para }s<r.\label{eq:final4.7}
+	\end{eqnarray} 
+	Esta propiedad nos va a ser útil un poco más adelante.\comentario{en verdad no nos basta esta propiedad para el inicio del lema que viene, pero es bueno saberlo por mientras}	 
+
+	\begin{proof}
+		Supongamos por contradicción que para algún factor de $Q_r(X)$ se tiene que $h(X)\divi  X^s-1$ para algún $s<r$. Sea $h(X)$ este factor. Luego, $h(X)= (X-\eta_1)\cdot(X-\eta_2)\cdots(X-\eta_j)$ con $j\in\mathbb{N}$ y $\eta_i$ primitiva $r$-ésima raí­z de la unidad para $1\leq i\leq j$. Como $h(\eta_1) = 0$, entonces  $\eta_1^s-1 = 0$, ya que $h(X)\divi  X^s-1$. Esto implica que $\eta_1^s=1$, es decir, el orden multiplicativo de $\eta_1$ es $s<r$($\rightarrow\leftarrow$).
+	\end{proof}
+	A continuación, se define el segundo conjunto, para el cual se introdujeron las definiciones y propiedades anteriores sobre polinomios ciclotómicos:
+	\begin{definition}
+		Sea $h(X)$ uno de los factores irreducibles de $Q_r(X)$ sobre $F_p$.
+		\begin{eqnarray}
+			\mathcal{G} &=& \{x\modulohp\tq x\in P\}\nonumber 
+		\end{eqnarray}
+		
+	\end{definition}
+	Este conjunto dotado de la multiplicación es un grupo generado por los elementos $X,X+1,...,X+\ell $ en el cuerpo $F=F[X]/(h(X))$, y es un subgrupo de $F$. La demostración se deja como ejercicio para el lector.\comentario{demostracion de subgrupo propuesta para el lector}\\
+	El siguiente lema muestra una cota inferior del tamaño de $\mathcal{G}$.
+	\begin{lemma}
+		(Hendrik Lenstra Jr.) $|\mathcal{G}|\geq {{t+\ell }\choose{t-1}}$
+	\end{lemma}
+	
+	\begin{proof}
+		Lo primero que hay que notar, es que como $h(X)$ es un factor del polinomio ciclotómico $Q_r(X)$, entonces $X$ es una primitiva $r$-ésima raí­z de la unidad en $F$. Esto se puede demostrar en 2 pasos:
+		\begin{enumerate}
+			\item \underline{$X$ es $r$-ésima raí­z de la unidad en $F$}\\
+			Mostrar esto es equivalente a mostrar que $X^r\equiv 1\modulohp$.\\
+			Sabemos por la construcción del polinomio ciclotómico que $Q_r(X)\divi  X^r-1$. Además, ya que $h(X)$ es un factor de $Q_r(X)$, entonces $h(X)\divi  Q_r(X)$. De esto podemos concluir que 
+			\begin{eqnarray}
+				& &h(X)\divi  Q_r(X)\nonumber\\
+				&\Leftrightarrow &\exists q(X) \text{ tal que }X^r-1 = h(X)q(X)\modl p\nonumber\\
+				&\Leftrightarrow &X^r -1 \equiv 0 \modulohp\nonumber\\
+				&\Leftrightarrow &X^r  \equiv 1 \modulohp\nonumber\\
+				&\Leftrightarrow &X \text{ es }r\text{-ésima raí­z de la unidad}\nonumber
+			\end{eqnarray}	
+			\item \underline{El orden multiplicativo de $X$ en $F$ es $r$}\\
+			Supongamos que $X^s\equiv 1 \modulohp$ para algún $s<r$.
+			Por $\eqref{eq:final4.7}$ podemos afirmar que cada factor $h(X)$ de $Q_r(X)$ no puede ser un factor del polinomio ciclotómico $Q_s(X)$, con $s<r$.
+			
+			\demostrar{Aca falta demostrar. Con $\eqref{eq:final4.7}$ no nos basta para demostrarlo. Ya que $\modl p$ no implica sin modulo.}	
+		\end{enumerate}
+		Ahora demostraremos que 2 polinomios distintos de grado menor a $t$ en $P$ se mapean a distintos elementos de $\mathcal{G}$.\\
+		Sean $f(X),g(X)\in \mathcal{G}$ tales que $deg(f(X))<t$ y $deg(g(X))<t$. Por contradicción, supongamos que se mapean al mismo elemento en $F$. Esto es equivalente a decir que 
+		\begin{eqnarray}
+			f(X)&\equiv & g(X)\modulohp\nonumber
+		\end{eqnarray} 
+		Sea $m\in I$. En $F$ elevamos la equivalencia anterior a $m$ y tenemos que
+		\begin{eqnarray}
+			[f(X)]^m&\equiv &[g(X)]^m\modulohp\label{eq:2}
+		\end{eqnarray}			    
+		Sabemos que $m$ es introspectivo para $f(X)$:
+		\begin{eqnarray}
+			&\Leftrightarrow &[f(X)]^m \equiv f(X^m) \modulop\nonumber\\
+			&\Leftrightarrow &[f(X)]^m - f(X^m) \equiv (X^r-1)q(X) \modl p \equiv h(X)q_1(X)q(X) \modl p\equiv h(X)q_2(X) \modl p \nonumber\\
+			&\Leftrightarrow &[f(X)]^m \equiv f(X^m) \modulohp\nonumber
+		\end{eqnarray}
+		Análogamente, esto se puede hacer para $g(X)$.\\
+		Luego, de $\eqref{eq:2}$ obtenemos que $f(X^m) \equiv g(X^m) \modulohp$. De esto, podemos decir que $X^m$ es raí­z de $Q(Y)=f(Y)-g(Y)$ en $F$, para cualquier $m\in G$ (ya que los $m$ los habí­amos tomado de $I$). Como $\MCD(m,r)=1$, ya que $G\subseteq \mathbb{Z}_r^*$, entonces $X^m$ es primitiva $r$-ésima raí­z de la unidad $\forall m \in G$ (ya que $X$ lo era y lo estamos elevando a un coprimo de $r$.\\
+		Como $|G| = t$, entonces existen $t$ soluciones distintas para $Q(Y)$ (para $m_1\neq m_2 \in G$ se tiene que $X^{m_1}\neq X^{m_2}$, ya que el orden de $X$ es $r>m_1,m_2$) en $F$. Esto contradice que $deg(Q(Y)<t$ ya que estamos en un cuerpo \comentario{Aca usamos que sobre cuerpos "todo funciona", no se si hay que poner esto en alguna parte)}($\rightarrow\leftarrow$).\\
+		Luego, si $f(X)\neq g(X)$ en $P$, ambos de grado menor a $t$, entonces $f(X)\neq g(X)$ en $F$.\\\\
+		También notemos que como $\langle n\rangle _r\subseteq G\subseteq \mathbb{Z}_r^*$, entonces $O_r(n)=|\langle n\rangle _r|\leq |\mathbb{Z}_r^*|=\phi(r)$. Luego, $r\geq\phi(r)\geq O_r(n)>\log ^2 n$, y por ende $\sqrt{r}>\log  n$. De todo esto, podemos decir que $\ell =\lfloor \sqrt{\phi(r)}\log  n\rfloor < \sqrt{r}\log  n<\sqrt{r}\sqrt{r}=r$. Como $r<p$, luego $\ell <p$\comentario{Esto hay que ponerlo antes del lema A}. Así­ podemos afirmar que si $i\neq j$ y $1\leq i,j\leq l$, entonces $i\neq j$ en $F_p$ y por lo tanto $i\neq j$ en $F$.\\
+		También sabemos que $deg(h(X))>1$, luego $X,X+1,...,X+\ell $ son todos distintos en $F$ y no trivialmente $0$\comentario{Que no sea trivialmente 0 no se si nos sirve, ya que son de grado $1<t$ ($O_r(p)\leq t$), entonces como son distintos en $P$ seran distintos en $\mathcal{G}$}. Esto nos sirve para demostrar que existen al menos ${t+\ell }\choose{t-1}$ polinomios distintos de grado $<t$ en $P$. Podemos demostrarlo por inducción:
+		\begin{itemize}
+			\item \underline{Caso base:}\\
+			Para $t=2$ \comentario{También funciona para $t=1$}, tengo que ${{2+\ell }\choose{2-1}}={{2+\ell }\choose{1}}=\ell +2$. Sabemos que tenemos al menos $\ell +1$ polinomios de grado $1$ y $\ell +1$ polinomios de grado 0. Entonces tenemos al menos $2\ell +2$ polinomios de grado $<2$. Como $\ell +2< 2\ell +2$ para nuestro $\ell $, entonces se cumple la propiedad para el caso base.
+			\item \underline{Hipótesis de inducción:}\\
+			Se cumple la propiedad para $t-1$. Es decir, hay ${{t+\ell -1}\choose{t-2}}$ polinomios distintos de grado $<t-1$ en $P$.
+			\item \underline{Tesis de inducción:}\\
+			Lo primero que queremos ver es cuántos polinomios distintos de grado $t-1$ podemos formar con los $\ell +1$ polinomios de grado 1. Para esto, usaremos el problema de las $N$ pelotas sin etiquetar y $M$ sacos etiquetados: de cuántas formas distintas se pueden asignar las pelotas a los sacos. La equivalencia con este problema es que cualquier polinomio de grado $t-1$ va a ser de la forma $X^{e_0}(X+1)^{e_1}\cdots(X+\ell )^{e_\ell }$, con $e_0+e_1+...+e_\ell =t-1$. De esta forma, podemos decir que al saco $X$ se le asignan $e_0$ pelotas, al saco $X+1$ se le asignan $e_1$ pelotas, y así­ hasta llegar al saco $X+\ell $.\\
+			Para esta problema, la cantidad de asignaciones distintas es ${{N+M-1}\choose{N}}$, y para nuestro caso $N=t-1$ y $M=\ell +1$. Usando la fórmula descrita anteriormente concluimos que podemos formar un total de ${{t+\ell -1}\choose{t-1}}$ polinomios de grado $t-1$ a partir de los $\ell +1$ polinomios de grado $1$.\\
+			Por hipótesis de inducción, tengo al menos ${{t+\ell -2}\choose{t-2}}$ polinomios distintos de grado $<t-1$, y si sumo los polinomios de grado $t-1$ tengo:
+			\begin{eqnarray}
+			& &{{t+\ell -1}\choose{t-2}}+{{t+\ell -1}\choose{t-1}}\nonumber\\
+			&= &\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}+\frac{(t+\ell -1)!}{\ell !(t-1)!}\nonumber\\
+			&= &\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}+\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}\frac{\ell +1}{t-1}\nonumber\\
+			&= &\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}(1+\frac{\ell +1}{t-1})\nonumber\\
+			&= &\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}(\frac{t-1+\ell +1}{t-1})\nonumber\\
+			&= &\frac{(t+\ell -1)!}{(\ell +1)!(t-2)!}\frac{t+\ell }{t-1}\nonumber\\
+			&= &\frac{(t+\ell )!}{(\ell +1)!(t-1)!}\nonumber\\
+			&=& {{t+\ell }\choose{t-1}}\nonumber
+			\end{eqnarray}
+			Luego, la propiedad se cumple para $t$.
+		\end{itemize}
+		Con esto podemos ver que existen al menos ${{t+\ell }\choose{t-1}}$ polinomios distintos de grado $<t$ en $P$, y usando que polinomios distintos de grado $<t$ en $P$ se mapean a polinomios distintos en $\mathcal{G}$, podemos decir que existen al menos ${{t+\ell }\choose{t-1}}$ polinomios distintos en $\mathcal{G}$. Luego, $|\mathcal{G}|\geq {{t+\ell }\choose{t-1}}$.
+		
+	\end{proof}
+	Como $n$ no es una potencia de $p$ (ya que si lo fuera habrí­a retornado en el paso $1$), también podemos acotar por arriba al conjunto $\mathcal{G}$.
+	\begin{lemma}
+		$|\mathcal{G}|\leq n^{\sqrt{t}}$.
+	\end{lemma}
+	\begin{proof}
+		Consideremos el siguiente subconjunto de $I$:
+		\begin{eqnarray}
+			\hat{I} &=&\{(\frac{n}{p})^{i}\cdot p^{j}\tq 0\leq i,j\leq \lfloor \sqrt{t}\rfloor\}\nonumber 
+		\end{eqnarray}
+		Primero vamos a demostrar que si $0\leq i,j,a,b\leq \lfloor \sqrt{t}\rfloor$, con $i\neq a$ o $j\neq b$, entonces $(\frac{n}{p})^{i}\cdot p^{j} \neq (\frac{n}{p})^{a}\cdot p^{b}$. Supongamos por contradicción que $(\frac{n}{p})^{i}\cdot p^{j} = (\frac{n}{p})^{a}\cdot p^{b}$ para $i,j,a,b$ como los de antes. Podemos notar que si $i=a$ entonces es inmediato que $j=b$, luego necesariamente se cumple que $i\neq a$ y $j\neq b$. Supongamos sin pérdida de generalidad que $a>i$. Para que la igualdad se cumpla, se debe cumplir que $b<j$. Como $n$ no es potencia de $p$, y $p\divi  n$, $n$ tiene que ser de la forma $n=cp^{k+1}$, con $k\geq 0$ y $1<c<p$. Luego,
+		\begin{eqnarray}
+			& &(\frac{n}{p})^{i}\cdot p^{j} = (\frac{n}{p})^{a}\cdot p^{b}\nonumber\\
+			&\Leftrightarrow &(cp^k)^{i}\cdot p^{j} = (cp^k)^{a}\cdot p^{b}\nonumber\\
+			&\Leftrightarrow &(cp^k)^{a-i} = p^{j-b}\nonumber\\
+			&\Leftrightarrow &(\frac{n}{p})^{a-i} = p^{j-b}\nonumber\\
+			&\Leftrightarrow &n^{a-i} = p^{j-b+a-i}\nonumber\\
+			&\Leftrightarrow &n^{k_1} = p^{k_2}\hspace{0.5cm}k_1,k_2>0\nonumber
+		\end{eqnarray}
+		Ya que la descomposición en factores primos es única tendrí­amos que $n$ es potencia de $p$ ($\rightarrow\leftarrow$).\\\\
+		Con esto podemos afirmar que $|\hat{I}|=(\lfloor \sqrt{t}\rfloor+1)^2>t$. Como $\hat{I}\subseteq I$ y $|G|=t$, entonces deben existir al menos un par de números distintos $m_1,m_2\in \hat{I}$ tales que son iguales en $G$. Esto es equivalente a decir que $m_1\equiv m_2 \modl r$. Por otro lado, si $m=c\cdot r + m\hspace{0.1cm}mod\hspace{0.1cm} r$, entonces 
+		\begin{eqnarray}
+			X^m &\equiv &	X^{c\cdot r + m\hspace{0.1cm}mod\hspace{0.1cm} r} \modulox\nonumber\\
+			&\equiv & X^{c\cdot r}\cdot X^{m\hspace{0.1cm}mod\hspace{0.1cm} r}  \modulox \nonumber\\
+			&\equiv & X^{m\hspace{0.1cm}mod\hspace{0.1cm} r}\modulox\nonumber
+		\end{eqnarray}
+		Con esto podemos afirmar que 
+		\begin{eqnarray}
+			& & X^{m_1}\equiv X^{m_2} \modulox\nonumber\\
+			&\Rightarrow & X^{m_1}\equiv X^{m_2} \modulop\label{eq:4.8}
+		\end{eqnarray}
+		Sea $f(X)\in P$. Como $m_1,m_2\in \hat{I}\subseteq I$, entonces son introspectivos para $f(X)$. Luego,
+		\begin{eqnarray}
+			[f(X)]^{m_1} &\equiv & f(X^{m_1}) \modulop,\hspace{0.5cm}\text{y por }\eqref{eq:4.8}\nonumber\\
+			&\equiv & f(X^{m_2}) \modulop\nonumber\\
+			&\equiv &[f(X)]^{m_2} \modulop\nonumber		
+		\end{eqnarray}
+		Esto implica que $[f(X)]^{m_1}\equiv [f(X)]^{m_2}\modulohp$ (es decir en $F$). Luego, $f(X)\modulohp = f^*(X)\in \mathcal{G}$ es solución de $Q^*(Y)= Y^{m_1}-Y^{m_2}$ en $F$\comentario{OJO ACA DECIA DIRECTAMENTE QUE F(X) ESTABA EN $\mathcal{G}$ PERO CREO QUE NO ES ASI}. Como $f(X)$ es un elemento arbitrario de $P$, entonces se cumple para todos los polinomios de $P$. De esta forma, cada elemento de $\mathcal{G}$ es solución de $Q^*(Y)$, luego, este polinomio tiene al menos $|\mathcal{G}|$ distintas raí­ces en $F$, por lo tanto, $|\mathcal{G}|\leq deg(Q^*(Y))$ . Por último, 
+		\begin{eqnarray}
+			deg(Q^*(Y)) &=& Max\{m_1,m_2\}\nonumber\\
+			&\leq& (\frac{n}{p})^{\lfloor \sqrt{t}\rfloor}\cdot p^{\lfloor \sqrt{t}\rfloor}\nonumber\\
+			&=&n^{\lfloor \sqrt{t}\rfloor}\nonumber
+		\end{eqnarray}
+		De esto tenemos que $|\mathcal{G}|\leq n^{\lfloor \sqrt{t}\rfloor}$, y concluimos la demostración.
+		
+	\end{proof}
+	Finalmente, usando los lemas demostrados anteriormente, podemos demostrar la correctitud.
+	\begin{lemma}\ref{te-final6}
+		Si el algoritmo con input $n$ retorna PRIMO en el paso 6 del algoritmo, entonces $n$ es primo.
+	\end{lemma}
+	\begin{proof}
+	Supongamos que el algoritmo retornó PRIMO en el paso 6. Usando lo que hemos definido anteriormente, sabemos que $t=|G|$ y $\ell  = \lfloor \sqrt{\phi(r)}\log  n\rfloor$. También, por el Lema 4.7 \comentario{referenciar lema} tenemos que:
+	\begin{eqnarray}
+		\mathcal{G}&\geq &{{t+\ell }\choose{t-1}}\label{eq:10}
+	\end{eqnarray}
+	Además, como $t>\log ^2 n$ entonces $t>\sqrt{t}\log  n$, y por ende $t>\mia$. Luego,
+	\begin{eqnarray}
+		\frac{(t+\ell )!}{(t-1)!} &=& \frac{(\ell +1+t-1)!}{(t-1)!}\nonumber\\
+		&=&\frac{(\ell +1+(t-1))(\ell +1+(t-2))\cdots(\ell +1+(\mia+1))(\ell +1+\mia)!}{(t-1)(t-2)\cdots (\mia+1)(\mia)!}\nonumber\\
+		&=& \frac{(\ell +1+(t-1))}{(t-1)}\cdot\frac{(\ell +1+(t-2))}{(t-2)}\cdots\frac{(\ell +1+(\mia+1))}{(\mia+1)}\cdot\frac{(\ell +1+\mia)!}{(\mia)!}\nonumber\\
+		&\geq & 1\cdot1\cdots1\cdot1\cdot\frac{(\ell +1+\mia)!}{(\mia)!}\nonumber\\
+		\frac{(t+\ell )!}{(t-1)!} &\geq & \frac{(\ell +1+\mia)!}{(\mia)!}\nonumber
+	\end{eqnarray}
+Esto implica que 
+\begin{eqnarray}
+	& &\frac{(t+\ell )!}{(\ell +1)!(t-1)!} \geq \frac{(\ell +1+\mia)!}{(\ell +1)!(\mia)!}\nonumber\\
+	&\Leftrightarrow &{{t+\ell }\choose{t-1}}\geq {{\ell +1+\mia}\choose{\mia}}\label{eq:11}
+\end{eqnarray}	
+Por otro lado, como $\ell =\lfloor \sqrt{\phi(r)}\log  n\rfloor\geq \mia$, entonces
+\begin{eqnarray}
+	& &\frac{(\ell +1+\mia)!}{(\ell +1)!}\nonumber\\
+	&= &\frac{(\ell +1+\mia)(\ell +\mia)\cdots (\mia+2+\mia)(\mia+1+\mia)!}{(\ell +1)(\ell )\cdots (\mia+2)(\mia+1)!}\nonumber\\
+	&= &\frac{\ell +1+\mia}{\ell +1}\cdot\frac{\ell +\mia}{\ell }\cdots\frac{\mia+2+\mia}{\mia+2}\cdot\frac{(\mia+1+\mia)!}{(\mia+1)!}\nonumber\\
+	&\geq &1\cdot 1\cdots 1 \cdot\frac{(\mia+1+\mia)!}{(\mia+1)!}\nonumber
+\end{eqnarray}
+Luego, 
+\begin{eqnarray}
+	& &\frac{(\ell +1+\mia)!}{(\ell +1)!}\geq \frac{(2\mia+1)!}{(\mia+1)!}\nonumber\\
+	&\Rightarrow &\frac{(\ell +1+\mia)!}{(\ell +1)!(\mia)!}\geq \frac{(2\mia+1)!}{(\mia+1)!(\mia)!}\nonumber\\
+	&\Leftrightarrow &{{\ell +1+\mia}\choose{\mia}}\geq {{2\mia +1}\choose{\mia}}\label{eq:12}
+\end{eqnarray}
+	También sabemos que $\mia > \lfloor \log ^2n\rfloor\geq 1$, ya que $n\geq 2$\comentario{esto no se por que es desigualdad estricta, sin embargo es arreglable si comenzamos de n>2, ya que la ultima desigualdad pasaria a ser estricta}, entonces
+	\begin{eqnarray}
+		{{2\mia +1}\choose{\mia}} &=& \frac{(2\mia +1)!}{(\mia +1)!(\mia)!} \nonumber\\
+		&=&\frac{(2\mia+1)(2\mia)\cdots(\mia+3)(\mia +2)(\mia +1)!}{(\mia)(\mia -1)\cdots2\cdot 1}\nonumber\\
+		&=&\frac{2\mia+1}{\mia}\cdot\frac{2(\mia -1)+2}{\mia-1}\cdots\frac{2\cdot 2 + (\mia-1)}{2}\cdot\frac{2\cdot 1 +\mia}{1}\nonumber\\
+		& &\text{Pero como }\mia >1 \Rightarrow \mia \geq 2\nonumber\\
+		&\geq& \frac{2\mia+1}{\mia}\cdot\frac{2(\mia -1)+2}{\mia-1}\cdots\frac{2\cdot 2 + (\mia-1)}{2}\cdot (2+2)\nonumber\\
+		&>&	\frac{2\mia}{\mia}\cdot\frac{2(\mia -1)}{\mia-1}\cdots\frac{2\cdot 2 }{2}\cdot (2^2)\nonumber\\
+		&=& 2\cdot 2\cdots 2\cdot (2^2),\hspace{1cm}\text{en donde el número } 2 \text{ se repite }\mia-1 \text{ veces}\nonumber\\
+		&=& 2^{\mia -1}\cdot 2^2\nonumber\\ 
+		&=& 2^{\mia +1}\nonumber
+	\end{eqnarray}
+	Luego, 
+	\begin{eqnarray}
+		{{2\mia +1}\choose{\mia}}&>& 2^{\mia +1}\label{eq:13} 
+	\end{eqnarray}
+	Por último,
+	\begin{eqnarray}
+		 2^{\mia +1} &\geq &  2^{\lceil \sqrt{t} \log n \rceil}\nonumber\\
+		 &\geq &2^{\sqrt{t}\log n}\nonumber\\
+		 &=& 2^{\log {n^{\sqrt{t}}}}\nonumber\\
+		 &=& n^{\sqrt{t}}\nonumber
+	\end{eqnarray}
+	Entonces,
+	\begin{eqnarray}
+		2^{\mia +1} &\geq & n^{\sqrt{t}}\label{eq:14}
+	\end{eqnarray}
+	Usando $\eqref{eq:10},\eqref{eq:11},\eqref{eq:12},\eqref{eq:13},\eqref{eq:14}$, ya que en $\eqref{eq:13}$ tenemos una desigualdad estricta, nos queda que 
+	\begin{eqnarray}
+		|\mathcal{G}|&>& n^{\sqrt{t}}\nonumber
+	\end{eqnarray}
+	Esto es una contradicción ya que en el Lema 4.8 habí­amos demostrado que $|\mathcal{G}|\leq n^{\sqrt{t}}$. \\
+	De esta forma, como habí­amos comenzado la demostración de todos los lemas suponiendo que el algoritmo con input $n$ retornó PRIMO en el paso 6, pero $n$ era compuesto, y esto genera una contradicción, entonces $n$ debe ser primo. 
+	
+	\end{proof}
