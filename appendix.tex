@@ -1,0 +1,1446 @@
+%!TEX root = main.tex
+
+
+\newpage
+\section{Preliminares Teoría de Grupos}
+\label{app-grupos}
+%\subsection{Definiciones y propiedades básicas}
+%\begin{definition}[Grupo]
+%Un conjunto $G$ y una función (total) $\circ : G \times
+%G \to G$ forman un grupo si:
+%\begin{enumerate}
+%	\item Para cada $a,b,c \in G$: $(a \circ b) \circ c = a \circ (b
+%\circ c)$
+
+%	\item Existe $e \in G$ tal que para cada $a \in G$: $a \circ e = e \circ a = a$
+
+%   \item Para cada $a \in G$, existe $b \in G$: $a \circ b 	= b \circ a = e$
+%\end{enumerate}
+%\end{definition}
+%\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
+\begin{definition}[Grupo]
+Una tupla $(G,\circ)$, dónde $G$ es un conjunto y $\circ :G\times G\to G$ una función (total) forman un grupo si:
+\begin{enumerate}
+	\item Para cada $a,b,c \in G$: $(a \circ b) \circ c = a \circ (b
+\circ c)$
+
+	\item Existe $e \in G$ tal que para cada $a \in G$: $a \circ e = e \circ a = a$
+
+   \item Para cada $a \in G$, existe $b \in G$: $a \circ b 	= b \circ a = e$
+\end{enumerate}
+Decimos que $(G,\circ)$ es un grupo abeliano si además de ser un grupo, se cumple que $\circ$ es conmutativo, es decir, para todo $a,b\in G$ se tiene que $a\circ b = b\circ a$.
+\end{definition}
+
+%Una propiedad que se cumple en los grupos es que
+El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen
+la condición 2 de la definición anterior, entonces $e_1= e_2$.  Otra
+propiedad que podemos derivar de la definición anterior es que el
+inverso de cada elemento $a$ es único: si $a \circ b = b \circ a= e$ y
+$a \circ c = c \circ a = e$, entonces $b = c$. La demostración de
+estas propiedades se deja como ejercicio para el lector.
+
+
+Habiéndo definido esta estructura algebraica, nos interesa describir a los grupos que podemos encontrar dentro de otros grupos: los subgrupos.
+%--------------------------------------
+\begin{definition}
+$(H, \circ)$ es un subgrupo de un grupo $(G, \circ)$, para $H \subseteq G$, si $(H, \circ)$ es un grupo.
+\end{definition}
+
+Dos propiedades básicas que relacionan grupos con sus subgrupos son las que enunciamos y demostramos a continuación.
+
+\begin{proposition}
+Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones se cumplen.
+	\begin{enumerate}
+		\item Si $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$, entonces $e_1 = e_2$
+
+		\item Para cada $a \in H$, si $b$ es el inverso de $a$ en $(G, \circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$, entonces $c = b$
+	\end{enumerate}
+\end{proposition}
+
+
+
+
+%--------
+%A continuación demostraremos la proposición.
+\begin{proof}
+\text{ }
+	\begin{enumerate}
+	\item Supongamos que $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$. Vamos a demostrar que $e_1 = e_2$.
+Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, entonces se cumple $e_2 \circ e_1 = e_2$.
+Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo tanto $e_2 \circ e_2 = e_2$
+(notemos que se usa la misma operación en $H$ y $G$).
+De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$.
+Sea $e^{-1}_2$ el inverso de $e_2$ en $(G, \circ)$. Entonces:
+\begin{eqnarray*}
+e_2 \circ e_1 = e_2 \circ e_2 & \Rightarrow & e^{-1}_2 \circ (e_2
+\circ e_1) =  e^{-1}_2 \circ (e_2 \circ e_2)\\
+& \Rightarrow & (e^{-1}_2 \circ e_2) \circ e_1 =  (e^{-1}_2 \circ e_2)
+\circ e_2\\ 
+& \Rightarrow & e_1 \circ e_1 =  e_1 \circ e_2\\ 
+& \Rightarrow & e_1 = e_2
+\end{eqnarray*}
+
+%\qed
+
+	
+	\item
+	Sea $a \in H$, y suponga que $b$ es el inverso de $a$ en $(G,
+\circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$. Vamos a demostrar que $b = c$.
+Por la primera propiedad, sabemos que $(G, \circ)$ y $(H,
+\circ)$ tienen el mismo neutro. Sea $e$ el neutro en $(G, \circ)$ y $(H, \circ)$. 
+Dado que $b$ es el inverso de $a$ en $(G, \circ)$, entonces $a \circ b = e$. Además, dado que $c$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ c = e$. De lo anterior concluimos que $a \circ b = a \circ c$.
+Como sabemos que $b$ es el inverso de $a$ en $(G, \circ)$, tenemos que:
+%. Entonces:
+
+\begin{eqnarray*}
+a \circ b = a \circ c & \Rightarrow & b \circ (a
+\circ b) =  b \circ (a \circ c)\\
+& \Rightarrow & (b \circ a) \circ b =  (b \circ a)
+\circ c\\ 
+& \Rightarrow & e \circ b =  e \circ c\\ 
+& \Rightarrow & b = c
+\end{eqnarray*}
+	\end{enumerate}
+\end{proof}
+
+%----------
+A continuación enunciamos el Teorema de Lagrange para teoría de grupos. Este importante resultado relaciona el orden de un grupo finito con el orden de cualquiera de sus subgrupos.
+\begin{theorem}[{\bf Lagrange}]
+\label{teo:lagrange}
+Si $(G, \circ)$ es un grupo finito y $(H, \circ)$ es un subgrupo de $(G, \circ)$, entonces $|H|$ divide a $|G|$.
+\end{theorem}
+
+Para demostrar el teorema \ref{teo:lagrange} vamos a introducir una relación binaria que nos será de gran utilidad. Sea $(G, \circ)$ un grupo finito y $(H, \circ)$ un subgrupo de $(G, \circ)$. 
+Suponga que $e$ es el elemento neutro de $(G,\circ)$ y $a^{-1}$ es el inverso de $a$ en $(G, \circ)$.
+Sea entonces $\sim$ una relación binaria sobre $G$ definida
+como 
+\begin{center}
+	$a \sim b$ si y sólo si $b \circ a^{-1} \in H$
+\end{center}
+En base a esta relación, propondremos dos lemas que nos servirán para la demostración del teorema de Lagrange.
+
+\begin{lemma}\label{lema:rel bin}
+	$\sim$ es una relación de equivalencia.
+\end{lemma}
+\begin{proof}
+%[Demostración del lema \ref{lema:rel bin}.]
+Para demostrar que $\sim$ es una relación de equivalencia debemos demostrar que es refleja, simétrica y transitiva.
+Sabemos que $a \sim a$ ya que $a \circ a^{-1} = e$ y $e \in H$. Luego, la relación es refleja. 
+Supongamos ahora que $a \sim b$. Para demostrar que es simétrica tenemos que demostrar que $b \sim a$.
+Dado que $a \sim b$, entonces $b \circ a^{-1} \in H$. Tenemos que:
+%\comentarioin{Siempre antes de un eqnarray vamos a poner ``:''? Para ponerlo en todo el documento asi}
+%\comentarioin{Depende del contexto si corresponde usar ``:''. Cuando pienses si corresponde colocar ``:'', piensa si pondrías ``:'' si esto fuera un párrafo. Por ejemplo, ``El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' es parte del primer párrafo de esta sección, y ahí es claro que corresponde usar ``:''. Podríamos haber colocado la frase ``si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' en una linea separada, incluso con eqnarray, y en ese caso tendríamos que usar ``:''.}
+\begin{eqnarray*}
+(b \circ a^{-1}) \circ (a \circ b^{-1}) & = & (b \circ (a^{-1} \circ
+a)) \circ b^{-1}\\ 
+& = & (b \circ e) \circ b^{-1}\\ 
+& = & b \circ b^{-1}\\ 
+& = & e
+\end{eqnarray*}
+
+De forma análoga podemos llegar a que $(a \circ b^{-1}) \circ (b \circ
+a^{-1}) = e$.
+Así, podemos afirmar que $(b \circ a^{-1})^{-1} = a \circ b^{-1}$ y concluimos que $a \circ b^{-1}\in H$, ya que $(H, \circ)$ es un subgrupo de $(G, \circ)$ (en particular, el inverso de cada elemento de $H$ está en $H$). Luego, la relación es simétrica.
+Por último, debemos demostrar que la relación es transitiva. Para esto supongamos que $a \sim b$ y $b \sim c$, y debemos demostrar que $a \sim c$.
+Por la definición de $\sim$ sabemos que $b \circ a^{-1} \in H$ y $c \circ b^{-1} \in H$. %, y tenemos que demostrar que $c \circ a^{-1} \in H$.
+Pero $(c \circ b^{-1}) \circ (b \circ a^{-1}) = c \circ a^{-1}$ y sabemos que la operación
+$\circ$ es cerrada en $H$. Por lo tanto $c \circ a^{-1} \in H$, por lo que
+%significa que
+$a\sim c$. Luego, $\sim$ también es transitiva.
+
+\end{proof}
+
+%-----
+
+Sea $[a]_\sim$ la clase de equivalencia de $a \in G$ bajo la relación $\sim$. El siguiente lema relaciona este concepto con $H$ y $G$.
+\begin{lemma}\label{lema grupo 6}
+\hfill
+\begin{enumerate}
+\item $[e]_\sim = H$
+
+\item Para cada $a, b \in G$: $|[a]_\sim| = |[b]_\sim|$
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{proof}
+%[Demostración del lema \ref{lema grupo 6}.]
+\text{}
+\begin{enumerate}
+\item Se tiene que:
+
+\begin{center}
+\begin{tabular}{lcl}
+$a \in [e]_\sim$ & $\Leftrightarrow$ & $e \sim a$\\
+& $\Leftrightarrow$ & $a \circ e^{-1} \in H$\\
+& $\Leftrightarrow$ & $a \circ e \in H$\\
+& $\Leftrightarrow$ & $a \in H$
+\end{tabular}
+\end{center}
+
+\item Sean $a,b \in G$, y defina la función $f$ de la siguiente forma:
+\begin{eqnarray*}
+f(x) & = & x \circ (a^{-1} \circ b)
+\end{eqnarray*}
+
+Se tiene que:
+
+\begin{center}
+\begin{tabular}{lcl}
+$x \in [a]_\sim$ & $\Rightarrow$ & $a \sim x$\\
+& $\Rightarrow$ & $x \circ a^{-1} \in H$\\
+& $\Rightarrow$ & $(x \circ a^{-1}) \circ e \in H$\\
+& $\Rightarrow$ & $(x \circ a^{-1}) \circ (b \circ b^{-1}) \in H$\\
+& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $f(x) \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $b \sim f(x)$\\
+& $\Rightarrow$ & $f(x) \in [b]_\sim$
+\end{tabular}
+\end{center}
+
+
+Por lo tanto podemos afirmar que $f : [a]_\sim \to [b]_\sim$. Vamos a demostrar que $f$ es una biyección, de lo que podremos
+concluir que $|[a]_\sim| = |[b]_\sim|$.  
+Lo primero es mostrar que $f$ es inyectiva:
+
+\begin{center}
+\begin{tabular}{lcl}
+$f(x) = f(y)$ & $\Rightarrow$ & $x \circ (a^{-1} \circ b) = y \circ
+(a^{-1} \circ b)$\\
+%\comentarioin{Por qué no simplemente multiplicar por el inverso de $(a^{-1}\circ b$ aca?)}\\
+& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}
+= (y \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}$\\
+& $\Rightarrow$ & $x \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})
+= y \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})$\\
+& $\Rightarrow$ & $x \circ e = y \circ e$\\
+& $\Rightarrow$ & $x = y$
+\end{tabular}
+\end{center}
+
+Además, $f$ es sobreyectiva:
+
+\begin{center}
+\begin{tabular}{lcl}
+$y \in [b]_\sim$ & $\Rightarrow$ & $b \sim y$\\
+& $\Rightarrow$ & $y \circ b^{-1} \in H$\\
+& $\Rightarrow$ & $(y \circ b^{-1}) \circ (a \circ a^{-1}) \in H$\\
+& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \circ a^{-1} \in H$\\
+& $\Rightarrow$ & $a \sim ((y \circ b^{-1}) \circ a)$\\
+& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \in [a]_\sim$
+\end{tabular}
+\end{center}
+
+Sea $x = ((y \circ b^{-1}) \circ a)$. Tenemos que:
+\begin{center}
+\begin{tabular}{lcl}
+$f(x)$ & $=$ & $x \circ (a^{-1} \circ b)$\\
+& $=$ & $((y \circ b^{-1}) \circ a) \circ (a^{-1} \circ b)$\\
+& $=$ & $y \circ (b^{-1} \circ (a \circ a^{-1}) \circ b)$\\
+& $=$ & $y \circ ((b^{-1} \circ e) \circ b)$\\
+& $=$ & $y \circ (b^{-1} \circ b)$\\
+& $=$ & $y \circ e$\\
+& $=$ & $y$ 
+\end{tabular}
+\end{center}
+
+\end{enumerate}
+
+\end{proof}
+A continuación demostraremos el teorema \ref{teo:lagrange} a partir del lema \ref{lema grupo 6}.
+\begin{proof}[Demostración del teorema \ref{teo:lagrange}.]
+Sea $E = \{[a]_{\sim}\mid a\in G\}$ el conjunto de todas las clases de equivalencia de $G$ bajo la relación $\sim$. Como $H = [e]_{\sim}$ y todas las clases de equivalencia tienen la misma cardinalidad, entonces $|G| = |[e]_{\sim}|\cdot |E| = |H|\cdot |E|$. Luego, $|H|$ divide a $|G|$. 
+
+\end{proof}
+
+%-------------------
+Otro concepto que nos interesa en teoría de grupos es el orden de los
+elementos en un grupo.  Dada un elemento $a$ en un grupo $(G,\circ)$ y
+$m \in \mathbb{Z}$, se define $a^m$ de la siguiente forma. Si $m > 0$,
+entonces $a^m$ es el resultado de operar $a$ consigo mismo $m$ veces
+bajo la operación $\circ$. Si $m = 0$, entonces $a^m = e$, donde $e$
+es el neutro en $(G,\circ)$. Si $m < 0$, entonces $a^m$ es el
+resultado de operar $a^{-1}$ consigo mismo $m$ veces bajo la operación
+$\circ$, donde $a^{-1}$ es el inverso de $a$ en $(G, \circ)$. Con esto
+tenemos que:
+
+\begin{definition}\label{def_orden}
+	El orden de un elemento $a$ de un grupo $(G,\circ)$ es el menor entero positivo $m$ tal que $a^m = e$, donde
+        %$a^m$ es el resultado de operar $a$ bajo $\circ$ en el grupo, y el elemento
+        $e$ es el elemento neutro del grupo. Si este valor $m$ no existe, decimos que $a$ tiene orden infinito. Denotamos al orden del elemento $a$ en $G$ como $O_G(a)$.
+\end{definition} 
+Nótese que utilizamos la misma notación de orden para denotar la cantidad de elementos de un grupo; sin embargo, esto no genera confusión ya que es claro cuando se habla de un grupo o de un elemento de un grupo. 
+A continuación definimos el conjunto generado por un elemento en un grupo, y veremos que está directamente relacionado con el orden del mismo. 
+ 
+\begin{definition}\label{def_gen}
+	El conjunto generado por un elemento $a$ en un grupo $(G,\circ)$ es el conjunto
+        \begin{eqnarray*}
+        \langle a\rangle & := & \{a^k\mid k\in\mathbb{Z}\}.
+        \end{eqnarray*}
+        Decimos que $a$ es el generador del grupo.
+\end{definition}
+
+Nótese que la definición del conjunto generado por un elemento $a$
+depende directamente del grupo $G$ al cual pertenece $a$. En
+particular, se tiene que $a^m\in G$ para cada número entero $m$, y
+por ende $\langle a\rangle\subseteq G$ (notar que utilizamos la misma
+operación $\circ$ en el grupo $G$ y la definición de $\langle
+a \rangle$). A continuación, mostraremos una propiedad fundamental de
+los conjuntos generados.
+
+
+\begin{proposition}\label{prop-generado}
+	Si $a$ es un elemento de un grupo $(G,\circ)$, entonces $(\langle a\rangle ,\circ)$ es un subgrupo de $(G,\circ)$. 
+%        A los grupos que pueden ser generados por un solo elemento los denominamos grupos cíclicos.
+\end{proposition} 
+
+
+\begin{proof}
+Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
+que $(\langle a\rangle,\circ)$ es un grupo. Nótese que la operación
+$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
+a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{Z}$,
+por lo que $b \circ c \in \langle a\rangle$ puesto que $b \circ c =
+a^{m+n}$ y $m+n \in \mathbb{Z}$. Tenemos que demostrar entonces los
+tres axiomas de grupos para $(\langle a\rangle, \circ)$. La
+asociatividad de la operación $\circ$ se cumple trivialmente puesto
+que $(G,\circ)$ es un grupo. Además, dado que $a^0 = e$, donde $e$ es
+el neutro de $(G, \circ)$, tenemos que $e \in \langle a\rangle$ y
+$(\langle a\rangle, \circ)$ tiene un elemento neutro. Finalmente, si
+$b \in \langle a\rangle$, se tiene que $b = a^n$ para
+$n \in \mathbb{Z}$, de lo cual deducimos que $b$ tiene inverso en
+$(\langle a\rangle, \circ)$ ya que $a^{-n} \in \langle
+a\rangle$ y $a^n \circ a^{-n} = a^{-n} \circ a^n = e$ por definición de la operación $a^n$.
+\end{proof}
+
+Si para un grupo $(G, \circ)$ existe un elemento $a \in G$ tal que
+$\langle a \rangle = G$, entonces decimos que $(G,\circ)$ es un grupo
+cíclico. Desde la proposición \ref{prop-generado}, podemos observar
+que para un grupo finito $(G, \circ)$ y un elemento $a \in G$, se
+tiene que $|\langle a\rangle |$ divide a $|G|$ por el teorema de
+Lagrange. En la siguiente proposición, establecemos para grupos
+finitos la relación directa que existe entre el orden de un elemento
+$a$ y el orden del grupo $\langle a \rangle$.
+
+\begin{proposition}\label{prop-orden}
+Sea $a$ un elemento de un grupo finito $(G,\circ)$, y sea $m =
+|\langle a \rangle|$. Entonces se tiene que $\langle a\rangle
+= \{a^0,\ldots,a^{m-1}\}$ y $O_G(a) = m$.
+\end{proposition}
+%\comentarioin{hablar sobre $a=e$ y tambien sobre grupo ciclico}
+\begin{proof}
+Dado que $G$ es un grupo finito, existen $i,j \in \mathbb{N}$ tales que
+$i < j$ y $a^i = a^j$. De esto concluimos que $a^{j-i} = e$, y sabemos
+que $O_G(a)$ es un número entero positivo. Sea $k = O_G(a)$. Tenemos
+entonces las siguientes propiedades.
+\begin{enumerate}
+\item
+$a^i \neq a^j$ para cada $i,j\in [0,k-1]$ tales que  $i \neq j$. Si
+suponemos que esto es falso, entonces existen $i,j\in [0,k-1]$ tales
+que $i < j$ y $a^i = a^j$. Pero esto implica que $a^{j-i} = e$, lo
+cual contradice la definición de $k$ puesto que $0 < j-i < k$.
+
+\item
+Para cada $i \in \mathbb{Z}$, existe $j \in [0,k-1]$ tal que $a^i =
+a^j$. Sabemos que $i = \alpha \cdot k + \beta$, con $\alpha \in \mathbb{Z}$
+y $0 \leq \beta < k$. Tenemos entonces que:
+\begin{eqnarray*}
+a^i & = & a^{\alpha \cdot k + \beta}\\
+& = & (a^k)^{\alpha} \circ a^{\beta}\\
+& = & e^{\alpha} \circ a^{\beta}\\
+& = & e \circ a^{\beta}\\
+& = & a^{\beta}.
+\end{eqnarray*}
+Por lo tanto se cumple la propiedad enunciada con $j = \beta$.
+\end{enumerate}
+De las dos propiedades anteriores deducimos que $\langle a \rangle
+= \{a^0, \ldots, a^{k-1}\}$ y $|\langle a \rangle| = |\{a^0, \ldots,
+a^{k-1}\}| = k$, lo cual concluye la demostración de la proposición
+puesto que $k = O_G(a)$.
+%Notemos que si $a=e$, donde $e$ es el neutro
+%de $(G, \circ)$, entonces la proposición se cumple puesto que $\langle
+%e \rangle = \{e\}$, $|\langle e \rangle| = 1$ y $O_G(e) =
+%1$. Supongamos que $a\neq e$.  Como $\langle a\rangle\subseteq G$ y
+%$G$ es finito, existe un número natural $k$ tal que $a^k = a^\ell$
+%para algún $\ell \in [0,k-1]$. Sea $k$ el número natural más pequeño
+%que cumple con la propiedad anterior.  Como $a\neq e$ se tiene que
+%$k\geq 2$.  A continuación mostraremos que necesariamente
+%$\ell=0$. Supongamos por contradicción que $\ell>0$. Entonces tenemos
+%que:
+%\begin{eqnarray}
+%	a^k\ = \ a^\ell
+%	&\Rightarrow & a^k\cdot a^{-\ell} \ = \ a^\ell\cdot a^{-\ell}\nonumber\\
+%	&\Rightarrow & a^{k-\ell} \ = \ a^0 \ = \ e \label{ecuacion contradiccion}
+%\end{eqnarray}
+%Como $0 < \ell < k$, tenemos que $k > k-\ell > 0$.
+%%Notemos que como $j<k$ entonces $k-j>k-k=0$. Por otro lado, como $j>0$ entonces $k-j< k-0 = k$.
+%Pero esto nos lleva a una contradicción, ya que \eqref{ecuacion
+%contradiccion} contradice nuestra elección de $k$. Así, concluimos que
+%$a^k=e$. Además, como $k$ es el menor número natural tal que $a^k
+%= a^\ell$ para algún $\ell \in [0,k-1]$,
+%%$k$ es el menor número natural que cumple esto,
+%se tiene $a^i\neq a^j$ para todo $i,j\in [0,k-1]$ con $i \neq j$.
+\end{proof}
+
+%Ahora estamos listos para demostrar la proposición \ref{prop-generado}.
+
+%\begin{proof}[Demostración proposición \ref{prop-generado}]
+%Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
+%que $(\langle a\rangle,\circ)$ es un grupo. Para esto primero debemos demostrar que Nótese que la operación
+%$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
+%a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{N}$,
+%por lo que $b \circ c \in \langle a\rangle$ ya que $b \circ c =
+%a^{m+n}$. Tenemos que demostrar entonces los tres axiomas de grupos
+%para $(\langle a\rangle, \circ)$. La asociatividad de la operación
+%$\circ$ se cumple trivialmente puesto que $(G,\circ)$ es un
+%grupo. Además, dado que $a^0 = e$, donde $e$ es el neutro de
+%$(G, \circ)$, tenemos que $e \in \langle a\rangle$ y $(\langle
+%a\rangle, \circ)$ tiene un elemento neutro. Solo nos queda demostrar
+%entonces que cada elemento de $\langle a\rangle$ tiene un inverso.
+%
+%Para esto demostramos los tres axiomas de los grupos.
+%\begin{enumerate}
+%	\item Para todo $b,c,d\in\langle a\rangle$ se cumple que $(b\circ c )\ci%rc d=b\circ (c \circ d)$:
+%	
+%	Sea $b,c,d\in \langle a \rangle$. Como $\langle a\rangle\subseteq G$ entonces $b,c,d\in G$. Así, como $(G,\circ)$ es un grupo, entonces en particular cumple con este axioma y podemos concluir que $(b\circ c )\circ d=b\circ (c \circ d)$.
+%	\item Existe un elemento neutro en $(\langle a \rangle,\circ)$:
+%	
+%	Por la definición de $\langle a\rangle$ sabemos que $a^0=e$ pertenece al conjunto. Como $(G,\circ)$ es un grupo, y $e$ es su elemento neutro, entonces para todo $b\in G$ se cumple que $b\circ e = b$. De este forma, como $\langle a\rangle \subseteq G$ entonces para todo $b\in \langle a\rangle$ se cumple que $b\circ e=b$.
+%	\item Cada elemento en $\langle a \rangle$ tiene inverso.
+%	
+%	Sea $b\in \langle a \rangle$, lo cual implica que $b = a^n$ para algún $n\in\mathbb{N}$. Como $n = \alpha k + (n\mods k)$, con $\alpha = \lfloor \frac{n}{k}\rfloor$, entonces 
+%	\begin{eqnarray*}
+%		a^n &=& a^{\alpha k + (n\mods k)}\\
+%		&=& (a^k)^{\alpha}\circ a^{(n\mods k)}\\
+%		&=& e^{\alpha}\circ a^{(n\mods k)}\\
+%               &=& a^{(n\mods k)} 	
+%	\end{eqnarray*}	 
+%	Luego, tomando $c = a^{k-(n\mod k)}$ tenemos que 	
+%	\comentarioin{el comando $\mod$ toma mucho espacio antes, quizas podriamos ajustar el comando}
+%        \comentarioin{existe el comando {\tt mods} para el caso en que queremos sacar el espacio que coloca {\tt mod}, lo usé en este caso.}
+%	\begin{eqnarray*}
+%		b\circ b^{-1} &=& a^{(n\mod k)} \circ a^{k-(n\mod k)}\\
+%		&=& a^{k}\\
+%		&=& e
+%	\end{eqnarray*}	
+%
+%\end{enumerate}
+%
+%\end{proof}
+
+Desde la proposición \ref{prop-generado} podemos observar que $O_G(a)
+= |\langle a\rangle |$ para un elemento $a$ de un grupo finito
+$(G,\circ)$, lo que nos dice que la notación de orden es consistente.
+%notacion es consistente
+%https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/05/Order-group-theory.pdf
+
+Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$ definido en \ref{eq-zn-star}, donde $\cdot$ corresponde a la
+multiplicación usual en módulo $n$. Este grupo juego un rol fundamental en este documento. 
+%Un caso particular de los grupos generados por un
+%elemento es cuando $(G,\circ) = (\mathbb{Z}_n^*,\cdot)$, donde $\cdot$
+%corresponde a la multiplicación usual.
+En este contexto, denotamos al grupo $\langle a \rangle$ generado por
+$a\in \mathbb{Z}_n^*$ como $\langle a\rangle_n$.
+%\begin{eqnarray*}
+%\langle a\rangle_n & := & \{a^k\mods n \mid k\in\mathbb{Z}\}.
+%\end{eqnarray*}
+Con este grupo, podemos definir un caso particular de los conceptos
+introducidos en las definiciones \ref{def_orden} y \ref{def_gen}: el
+orden multiplicativo. Este concepto se utiliza reiteradas veces a lo
+largo de este documento.
+
+%\comentario{sacar definicion siguiente y decirlo en un parrafo, dejarlo como ejercicio (ya se vio en la sección 2, en vez de hablar de $O_Z_r^*(a)$ hablamos de $O_r(a)$.}
+
+\begin{definition}\label{def_ord_mult}
+	 Sea $a\in \mathbb{Z}$ y $n\in \mathbb{N}$ tal que $n \geq 1$. Si $\MCD(a,n)=1$, decimos que el orden multiplicativo de $a$ en módulo $n$ es
+         \begin{eqnarray*}
+         O_n(a) & := & |\langle a\rangle _n|.
+         \end{eqnarray*}
+\end{definition}
+Nótese que en la definición anterior no nos restringimos solamente a
+los elementos $a\in\mathbb{Z}_n^*$, sino que también incluimos todos
+aquellos naturales tales que $(a \mods n) \in \mathbb{Z}_n^*$. Como $a \equiv (a\mods n) \modl n$, lo anterior es consistente y está bien
+definido.
+%Finalmente, nótese que $O_n(a)$ es el orden de un elemento
+%$a$ que pertenece al grupo $(\mathbb{Z}_n^*,\cdot)$, vale decir,
+%$O_n(a) = O_{\mathbb{Z}_n^*}(a)$.
+
+A continuación vamos a fijarnos en los elementos de los grupos abelianos, y enunciar dos propiedades que son útiles para este documento.
+%\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
+\begin{theorem}\label{orden del producto coprimos}
+	Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Si $m$ y $n$ son coprimos, entonces $a\circ b$ tiene orden $O_G(a\circ b)=mn$.
+\end{theorem}
+
+Antes de probar el teorema \ref{orden del producto coprimos} vamos a realizar una observación que ocuparemos repetidas veces en la demostración.
+\begin{observacion}\label{observacion orden}
+ Si $d=O_G(a)$ y $a^q =e$, donde $e$ es el neutro del grupo $G$, entonces necesariamente $d$ divide a $q$. Para ver esto, supongamos por contradicción que $d$ no divide a $q$. Esto quiere decir que $q = d\alpha + \beta$ con $0<\beta<d$. Luego, 
+\begin{eqnarray*}
+	e &=& a^q \\
+	 &=&  a^{d\alpha  + \beta} \\ 
+	 &=&  a^{d\alpha }\cdot a^{\beta}\\
+	 &=&  (a^{d})^{\alpha }\cdot a^{\beta}\\
+	 &=&  e^{\alpha}\cdot a^{\beta}\\
+	 &=&  a^{\beta} 
+\end{eqnarray*} 
+Lo que es una contradicción, ya que $0<\beta < d$ y $d = O_G(a)$ es el menor elemento mayor a cero tal que~$a^d = e$.   
+\end{observacion}
+\begin{proof}[Demostración del teorema \ref{orden del producto coprimos}]
+	Sea $r=O_G(a\circ b)$. Debemos demostrar que $r = mn$. Sabemos que 
+	\begin{eqnarray*}
+		(a\circ b)^{mn} &=& a^{mn}\circ b^{mn}\\
+                &=& (a^m)^n\circ (b^n)^m\\
+		&=&e^n\circ e^m \\
+		 &=&  e
+	\end{eqnarray*}
+Luego, por la observación \ref{observacion orden} tenemos que $r$ divide a $mn$ y por ende $r\leq mn$. Nos hace falta demostrar que $mn\leq r$. Para esto notemos que como $e \ = \ (a\circ b)^r$, entonces
+\begin{eqnarray*}
+	 e \ = \ e^n & =&  (a\circ b)^{rn} \\
+	 & = & a^{rn} \circ b^{rn}\\
+	 & = & a^{rn} \circ (b^{n})^{r}\\
+	 & = & a^{rn} \circ e^{r}\\
+	 &=& a^{rn}
+\end{eqnarray*}
+ De la misma forma tenemos que
+\begin{eqnarray*}
+	 e \ = \ e^m & =&  (a\circ b)^{rm} \\
+	 & = & a^{rm} \circ b^{rm}\\
+	 & = & (a^{m})^r \circ b^{rm}\\
+	 & = & e^{r} \circ b^{rm}\\
+	 &=& b^{rm}
+\end{eqnarray*}
+Luego $a^{rn}=e$ y $b^{rm} = e$. De esto podemos concluir por la observación \ref{observacion orden} que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, entonces necesariamente $m \divi r$ y $n\divi r$. Asi, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$, y por tanto $mn\leq r$. 
+\end{proof}
+
+Como consecuencia del teorema \ref{orden del producto coprimos} podemos mostrar el siguiente resultado, que es una versión generalizada del mismo.
+\begin{corollary}\label{corolario orden}
+Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Entonces existe un elemento $c\in G$ que tiene orden $O_G(c)=\MCM(m,n)$.
+\end{corollary}
+\begin{proof}
+Sean $p_1,...,p_k$ los divisores primos de $m$ o de $n$. Luego, podemos escribir $m$ y $n$ como 
+$$m \ = \ \prod\limits_{i=1}^k p_i^{\alpha_i} \ \quad\text{y}\quad \ n \ = \ \prod\limits_{i=1}^k p_i^{\beta_i}$$ donde $\alpha_i,\beta_i \geq 0$ (son iguales a 0 cuando el primo no es divisor del número). Defina
+$$m' \ = \ \prod\limits_{i\,:\,\alpha_i\geq \beta_i} p_i^{\alpha_i} \ \quad\text{y}\quad \ n' \ = \ \prod\limits_{i\,:\,\beta_i> \alpha_i} p_i^{\beta_i}$$
+Por ejemplo, si $m=2^3\cdot 3^2\cdot 5^1$ y $n=2^1\cdot 3^2\cdot 7^1$, $m' = 2^3\cdot 3^2\cdot 5^1$ y $n' = 7^1$. Notemos que las siguientes afirmaciones sobre $m'$ y $n'$ se cumplen:
+\begin{itemize}
+	\item $m'$ divide a $m$
+	\item $n'$ divide a $n$
+	\item $m'$ y $n'$ son coprimos
+	\item $\MCM(m,n) = m'n'$
+\end{itemize}
+Considere los elementos $a' = a^{\frac{m}{m'}}$ y $b' = b^{\frac{n}{n'}}$. Vamos a mostrar que $O_G(a')=m'$ y $O_G(b')=n'$. Primero, sea $k=O_G(a')$. Entonces $$e\ = \ (a')^k\ = \ (a^{\frac{m}{m'}})^k \ = \ a^{\frac{mk}{m'}}$$
+Por la observación \ref{observacion orden}, como $O_G(a) = m$ entonces $m$ divide a $\frac{mk}{m'}$, y por ende $m'$ debe dividir a $k$ (ya que $\frac{mk}{m'}\in \mathbb{Z}$). De esto concluimos que $m'\leq k$. Por otro lado, $$(a')^{m'} \ = \ (a^{\frac{m}{m'}})^{m'} \ = \ a^m \ = \ e$$ 
+%Nuevamente, por la observación \ref{observacion orden} necesariamente $k$ divide a $m'$, y
+Dado que $k=O_G(a')$, concluimos que se cumple $k\leq m'$. Luego, $O_G(a')=k=m'$. De forma análoga, se puede mostrar que $O_G(b')=n'$.
+
+%Una propiedad importante que se sigue del teorema \ref{orden del producto coprimos} y el corolario \ref{corolario orden} es la siguiente.
+
+Por último, defina $c=a'\circ b'$. Como sabemos que $(G,\circ)$ es un grupo abeliano, $a',b'\in G$ con $O_G(a') = m'$ y $O_G(b')= n'$, y $m'$, $n'$ son coprimos, se deduce por el teorema \ref{orden del producto coprimos} que $O_G(c) = m'n' = \MCM(m,n)$. Con esto concluimos la demostración.
+\end{proof}
+Como último resultado sobre teoría de grupos que será útil para este
+documento, presentamos y demostramos el teorema de Cauchy.
+\begin{theorem}[{\bf Cauchy}]\label{teo cauchy}
+Sea $p$ un número primo que divide el orden de un grupo finito
+$(G,\circ)$. Entonces existe un elemento de $G$ que tiene orden $p$.
+\end{theorem}
+Para demostrar el teorema \ref{teo cauchy}, vamos a demostrar el lema \ref{tcf}, que es una versión más fuerte del teorema de Cauchy.
+\begin{lemma}\label{tcf}
+Sea $p$ un número primo que divide el orden de un grupo finito
+$(G, \circ)$. Entonces $G$ tiene $p\cdot k$ elementos que son solución
+de la ecuación $$x^p=e,$$ donde $e$ es el neutro de $(G, \circ)$ y $k$
+es un número entero positivo.
+%\comentarioin{al parecer este es el teorema de cauchy original (?)}
+\end{lemma}
+%\comentarioin{hay que poner en la demostracion que estamos demostrando el lema A13? o se entiende?}
+\begin{proof}
+Sea $|G|= n $, y suponga que $p\divi n$, es decir, $n= p\cdot c$ con
+$c\in \mathbb{N}$. Definimos el conjunto
+\begin{eqnarray*}
+S & = & \{(g_0,g_1,\ldots,g_{p-1})\mid g_i\in G \text{ para cada }
+i \in [0,p-1] \text{ y } g_0 \cdot g_1 \cdot \ldots \cdot g_{p-1} =
+e\}.
+\end{eqnarray*}
+Notemos que si $(g_0,g_1,\ldots,g_{p-1})\in S$, entonces al escoger
+los elementos $g_0,\ldots,g_{p-2}$ el elemento $g_{p-1}$ queda
+únicamente determinado: como $g_0 \cdot \ldots \cdot g_{p-2}\cdot
+g_{p-1}=e$, entonces necesariamente $g_{p-1} = (g_0 \cdot \ldots \cdot
+g_{p-2})^{-1}$. De esto podemos concluir que $|S|=n^{p-1}$, usando el
+argumento que para cada $i\in [0,p-2]$, $g_i\in G$, y tenemos $n$
+posibles elementos que podemos escoger. Definamos la relación binaria
+$\sim$ sobre las tuplas de $S$ de la siguiente forma:
+\begin{multline*}
+(g_0,g_1,\ldots,g_{p-1})\sim (h_0,h_1,\ldots,h_{p-1}) \ \ \text{si y solo si} \\
+(h_0,h_1,\ldots,h_{p-1})\text{ es una permutación cíclica de } (g_0,g_1\ldots,g_{p-1}), 
+\end{multline*}
+es decir, si $(h_0,h_1,\ldots,h_{p-1}) = (g_{(0+k) \mods p},
+g_{(1+k) \mods p}, \ldots g_{(p-1+k) \mods p})$ para algún $k\in
+[0,p-1]$. Demostrar que $\sim$ es una relación de equivalencia es un
+ejercicio sencillo y queda propuesto para el lector.  Ya que $\sim$
+satisface esta propiedad, podemos analizar las clases de equivalencia
+bajo esta relación.  Podemos ver que existen dos tipos de tuplas en
+$S$.  El tipo I ocurre cuando todos los elementos de la tupla son el
+mismo, en cuyo caso tenemos que $|[(g_0,\ldots,g_{p-1})]_{\sim}|=1$
+(al hacer permutaciones cíclicas obtenemos la misma tupla).  El tipo
+II occure cuando en la tupla existen elementos distintos. Nótese que, en general, si permutamos una tupla del tipo II podríamos eventualmente obtener la misma tupla. Por ejemplo, si nuestra tupla es $(a,b,a,b)$, entonces podemos hacer una permutación cíclica de dos hacia la izquierda (vale decir, $k = 2$) y obtenemos la misma tupla $(a,b,a,b)$. En la afirmación \ref{afirmacion-perm-cicl} demostramos que
+%si el tamaño de la tupla es un número primo (como en nuestro caso)
+en nuestro caso no sucede lo anterior porque $p$ es un número primo.
+%entonces no sucede lo anterior, en cuyo caso 
+De esta forma concluimos que $|[(g_0,\ldots,g_{p-1})]_{\sim}|=p$.
+
+
+\begin{afirmacion}\label{afirmacion-perm-cicl}
+%Sea $p$ un número primo.
+Si $(g_0, g_1, \ldots, g_{p-1}) = (g_{(0+k) \mods p}, g_{(1+k) \mods
+p}, \ldots, g_{(p-1+k) \mods p})$ para algún $k \in [1,p-1]$, entonces
+$g_0 = g_1 = \cdots = g_{p-1}$.
+\end{afirmacion}
+
+\begin{proof}
+Suponga que $(g_0, g_1, \ldots, g_{p-1}) = (g_{(0+k) \mods p},
+g_{(1+k) \mods p}, \ldots, g_{(p-1+k) \mods p})$ para algún $k \in
+[1,p-1]$. Así, tenemos que $g_i = g_{(i+k) \mods p}$ para cada
+$i \in [0,p-1]$. Nótese que de esto se deduce que $g_{((j\mods p) +k)\mods p} = g_{(j+k)\mods p}$, de lo cual se concluye que
+\begin{align}\label{eq-lem-perm-cicl}
+g_0 = g_k = g_{(2\cdot k) \mods p} = g_{(3\cdot k) \mods p} = \cdots = g_{((k-1) \cdot k) \mods p}.
+\end{align}
+Por lo tanto, si demostramos que
+\begin{eqnarray*}
+(i \cdot k) \mods p & \neq & (j \cdot k) \mods p
+\end{eqnarray*}
+para cada $i,j \in [0,p-1]$ tales que $i < j$, entonces concluimos que
+$g_0 = g_1 = \cdots = g_{p-1}$ ya que todos los elementos de la tupla
+$(g_0, g_1, \ldots, g_{p-1})$ son mencionados
+en \eqref{eq-lem-perm-cicl}. Por el contrario, supongamos que $(i \cdot
+k) \mods p \ = \ (j \cdot k) \mods p$ para algún par $i,j \in [0,p-1]$ tal
+que $i < j$. Tenemos entonces que $i \cdot k \equiv j \cdot k \modl
+p$, vale decir, $(j-i) \cdot k \equiv 0 \modl p$. Así, dado que $k \in
+[1,p-1]$ y $p$ es un número primo, concluimos que $(j-i) \equiv
+0 \modl p$. Pero $0 < j-i < p$, por lo que obtenemos una
+contradicción.
+\end{proof}
+
+Continuando entonces con la demostración del lema \ref{tcf},
+supongamos que hay $r$ clases de equivalencia de tuplas del tipo I y
+$q$ clases de equivalencia de tuplas del tipo II, y observemos que
+$r\geq 1$ ya que $(e,e,\ldots,e)$ es de tipo I. Luego, como todas las
+tuplas de $S$ caen en una clase de equivalencia de $\sim$, se cumple
+que $r\cdot 1 \ + \ q\cdot p = |S|$. Además, tenemos que:
+\begin{eqnarray*}
+r\cdot 1 \ + \ q\cdot p \ = \ |S| &\Rightarrow&  r \ + \ q\cdot p \ = \ n^{p-1}\\ 
+	&\Rightarrow& r \ = \ n^{p-1} \ - \ q\cdot p\\
+	&\Rightarrow& r \ = \ (p \cdot c)^{p-1} - q \cdot p \quad\quad\quad \text{dado que } n= p\cdot c\\
+	&\Rightarrow& r \ = \ p\cdot (c\cdot (p \cdot c)^{p-2}-q).
+\end{eqnarray*}
+Sea $k = c\cdot (p \cdot c)^{p-2}-q$. Dado que $p\geq 2$, tenemos que
+$k \in \mathbb{Z}$. Así, dado que $r = p \cdot k$ y $r \geq 1$,
+concluimos que $k$ es un número entero positivo.
+%entonces
+%necesariamente $k\geq 1$ (un número natural).
+Luego, existen $r = p\cdot k$ tuplas de tipo I,
+%que sus clases de equivalencia son del primer
+%tipo,
+es decir, $r=p\cdot k$ elementos distintos $g\in G$ tales que $g \cdot
+g \cdot \ldots \cdot g = g^p = e$, los cuales corresponden a las
+soluciones de la ecuación $x^p=e$.
+\end{proof}
+Habiéndo demostrado el lema \ref{tcf}, podemos hacer la demostración del teorema de Cauchy.
+\begin{proof}[Demostración del teorema \ref{teo cauchy}]
+Supongamos que $(G,\circ)$ es un grupo finito, y $p$ es un número
+primo que divide el orden de $G$. Por el lema \ref{tcf}, sabemos que
+$G$ tiene $p\cdot k$ soluciones de la ecuación $x^p=e$, donde $e$ es
+el neutro de $(G,\circ)$ y $k$ es un número entero positivo. Como
+$p\cdot k \geq 2$, entonces existe un elemento $a\in G$ tal que $a\neq
+e$ y $a^p=e$. Supongamos que $O_G(a)=m$ con $m<p$. Nótese que $m > 1$
+puesto que $a \neq e$, y $e = a^m = a^p$. Usando el hecho de que
+podemos escribir $p=\alpha \cdot m+\beta$, con $\alpha \in \mathbb{N}$
+y $\beta = p \mods m$, concluimos que
+\begin{eqnarray*}
+	e & = & a^p \\
+	&=& a^{\alpha \cdot m + \beta}\\
+	&=& (a^{m})^{\alpha} \circ a^{\beta}\\
+	&=& e^{\alpha}\circ a^{\beta}\\
+	&=& a^{\beta}
+\end{eqnarray*} 
+Como $p$ es primo, $1<m<p$ y $\beta = p \mods m$, tenemos que
+$\beta \in [1,m-1]$. Pero esto contradice el hecho que $O_G(a) = m$,
+puesto que $a^{\beta}=e$. De esta forma concluimos que $O_G(a) = p$,
+lo que demuestra que existe un elemento de $G$ que tiene orden $p$.
+\end{proof}
+%\comentarioin{Bernardo: hay que cerrar de alguna forma este preliminar? o se corta aqui nomas?}
+
+
+%------------------------------------------
+
+%\newpage
+\section{Preliminares Teoría de Cuerpos}
+\label{app-cuerpos}
+\subsection{Definiciones y propiedades básicas}
+%\comentarioin{Habíamos hablado de poner $\oplus,\otimes$ para denotar la suma y multiplicacion en un cuerpo, y así dejar $q\cdot$ para denotar la suma de $q$ veces un cuerpo. Sin embargo, empecé a cambiar las cosas y la notación se volvió muy fea y además engorrosa (no podíamos denotar $-a$ por ejemplo. Creo que lo mejor es escribir la suma de $q$ términos de $a$ como $qa$ o $\textbf{q}a$. En cambio, cuando en el cuerpo estámos hablando del elemento neutro, preferí poner la notación $\mathbb{0},\mathbb{1}$ para denotarlos}
+\begin{definition}[Cuerpo]
+Una tupla $(F, +,\cdot)$, dónde $F$ es un conjunto y $ +,\cdot :F\times F\to F$ son funciones (totales), es un cuerpo si:
+\begin{enumerate}
+	\item $(F,+)$ es un grupo abeliano
+
+	\item $(F\setminus \{\0\},\cdot)$ es un grupo abeliano, con $\0$ el elemento neutro de $(F,+)$
+
+   \item La operación $\cdot$ distribuye sobre $+$, es decir, se cumple que para todo $a,b,c$ en $F$:
+    $$(a+b)\cdot c \ = \ (a \cdot c ) + (b\cdot c)$$
+\end{enumerate}
+\end{definition}
+
+%\begin{definition}[Cuerpo]
+%Un conjunto $F$ y dos funciones (totales) $\circ,+ : F\times
+%F \to F$ forman un cuerpo si ambas estructuras algebraicas $(F,\circ)$ y $(F\setminus \{e_+\})$ son un grupo, donde $e_+$ el elemento neutro de $(F,\circ)$, y se cumplen las siguientes propiedades:
+%\begin{enumerate}
+%	\item $F$ es cerrado bajo las operaciones $\circ$ y $+$
+%	\item Las operaciones $\circ, +$ son conmutativas \comentarioin{esto no iria si es que los grupos los definimos con conmutatividad}
+%	\item La operación $\circ$ distribuye sobre $+$, es decir, 
+%	$$(a+b)\circ(c + d) \ = \ (a \circ c ) + (a\circ d)+(b \circ c ) + (b\circ d)$$
+%\end{enumerate}
+%\end{definition}
+Dado un cuerpo $(F,+,\cdot)$, hablamos de adición o suma para
+referirnos a $+$, y de multiplicación para referirnos a $\cdot$. El
+elemento neutro de la suma es $\0$ y el de la multiplicación es
+$\1$. Además, para $a\in F$ decimos que $-a$ es su inverso bajo $+$ y
+$a^{-1}$ es su inverso bajo $\cdot$.
+%También, el elemento neutro de la
+%suma es $\0$ y el de la multiplicación es $\1$.
+También, dado $n \in \mathbb{N}$, usamos las siguientes
+abreviaciones:
+\begin{eqnarray*}
+		na & = & \underbrace{a +\ldots + a}_\text{$n$ veces}\\
+                (-n)a & = & n(-a)\\
+		a^n & = & \underbrace{a \cdot \ldots \cdot a}_\text{$n$ veces}\\
+		a^{-n} & = & (a^{-1})^n
+\end{eqnarray*}
+En particular, tenemos que $0a = \0$ y $a^0 = \1$. Por último, con el
+objetivo de no sobrecargar la notación, la multiplicación
+tiene preferencia sobre la adición, es decir, $a\cdot b + c\cdot d
+= (a\cdot b)+(c\cdot d)$.
+%\comentarioin{Aca poner que $a+\cdots +a = qa$ sin el $\cdot$.}
+A continuación presentamos algunas propiedades básicas que se cumplen
+en los cuerpos.
+
+%\comentarioin{Agregue el punto 3 a la siguiente proposición: es algo importante sobre cuerpos y ademas lo utilizo para demostrar que la caracteristica de un cuerpo finito es primo}
+\begin{proposition}\label{proposicion cuerpos}
+\hfill
+\begin{enumerate}
+\item Para todo $a\in F$ se cumple que $a\cdot \0 =\0\cdot a= \0$
+
+\item Para todo $a,b\in F$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
+
+\item Para todo $a \in F$ y $p \in \mathbb{Z}$ se cumple que $-(pa) = (-p)a = p(-a)$.
+
+\item Para todo $a \in F$ y $p,q \in \mathbb{Z}$ se cumple que $(pq)a = p(qa)$.
+
+\item Para todo $a,b\in F$ y $p \in \mathbb{Z}$ se cumple que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$. De esto y la propiedad 4 se concluye que para todo $a,b\in F$ y $p,q \in \mathbb{Z}$, se cumple que $(pq)(a\cdot b) = (pa)\cdot (qb)$.
+
+\item Para todo $a,b\in F$ se cumple que $a\cdot b = \0$ si y solo si $a=\0$ o $b=\0$\label{inciso prop}
+
+\end{enumerate}
+\end{proposition}
+%\comentarioin{agregue este comentario al inciso 6 porque creo que es algo muy relevante}
+En particular, el inciso \ref{inciso prop} de la proposición anterior comienza a darnos una mirada de las buenas propiedades en los cuerpos: nos permite hacer ``cancelación'' en las ecuaciones. Vamos a profundizar en esta propiedad con un ejemplo.
+\begin{example}
+Considere la estructura $(\mathbb{Z}_4,+,\cdot)$. Notemos que si
+queremos resolver la ecuación $$ 2\cdot x\ = \ 2\cdot 2,$$ no podemos
+``cancelar'' el 2 en ambos lados de la ecuación y concluir que $x =
+2$. De hecho, si bien $x =2$ es una raiz de la ecuación, $x=0$ también
+lo es. Esto es debido a que en esta estructura el elemento $2$ no
+tiene inverso multiplicativo.  En general, cuando consideramos
+$(\mathbb{Z}_n,+,\cdot)$ para $n \geq 2$ un número compuesto, no vamos
+a tener un cuerpo y
+%no estamos trabajando sobre un cuerpo,
+vamos a encontrar elementos de la estructura $a\neq 0$ y $b\neq 0$
+tales que $a\cdot b = 0$. \qed
+\end{example}
+\begin{proof}[Demostración de la proposición \ref{proposicion cuerpos}]\hfill
+	\begin{enumerate}
+		\item 
+		Sabemos que $\0+\0 = \0$. Luego:
+		\begin{eqnarray*}
+\0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
+			&\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0\\
+                        &\Rightarrow &a\cdot \0+a\cdot \0 + -(a\cdot \0) = a\cdot \0 + -(a \cdot \0)\\
+                        &\Rightarrow &a\cdot \0+ \0 = \0\\
+			&\Rightarrow &a\cdot \0 = \0 
+		\end{eqnarray*}
+	%Donde la notación $x-y = x +(-y)$.
+        Por lo tanto, $a\cdot \0
+=\0 $. Por la conmutatividad de la multiplicación también podemos
+obtener que $\0 \cdot a=\0 $.
+
+	\item Tenemos que:
+        \begin{eqnarray*} (-a)\cdot b + a \cdot b & = & ((-a) +
+        a) \cdot b\\ & = & \0 \cdot b\\ 
+        & = & \0 \quad\quad\quad \text{por la propiedad 1}
+        \end{eqnarray*}
+Así, tenemos que $-(a \cdot b) = (-a)\cdot b$. Además, por esta propiedad y la 
+        conmutatividad de la multiplicación obtenemos $a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b)$.
+
+        \item Si $p = 0$, concluimos que $-(pa) = (-p)a = p(-a)$ por
+        la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
+        F$). Si $p > 0$, tenemos que:
+\begin{eqnarray*}
+(-p)a + pa & = & p(-a) + pa\\
+& = & \underbrace{(-a) +\cdots + (-a)}_\text{$p$ veces} \ + \ \underbrace{a +\cdots + a}_\text{$p$ veces}\\ 
+& = & \underbrace{((-a) + a) + \cdots + ((-a) + a)}_\text{$p$ veces}\\
+& = & \underbrace{\0 + \cdots + \0}_\text{$p$ veces}\\
+& = & \0
+\end{eqnarray*}
+Por lo tanto, $-(pa) = (-p)a$. Además, por definición tenemos que $p(-a) = (-p)a = -(pa)$. El caso $p < 0$ es dejado como ejercicio para el lector (para resolverlo es útil considerar el caso $p > 0$ y la propiedad $p = -|p|$). 
+
+\item Si $p = 0$ o $q = 0$, concluimos que $(pq)a = p(qa)$ por
+        la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
+        F$). Si $p > 0$ y $q > 0$, tenemos que:
+\begin{eqnarray*}
+(pq)a &=& \underbrace{a +\cdots + a}_\text{$pq$ veces}\\
+ &=& \underbrace{c +\cdots + c}_\text{$p$ veces} \quad\quad\quad \text{para }
+ c = \underbrace{a +\cdots + a}_\text{$q$ veces}\\
+ & = & \underbrace{qa +\cdots + qa}_\text{$p$ veces}\\
+ & = & p(qa)
+\end{eqnarray*}
+Si $p < 0$ y $q < 0$, tenemos por la propiedad anterior que:
+\begin{eqnarray*}
+(pq)a &=& ((-p)(-q))a\\
+ &=& (-p)((-q)a)\\
+ &=& (-p)(-(qa)) \quad\quad\quad \text{por la propiedad 3}\\
+ &=& p(-(-(qa))) \quad\quad\quad \text{por la propiedad 3}\\
+ &=& p(qa)
+\end{eqnarray*}
+Los casos faltantes pueden ser demostrados utilizando las mismas ideas, y son dejados como ejercicios para el lector.
+
+	\item Si $p = 0$, concluimos que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$ por la propiedad 1 y la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in F$). Si $p > 0$, tenemos que:
+	\begin{eqnarray*}
+		p(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$p$ veces}\\
+		&=&(\underbrace{a +\cdots + a}_\text{$p$ veces}) \cdot b\\
+		&=&(pa) \cdot b
+	\end{eqnarray*}		
+Además, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = p(b \cdot a) = (pb) \cdot a = a \cdot (pb)$. Si $p < 0$, utilizando la propiedad anterior concluimos que:
+	\begin{eqnarray*}
+		p(a\cdot b)&=& (-|p|)(a \cdot b)\\
+		&=& |p|(-(a \cdot b))\\
+		&=& |p|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
+		&=& (|p|(-a)) \cdot b\\
+		&=& ((-|p|)(a)) \cdot b\\
+		&=& (pa) \cdot b
+	\end{eqnarray*}
+	Finalmente, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = a \cdot (pb)$. 
+
+	\item ($\Rightarrow$)
+	Supongamos por contradicción que $a\cdot b=\0$, $a\neq \0$ y $b \neq \0$. Luego, $b$ tiene inverso bajo $\cdot$. Así, utilizando nuevamente la primera propiedad obtenemos:
+	\begin{eqnarray*}
+		a\cdot b = \0 &\Rightarrow& a\cdot b\cdot b^{-1} = \0 \cdot b^{-1}\\
+       &\Rightarrow& a\cdot \1 = \0\\
+       &\Rightarrow& a = \0
+	\end{eqnarray*}
+	Lo cual es una contradicción ya que supusimos que $a\neq \0$.
+	
+	($\Leftarrow$)
+	Esta dirección se cumple por la propiedad 1.
+	
+	\qedhere
+	\end{enumerate}
+\end{proof}
+Por último, vamos a definir lo que es un subcuerpo. Además, introducimos el concepto de cuerpo de extensión.
+\begin{definition}
+Sea $(F,+,\cdot)$ un cuerpo y $K\subseteq F$. Decimos que $(K,
++, \cdot)$ es un subcuerpo de $(F,+,\cdot)$ si $(K, +, \cdot)$ es un
+cuerpo. En la misma línea, bajo las condiciones anteriores decimos que
+$(F,+,\cdot)$ es un cuerpo de extensión de $(K,+,\cdot)$.
+\end{definition}
+
+Nótese que en la definición anterior usamos las mismas operaciones en
+$(F,+,\cdot)$ y $(K, +, \cdot)$. En particular, se puede demostrar que
+$(K, +, \cdot)$ y $(F,+,\cdot)$ tienen los mismos neutros bajo $+$ y
+$\cdot$, lo cual es dejado como un ejercicio para el lector. Así, por
+ejemplo, $(\mathbb{Q}, +, \cdot)$ es un subcuerpo de $(\mathbb{R},
++, \cdot)$, donde $+$ y $\cdot$ son la suma y multiplicación
+usuales. Finalmente, nótese que si $(K, +, \cdot)$ es un subcuerpo de
+$(F,+,\cdot)$, entonces $(K, +)$ y $(K \setminus \{\0\}, \cdot)$ son
+subgrupos de $(F, +)$ y $(F \setminus \{\0\}, \cdot)$,
+respectivamente.
+
+%\comentarioin{aqui falta concluir con algo del estilo: los subcuerpos son subgrupos, etc}
+
+%\comentarioin{Marcelo: hasta aquí revisé}
+
+\subsection{Cuerpos finitos}
+Los cuerpos finitos son de gran importancia para el desarrollo de este
+documento.
+
+Un cuerpo $(F,+,\cdot)$ se dice finito si $F$ es un conjunto
+finito. Por ejemplo $(\mathbb{Z}_p, +, \cdot)$ es un cuerpo finito si
+$p$ es un número primo y las operaciones $+, \cdot$ son realizadas en
+módulo $p$.
+%A continuación, vamos a definir formalmente el caso particular de los
+%cuerpos finitos, los cuales 
+%\begin{definition}[Cuerpo finito]
+%	Una cuerpo finito
+%        %(cuerpo de Galois)
+%        $(F,+,\cdot)$ es un cuerpo con una cantidad finita de elementos.
+%\end{definition}
+Si $(F,+,\cdot)$ es un cuerpo finito, entonces $(F,+)$ es un grupo
+finito, de lo cual concluimos por la proposición \ref{prop-orden} que
+existe $n \in \mathbb{N}$ tal que $n \geq 1$ y $n \1 = \0$. Esta propiedad es
+utilizada para definir la característica de un cuerpo finito, una
+noción fundamental asociada a estas estructuras.
+\begin{definition}
+La característica de un cuerpo finito $(F, +, \cdot)$ se define como el menor $p\in \mathbb{N}$ tal que $p \geq 1$ y $p \1 = \0$, donde $\0$ y $\1$ son los neutros de las operaciones $+$ y $\cdot$, respectivamente.
+%$\overbrace{\1 +\1 +\cdots +\1}^\text{$p$ veces}  = p\1 = \0 $ (suma de $p$ términos).
+\end{definition}
+%Si bien la característica de un cuerpo se puede definir de forma general, nosotros solo nos restringimos a los cuerpos finitos.\comentarioin{este comentario aportará? yo creo que no omitimos si lo ponemos}
+Notemos que la característica de un cuerpo finito no puede ser 1 , ya
+que $\1 \neq \0 $. El siguiente teorema nos provee más información
+sobre la característica de un cuerpo finito.
+\begin{theorem}\label{caracteristica primo}
+Si $(F,+,\cdot)$ es un cuerpo finito de característica $p$, entonces
+$p$ es un número primo.
+\end{theorem}
+\begin{proof}
+Supongamos, por contradicción, que la característica $p$ de un cuerpo
+finito $(F, +, \cdot)$ satisface que $p = ab$, con $1<a, b<p$. Luego,
+\begin{eqnarray*}
+	p\1  = \0 &\Rightarrow & (a b)\1 = \0 \\
+        &\Rightarrow & (a b) (\1 \cdot \1) = \0 \\
+	&\Rightarrow & (a\1) \cdot (b\1) =  \0 \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{proposicion cuerpos}}\\
+	&\Rightarrow& a \1  = \0 \ \text{ o } \ b\1  = \0 \quad\quad\quad \text{por la propiedad 6 de la proposición \ref{proposicion cuerpos}}
+\end{eqnarray*}
+En cualquiera de los dos casos, concluimos que existe un número $q <
+p$ tal que $q > 1$ y $q \1 = \0$, lo cual contradice el hecho de que
+$p$ es la característica de $(F, +, \cdot)$.
+%Esto contradice nuestra elección de $p$, ya que cualquiera de los dos casos al sumar $\1$ una cantidad de veces menor que $p$ obtenemos que $\underbrace{\1 +\1 +\cdots +\1}_\text{$a$ o $b$ veces}  = \0 $. 
+\end{proof}
+El siguiente teorema relaciona la característica de un cuerpo con el
+orden de este. Esto nos permite apreciar como es la estructura de un
+cuerpo finito.
+\begin{theorem}\label{orden cuerpo pot carac}
+	Sea $(F,+,\cdot)$ un cuerpo finito y sea $p$ su
+	característica. Entonces, el orden de $F$ es una potencia de
+	$p$, es decir, $|F|=p^n$ para algún $n\in \mathbb{N}$.
+\end{theorem}
+
+\begin{proof}
+Sea $(F,+,\cdot)$ un cuerpo finito de característica $p$, y
+supongamos, por contradicción, que existe un primo $q\neq p$ tal que
+$q$ divide a $|F|$. Como $(F,+)$ es un grupo finito, entonces por el
+teorema de Cauchy (teorema \ref{teo cauchy}), existe un elemento $a\in
+F$ que tiene orden $q$. Así, bajo la operación $+$ tenemos que
+$\langle a\rangle = \{ 0 a, 1 a,...,(q-1) a\}$, y además tenemos que
+$q a = \0$.
+%y podemos concluir que
+Adicionalmente, como $(F,+,\cdot)$ tiene característica $p$, se tiene
+que $p x = \0 $ para todo $x \in F$, por la
+proposición \ref{proposicion cuerpos} y el hecho de que $p \1 =\0 $
+(en particular, sabemos que $\1 \cdot x = x$ y $\0 \cdot x
+= \0$). Como $p$ y $q$ son primos relativos, por la identidad de
+Bézout sabemos que existen $s,t\in \mathbb{Z}$ tales que $p s + q t
+= \MCD(p,q) = 1$.\footnote{Si el lector no está familiarizado con la
+identidad de Bézout puede
+visitar \url{https://es.wikipedia.org/wiki/Identidad_de_B\%C3\%A9zout}.}
+Nótese que podemos ocupar la identidad de Bézout ya que
+$p,q\in\mathbb{N}$.
+%(no necesariamente son elementos de $F$).
+Luego,
+\begin{eqnarray*}
+	a &=& 1a\\
+        &=& (p s + q t) a\\
+        &=& (p s) a + (q t) a \quad\quad\quad \text{por la definición de $m b$ para $m \in \mathbb{Z}$ y $b \in F$}\\
+        &=& (p s) (a \cdot \1) + (q t) (a \cdot \1)\\
+	&=& (pa) \cdot (s\1) + (qa)\cdot (t\1) \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{proposicion cuerpos}}\\
+	&=& \0 \cdot (s\1) + \0 \cdot (t\1)\\
+	&=& \0 + \0 \quad\quad\quad \text{por la propiedad 1 de la proposición \ref{proposicion cuerpos}}\\
+        &=& \0
+\end{eqnarray*}
+Pero esto es una contradicción ya que el orden de $a$ en $(F,+)$ es
+$q\geq 2$, por lo que $a \neq \0$ (puesto que $a = 1a$ y $1a \neq \0$).
+\end{proof}
+%\comentarioin{Aca hay que hacer un lazo que de mas continuidad.}
+
+%\comentarioin{¿El siguiente ejemplo es necesario?}
+%Un ejemplo particular de cuerpos finitos es el cuerpo $$F_p := (\mathbb{Z}_p,+,\cdot),$$ donde $p$ es un número primo. \comentarioin{desde aqui hacia abajo revisar}
+%Este cuerpo finito $F_q$ cobra importancia debido a que podemos demostrar que cualquier cuerpo $K$ de orden $q$ es isomorfo a $F_q$, es decir, podemos $K$ y $F_q$ tienen la misma forma. Esto implica que al trabajar con $K$ podemos asumir que estamos trabajando en $F_q$.
+%\comentarioin{revisar esta parte. Encontré demostraciones pero implicaría mucha más teoría. Quizás se podría hablar de qué es un isomorfismo y por qué podríamos trabajar con $F_q$}
+
+%\comentarioin{Marcelo: hasta aquí llegué}
+
+A continuación vamos a mostrar la forma estándar para construir un
+cuerpo finito con característica $p$ y orden $p^n$, para $n \geq 1$.
+Sea $h(X)$ un polinomio en $\mathbb{Z}_p[X]$ de grado $n$. Definimos
+el conjunto
+\begin{eqnarray*}
+\mathbb{Z}_p[X]/h(X) & := & \{p(X) \mods h(X) \ \mid \ p(X)\in \mathbb{Z}_p[X]\}\\
+&=& \{p(X) \mods (h(X),p) \ \mid \ p(X)\in \mathbb{Z}[X]\}
+\end{eqnarray*}
+En el caso de que $h(X)$ es irreducible en $\mathbb{Z}_p[X]$, se tiene
+que $(\mathbb{Z}_p[X]/h(X), +, \cdot)$ es un cuerpo finito de
+característica $p$ y orden $p^n$, donde las operaciones $+$ y $\cdot$
+sobre polinomios son definidos en módulo $(h(X),p)$.
+%\comentarioin{aca tengo que explicar como saber que un polinomio de grado mayor que 3 es irreducible en $Z_p[X]$, ya que al parecer, que no tenga raíces en $Z_p$ no implica que no sea irreducible.}
+\begin{example}
+Para construir un cuerpo de 9 elementos, debemos construir el cuerpo
+$\mathbb{Z}_3[X]/h(X)$, donde $h(X)$ es un polinomio irreducible en
+$\mathbb{Z}_3[X]$ y tiene grado 2. Para esto, notamos que $h(X) =
+X^2+2X+2$ es irreducible en $\mathbb{Z}_3[X]$ puesto que $h(0) = 2$,
+$h(1) = 2$ y $h(2) = 1$, y un polinomio de grado 2 es irreducible en
+$\mathbb{Z}_3[X]$ si y sólo si no tiene raíces en este cuerpo. Tenemos
+que:
+\begin{eqnarray*}
+	\mathbb{Z}_3[X]/(X^2+2X+2) &=& \{a_0 +a_1X \ \mid \
+	a_0,a_1 \in \mathbb{Z}_p \}\\
+	&=& \{0,\,1,\,2,\,X,1+X,\,2+X,\,2X,1+2X,2+2X\}
+\end{eqnarray*}
+Por lo tanto, tenemos que $(\mathbb{Z}_3[X]/(X^2+2X+2), +, \cdot)$ es
+un cuerpo, donde $0, 1$ son los elementos neutros de la suma y la
+multiplicación, respectivamente. Por ejemplo, $(1+2X) + (1+X) = 2$ en
+este cuerpo, puesto que $(1+2X) + (1+X) \equiv 2 \modl 3$, de lo cual
+se deduce que $(1+2X) + (1+X) \equiv 2 \modl (X^2+2X+2, 3)$. Siguiendo
+esta línea de razonamiento, concluimos que $2+X$ es el inverso aditivo
+de $1+2X$ puesto que $(1+2X) + (2+X) \equiv 0 \modl (X^2+2X+2, 3)$. De
+la misma forma, $2X+2$ es el inverso multiplicativo de $X+1$ puesto
+que
+\begin{eqnarray*}
+(X+1)(2X+2) & = & 2X^2 + 4X + 2\\
+& = & 2X^2 + 4X + 4 - 2\\
+& = & 2(X^2 + 2X + 2) - 2\\
+& \equiv & 2(X^2 + 2X + 2) + 1 \modl 3,
+\end{eqnarray*}
+y de esto se deduce que $(X+1)(2X+2) \equiv 1 \modl (X^2+2X+2,
+3)$. Finalmente, nótese que $(\mathbb{Z}_3, +, \cdot)$
+es un subcuerpo de $(\mathbb{Z}_3[X]/(X^2+2X+2), +, \cdot)$. \qed
+\end{example}
+
+%\comentarioin{2 nuevos teoremas para no usar isomorfismos}
+El siguiente teorema nos reafirma sobre las buenas propiedades de los polinomios sobre cuerpos.
+\begin{theorem}\label{raices en polinomios sobre cuerpos}
+Si $F$ es un cuerpo y $p(X)$ un polinomio no nulo de grado $k$ sobre $F[X]$, entonces $p(X)$ tiene a lo más $k$ raíces en $F$.
+\end{theorem}
+\begin{proof}
+Vamos a demostrar el teorema por inducción sobre el grado del
+polinomio. Para el caso base consideramos $k=0$. Como $p(X)$ es no
+nulo, concluimos que $p(X)$ no tiene raíces y se cumple lo
+requerido. Para el paso inductivo supongamos que todo polinomio no
+nulo sobre $F[X]$ de grado $k$ tiene a los más $k$ raíces en $F$, y
+sea $p(X)$ un polinomio sobre $F[X]$ de grado $k+1$. Si $p(X)$ no
+tiene raíces en $F$ entonces el resultado se cumple trivialmente, por
+lo que vamos a asumir que existe una raíz $c \in F$ de
+$p(X)$. Luego, podemos escribir $p(X)$ como
+\begin{eqnarray*}
+p(X) & = & (X-c)\cdot q(X),
+\end{eqnarray*}
+donde $q(X)$ es un polinomio de grado $k$ (dejamos como ejercicio para
+el lector la demostración de este propiedad).
+%Es claro que $q(X)$ es de grado $k$, y
+Por la hipótesis de inducción, sabemos que $q(X)$ tiene a lo más $k$
+soluciones en $F$. Es importante observar que todo elemento que $d\in
+F$ que no sea $c$ o una raiz de $q(X)$ no puede ser una raiz de
+$p(X)$, ya que tendríamos que $(d-c)\neq \0$ y $q(d)\neq \0$, y por el
+inciso \ref{inciso prop} de la proposición \ref{proposicion cuerpos}
+sabemos inmediatamente que $p(d)\neq\0$ (si $F$ no fuera un cuerpo
+esta propiedad no necesariamente se cumpliría).  Luego, $p(X)$ tiene a
+lo más $k+1$ soluciones en $F$.
+%\comentarioin{\ref{proposicion cuerpos} inciso \ref{inciso prop} es la respuesta a :No se por qué esta demostración no funcionaría con anillos que no son cuerpos. En que parte usan que tenemos un cuerpo? Yo creo que falta eso}
+\end{proof}
+Notemos que el resultado del teorema \ref{raices en polinomios sobre
+cuerpos} no es cierto para todas las estructuras algebraicas. Por
+ejemplo, si tomamos la estructura $(\mathbb{Z}_6,+,\cdot)$, que no es
+un cuerpo, y el polinomio $p(X) = 2X+4$ sobre $\mathbb{Z}_6[X]$,
+entonces tenemos que $p(X)$ es de grado 1 pero tiene 2 raíces: 1 y 4.
+
+Para finalizar esta sección mostraremos un resultado fundamental sobre
+teoría de cuerpos, que utilizaremos en el desarrollo del documento.
+\begin{theorem}\label{subgrupo de cuerpo  es ciclico}
+Sea $(F,+,\cdot)$ un cuerpo y $(G,\cdot)$ un subgrupo finito del grupo
+de $(F\setminus\{\0\},\cdot)$.
+%multiplicativo de este. 
+Luego, este subgrupo es un grupo cíclico, es decir, existe un elemento
+$a\in G$ tal que $\langle a\rangle = G$.
+\end{theorem}
+\begin{proof}
+%Sean $a,b\in G$, con $O_G(a) = m$ y $O_G(b)=n$. Por el
+%corolario \ref{corolario orden}, sabemos que existe un elemento en $G$
+%con orden multiplicativo igual a $\MCM(m,n)$.
+Sea $c\in G$ el elemento de mayor orden multiplicativo. Esto quiere
+decir que para todo $d\in G$:
+\begin{eqnarray*}
+O_G(d) & \leq & O_G(c).
+\end{eqnarray*}
+Nótese que este elemento $c$ existe ya que $(G,\cdot)$ es un grupo
+finito.  Mostraremos a continuación que el orden multiplicativo de
+cualquier elemento en $G$ divide a $O_G(c)$. Sea $d\in G$. Por el
+corolario \ref{corolario orden}, sabemos que existe un elemento $c'$
+con $O_G(c') = \MCM(O_G(d),O_G(c))$. Por definición del mínimo común
+múltiplo sabemos que $O_G(c)$ divide a $\MCM(O_G(d),O_G(c))$, de lo
+que concluimos que $O_G(c)\leq O_G(c')$. Por otro lado, como $c'\in G$
+y $c$ es el elemento de mayor orden, tenemos que $O_G(c')\leq
+O_G(c)$. De esto concluimos que $O_G(c)=O_G(c')$. Así, sabemos que
+$O_G(d)$ divide a $\MCM(O_G(d),O_G(c)) = O_G(c') = O_G(c)$, que es
+exactamente lo que afirmamos.
+	
+	Por último, notemos que cada elemento $d\in G$ cumple con:
+	\begin{eqnarray*}
+		d^{O_G(c)} &=& d^{\alpha O_G(d)}\\
+		&=& (d^{O_G(d)})^{\alpha}\\
+		&=& \1^{\alpha}\\
+		&=& \1
+	\end{eqnarray*}
+%
+De lo anterior podemos concluir que cada elemento de $G$ es una raiz
+del polinomio $p(X)=X^{O_G(c)} - 1$ sobre $F[X]$. Por el
+teorema \ref{raices en polinomios sobre cuerpos}, sabemos que $p(X)$
+tiene a lo más $O_G(c)$ raíces. Así, podemos afirmar que $|G|\leq
+O_G(c)$. Finalmente, sabemos que el orden de cualquier elemento de un
+grupo es menor o igual al orden del grupo, por lo que también podemos
+afirmar que $O_G(c)\leq |G|$. De esta forma se deduce que
+$O_G(c)= |G|$. Por lo tanto, se tiene que $\langle c\rangle = G$, puesto
+que $\langle c\rangle \subseteq G$ (ya que $c \in G$), y queda
+demostrado el~resultado.
+\end{proof}
+%----------------------------------
+\section{Demostraciones Intermedias}
+
+\subsection{Demostración del lema \ref{lem-mcm}}
+\label{app-lem-mcm}		
+
+Dado $n \geq 1$, sea $d_n=\MCM(n)$, y para $m \in \{1, \ldots, n\}$, sea  
+		\begin{eqnarray*}
+		I(m,n) &=& \int_{0}^{1}x^{m-1}(1-x)^{n-m}dx.
+		\end{eqnarray*}
+Se tiene que
+		\begin{eqnarray*}
+			\int_{0}^{1}x^{m-1}(1-x)^{n-m}dx  &=&
+				  \int_{0}^{1}\sum_{i=0}^{n-m}{n-m\choose i}(-1)^ix^{i+m-1}dx\\
+				  &=&
+				  \sum_{i=0}^{n-m}\bigg[{n-m\choose i}(-1)^i \int_{0}^{1}x^{i+m-1}dx\bigg]\\
+				  &=& \sum_{i=0}^{n-m}\bigg[{n-m\choose i}(-1)^i \bigg(\frac{x^{m+i}}{m+i}\bigg)\bigg\rvert_0 ^1\bigg]\\
+				  &=&\sum_{i=0}^{n-m}{n-m\choose i}(-1)^i \frac{1}{m+i}
+		\end{eqnarray*}
+		Del desarrollo anterior concluimos que $I(m,n)\cdot d_n\in \mathbb{N}$, ya que $1 \leq m+i\leq n$ para cada $i \in \{0, \ldots, n-m\}$ y $\int_{0}^{1}x^{m-1}(1-x)^{n-m}dx \geq 0$, puesto que en el intervalo $[0,1]$ se tiene $x \geq 0$ y $(1-x) \geq 0$.
+%		\comentario{que paso aca? no hice new page}
+		Por otro lado, si calculamos $I(m,n)$ por partes, tenemos:	
+		\begin{eqnarray*}
+		I(m,n)&=&\int_{0}^{1}x^{m-1}(1-x)^{n-m}dx\\
+		&=&\bigg(x^{m-1}(-1)\frac{(1-x)^{n-m+1}}{n-m+1}\bigg)\bigg\rvert_0 ^1 -\int_0^1(-1)\frac{(1-x)^{n-m+1}}{n-m+1}(m-1)x^{m-2}dx\\
+		&=& \frac{m-1}{n-m+1}\int_{0}^{1}x^{m-2}(1-x)^{n-m+1}dx\\
+		&=& \frac{m-1}{n-m+1}\bigg[\bigg(x^{m-2}(-1)\frac{(1-x)^{n-m+2}}{n-m+2}\bigg)\bigg\rvert_0 ^1 -\int_0^1(-1)\frac{(1-x)^{n-m+2}}{n-m+2}(m-2)x^{m-3}dx\bigg]\\
+		&=& \frac{(m-1)(m-2)}{(n-m+1)(n-m+2)}\int_{0}^{1}x^{m-3}(1-x)^{n-m+2}dx\\
+		& \vdots &\\
+		&=& \frac{(m-1)(m-2)\cdots(m-(m-1))}{(n-m+1)(n-m+2)\cdots(n-m+(m-1))}\int_{0}^{1}x^{m-m}(1-x)^{n-m+(m-1)}dx\\
+		&=& \frac{(m-1)(m-2)\cdots 2\cdot 1}{(n-m+1)(n-m+2)\cdots(n-1)}\int_{0}^{1}(1-x)^{n-1}dx\\
+		&=& \frac{(m-1)!}{\frac{(n-1)!}{(n-m)!}}\bigg((-1)\frac{(1-x)^n}{n}\bigg)\bigg\rvert_0^1\\
+		&= &\frac{(m-1)!(n-m)!}{n(n-1)!} \ = \ \frac{m(m-1)!(n-m)!}{m \cdot n!} \ = \ \frac{m!(n-m)!}{m\cdot n!} \ = \ \frac{1}{m{n\choose m}}
+		\end{eqnarray*}
+%		\begin{align}
+%		I(m,n)&=\int_{0}^{1}x^{m-1}(1-x)^{n-m}dx\nonumber\\
+%		&=x^{m-1}(-1)(1-x)^{n-m+1}\frac{1}{n-m+1}\bigg\rvert_0 ^1 -\int_0^1(-1)\frac{(1-x)^{n-m+1}}{n-m+1}(m-1)x^{m-2}dx\nonumber\\
+%		&=\frac{m-1}{n-m+1}\int_{0}^{1}x^{m-2}(1-x)^{n-m+1}dx\nonumber\\
+%		&=\frac{m-1}{n-m+1}(x^{m-2}(-1)(1-x)^{n-m+2}\frac{1}{n-m+2}\bigg\rvert_0 ^1 -\int_0^1(-1)\frac{(1-x)^{n-m+2}}{n-m+2}(m-2)x^{m-3}dx)\nonumber\\
+%		&=\frac{(m-1)(m-2)}{(n-m+1)(n-m+2)}\int_{0}^{1}x^{m-3}(1-x)^{n-m+2}dx\nonumber\\
+%		&\hspace{5cm}\vdots\nonumber\\
+%		&=\frac{(m-1)(m-2)\cdots(m-(m-1))}{(n-m+1)(n-m+2)\cdots(n-m+(m-1))}\int_{0}^{1}x^{m-m}(1-x)^{n-m+(m-1)}dx\nonumber\\
+%		&=\frac{(m-1)(m-2)\cdots 2\cdot 1}{(n-m+1)(n-m+2)\cdots(n-1)}\int_{0}^{1}(1-x)^{n-1}dx\nonumber\\
+%		&=\frac{(m-1)!}{(n-1)!/(n-m)!}(-1)\frac{(1-x)^n}{n}\bigg\rvert_0^1\nonumber\\
+%		&=\frac{m(m-1)!(n-m)!}{m\cdot n(n-1)!}=\frac{m!(n-m)!}{m\cdot n!}=\frac{1}{m{n\choose m}}
+%		\end{align}
+		Dado que $I(m,n)\cdot d_n\in \mathbb{N}$, concluimos entonces que $m{n\choose m}\divi  d_n$, para todo $m \in \{1, \ldots, n\}$.
+		En particular, se tiene que $n{2n\choose n}$ divide a $d_{2n}$ y por lo tanto se cumple también que $n{2n\choose n}$ divide a $d_{2n+1}$.
+		Por otro lado, se tiene que $(2n+1){2n\choose n}=(n+1){2n+1\choose n+1}$, y de esto se deduce que $(2n+1){2n\choose n}$ divide a $ d_{2n+1}$ (dado que $(n+1){2n+1\choose n+1}$ divide a $d_{2n+1}$). Por lo tanto, sabemos que existen $\alpha, \beta \in \mathbb{N}$ tales que:
+		\begin{eqnarray*}
+		\alpha \cdot n{2n\choose n} & = & d_{2n+1}\\
+		\beta \cdot (2n+1){2n\choose n} & = & d_{2n+1}.
+		\end{eqnarray*}
+Se tiene entonces que $\alpha \cdot n = \beta \cdot (2n+1)$, de lo cual se deduce que $\beta = \gamma \cdot n$ para $\gamma \in \mathbb{N}$, puesto que $\MCD(2n+1,n)=1$. Concluimos que $n(2n+1){2n\choose n}$ divide a $d_{2n+1}$,
+%(esto ya que $n$ divide a $\frac{d_{2n+1}}{{2n\choose n}}$ y $(2n+1)$ divide a $\frac{d_{2n+1}}{{2n\choose n}}$, luego $d_{2n+1}/{2n\choose n} = n\cdot (2n+1)\cdot k$, con $k$ constante) 
+de lo cual se deduce que $n(2n+1){2n\choose n} \leq d_{2n+1}$.
+		Además, 
+		\begin{eqnarray*}
+		4^n \ = \ 2^{2n} \ = \ (1+1)^{2n} \ = \ \sum_{i=0}^{2n}{2n\choose i} \ \leq \ (2n+1)\max\bigg\{{2n\choose i} \,\bigg|\, 0\leq i\leq 2n\bigg\}\ =\ (2n+1){2n\choose n}.
+		\end{eqnarray*}
+		Multiplicando por $n$ ambos lados de la desigualdad y considerando que $n(2n+1){2n\choose n} \leq d_{2n+1}$, nos queda
+		\begin{eqnarray*}
+			n\cdot 4^n \ \leq \ n(2n+1){2n\choose n} \ \leq \ d_{2n+1}
+		\end{eqnarray*}
+		Así, si $n\geq 2$ entonces $d_{2n+1}\geq n\cdot 4^{n} = n\cdot 2^{2n}\geq 2\cdot 2^{2n}=2^{2n+1}$, y la propiedad mencionada en el lema se cumple para todos los impares mayores o iguales a 5. Además, si $n\geq 4$ entonces $d_{2n+1}\geq n\cdot 4^{n}\geq 4\cdot 4^{n}=2^{2n+2}$. Así, dado que $d_{2n+2}\geq d_{2n+1}$, se concluye que $d_{2n+2}\geq 2^{2n+2}$ y la propiedad mencionada en el lema se cumple para todos los pares mayores o iguales a 10.
+%		(pares mayores o iguales a 9). 
+Finalmente, como $d_8=840 \geq 2^8$, podemos afirmar que $\MCM(n) \geq 2^n$ para todo $n \geq 7$, lo cual concluye la demostración del lema. 
+
+Como comentario final, nótese que la propiedad no se cumple para $n = 6$ puesto que $\MCM(6) = 60$ y $2^6 = 64$. Dejamos al lector como ejercicio verificar que la propiedad tampoco se cumple para $n=4$.
+%$\forall N\geq 7$, $d_N\geq 2^N$ (se puede verificar que para los $N\leq 4$ y $N = 6$ no se cumple esta propiedad).
+%		Con esto, queda demostrado el lema.
+		
+%\subsection{Demostración del Corolario \ref{mm-mcm}}
+%	Sabemos por el Lema \ref{lem-mcm} se cumple para cualquier $m\geq 7$. Sea $p$ un primo tal que $p^{\alpha}$ es la mayor potencia de $p$ que divide a $d_{m}$. Como $p$ es primo, entonces $p^{\alpha}$ divide a algún $j$ en $1\leq j\leq m$\comentario{esto pensarlo}. Esto implica que $p^{\alpha}\leq m=p^{\log_p m}=p^{\frac{\log m}{\log p}}$\comentario{que feo este exponente}. Como esto pasa para todos los primos menores o iguales que $m$, entonces
+%	\begin{align}
+%		d_{m}\leq \prod_{p\leq m}p^{\frac{\log m}{\log p}}\nonumber
+%	\end{align}\comentario{esto explicar un poco mas?}
+%	Luego, por el Lema \ref{lem-mcm} tenemos que 
+%	\begin{align}
+%		&2^{m}\leq \prod_{p\leq m}p^{\frac{\log m}{\log p}},\hspace{0.5cm} \text{y aplicando logaritmo en ambos lados}\nonumber\\
+%		\Leftrightarrow &m\log 2\leq \log (m)\cdot \pi(m)\nonumber\\
+%		\Leftrightarrow &\pi(m)\geq \frac{m\log 2 }{\log m}\nonumber	
+%	\end{align}
+%	Esta desigualda se cumple para todo $m\geq 7$. Se puede verificar rápidamente que tambien se cumple cuando $m$ toma los valores de 4, 5 y 6. Con esto terminamos la demostración del corolario.
+		
+\subsection{Lema \ref{prop-1}: demostración de que $\log^2 n + 2\lfloor \log B \rfloor \leq \log^4 n$, para $n\geq 5$}
+\label{app-prop-1}
+Sabemos que si $n$ es un natural positivo entonces $\log n \leq n$. Supongamos que $n\geq 10$. Si desarrollamos la primera desigualdad tenemos que 
+\begin{eqnarray*}
+\log^5 n \leq n^5 &\Rightarrow& \lceil\log^5 n\rceil \leq \lceil n^5\rceil \ = \ n^5\\
+	&\Rightarrow& B \leq n^5\\
+	&\Rightarrow& \log B  \leq \log {n^5}\\
+	&\Rightarrow& \lfloor\log B\rfloor  \leq \log {n^5} \ = \ 5\log n	 
+\end{eqnarray*}
+
+De lo anterior podemos afirmar que
+\begin{eqnarray*}
+	\log^2 n + 2\lfloor \log B \rfloor
+	&\leq& \log^2 n + 10\log n\\
+	&\leq& \log^2 n + 10\log^2 n \ = \ 11\log^2 n
+\end{eqnarray*}
+Además, como $11\leq\log^2 10$, entonces
+\begin{eqnarray*}
+	11\log^2 n &\leq& \log^2 10 \cdot\log^2 n\\
+	&\leq& \log^2n\cdot \log^2n\\
+	&=& \log^4 n
+\end{eqnarray*}
+De esta forma concluimos que si $n\geq 10$, entonces $\log^2 n + 2\lfloor \log B \rfloor \leq \log^4 n$. Para $n\in \{5,\ldots, 9\}$ podemos calcular manualmente los valores de ambos lados de la desigualdad, y ver que esta también se cumple.
+
+
+\section{Algoritmos intermedios}
+\label{sec-app-alg-int}
+%{\bf Supuestos para el análisis de complejidad:} 
+Para el análisis de los algoritmos mostrados en esta sección, es importante considerar que las operaciones aritméticas (suma, resta, multiplicación, división, resto, $\lfloor \log n \rfloor$, $\lfloor \frac{n+m}{2} \rfloor$), de comparación ($=$, $<$, $\leq$, $>$, $\geq$) y de asignación ($:=$) para números enteros pueden ser realizados en tiempo polinomial en el largo de la entrada. Por ejemplo, existe un algoritmo tal que, dados dos números enteros $n$ y $m$, calcula $n\cdot m$ en tiempo $O(\poly(\log n, \log m))$, vale decir, en tiempo polinomial en el largo de las entradas $n$ y $m$. De esta forma, el análisis de los algoritmos se enfoca en las otras operaciones realizadas en ellos.
+% Además, si demostramos que un algoritmo puede ser ejecutado en tiempo polinomial bajo este supuesto, entonces sabemos que también pueden ser ejecutado en tiempo polinomial considerando el tiempo real de ejecución de las operaciones aritméticas y de comparación, ya que cada una de ellas puede ser llevada a cabo en tiempo polinomial. 
+
+
+\subsection{Algoritmo de exponenciación rápida}
+\label{app-fast_exp}
+\begin{algorithm}[H]
+\caption{\quad\textbf{EXP}}
+\label{alg:fast_exp}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $n, k$, donde $n$ es un entero y $k$ es un natural positivo\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $n^k$
+\begin{algorithmic}[1]
+	\IF {$k = 0$}
+		\RETURN $1$
+    \ELSIF {$k = 1$} 
+       \RETURN $n$
+    \ELSIF {$k$ es par}
+       \STATE $val :=\textbf{EXP}(n,\frac{k}{2})$
+       \RETURN $val\cdot val$
+    \ELSE
+   	   \STATE $val :=\textbf{EXP}(n,\frac{k-1}{2})$
+	   \RETURN $val\cdot val\cdot n$   
+	   \ENDIF         
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:fast_exp} es un algoritmo recursivo. El número de llamadas recursivas realizadas por el algoritmo 
+%tiempo de ejecución del algoritmo 
+está dado por la siguiente ecuación de recurrencia:
+% bajo los supuestos hechos en este capítulo:
+\begin{eqnarray*}
+	T(k) &=& 
+	\begin{cases}
+	T(\lfloor\frac{k}{2}\rfloor) + 1& \text{si } k > 2\\
+	1 & \text{si } k = 2 
+	\end{cases}
+\end{eqnarray*}
+De esto concluimos la cantidad de llamadas recursivas realizadas por el algoritmo \ref{alg:fast_exp} es $O(\log k)$, vale decir, lineal en el tamaño de la entrada~$k$. Además, las operaciones artiméticas, de comparación y de asignación pueden ser realizadas en tiempo $O(\poly_1(\log n^k)) = O(\poly_1(k \cdot \log n))$, dado que los números enteros utilizados en los distintos pasos del algoritmo están acotados por $n^k$. Por lo tanto, el algoritmo \ref{alg:fast_exp} funciona en tiempo $O(\log k \cdot \poly_1(k \cdot \log n))$, vale decir, en tiempo $O(\poly_2(\log n,k))$. 
+	
+\subsection{Algoritmo para verificar si existe un $m\in \{i,...,j\}$ tal que $n = m^k$}
+\label{app-tiene_raiz_entera}
+\begin{algorithm}[H]
+\caption{\quad\textbf{TieneRaízEntera}}
+\label{alg:tiene_raiz_entera}
+\hspace*{\algorithmicindent} \textbf{Input:} una secuencia $n,k,i,j$, donde $n,k,i,j$ son números naturales  tales que $i \leq j \leq n$\\
+\hspace*{\algorithmicindent} \textbf{Output:} \textbf{true} si existe un $m\in \{i,...,j\}$ tal que $n = m^k$, \textbf{false} si no 
+\begin{algorithmic}[1]
+   	\IF {$i=j$}
+   		\IF {\textbf{EXP}$(i,k)=n$}
+   			\RETURN \TRUE
+   		\ELSE
+   			\RETURN \FALSE
+   		\ENDIF
+   	\ELSIF {$i<j$}
+   		\STATE $p:=\lfloor \frac{i+j}{2}\rfloor$
+   		\STATE $val:=\textbf{EXP}(p,k)$
+   		\IF {$val = n$}
+   			\RETURN \TRUE
+   		\ELSIF {$val<n$}
+   			\RETURN \textbf{TieneRaízEntera}$(n,k,p+1,j)$
+   		\ELSE
+                        \RETURN \textbf{TieneRaízEntera}$(n,k,i,p-1)$
+%			\IF {$i \leq p -1$}  				
+%			\ELSE
+%				\RETURN \FALSE
+%			\ENDIF
+   		\ENDIF
+        \ELSE
+                \RETURN \FALSE
+   	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:tiene_raiz_entera} en el peor caso realiza  $O(\log (j - i))$ llamadas recursivas, vale decir, $O(\log n)$ llamadas recursivas puesto que $j - i \leq j \leq n$. 
+Dado el análisis de la sección~\ref{app-fast_exp}, las llamadas a la función \textbf{EXP} pueden ser realizadas en tiempo $O(\poly_1(\log n,k))$, dado que estas llamadas son de la forma \textbf{EXP}$(p,k)$ con $p \leq j \leq n$. Además, las operaciones artiméticas, de comparación y de asignación son realizadas en tiempo $O(\poly_2(\log n, k))$, dado que $i \leq j \leq n$. 
+%Dados los supuestos iniciales de esta sección, en cada una de estas llamadas lo que predomina en orden de complejidad es la llamada a la función \textbf{EXP}, que demora $O(\log k)$ en el peor caso (\ref{app-fast_exp}). 
+De esta forma, concluimos que el algoritmo \ref{alg:tiene_raiz_entera} funciona en tiempo
+%está función tiene complejidad $O(\log (j-i)\cdot\log k)$.   
+$O(\log n \cdot (\poly_1(\log n,k) + \poly_2(\log n, k))$, vale decir, en tiempo $O(\poly_3(\log n, k))$.
+
+
+\subsection{Algoritmo para verificar si un número es potencia de otro}
+\label{app-es_potencia}
+\begin{algorithm}[H]
+\caption{\quad\textbf{EsPotencia}}
+\label{alg:es_potencia}
+\hspace*{\algorithmicindent} \textbf{Input:} un número natural $n>1$\\
+\hspace*{\algorithmicindent} \textbf{Output:} \textbf{true} si $n = a^b$ para $a,b \in \mathbb{N}$ tales que $b \geq 2$, \textbf{false} si no lo es
+\begin{algorithmic}[1]
+   \IF {$n\leq 3$}
+    	\RETURN \FALSE
+    \ELSE
+    	\FOR {$k = 2$ \TO $\lfloor \log n\rfloor$}
+    		\IF {\textbf{TieneRaízEntera}$(n,k,1,n)$}
+    			\RETURN \TRUE
+    		\ENDIF
+		\ENDFOR    		
+    	\RETURN \FALSE
+    \ENDIF	 
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:es_potencia} realiza a lo más $(\lfloor \log n\rfloor - 1)$ llamadas al algoritmo \textbf{TieneRaízEntera}$(n,k,1,n)$ presentado en la sección~\ref{app-tiene_raiz_entera}, el cual tiene orden de complejidad $O(\poly_1(\log n, k))$. Como $k \leq \lfloor \log n\rfloor \leq \log n$ para $n > 1$, 
+%De esta forma 
+concluimos que  
+%O(\log n\cdot \log (\log n))\leq O(\log n^2)$ en el peor caso (ver \ref{app-tiene_raiz_entera}).  De esta forma, este 
+el algoritmo \ref{alg:es_potencia} funciona en tiempo $O(\log n \cdot \poly_1(\log n, \log n))$, vale decir, en tiempo~$O(\poly_2(\log n))$.
+%\comentario{revisar los de $\log \log n$}
+
+
+\subsection{Algoritmo para calcular el máximo común divisor entre dos números}
+\label{app-mcd}
+\begin{algorithm}[H]
+\caption{\quad\textbf{MCD}}
+\label{alg:mcd}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $a,b$, donde $a$ y $b$ son números naturales\\
+\hspace*{\algorithmicindent} \textbf{Output:} el máximo común divisor de $a$ y $b$
+\begin{algorithmic}[1]
+   	\IF {$a = 0$ \AND $b=0$}
+    	\RETURN \textbf{error}
+    \ELSIF {$a=0$}
+    	\RETURN $b$
+    \ELSIF {$b=0$}
+    	\RETURN $a$
+    \ELSIF {$a\geq b$}
+    	\RETURN $\textbf{MCD}(b,\, a \mods b)$
+	\ELSE
+		\RETURN $\textbf{MCD}(a,\, b \mods a)$    	
+   	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+Para demostrar que el algoritmo es correcto, es necesario demostrar que para $a \geq b > 0$, se tiene que $\MCD(a,\, b) = \MCD(b,\, a \!\! \mod b)$. 
+Para el análisis de la complejidad del algoritmo \ref{alg:mcd} podemos usar el hecho de que si $a\geq b > 0$, entonces $a \!\! \mod b<\frac{a}{2}$. Las demostraciones de estas dos propiedades quedan propuestas para el lector. De esta forma, 
+%si suponemos sin perdida de generalidad que $a \geq b$,
+tenemos que el algoritmo \ref{alg:mcd} calcula $\MCD(a,b)$ 
+%concluimos que el algoritmo  (sin pérdida de generalidad) que $a\geq b$, la complejidad del algoritmo \ref{alg:mcd}  es 
+% $\MCD$ queda 
+y funciona en orden~$O(\max\{\log a,\log b\})$.
+%\comentario{no se si explicar mas aca}
+%\comentario{Marcelo: basta considerar números naturales para este algoritmo?}
+
+
+\subsection{Algoritmo para calcular el orden multiplicativo $O_r(n)$}
+\label{app-orden_multiplicativo}
+\begin{algorithm}[H]
+\caption{\quad\textbf{OrdenMultiplicativo}}
+\label{alg:mult_ord}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $n,r$, donde $n$ y $r$ son números naturales tales que $n,r > 1$\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $O_r(n)$ si $\MCD (n,r) = 1$, el valor -1 en caso contrario.
+\begin{algorithmic}[1]
+   	\IF {$\textbf{MCD}(n,r) \neq 1$}
+    	\RETURN -1
+   	\ENDIF
+	\STATE{$\textit{val} :=1$}
+   	\FOR {$k := 1$ \TO $r-1$}
+%   		\IF {$k=1$}
+%   			\STATE $val:= n\mod r$
+%   			\IF {$val = 1$}
+%   				\RETURN $k$
+%   			\ENDIF
+%   		\ELSE
+   			\STATE $\textit{val} := (val\cdot n)\mod r$
+   			\IF {$\textit{val} = 1$}
+   				\RETURN $k$
+   			\ENDIF
+   		%\ENDIF
+   	\ENDFOR
+   			
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:mult_ord} comienza calculando el máximo común divisor entre $n$ y $r$, lo cual de acuerdo al análisis realizado en la sección \ref{app-mcd} toma tiempo $O(\max\{\log n, \log r\})$. Luego, entra al ciclo, y en el peor de los casos retorna cuando $k = r-1$, es decir, realiza $O(r)$ iteraciones. 
+Además, las operaciones artiméticas, de comparación y de asignación realizadas en el ciclo toman tiempo $O(\poly_1(\log n, \log r))$. De esta forma, 
+%De esta forma, bajo los supuestos realizados en esta sección, 
+concluimos que el algoritmo es de orden $O(\max\{\log n, \log r\} + r \cdot \poly_1(\log n, \log r))$, vale decir, es de orden~$O(\poly_2(\log n, r))$. 
+%\comentario{Marcelo: por favor revisar versión simplificada del algoritmo}
+
+%\subsection{Algoritmo para hacer módulo polinomio (esto lo pensaba sacar)}
+%\label{app-mod-pol}
+%\begin{algorithm}[H]
+%\caption{ModPol}
+%\label{alg:mod_pol}
+%\hspace*{\algorithmicindent} \textbf{Input:} una tupla $(q(X), n, r)$, donde $q(X)$ está en su forma canónica (en forma de lista?)\\
+%\hspace*{\algorithmicindent} \textbf{Output:} 
+%\begin{algorithmic}[1]
+%	\IF {$\deg(q(X))\geq r$}
+%		\FOR {$i = r$ \TO $\deg(q(X))$}
+%			\STATE $q[i\mod r] = q[i\mod r] + q[i]$
+%		\ENDFOR	
+%	\ENDIF	
+%	%aca hacer modulo n
+%	\FOR {$coeficiente$ \textbf{in} $q(X)$}
+%		\STATE $coeficiente = coeficiente \mod n$
+%	\ENDFOR
+%	\RETURN $q(X)$        
+%\end{algorithmic}
+%\end{algorithm}
+%\comentario{explicar por que tiene complejidad polinomial, y arreglar input output, hacer modulo a los coeficientes}
+
+%El algoritmo \ref{alg:mod_pol} retorna el polinomio $q(X)$ en $F_n[X]/(X^r-1)$. Este ocupa el hecho de que $X^r\equiv 1 \modulo$. De esta forma, $X^i\equiv X^{i\mod r}$ para $1\leq i\leq deg(q)$. 
+
+
+\subsection{Algoritmo de exponenciación rápida para polinomios en módulo $(X^r-1,n)$}
+\label{app-fast_exp_mod}
+\begin{algorithm}[H]
+\caption{\quad\textbf{ExpMod}}
+\label{alg:fast_exp_mod}
+\hspace*{\algorithmicindent} \textbf{Input:} una tupla $(q(X), k, r, n)$\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $q(X)^k \!\! \modulo$
+\begin{algorithmic}[1]
+	\IF {$k = 0$}
+		\RETURN $1$
+    \ELSIF {$k = 1$}
+    	\RETURN $q(X)  \!\! \modulo$
+   	\ELSIF {$k$ es par}
+    	\STATE $val :=\textbf{ExpMod}(q(X),\frac{k}{2}, r, n)$
+      	\RETURN $(val\cdot val)  \!\! \modulo$
+   	\ELSE
+   		\STATE $val :=\textbf{ExpMod}(q(X),\frac{k-1}{2}, r, n)$
+	  	\RETURN $(val\cdot val\cdot q(X))  \!\! \modulo$   
+	  	\ENDIF         
+\end{algorithmic}
+\end{algorithm}
+%\comentario{explicar por que tiene complejidad polinomial, y arreglar input output, hacer modulo a los coeficientes}
+%\comentario{el algoritmo lo hice para $X^r -1$ porque facilita mucho}
+
+Para analizar la complejidad de este algoritmo, primero es necesario mencionar cuál es la complejidad 
+de las operaciones aritméticas para polinomios. Un polinomio 
+\begin{eqnarray*}
+q(X) & = & \sum_{i=0}^{k-1} a_i X^i
+\end{eqnarray*}
+es representado como una tupla $(a_{k-1}, \ldots, a_0)$ con $k$ elementos. En particular, si consideramos polinomios en módulo $n$, entonces cada coeficiente $a_i \in \{0, \ldots, n-1\}$, y el tamaño de la tupla $(a_{k-1}, \ldots, a_0)$ es $O(k \cdot \log n)$. De manera general, un polinomio $q(X)$ en módulo $n$ es representado por una tupla de tamaño $O(\grado(q(X)) \cdot \log n)$, donde $\grado(q(X))$ es el grado del polinomio $q(X)$. Las operaciones aritméticas suma, resta, multiplicación, división y resto para polinomios en módulo $n$ pueden ser realizados en tiempo polinomial en el largo de la entrada. Por ejemplo, existe un algoritmo tal que, dados dos polinomios $q_1(X)$ y $q_2(X)$, calcula $q_1(X) \cdot q_2(X)$ en módulo $n$ en tiempo $O(\poly(\grado(q_1(X)) \cdot \log n,\, \grado(q_2(X)) \cdot \log n))$, vale decir, en tiempo polonomial en el largo de las entradas $q_1(X)$ y $q_2(X)$. Nótese que $O(\poly(\grado(q_1(X)) \cdot \log n,\, \grado(q_2(X)) \cdot \log n))$ es equivalente a $O(\poly_1(\grado(q_1(X)), \grado(q_2(X)), \log n))$, por lo que esta última notación es usada cuando consideramos la complejidad de las operaciones aritméticas para polinomios en módulo $n$. 
+
+
+El algoritmo \ref{alg:fast_exp_mod} realiza $O(\log k)$ llamadas recursivas.
+% en las que debe hacer multiplicación de polinomios, y obtener la representación del polinomio en el anillo $F_n[X]/(X^r-1)$. Para realizar la operación $p(X)\modulo$ para un polinomio $p(X)$ cualquiera se necesitan $O(deg(p(X)))$.
+En cada una de estas llamadas debe realizar operaciones aritmeticas y de comparación para números naturales, por ejemplo verificar si $k$ es par, y operaciones aritmeticas y de asignación ($:=$) para polinomios en módulo $n$, por ejemplo calcular $q(X) \!\! \modulo$. Dado que $\grado(X^r - 1) = r$ y los polinomios almacenados en la variable $val$ son de grado menor a $r$, tenemos que cada llamada recursiva puede ser realizada en tiempo $O(\poly_1(\log k, \grado(q(X)), r, \log n))$. Concluimos entonces que el algoritmo \ref{alg:fast_exp_mod} funciona en tiempo $O(\log k \cdot \poly_1(\log k, \grado(q(X)), r, \log n))$, vale decir, en tiempo $O(\poly_2(\log k, \grado(q(X)), r, \log n))$.
+
+%comentario{aca tambien supongo que hacer modulo es una operación}
+%\comentario{esta bien decir $deg(p(X))$ o es mejor $deg(p)$}
+\end{document}
