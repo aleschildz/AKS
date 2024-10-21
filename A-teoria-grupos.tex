@@ -12,33 +12,61 @@
 %\end{enumerate}
 %\end{definition}
 %\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
-\begin{definition}[Grupo]
-Una tupla $(G,\circ)$, dónde $G$ es un conjunto y $\circ :G\times G\to G$ una función (total) forman un grupo si:
+\begin{definition}
+Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon G\times G\to G$ es una función (total) tal que:
 \begin{enumerate}
-	\item Para cada $a,b,c \in G$: $(a \circ b) \circ c = a \circ (b
-\circ c)$
+	\item $\circ$ es asociativa: para todos $a,b,c \in G$ se cumple que $(a \circ b) \circ c = a \circ (b
+\circ c)$.
 
-	\item Existe $e \in G$ tal que para cada $a \in G$: $a \circ e = e \circ a = a$
+	\item Existe un $e \in G$ (llamado \emph{neutro}) tal que para todo $a \in G$ se cumple que $a \circ e = e \circ a = a$
 
-   \item Para cada $a \in G$, existe $b \in G$: $a \circ b 	= b \circ a = e$
+   \item Para cada $a \in G$ existe un $b \in G$ (llamado \emph{inverso} de $a$) tal que $a \circ b 	= b \circ a = e$
 \end{enumerate}
-Decimos que $(G,\circ)$ es un grupo abeliano si además de ser un grupo, se cumple que $\circ$ es conmutativo, es decir, para todo $a,b\in G$ se tiene que $a\circ b = b\circ a$.
+Decimos que $(G,\circ)$ es un \emph{grupo abeliano} si es un grupo que además cumple la siguiente propiedad:
+\begin{enumerate}
+	\item[4.] $\circ$ es conmutativa: para todos $a,b\in G$ se cumple que $a\circ b = b\circ a$. 
+\end{enumerate}
 \end{definition}
 
-%Una propiedad que se cumple en los grupos es que
-El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen
-la condición 2 de la definición anterior, entonces $e_1= e_2$.  Otra
-propiedad que podemos derivar de la definición anterior es que el
-inverso de cada elemento $a$ es único: si $a \circ b = b \circ a= e$ y
-$a \circ c = c \circ a = e$, entonces $b = c$. La demostración de
-estas propiedades se deja como ejercicio para el lector.
+Cuando la operación $\circ$ está clara por contexto, es usual referirse al grupo $(G, \circ)$ escribiendo simplemente $G$.
 
+Veamos algunas propiedades básicas de los grupos.
 
-Habiéndo definido esta estructura algebraica, nos interesa describir a los grupos que podemos encontrar dentro de otros grupos: los subgrupos.
+\begin{proposition}
+El elemento neutro de un grupo es único.
+\end{proposition}
+
+\begin{proof}
+Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos elementos neutros. Como $e$ es neutro, tenemos que $e \circ e' = e'$. Por otro lado, como $e'$ es neutro, tenemos que $e \circ e' = e$. Por transitividad concluimos que $e = e'$.
+\end{proof}
+
+\begin{proposition} \label{inverso_unico}
+	Cada elemento de un grupo tiene un único inverso.
+	\end{proposition}
+	
+	\begin{proof}
+	Sea $(G,\circ)$ un grupo, $a \in G$ y supongamos que $b, c \in G$ son ambos inversos de $a$. Luego
+	\begin{align*}
+	b &= b \circ e && e \text{ es neutro} \\
+	b &= b \circ \left( a \circ c \right) && c \text{ es inverso de } a \\
+	b &= \left( b \circ a \right) \circ c && \circ \text{ es asociativa} \\
+	b &= e \circ c && b \text{ es inverso de } A \\
+	b &= c && e \text{ es neutro}.
+	\end{align*}
+	\end{proof}
+
+En virtud de la proposición \ref{inverso_unico}, podemos usar la notación $a^{-1}$ para denotar al (único) inverso del elemento $a$. Para que dicha notación tenga sentido es necesario que el grupo subyacente esté claro por contexto.
+
+Como expresiones de la forma $a \circ b \circ c$ no presentan ambigüedad (ya que $\circ$ es asociativa), los paréntesis son opcionales y usualmente solo se incluyen cuando hacen más clara un cálculo o demostración.
+
+La siguiente definición es central en la teoría de grupos. Se refiere a los grupos que viven naturalmente dentro de otros grupos.
+
 %--------------------------------------
 \begin{definition}
-$(H, \circ)$ es un subgrupo de un grupo $(G, \circ)$, para $H \subseteq G$, si $(H, \circ)$ es un grupo.
+Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph{subgrupo} de $(G,\circ)$ si $(H, \circ)$ es un grupo (con la misma operación).
 \end{definition}
+
+% Ale: hasta aquí edité.
 
 Dos propiedades básicas que relacionan grupos con sus subgrupos son las que enunciamos y demostramos a continuación.
 

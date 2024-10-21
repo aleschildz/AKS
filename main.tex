@@ -83,9 +83,10 @@
 \newtheorem{afirmacion}[theorem]{Afirmación}
 
 \newtheorem*{lemma*}{Lema}
-\newtheorem{definition}[theorem]{Definición}
 \newtheorem{observacion}[theorem]{Observación}
 \newtheorem{prop}[theorem]{Proposición}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
 \theoremstyle{remark}
 \newtheorem{example}[theorem]{Ejemplo}
 \theoremstyle{remark}
@@ -128,19 +129,13 @@ María Alejandra Schild\\
 	
 %%%	%aqui poner de que trata el documento
 	\begin{abstract}
-El test de primalidad AKS \cite{AKS04} es el primer algoritmo
-determinista que decide en tiempo polinomial si un número dado es
-primo o no.
+\noindent El test de primalidad AKS \cite{AKS04} es el primer algoritmo
+determinista que decide en tiempo polinomial si un entero dado es
+primo.
           %Antes de este test no existían algoritmos que resolvieran este problema en tiempo polinomial de forma determinista.
-En este documento se hace una revisión detallada del algoritmo AKS
-incluyendo cada demostración en \cite{AKS04}, transformándolo en un
-documento autocontenido. Vale decir, se explica detenidamente de dónde
-viene cada teorema y lema usado en el proceso de establecer la
-correctitud del algoritmo, junto a una demostración completa de cada
-uno de ellos. Se utiliza como base herramientas de teoría de números,
-como aritmética modular, y de álgebra abstracta, como teoría de
-cuerpos finitos. En el documento se presenta el material necesario
-para poder trabajar con estas herramientas.
+En este documento se hace una revisión detallada y autocontenida del algoritmo y de la demostración de su correctitud. Para ello se utilizan herramientas de teoría
+de números y de álgebra abstacta. Al final del documento se incluye el material 
+necesario para comprender dichos resultados.
 \end{abstract}
 
 
@@ -168,7 +163,7 @@ para poder trabajar con estas herramientas.
 \newpage
 
 
-\section{Preliminares Teoría de Grupos}
+\section{Preliminares sobre teoría de grupos}
 \label{app-grupos}
 \input{A-teoria-grupos.tex}
 
