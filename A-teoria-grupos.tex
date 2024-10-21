@@ -13,7 +13,7 @@
 %\end{definition}
 %\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
 \begin{definition}
-Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon G\times G\to G$ es una función (total) tal que:
+Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon G\times G\to G$ es una función (total) que satisface los siguientes axiomas:
 \begin{enumerate}
 	\item $\circ$ es asociativa: para todos $a,b,c \in G$ se cumple que $(a \circ b) \circ c = a \circ (b
 \circ c)$.
@@ -28,7 +28,7 @@ Decimos que $(G,\circ)$ es un \emph{grupo abeliano} si es un grupo que además c
 \end{enumerate}
 \end{definition}
 
-Cuando la operación $\circ$ está clara por contexto, es usual referirse al grupo $(G, \circ)$ escribiendo simplemente $G$.
+Cuando la operación $\circ$ está clara por contexto, es usual referirse al grupo $(G, \circ)$ escribiendo simplemente $G$. 
 
 Veamos algunas propiedades básicas de los grupos.
 
@@ -39,6 +39,8 @@ El elemento neutro de un grupo es único.
 \begin{proof}
 Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos elementos neutros. Como $e$ es neutro, tenemos que $e \circ e' = e'$. Por otro lado, como $e'$ es neutro, tenemos que $e \circ e' = e$. Por transitividad concluimos que $e = e'$.
 \end{proof}
+
+En el contexto de la teoría de grupos, usualmente la letra «e» está reservada para el neutro. Sin embargo, lo ideal es siempre especificar la notación. 
 
 \begin{proposition} \label{inverso_unico}
 	Cada elemento de un grupo tiene un único inverso.
@@ -55,9 +57,50 @@ Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos elementos neu
 	\end{align*}
 	\end{proof}
 
-En virtud de la proposición \ref{inverso_unico}, podemos usar la notación $a^{-1}$ para denotar al (único) inverso del elemento $a$. Para que dicha notación tenga sentido es necesario que el grupo subyacente esté claro por contexto.
+En virtud de la proposición \ref{inverso_unico}, podemos usar la notación $a^{-1}$ para denotar al (único) inverso del elemento $a$. Para que dicha notación tenga sentido es necesario que el grupo subyacente esté claro por contexto. 
+Notemos que $e^{-1} = e$, es decir, el elemento neutro es su propio inverso. En general, puede ocurrir que existan elementos en el grupo distintos al neutro que igualmente tengan esa propiedad.
 
-Como expresiones de la forma $a \circ b \circ c$ no presentan ambigüedad (ya que $\circ$ es asociativa), los paréntesis son opcionales y usualmente solo se incluyen cuando hacen más clara un cálculo o demostración.
+Como expresiones de la forma $a \circ b \circ c$ no presentan ambigüedad (ya que $\circ$ es asociativa), los paréntesis son opcionales y usualmente solo se incluyen cuando hacen más claro un cálculo o demostración.
+
+\begin{proposition}[Leyes de cancelación] \label{cancelacion_grupos}
+	Sea $(G, \circ)$ un grupo, y sean $a, b, c \in G$. Se cumple que:
+	\begin{enumerate}
+		\item Si $a \circ c = b \circ c$, entonces $a = b$.
+		\item Si $c \circ a = c \circ b$, entonces $a = b$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Probaremos solo la primera afirmación: la demostración de la es análoga. Tenemos que
+$$a = a \circ e = a \circ \left( c \circ c^{-1} \right) = \left(a \circ c \right) \circ c^{-1} = \left(b \circ c \right) \circ c^{-1} = b \circ \left( c \circ c^{-1} \right) = b \circ e = b.$$
+\end{proof}
+
+La siguiente definición es útil cuando necesitamos operar un elemento de un grupo consigo mismo varias veces. 
+
+\begin{definition}[Potenciación en un grupo]
+Sea $(G, \circ)$ un grupo con neutro $e$ y $a \in G$. Definimos $a^0 \coloneqq e$ y, si $n$ es un entero positivo, definimos $a^n \coloneqq \underbrace{a \circ a \circ \cdots \circ a}_{n \text{ veces}}$ y $a^{-n} \coloneqq \underbrace{a^{-1} \circ a^{-1} \circ \cdots \circ a^{-1}}_{n \text{ veces}}$.
+\end{definition}
+
+Dejamos de ejercicio al lector verificar que la potenciación tiene las siguientes propiedades.
+
+\begin{prop} Sea $(G, \circ)$ un grupo. Se cumple que:
+	\begin{enumerate}
+		\item $a^m \circ a^n = a^{m+n}$ para todo $a \in G$ y todos $m, n \in \mathbb{Z}$.
+		\item $\left( a^m \right)^n = a^{mn}$ para todo $a \in G$ y todos $m, n \in \mathbb{Z}$.
+		\item Si $G$ es abeliano, entonces $\left( a \circ b \right)^{n} = a^n \circ b^n$ para todos $a, b \in G$ y todo $n \in \mathbb{Z}$.
+	\end{enumerate}
+\end{prop}
+
+
+\begin{example} \label{grupo_ciclico}
+Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
+\end{example}
+
+El grupo del ejemplo \ref{grupo_ciclico} tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $4 = 1 + 1 + 1 + 1$. Debido a esta propiedad, al grupo $\mathbb{Z}_n$ se le conoce como el \emph{grupo cíclico} de $n$ elementos. 
+
+\begin{remark} Notemos que, en el contexto del ejemplo \ref{grupo_ciclico}, sería confuso utilizar la notación $1^4$ para referirnos a la cuarta potencia de $1$, pues lo que queremos representar es el número que se obtiene \textit{sumando} $1$ consigo mismo $4$ veces. En estos casos en los que la operación del grupo se asemeja más a la suma que a la multiplicación, se suele usar la notación aditiva para denotar a las potencias. De esta forma, si $n \in \mathbb{Z}$ y $a$ es un elemento del grupo, escribimos $n a$ en lugar de $a^n$.
+\end{remark}
+
 
 La siguiente definición es central en la teoría de grupos. Se refiere a los grupos que viven naturalmente dentro de otros grupos.
 
@@ -66,66 +109,41 @@ La siguiente definición es central en la teoría de grupos. Se refiere a los gr
 Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph{subgrupo} de $(G,\circ)$ si $(H, \circ)$ es un grupo (con la misma operación).
 \end{definition}
 
-% Ale: hasta aquí edité.
+Para probar que $(H, \circ)$ es un subgrupo de $(G, \circ)$ debemos, incluso antes de verificar los axiomas, comprobar que $H$ sea cerrado bajo la operación binaria $\circ$. En otras palabras, necesitamos que $\circ$ restringida a $H \times H$ tenga recorrido contenido en $H$. 
 
-Dos propiedades básicas que relacionan grupos con sus subgrupos son las que enunciamos y demostramos a continuación.
+
+Notemos que, \textit{a priori}, no sabemos si el nuetro y los inversos de un subgrupo coinciden con los del grupo más grande. Demostraremos a continuación que eso efectivamente ocurre.
+
 
 \begin{proposition}
-Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones se cumplen.
+Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones se cumplen:
 	\begin{enumerate}
 		\item Si $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$, entonces $e_1 = e_2$
 
-		\item Para cada $a \in H$, si $b$ es el inverso de $a$ en $(G, \circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$, entonces $c = b$
+		\item Para cada $a \in H$, si $b$ es el inverso de $a$ en $(H, \circ)$, entonces $b$ es el inverso de $a$ en $(G, \circ)$.
 	\end{enumerate}
 \end{proposition}
-
-
-
 
 %--------
 %A continuación demostraremos la proposición.
 \begin{proof}
 \text{ }
 	\begin{enumerate}
-	\item Supongamos que $e_1$ es el neutro en $(G, \circ)$ y $e_2$ es el neutro de $(H, \circ)$. Vamos a demostrar que $e_1 = e_2$.
-Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, entonces se cumple $e_2 \circ e_1 = e_2$.
-Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo tanto $e_2 \circ e_2 = e_2$
-(notemos que se usa la misma operación en $H$ y $G$).
-De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$.
-Sea $e^{-1}_2$ el inverso de $e_2$ en $(G, \circ)$. Entonces:
-\begin{eqnarray*}
-e_2 \circ e_1 = e_2 \circ e_2 & \Rightarrow & e^{-1}_2 \circ (e_2
-\circ e_1) =  e^{-1}_2 \circ (e_2 \circ e_2)\\
-& \Rightarrow & (e^{-1}_2 \circ e_2) \circ e_1 =  (e^{-1}_2 \circ e_2)
-\circ e_2\\ 
-& \Rightarrow & e_1 \circ e_1 =  e_1 \circ e_2\\ 
-& \Rightarrow & e_1 = e_2
-\end{eqnarray*}
-
-%\qed
-
-	
-	\item
-	Sea $a \in H$, y suponga que $b$ es el inverso de $a$ en $(G,
-\circ)$ y $c$ es el inverso de $a$ en $(H, \circ)$. Vamos a demostrar que $b = c$.
-Por la primera propiedad, sabemos que $(G, \circ)$ y $(H,
-\circ)$ tienen el mismo neutro. Sea $e$ el neutro en $(G, \circ)$ y $(H, \circ)$. 
-Dado que $b$ es el inverso de $a$ en $(G, \circ)$, entonces $a \circ b = e$. Además, dado que $c$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ c = e$. De lo anterior concluimos que $a \circ b = a \circ c$.
-Como sabemos que $b$ es el inverso de $a$ en $(G, \circ)$, tenemos que:
-%. Entonces:
-
-\begin{eqnarray*}
-a \circ b = a \circ c & \Rightarrow & b \circ (a
-\circ b) =  b \circ (a \circ c)\\
-& \Rightarrow & (b \circ a) \circ b =  (b \circ a)
-\circ c\\ 
-& \Rightarrow & e \circ b =  e \circ c\\ 
-& \Rightarrow & b = c
-\end{eqnarray*}
+	\item 
+Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, se cumple que $e_2 \circ e_1 = e_2$.
+Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo que $e_2 \circ e_2 = e_2$
+(notemos que se usa la misma operación en $H$ y en $G$).
+De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$. Usando la proposición \ref{cancelacion_grupos} concluimos que $e_1 = e_2$.
+	\item 
+	Sea $a^{-1}$ el inverso de $a$ en $(G, \circ)$. Queremos probar que $b = a^{-1}$. Por la primera propiedad de esta proposición, sabemos que $(G, \circ)$ y $(H,
+\circ)$ tienen el mismo neutro, que llamaremos $e$. 
+Dado que $a^{-1}$ es el inverso de $a$ en $(G, \circ)$, tenemos que $a \circ a^{-1} = e$. Además, dado que $b$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ b = e$. Luego $a \circ a^{-1} = a \circ b$. Usando la proposición \ref{cancelacion_grupos} concluimos que $a^{-1} = b$.
 	\end{enumerate}
 \end{proof}
 
-%----------
+% Ale: aquí voy.
+
+
 A continuación enunciamos el Teorema de Lagrange para teoría de grupos. Este importante resultado relaciona el orden de un grupo finito con el orden de cualquiera de sus subgrupos.
 \begin{theorem}[{\bf Lagrange}]
 \label{teo:lagrange}
