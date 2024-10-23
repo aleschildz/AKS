@@ -24,7 +24,7 @@ Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon 
 \end{enumerate}
 Decimos que $(G,\circ)$ es un \emph{grupo abeliano} si es un grupo que además cumple la siguiente propiedad:
 \begin{enumerate}
-	\item[4.] $\circ$ es conmutativa: para todos $a,b\in G$ se cumple que $a\circ b = b\circ a$. 
+	\item[4.] $\circ$ es conmutativa: para todos $a,b\in G$ se cumple que $a\circ b = b\circ a$.  \hfill$\blacksquare$
 \end{enumerate}
 \end{definition}
 
@@ -40,7 +40,7 @@ El elemento neutro de un grupo es único.
 Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos elementos neutros. Como $e$ es neutro, tenemos que $e \circ e' = e'$. Por otro lado, como $e'$ es neutro, tenemos que $e \circ e' = e$. Por transitividad concluimos que $e = e'$.
 \end{proof}
 
-En el contexto de la teoría de grupos, usualmente la letra «e» está reservada para el neutro. Sin embargo, lo ideal es siempre especificar la notación. 
+En el contexto de la teoría de grupos, usualmente la letra $e$ está reservada para el neutro. Sin embargo, lo ideal es siempre especificar la notación. 
 
 \begin{proposition} \label{inverso_unico}
 	Cada elemento de un grupo tiene un único inverso.
@@ -51,7 +51,7 @@ En el contexto de la teoría de grupos, usualmente la letra «e» está reservad
 	\begin{align*}
 	b &= b \circ e && e \text{ es neutro} \\
 	b &= b \circ \left( a \circ c \right) && c \text{ es inverso de } a \\
-	b &= \left( b \circ a \right) \circ c && \circ \text{ es asociativa} \\
+	b &= \left( b \circ a \right) \circ c && \text{$\circ$} \text{ es asociativa} \\
 	b &= e \circ c && b \text{ es inverso de } A \\
 	b &= c && e \text{ es neutro}.
 	\end{align*}
@@ -93,7 +93,7 @@ Dejamos de ejercicio al lector verificar que la potenciación tiene las siguient
 
 
 \begin{example} \label{grupo_ciclico}
-Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
+Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso). \hfill$\blacksquare$
 \end{example}
 
 El grupo del ejemplo \ref{grupo_ciclico} tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $4 = 1 + 1 + 1 + 1$. Debido a esta propiedad, al grupo $\mathbb{Z}_n$ se le conoce como el \emph{grupo cíclico} de $n$ elementos. 
