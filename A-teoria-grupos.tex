@@ -12,7 +12,7 @@
 %\end{enumerate}
 %\end{definition}
 %\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
-\begin{definition}
+\begin{definition}[Grupo, neutro, inverso, grupo abeliano]
 Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon G\times G\to G$ es una función (total) que satisface los siguientes axiomas:
 \begin{enumerate}
 	\item $\circ$ es asociativa: para todos $a,b,c \in G$ se cumple que $(a \circ b) \circ c = a \circ (b
@@ -29,8 +29,6 @@ Decimos que $(G,\circ)$ es un \emph{grupo abeliano} si es un grupo que además c
 \end{definition}
 
 Cuando la operación $\circ$ está clara por contexto, es usual referirse al grupo $(G, \circ)$ escribiendo simplemente $G$. 
-
-Veamos algunas propiedades básicas de los grupos.
 
 \begin{proposition}
 El elemento neutro de un grupo es único.
@@ -62,6 +60,10 @@ Notemos que $e^{-1} = e$, es decir, el elemento neutro es su propio inverso. En 
 
 Como expresiones de la forma $a \circ b \circ c$ no presentan ambigüedad (ya que $\circ$ es asociativa), los paréntesis son opcionales y usualmente solo se incluyen cuando hacen más claro un cálculo o demostración.
 
+\begin{example} \label{ejemplo_Z}
+El conjunto $\mathbb{Z}$ de los números enteros forma un grupo con la operación de suma. En este caso, el neutro es el número $0$, y el inverso de un $a \in \mathbb{Z}$ será $-a \in \mathbb{Z}$. \hfill$\blacksquare$
+\end{example}
+
 \begin{proposition}[Leyes de cancelación] \label{cancelacion_grupos}
 	Sea $(G, \circ)$ un grupo, y sean $a, b, c \in G$. Se cumple que:
 	\begin{enumerate}
@@ -78,7 +80,7 @@ $$a = a \circ e = a \circ \left( c \circ c^{-1} \right) = \left(a \circ c \right
 La siguiente definición es útil cuando necesitamos operar un elemento de un grupo consigo mismo varias veces. 
 
 \begin{definition}[Potenciación en un grupo]
-Sea $(G, \circ)$ un grupo con neutro $e$ y $a \in G$. Definimos $a^0 \coloneqq e$ y, si $n$ es un entero positivo, definimos $a^n \coloneqq \underbrace{a \circ a \circ \cdots \circ a}_{n \text{ veces}}$ y $a^{-n} \coloneqq \underbrace{a^{-1} \circ a^{-1} \circ \cdots \circ a^{-1}}_{n \text{ veces}}$.
+Sea $(G, \circ)$ un grupo con neutro $e$ y $a \in G$. Definimos $a^0 \coloneqq e$ y, si $n$ es un entero positivo, definimos $a^n \coloneqq \underbrace{a \circ a \circ \cdots \circ a}_{n \text{ veces}}$ y $a^{-n} \coloneqq \underbrace{a^{-1} \circ a^{-1} \circ \cdots \circ a^{-1}}_{n \text{ veces}}$. \hfill$\blacksquare$
 \end{definition}
 
 Dejamos de ejercicio al lector verificar que la potenciación tiene las siguientes propiedades.
@@ -98,7 +100,7 @@ Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z
 
 El grupo del ejemplo \ref{grupo_ciclico} tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $4 = 1 + 1 + 1 + 1$. Debido a esta propiedad, al grupo $\mathbb{Z}_n$ se le conoce como el \emph{grupo cíclico} de $n$ elementos. 
 
-\begin{remark} Notemos que, en el contexto del ejemplo \ref{grupo_ciclico}, sería confuso utilizar la notación $1^4$ para referirnos a la cuarta potencia de $1$, pues lo que queremos representar es el número que se obtiene \textit{sumando} $1$ consigo mismo $4$ veces. En estos casos en los que la operación del grupo se asemeja más a la suma que a la multiplicación, se suele usar la notación aditiva para denotar a las potencias. De esta forma, si $n \in \mathbb{Z}$ y $a$ es un elemento del grupo, escribimos $n a$ en lugar de $a^n$.
+\begin{remark} Notemos que, en el contexto del ejemplo \ref{grupo_ciclico}, sería confuso utilizar la notación $1^4$ para referirnos a la cuarta potencia de $1$, pues lo que queremos representar es el número que se obtiene \textit{sumando} $1$ consigo mismo $4$ veces. En estos casos en los que la operación del grupo se asemeja más a la suma que a la multiplicación, se suele usar la notación aditiva para denotar a las potencias. De esta forma, si $n \in \mathbb{Z}$ y $a$ es un elemento del grupo, escribimos $n a$ en lugar de $a^n$. \hfill$\blacksquare$
 \end{remark}
 
 
@@ -106,7 +108,7 @@ La siguiente definición es central en la teoría de grupos. Se refiere a los gr
 
 %--------------------------------------
 \begin{definition}
-Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph{subgrupo} de $(G,\circ)$ si $(H, \circ)$ es un grupo (con la misma operación).
+Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph{subgrupo} de $(G,\circ)$ si $(H, \circ)$ es un grupo (con la misma operación). \hfill$\blacksquare$
 \end{definition}
 
 Para probar que $(H, \circ)$ es un subgrupo de $(G, \circ)$ debemos, incluso antes de verificar los axiomas, comprobar que $H$ sea cerrado bajo la operación binaria $\circ$. En otras palabras, necesitamos que $\circ$ restringida a $H \times H$ tenga recorrido contenido en $H$. 
@@ -141,8 +143,31 @@ Dado que $a^{-1}$ es el inverso de $a$ en $(G, \circ)$, tenemos que $a \circ a^{
 	\end{enumerate}
 \end{proof}
 
-% Ale: aquí voy.
+\begin{example} \label{ejemplo_subgrupo}
+Sea $m$ un entero. Definimos el conjunto
+$m\mathbb{Z} \coloneq \left\{mk \;\; \mid \;\; k \in \mathbb{Z}\right\}$ de los múltiplos de $m$. Notemos que $m\mathbb{Z}$ es cerrado bajo la operación de suma: si $mk_1$ y $mk_2$ son elementos de $m\mathbb{Z}$, entonces $mk_1 + mk_2 = m(k_1 + k_2) \in m\mathbb{Z}$. Dejamos al lector verificar que $m\mathbb{Z}$ es un subgrupo de $(\mathbb{Z}, +)$. \hfill$\blacksquare$
+\end{example}
 
+
+A continuación hablaremos sobre clases laterales y grupos cocientes. Puesto que todos los grupos que utilizaremos en el documento son abelianos, vamos a agregar esa hipótesis a los teoremas. Ello simplifica significativamente las demostraciones. Sin embargo, hacemos notar que toda esa teoría también puede aplicarse a grupos no abelianos si se consideran algunas sutilezas adicionales. 
+
+\begin{definition}[Clases laterales] \label{definicion_clase_lateral}
+Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. Dado un elemento $g \in G$, definimos la \emph{clase lateral} de $g$ bajo $H$ como el conjunto
+$$g H \coloneq \left\{ gh \;\; \mid \;\, h \in H \right\}.$$ 
+\hfill$\blacksquare$
+\end{definition}
+
+Notemos que, según la definición \ref{definicion_clase_lateral}, $H$ en sí mismo es la clase lateral de $e \in G$. En general, ocurrirá que a varios elementos distintos de $G$ les corresponderá la misma clase lateral. Dejamos al lector verificar que la clase lateral de cualquier elemento de $H$ es justamente $H$. También hacemos notar que las clases laterales no necesariamente son subgrupos de $G$.
+
+\begin{prop} \label{particion_clases_laterales}
+Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. Las clases laterales bajo $H$ forman una partición de $G$.
+\end{prop}
+
+
+
+
+
+% Ale: aquí voy.
 
 A continuación enunciamos el Teorema de Lagrange para teoría de grupos. Este importante resultado relaciona el orden de un grupo finito con el orden de cualquiera de sus subgrupos.
 \begin{theorem}[{\bf Lagrange}]
