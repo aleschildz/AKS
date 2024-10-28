@@ -159,163 +159,56 @@ $$g H \coloneq \left\{ gh \;\; \mid \;\, h \in H \right\}.$$
 
 Notemos que, según la definición \ref{definicion_clase_lateral}, $H$ en sí mismo es la clase lateral de $e \in G$. En general, ocurrirá que a varios elementos distintos de $G$ les corresponderá la misma clase lateral. Dejamos al lector verificar que la clase lateral de cualquier elemento de $H$ es justamente $H$. También hacemos notar que las clases laterales no necesariamente son subgrupos de $G$.
 
-\begin{prop} \label{particion_clases_laterales}
+\begin{prop} \label{lema:rel bin}
 Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. Las clases laterales bajo $H$ forman una partición de $G$.
 \end{prop}
 
+\begin{proof}
+Definiremos la siguiente relación binaria en $G$: $a \sim b$ si y solo si $b \circ a^{-1} \in H$. Afirmamos que $\sim$ es una relación de equivalencia. En efecto:
+\begin{itemize}
+\item Sea $a \in G$ arbitrario. Tenemos que $a \circ a^{-1} = e \in H$, ya que $H$ es un subgrupo. Luego $a \sim a$, y $\sim$ es refleja.
+\item Sean $a, b \in G$ tales que $a \sim b$. Eso último significa que $b \circ a^{-1} \in H$. Como $H$ es un subgrupo, tenemos que $\left( b \circ a^{-1} \right)^{-1} \in H$ (ya que los subgrupos son cerrados bajo tomar inversos). Notemos que $\left( b \circ a^{-1} \right)^{-1} = a \circ b^{-1}$, pues
+$$\left( b \circ a^{-1} \right) \circ \left(a \circ b^{-1} \right) = b \circ \left( a^{-1} \circ a \right) \circ b^{-1} = b \circ e \circ b^{-1} = b \circ b^{-1} = e.$$
+Entonces $a \circ b^{-1} \in H$, lo que significa que $b \sim a$. Esto prueba que $\sim$ es simétrica.
+\item Sean $a, b, c \in G$ tales que $a \sim b$ y $b \sim c$. Esto significa que $b \circ a^{-1} \in H$ y $c \circ b^{-1} \in H$. Pero $(c \circ b^{-1}) \circ (b \circ a^{-1}) = c \circ a^{-1}$, y sabemos que la operación
+$\circ$ es cerrada en $H$. Por lo tanto, $c \circ a^{-1} \in H$. Luego
+$a\sim c$, y $\sim$ es transitiva.
+\end{itemize}
+Ahora veremos que las clases de equivalencia que la relación $\sim$ induce en $G$ son justamente las clases laterales. Para ello, tomemos un $g \in G$ arbitrario, y denotemos por $\left[ g \right]_{\sim}$ a su clase de equivalencia bajo $\sim$. Queremos probar que $gH = \left[ g \right]_\sim$. Veamos que
+\begin{align*}
+a \in gH \qquad & \Leftrightarrow \qquad \exists\, h \in H \quad a = gh \\
+& \Leftrightarrow \qquad \exists\, h \in H \quad a \circ g^{-1} = h \\
+& \Leftrightarrow \qquad a \circ g^{-1} \in H \\
+& \Leftrightarrow \qquad g \sim a \\
+& \Leftrightarrow \qquad a \in  \left[ g \right]_\sim.
+\end{align*}
+\end{proof}
 
 
+\begin{prop} \label{cardinalidad_clases_laterales}
+Sea $(G, \circ)$ un grupo abeliano finito, y sea $H$ un subgrupo de $G$. Todas las clases laterales bajo $H$ tienen la misma cardinalidad, es decir, $|aH| = |bH|$ para cualesquiera $a, b \in G$.
+\end{prop}
+
+\begin{proof}
+Vamos a demostrar que todas las clases laterales bajo $H$ tienen cardinalidad $|H|$.
+
+Sea $g \in G$ arbitrario. Queremos probar que $|gH| = |H|$. Definimos la función $f\colon H \rightarrow gH$ tal que $f(h) = gh$. Afirmamos que $f$ es una biyección. En efecto: 
+\begin{itemize}
+\item Sean $h_1, h_2 \in H$ tales que $f(h_1) = f(h_2)$. Entonces $gh_1 = gh_2$. Usando cancelación, obtenemos que $h_1 = h_2$. Luego $f$ es inyectiva.
+\item Sea $b \in gH$. Entonces existe un $h \in H$ tal que $b = gh$. Luego $f(h) = b$, y $f$ es sobreyectiva.
+\end{itemize}
+\end{proof}
 
 
-% Ale: aquí voy.
+El siguiente es un resultado importante en la teoría de grupos finitos, pues establece una relación entre la cardinalidad de un grupo y la cardinalidad de sus subgrupos. Hacemos notar que el teorema es válido incluso para grupos no abelianos. 
 
-A continuación enunciamos el Teorema de Lagrange para teoría de grupos. Este importante resultado relaciona el orden de un grupo finito con el orden de cualquiera de sus subgrupos.
-\begin{theorem}[{\bf Lagrange}]
+\begin{theorem}[{Teorema de Lagrange}]
 \label{teo:lagrange}
-Si $(G, \circ)$ es un grupo finito y $(H, \circ)$ es un subgrupo de $(G, \circ)$, entonces $|H|$ divide a $|G|$.
+Si $(G, \circ)$ es un grupo abeliano finito y $H$ es un subgrupo de $G$, entonces $|H|$ divide a $|G|$.
 \end{theorem}
 
-Para demostrar el teorema \ref{teo:lagrange} vamos a introducir una relación binaria que nos será de gran utilidad. Sea $(G, \circ)$ un grupo finito y $(H, \circ)$ un subgrupo de $(G, \circ)$. 
-Suponga que $e$ es el elemento neutro de $(G,\circ)$ y $a^{-1}$ es el inverso de $a$ en $(G, \circ)$.
-Sea entonces $\sim$ una relación binaria sobre $G$ definida
-como 
-\begin{center}
-	$a \sim b$ si y sólo si $b \circ a^{-1} \in H$
-\end{center}
-En base a esta relación, propondremos dos lemas que nos servirán para la demostración del teorema de Lagrange.
-
-\begin{lemma}\label{lema:rel bin}
-	$\sim$ es una relación de equivalencia.
-\end{lemma}
 \begin{proof}
-%[Demostración del lema \ref{lema:rel bin}.]
-Para demostrar que $\sim$ es una relación de equivalencia debemos demostrar que es refleja, simétrica y transitiva.
-Sabemos que $a \sim a$ ya que $a \circ a^{-1} = e$ y $e \in H$. Luego, la relación es refleja. 
-Supongamos ahora que $a \sim b$. Para demostrar que es simétrica tenemos que demostrar que $b \sim a$.
-Dado que $a \sim b$, entonces $b \circ a^{-1} \in H$. Tenemos que:
-%\comentarioin{Siempre antes de un eqnarray vamos a poner ``:''? Para ponerlo en todo el documento asi}
-%\comentarioin{Depende del contexto si corresponde usar ``:''. Cuando pienses si corresponde colocar ``:'', piensa si pondrías ``:'' si esto fuera un párrafo. Por ejemplo, ``El elemento neutro de un grupo es único: si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' es parte del primer párrafo de esta sección, y ahí es claro que corresponde usar ``:''. Podríamos haber colocado la frase ``si $e_1$ y $e_2$ satisfacen la condición 2 de la definición anterior, entonces $e_1= e_2$'' en una linea separada, incluso con eqnarray, y en ese caso tendríamos que usar ``:''.}
-\begin{eqnarray*}
-(b \circ a^{-1}) \circ (a \circ b^{-1}) & = & (b \circ (a^{-1} \circ
-a)) \circ b^{-1}\\ 
-& = & (b \circ e) \circ b^{-1}\\ 
-& = & b \circ b^{-1}\\ 
-& = & e
-\end{eqnarray*}
-
-De forma análoga podemos llegar a que $(a \circ b^{-1}) \circ (b \circ
-a^{-1}) = e$.
-Así, podemos afirmar que $(b \circ a^{-1})^{-1} = a \circ b^{-1}$ y concluimos que $a \circ b^{-1}\in H$, ya que $(H, \circ)$ es un subgrupo de $(G, \circ)$ (en particular, el inverso de cada elemento de $H$ está en $H$). Luego, la relación es simétrica.
-Por último, debemos demostrar que la relación es transitiva. Para esto supongamos que $a \sim b$ y $b \sim c$, y debemos demostrar que $a \sim c$.
-Por la definición de $\sim$ sabemos que $b \circ a^{-1} \in H$ y $c \circ b^{-1} \in H$. %, y tenemos que demostrar que $c \circ a^{-1} \in H$.
-Pero $(c \circ b^{-1}) \circ (b \circ a^{-1}) = c \circ a^{-1}$ y sabemos que la operación
-$\circ$ es cerrada en $H$. Por lo tanto $c \circ a^{-1} \in H$, por lo que
-%significa que
-$a\sim c$. Luego, $\sim$ también es transitiva.
-
-\end{proof}
-
-%-----
-
-Sea $[a]_\sim$ la clase de equivalencia de $a \in G$ bajo la relación $\sim$. El siguiente lema relaciona este concepto con $H$ y $G$.
-\begin{lemma}\label{lema grupo 6}
-\hfill
-\begin{enumerate}
-\item $[e]_\sim = H$
-
-\item Para cada $a, b \in G$: $|[a]_\sim| = |[b]_\sim|$
-\end{enumerate}
-\end{lemma}
-
-
-
-\begin{proof}
-%[Demostración del lema \ref{lema grupo 6}.]
-\text{}
-\begin{enumerate}
-\item Se tiene que:
-
-\begin{center}
-\begin{tabular}{lcl}
-$a \in [e]_\sim$ & $\Leftrightarrow$ & $e \sim a$\\
-& $\Leftrightarrow$ & $a \circ e^{-1} \in H$\\
-& $\Leftrightarrow$ & $a \circ e \in H$\\
-& $\Leftrightarrow$ & $a \in H$
-\end{tabular}
-\end{center}
-
-\item Sean $a,b \in G$, y defina la función $f$ de la siguiente forma:
-\begin{eqnarray*}
-f(x) & = & x \circ (a^{-1} \circ b)
-\end{eqnarray*}
-
-Se tiene que:
-
-\begin{center}
-\begin{tabular}{lcl}
-$x \in [a]_\sim$ & $\Rightarrow$ & $a \sim x$\\
-& $\Rightarrow$ & $x \circ a^{-1} \in H$\\
-& $\Rightarrow$ & $(x \circ a^{-1}) \circ e \in H$\\
-& $\Rightarrow$ & $(x \circ a^{-1}) \circ (b \circ b^{-1}) \in H$\\
-& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ b^{-1} \in H$\\
-& $\Rightarrow$ & $f(x) \circ b^{-1} \in H$\\
-& $\Rightarrow$ & $b \sim f(x)$\\
-& $\Rightarrow$ & $f(x) \in [b]_\sim$
-\end{tabular}
-\end{center}
-
-
-Por lo tanto podemos afirmar que $f : [a]_\sim \to [b]_\sim$. Vamos a demostrar que $f$ es una biyección, de lo que podremos
-concluir que $|[a]_\sim| = |[b]_\sim|$.  
-Lo primero es mostrar que $f$ es inyectiva:
-
-\begin{center}
-\begin{tabular}{lcl}
-$f(x) = f(y)$ & $\Rightarrow$ & $x \circ (a^{-1} \circ b) = y \circ
-(a^{-1} \circ b)$\\
-%\comentarioin{Por qué no simplemente multiplicar por el inverso de $(a^{-1}\circ b$ aca?)}\\
-& $\Rightarrow$ & $(x \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}
-= (y \circ (a^{-1} \circ b)) \circ (a^{-1} \circ b)^{-1}$\\
-& $\Rightarrow$ & $x \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})
-= y \circ ((a^{-1} \circ b) \circ (a^{-1} \circ b)^{-1})$\\
-& $\Rightarrow$ & $x \circ e = y \circ e$\\
-& $\Rightarrow$ & $x = y$
-\end{tabular}
-\end{center}
-
-Además, $f$ es sobreyectiva:
-
-\begin{center}
-\begin{tabular}{lcl}
-$y \in [b]_\sim$ & $\Rightarrow$ & $b \sim y$\\
-& $\Rightarrow$ & $y \circ b^{-1} \in H$\\
-& $\Rightarrow$ & $(y \circ b^{-1}) \circ (a \circ a^{-1}) \in H$\\
-& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \circ a^{-1} \in H$\\
-& $\Rightarrow$ & $a \sim ((y \circ b^{-1}) \circ a)$\\
-& $\Rightarrow$ & $((y \circ b^{-1}) \circ a) \in [a]_\sim$
-\end{tabular}
-\end{center}
-
-Sea $x = ((y \circ b^{-1}) \circ a)$. Tenemos que:
-\begin{center}
-\begin{tabular}{lcl}
-$f(x)$ & $=$ & $x \circ (a^{-1} \circ b)$\\
-& $=$ & $((y \circ b^{-1}) \circ a) \circ (a^{-1} \circ b)$\\
-& $=$ & $y \circ (b^{-1} \circ (a \circ a^{-1}) \circ b)$\\
-& $=$ & $y \circ ((b^{-1} \circ e) \circ b)$\\
-& $=$ & $y \circ (b^{-1} \circ b)$\\
-& $=$ & $y \circ e$\\
-& $=$ & $y$ 
-\end{tabular}
-\end{center}
-
-\end{enumerate}
-
-\end{proof}
-A continuación demostraremos el teorema \ref{teo:lagrange} a partir del lema \ref{lema grupo 6}.
-\begin{proof}[Demostración del teorema \ref{teo:lagrange}.]
-Sea $E = \{[a]_{\sim}\mid a\in G\}$ el conjunto de todas las clases de equivalencia de $G$ bajo la relación $\sim$. Como $H = [e]_{\sim}$ y todas las clases de equivalencia tienen la misma cardinalidad, entonces $|G| = |[e]_{\sim}|\cdot |E| = |H|\cdot |E|$. Luego, $|H|$ divide a $|G|$. 
-
+Sea $N$ el número de clases laterales (distintas) bajo $H$. Por la proposición \ref{lema:rel bin} sabemos que $|G|$ es la suma de las cardinalidades de todas las clases laterales distintas. Por otro lado, la proposición \ref{cardinalidad_clases_laterales} nos dice que cada una de dichas clases laterales tiene cardinalidad $|H|$. Luego $|G| = N \cdot |H|$, de lo que se deduce el resultado.
 \end{proof}
 
 %-------------------
