@@ -95,10 +95,10 @@ Dejamos de ejercicio al lector verificar que la potenciación tiene las siguient
 
 
 \begin{example} \label{grupo_ciclico}
-Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso). \hfill$\blacksquare$
+Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
+Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $2 = 1 \circ 1$, $3 = 1\circ1\circ1$, $4 = 1 \circ 1 \circ 1 \circ 1$ y $0 = 1 \circ 1 \circ 1 \circ 1 \circ 1$.
+\hfill$\blacksquare$
 \end{example}
-
-El grupo del ejemplo \ref{grupo_ciclico} tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $4 = 1 + 1 + 1 + 1$. Debido a esta propiedad, al grupo $\mathbb{Z}_n$ se le conoce como el \emph{grupo cíclico} de $n$ elementos. 
 
 \begin{remark} Notemos que, en el contexto del ejemplo \ref{grupo_ciclico}, sería confuso utilizar la notación $1^4$ para referirnos a la cuarta potencia de $1$, pues lo que queremos representar es el número que se obtiene \textit{sumando} $1$ consigo mismo $4$ veces. En estos casos en los que la operación del grupo se asemeja más a la suma que a la multiplicación, se suele usar la notación aditiva para denotar a las potencias. De esta forma, si $n \in \mathbb{Z}$ y $a$ es un elemento del grupo, escribimos $n a$ en lugar de $a^n$. \hfill$\blacksquare$
 \end{remark}
@@ -128,32 +128,29 @@ Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones
 
 %--------
 %A continuación demostraremos la proposición.
-\begin{proof}
-\text{ }
-	\begin{enumerate}
-	\item 
+\begin{proof}[Demostración de 1]
 Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, se cumple que $e_2 \circ e_1 = e_2$.
 Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo que $e_2 \circ e_2 = e_2$
 (notemos que se usa la misma operación en $H$ y en $G$).
 De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$. Usando la proposición \ref{cancelacion_grupos} concluimos que $e_1 = e_2$.
-	\item 
+\end{proof}
+\begin{proof}[Demostración de 2]
 	Sea $a^{-1}$ el inverso de $a$ en $(G, \circ)$. Queremos probar que $b = a^{-1}$. Por la primera propiedad de esta proposición, sabemos que $(G, \circ)$ y $(H,
 \circ)$ tienen el mismo neutro, que llamaremos $e$. 
 Dado que $a^{-1}$ es el inverso de $a$ en $(G, \circ)$, tenemos que $a \circ a^{-1} = e$. Además, dado que $b$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ b = e$. Luego $a \circ a^{-1} = a \circ b$. Usando la proposición \ref{cancelacion_grupos} concluimos que $a^{-1} = b$.
-	\end{enumerate}
 \end{proof}
 
 \begin{example} \label{ejemplo_subgrupo}
-Sea $m$ un entero. Definimos el conjunto
+Sea $m$ un entero positivo. Definimos el conjunto
 $m\mathbb{Z} \coloneq \left\{mk \;\; \mid \;\; k \in \mathbb{Z}\right\}$ de los múltiplos de $m$. Notemos que $m\mathbb{Z}$ es cerrado bajo la operación de suma: si $mk_1$ y $mk_2$ son elementos de $m\mathbb{Z}$, entonces $mk_1 + mk_2 = m(k_1 + k_2) \in m\mathbb{Z}$. Dejamos al lector verificar que $m\mathbb{Z}$ es un subgrupo de $(\mathbb{Z}, +)$. \hfill$\blacksquare$
 \end{example}
 
 
-A continuación hablaremos sobre clases laterales y grupos cocientes. Puesto que todos los grupos que utilizaremos en el documento son abelianos, vamos a agregar esa hipótesis a los teoremas. Ello simplifica significativamente las demostraciones. Sin embargo, hacemos notar que toda esa teoría también puede aplicarse a grupos no abelianos si se consideran algunas sutilezas adicionales. 
+A continuación hablaremos sobre clases laterales y grupos cocientes. Puesto que todos los grupos que utilizaremos en el documento son abelianos, vamos a agregar esa hipótesis a los teoremas para simplificar las demostraciones. Sin embargo, hacemos notar que toda esa teoría también puede aplicarse a grupos no abelianos si se consideran algunas sutilezas adicionales. 
 
 \begin{definition}[Clases laterales] \label{definicion_clase_lateral}
 Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. Dado un elemento $g \in G$, definimos la \emph{clase lateral} de $g$ bajo $H$ como el conjunto
-$$g H \coloneq \left\{ gh \;\; \mid \;\, h \in H \right\}.$$ 
+$$g \circ H \coloneq \left\{ g \circ h \;\; \mid \;\, h \in H \right\}.$$ Al conjunto de las clases laterales de $G$ bajo $H$ se le denota $\faktor{G}{H}$.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -174,9 +171,9 @@ Entonces $a \circ b^{-1} \in H$, lo que significa que $b \sim a$. Esto prueba qu
 $\circ$ es cerrada en $H$. Por lo tanto, $c \circ a^{-1} \in H$. Luego
 $a\sim c$, y $\sim$ es transitiva.
 \end{itemize}
-Ahora veremos que las clases de equivalencia que la relación $\sim$ induce en $G$ son justamente las clases laterales. Para ello, tomemos un $g \in G$ arbitrario, y denotemos por $\left[ g \right]_{\sim}$ a su clase de equivalencia bajo $\sim$. Queremos probar que $gH = \left[ g \right]_\sim$. Veamos que
+Ahora veremos que las clases de equivalencia que la relación $\sim$ induce en $G$ son justamente las clases laterales. Para ello, tomemos un $g \in G$ arbitrario, y denotemos por $\left[ g \right]_{\sim}$ a su clase de equivalencia bajo $\sim$. Queremos probar que $g \circ H = \left[ g \right]_\sim$. Veamos que
 \begin{align*}
-a \in gH \qquad & \Leftrightarrow \qquad \exists\, h \in H \quad a = gh \\
+a \in g \circ H \qquad & \Leftrightarrow \qquad \exists\, h \in H \quad a = g \circ h \\
 & \Leftrightarrow \qquad \exists\, h \in H \quad a \circ g^{-1} = h \\
 & \Leftrightarrow \qquad a \circ g^{-1} \in H \\
 & \Leftrightarrow \qquad g \sim a \\
@@ -186,32 +183,85 @@ a \in gH \qquad & \Leftrightarrow \qquad \exists\, h \in H \quad a = gh \\
 
 
 \begin{prop} \label{cardinalidad_clases_laterales}
-Sea $(G, \circ)$ un grupo abeliano finito, y sea $H$ un subgrupo de $G$. Todas las clases laterales bajo $H$ tienen la misma cardinalidad, es decir, $|aH| = |bH|$ para cualesquiera $a, b \in G$.
+Sea $(G, \circ)$ un grupo abeliano finito, y sea $H$ un subgrupo de $G$. Todas las clases laterales bajo $H$ tienen la misma cardinalidad, es decir, $|a \circ H| = |b \circ H|$ para cualesquiera $a, b \in G$.
 \end{prop}
 
 \begin{proof}
 Vamos a demostrar que todas las clases laterales bajo $H$ tienen cardinalidad $|H|$.
 
-Sea $g \in G$ arbitrario. Queremos probar que $|gH| = |H|$. Definimos la función $f\colon H \rightarrow gH$ tal que $f(h) = gh$. Afirmamos que $f$ es una biyección. En efecto: 
+Sea $g \in G$ arbitrario. Queremos probar que $|g \circ H| = |H|$. Definimos la función $f\colon H \rightarrow (g \circ H)$ tal que $f(h) = g \circ h$. Afirmamos que $f$ es una biyección. En efecto: 
 \begin{itemize}
-\item Sean $h_1, h_2 \in H$ tales que $f(h_1) = f(h_2)$. Entonces $gh_1 = gh_2$. Usando cancelación, obtenemos que $h_1 = h_2$. Luego $f$ es inyectiva.
-\item Sea $b \in gH$. Entonces existe un $h \in H$ tal que $b = gh$. Luego $f(h) = b$, y $f$ es sobreyectiva.
+\item Sean $h_1, h_2 \in H$ tales que $f(h_1) = f(h_2)$. Entonces $g \circ h_1 = g \circ h_2$. Usando cancelación, obtenemos que $h_1 = h_2$. Luego $f$ es inyectiva.
+\item Sea $b \in g \circ H$. Entonces existe un $h \in H$ tal que $b = g \circ h$. Luego $f(h) = b$, y $f$ es sobreyectiva.
 \end{itemize}
 \end{proof}
 
 
 El siguiente es un resultado importante en la teoría de grupos finitos, pues establece una relación entre la cardinalidad de un grupo y la cardinalidad de sus subgrupos. Hacemos notar que el teorema es válido incluso para grupos no abelianos. 
 
-\begin{theorem}[{Teorema de Lagrange}]
+\begin{theorem}[Lagrange]
 \label{teo:lagrange}
 Si $(G, \circ)$ es un grupo abeliano finito y $H$ es un subgrupo de $G$, entonces $|H|$ divide a $|G|$.
 \end{theorem}
 
 \begin{proof}
-Sea $N$ el número de clases laterales (distintas) bajo $H$. Por la proposición \ref{lema:rel bin} sabemos que $|G|$ es la suma de las cardinalidades de todas las clases laterales distintas. Por otro lado, la proposición \ref{cardinalidad_clases_laterales} nos dice que cada una de dichas clases laterales tiene cardinalidad $|H|$. Luego $|G| = N \cdot |H|$, de lo que se deduce el resultado.
+Por la proposición \ref{lema:rel bin} sabemos que $|G|$ es la suma de las cardinalidades de todas las clases laterales de $G$ bajo $H$. Por otro lado, la proposición \ref{cardinalidad_clases_laterales} nos dice que cada una de dichas clases laterales tiene cardinalidad $|H|$. Luego $$|G| = \left| \faktor{G}{H}\right| \cdot |H|,$$ de lo que se deduce el resultado. 
 \end{proof}
 
-%-------------------
+
+\begin{example} \label{ejemplo_clases_laterales}
+Continuamos con el ejemplo \ref{ejemplo_subgrupo}. Consideremos el grupo $(\mathbb{Z}, +)$ junto con el subgrupo $4\mathbb{Z}$. Dado $a \in \mathbb{Z}$, tenemos que $a + 4\mathbb{Z}$ es el conjunto de enteros de la forma $a + 4k$ para algún $k \in \mathbb{Z}$. Notemos que, si $r$ es el resto de dividir $a$ en $4$, entonces $a + 4\mathbb{Z} = r + 4\mathbb{Z}$. Por lo tanto, tenemos que
+$$\faktor{\mathbb{Z}}{4\mathbb{Z}} = \left\{ 4\mathbb{Z},\, 1+4\mathbb{Z},\, 2+4\mathbb{Z},\, 3+4\mathbb{Z}\right\}.$$
+Notemos que, si $a$ es cualquier elemento de $1+4\mathbb{Z}$ y $b$ es cualquier elemento de $2+4\mathbb{Z}$, entonces $a+b$ tendrá resto $3$ al dividirse en $4$, por lo que $a+b \in 3+\mathbb{Z}$. El mismo razonamiento sirve para cualquier otro par de clases laterales. Esto indica que, ultimadamente, no importa los representantes concretos que saquemos de las clases laterales, pues la operación del grupo se comporta bien entre ellas.  
+\hfill$\blacksquare$
+\end{example}
+
+La siguiente proposición se refiere al fenómeno que observamos en el ejemplo \ref{ejemplo_clases_laterales}.
+
+\begin{prop}[Grupo cociente] \label{grupo_cociente}
+Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. La siguiente operación binaria\footnote{El símbolo $\ast$ no es estándar para denotar la operación en el grupo cociente. Generalmente se utiliza el mismo símbolo de la operación de $G$. En este caso, evitamos hacer eso por claridad.} $\ast$ en $\faktor{G}{H}$ está bien definida, y el conjunto $\faktor{G}{H}$ forma un grupo abeliano con ella:
+$$\left(a \circ H \right) \ast \left( b \circ H \right) \coloneqq  (a \circ b) \circ H .$$
+\end{prop}
+
+\begin{proof}
+Lo primero que debemos mostrar es que $\ast$ está bien definida, es decir, que $\left(a \circ H \right) \ast \left( b \circ H \right)$ no depende de los representantes concretos $a$ y $b$. Para ello, tomaremos representantes distintos, $a' \in a \circ H$ y $b' \in b \circ H$, y mostraremos que $(a \circ b) \circ H = (a' \circ b') \circ H$. Tenemos que existen $h_1, h_2 \in H$ tales que $a' = a \circ h_1$ y $b' = b \circ h_2$. Por lo tanto, $a' \circ b' = (a \circ b) \circ (h_1 \circ h_2)$. Como $h_1 \circ h_2 \in H$, esto último muestra que $a' \circ b' \in (a \circ b) \circ H$, y luego $(a \circ b) \circ H = (a' \circ b') \circ H$. Concluimos que $\ast$ está bien definida.
+
+Ahora debemos probar que $\left(\faktor{G}{H},\, \ast\right)$ es un grupo abeliano. La asociatividad y la conmutatividad se heredan directamente de $\circ$ hacia $\ast$. Dejamos al lector verificar que el elemento neutro es $H = e \circ H$, y que el inverso de $a \circ H$ es $a^{-1} \circ H$.
+\end{proof}
+
+Hacemos notar que, en la proposición \ref{grupo_cociente}, $\faktor{G}{H}$ no es un subgrupo de $G$. De hecho, ni siquiera es un subconjunto de $G$. Veamos otra vez el ejemplo \ref{ejemplo_clases_laterales}. Las cuatro clases laterales no son enteros, sino subconjuntos de $\mathbb{Z}$. Ahora sabemos que esas cuatro clases laterales forman un grupo, y, si miramos con atención, notaremos que ese grupo es esencialmente idéntico al grupo de $\mathbb{Z}_4 = \left\{0, 1, 2, 3\right\}$ con la operación de suma en módulo $4$. Resulta incómodo no poder afirmar que ambos grupos son idénticos solo porque sus elementos tengan naturaleza distinta. Esto motiva la siguiente definición.
+
+\begin{definition}[Isomorfismo] \label{isomorfismo_de_grupo}
+Sean $(G_1, \circ_1)$ y $(G_2, \circ_2)$ dos grupos. Diremos que una función $\phi\colon G_1 \rightarrow G_2$ es un \emph{isomorfismo} si $\phi$ es una biyección y, además,
+$$\forall\, a, b \in G_1 \qquad \phi(a \circ_1 b) = \phi(a) \circ_2 \phi(b).$$
+Si existe un isomorfismo, se dice que los grupos $G_1$ y $G_2$ son \emph{isomorfos}, y se escribe $G_1 \simeq G_2$. \hfill$\blacksquare$
+\end{definition}
+
+En otras palabras, un isomorfismo es una biyección entre los grupos que también biyecta las relaciones definidas por las operaciones binarias. Uno puede pensar que son traductores. Por lo tanto, según la definición \ref{isomorfismo_de_grupo}, operar dos elementos $a, b \in G_1$ y luego aplicar el traductor $\phi$ tiene el mismo efecto que aplicar el traductor a $a$ y a $b$ por separado, y luego operarlos según la operación de $G_2$.
+
+No es difícil convencerse de que dos grupos isomorfos tienen exactamente las misma propiedades. Por ejemplo, si $G_1 \simeq G_2$, entonces $G_1$ es abeliano si y solo si $G_2$ es abeliano, o $G_1$ tiene un subgrupo de $n$ elementos si y solo si $G_2$ tiene un subgrupo de $n$ elementos.
+
+
+\begin{example} \label{ejemplo_exponencial}
+Se puede verificar que los números reales, $\mathbb{R}$, forman un grupo con la suma. Por otro lado, los reales positivos, $\mathbb{R}^{+}$, forman un grupo con la multiplicación. La función $\varphi\colon \mathbb{R} \rightarrow \mathbb{R}^{+}$ dada por $\varphi(x) = e^x$ es biyectiva, y además $e^{x+y} = e^x \cdot e^y$. Luego $(\mathbb{R}, +) \simeq (\mathbb{R}^{+}, \cdot)$. \hfill$\blacksquare$
+\end{example}
+
+Resumiremos nuestra discusión del ejemplo \ref{ejemplo_clases_laterales} en la siguiente proposición.
+
+\begin{prop}
+Sea $m$ un entero positivo, y considere los grupos abelianos $(\mathbb{Z}, +)$ y $(\mathbb{Z}_m, +)$. Entonces $$\faktor{\mathbb{Z}}{m \mathbb{Z}} \; \simeq \; \mathbb{Z}_m.$$
+\end{prop}
+
+Los grupos isomorfos a algún $\mathbb{Z}_m$ son tan ubicuos que tienen un nombre propio.
+
+\begin{definition}[Grupo cíclico finito]
+Se dice que un grupo $G$ es \emph{cíclico} de $m$ elementos si es isomorfo a $(\mathbb{Z}_m, +)$.
+\end{definition}
+
+
+% Ale: aquí voy.
+
+
 Otro concepto que nos interesa en teoría de grupos es el orden de los
 elementos en un grupo.  Dada un elemento $a$ en un grupo $(G,\circ)$ y
 $m \in \mathbb{Z}$, se define $a^m$ de la siguiente forma. Si $m > 0$,
