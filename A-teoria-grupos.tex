@@ -12,7 +12,7 @@
 %\end{enumerate}
 %\end{definition}
 %\comentarioin{Al parecer los nombres derivados de extranjeros se escriben sin mayuscula: http://aplica.rae.es/orweb/cgi-bin/v.cgi?i=huRPfQssalCJLqSk}
-\begin{definition}[Grupo, neutro, inverso, grupo abeliano]
+\begin{definition}[Grupo, neutro, inverso, grupo abeliano, orden]
 Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon G\times G\to G$ es una función (total) que satisface los siguientes axiomas:
 \begin{enumerate}
 	\item $\circ$ es asociativa: para todos $a,b,c \in G$ se cumple que $(a \circ b) \circ c = a \circ (b
@@ -24,8 +24,9 @@ Un \emph{grupo} es un par $(G,\circ)$, donde $G$ es un conjunto y $\circ \colon 
 \end{enumerate}
 Decimos que $(G,\circ)$ es un \emph{grupo abeliano} si es un grupo que además cumple la siguiente propiedad:
 \begin{enumerate}
-	\item[4.] $\circ$ es conmutativa: para todos $a,b\in G$ se cumple que $a\circ b = b\circ a$.  \hfill$\blacksquare$
+	\item[4.] $\circ$ es conmutativa: para todos $a,b\in G$ se cumple que $a\circ b = b\circ a$. 
 \end{enumerate}
+Al número $|G|$ se le llama el \emph{orden} del grupo $(G, \circ)$. \hfill$\blacksquare$
 \end{definition}
 
 Cuando la operación $\circ$ está clara por contexto, es usual referirse al grupo $(G, \circ)$ escribiendo simplemente $G$. 
@@ -35,7 +36,7 @@ El elemento neutro de un grupo es único.
 \end{proposition}
 
 \begin{proof}
-Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos elementos neutros. Como $e$ es neutro, tenemos que $e \circ e' = e'$. Por otro lado, como $e'$ es neutro, tenemos que $e \circ e' = e$. Por transitividad concluimos que $e = e'$.
+Sea $(G,\circ)$ un grupo, y supongamos que $e, e' \in G$ son ambos neutros. Como $e$ es neutro, tenemos que $e \circ e' = e'$. Pero $e'$ también es neutro, así que $e \circ e' = e$. Luego, por transitividad, $e = e'$.
 \end{proof}
 
 En el contexto de la teoría de grupos, usualmente la letra $e$ está reservada para el neutro. Sin embargo, lo ideal es siempre especificar la notación. 
@@ -197,7 +198,7 @@ Sea $g \in G$ arbitrario. Queremos probar que $|g \circ H| = |H|$. Definimos la 
 \end{proof}
 
 
-El siguiente es un resultado importante en la teoría de grupos finitos, pues establece una relación entre la cardinalidad de un grupo y la cardinalidad de sus subgrupos. Hacemos notar que el teorema es válido incluso para grupos no abelianos. 
+El siguiente es un resultado importante en la teoría de grupos finitos, pues establece una relación entre el orden de un grupo y el orden de sus subgrupos. Hacemos notar que el teorema es válido incluso para grupos no abelianos. 
 
 \begin{theorem}[Lagrange]
 \label{teo:lagrange}
@@ -262,19 +263,10 @@ Se dice que un grupo $G$ es \emph{cíclico} de $m$ elementos si es isomorfo a $(
 % Ale: aquí voy.
 
 
-Otro concepto que nos interesa en teoría de grupos es el orden de los
-elementos en un grupo.  Dada un elemento $a$ en un grupo $(G,\circ)$ y
-$m \in \mathbb{Z}$, se define $a^m$ de la siguiente forma. Si $m > 0$,
-entonces $a^m$ es el resultado de operar $a$ consigo mismo $m$ veces
-bajo la operación $\circ$. Si $m = 0$, entonces $a^m = e$, donde $e$
-es el neutro en $(G,\circ)$. Si $m < 0$, entonces $a^m$ es el
-resultado de operar $a^{-1}$ consigo mismo $m$ veces bajo la operación
-$\circ$, donde $a^{-1}$ es el inverso de $a$ en $(G, \circ)$. Con esto
-tenemos que:
+La siguiente definición será clave para nuestros propósitos.
 
-\begin{definition}\label{def_orden}
-	El orden de un elemento $a$ de un grupo $(G,\circ)$ es el menor entero positivo $m$ tal que $a^m = e$, donde
-        %$a^m$ es el resultado de operar $a$ bajo $\circ$ en el grupo, y el elemento
+\begin{definition}[Orden de un elemento]\label{def_orden}
+	Sea $(G,\circ)$ un grupo y $a \in G$. El \emph{orden} de $a$ es el menor entero positivo $m$ tal que $a^m = e$, donde
         $e$ es el elemento neutro del grupo. Si este valor $m$ no existe, decimos que $a$ tiene orden infinito. Denotamos al orden del elemento $a$ en $G$ como $O_G(a)$.
 \end{definition} 
 Nótese que utilizamos la misma notación de orden para denotar la cantidad de elementos de un grupo; sin embargo, esto no genera confusión ya que es claro cuando se habla de un grupo o de un elemento de un grupo. 
