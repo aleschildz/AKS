@@ -74,11 +74,9 @@ El conjunto $\mathbb{Z}$ de los números enteros forma un grupo con la operació
 \end{proposition}
 
 \begin{proof}
-Probaremos solo la primera afirmación: la demostración de la es análoga. Tenemos que
+Probaremos solo la primera afirmación: la segunda se demuestra análogamente. Tenemos que
 $$a = a \circ e = a \circ \left( c \circ c^{-1} \right) = \left(a \circ c \right) \circ c^{-1} = \left(b \circ c \right) \circ c^{-1} = b \circ \left( c \circ c^{-1} \right) = b \circ e = b.$$
 \end{proof}
-
-La siguiente definición es útil cuando necesitamos operar un elemento de un grupo consigo mismo varias veces. 
 
 \begin{definition}[Potenciación en un grupo]
 Sea $(G, \circ)$ un grupo con neutro $e$ y $a \in G$. Definimos $a^0 \coloneqq e$ y, si $n$ es un entero positivo, definimos $a^n \coloneqq \underbrace{a \circ a \circ \cdots \circ a}_{n \text{ veces}}$ y $a^{-n} \coloneqq \underbrace{a^{-1} \circ a^{-1} \circ \cdots \circ a^{-1}}_{n \text{ veces}}$. \hfill$\blacksquare$
@@ -97,7 +95,7 @@ Dejamos de ejercicio al lector verificar que la potenciación tiene las siguient
 
 \begin{example} \label{grupo_ciclico}
 Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
-Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $2 = 1 \circ 1$, $3 = 1\circ1\circ1$, $4 = 1 \circ 1 \circ 1 \circ 1$ y $0 = 1 \circ 1 \circ 1 \circ 1 \circ 1$.
+Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $2 = 1 + 1$, $3 = 1 + 1 + 1$, $4 = 1 + 1 + 1 + 1$ y $0 = 1 + 1 + 1 + 1 + 1$ (considerando la suma en módulo $5$).
 \hfill$\blacksquare$
 \end{example}
 
@@ -105,7 +103,7 @@ Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus 
 \end{remark}
 
 
-La siguiente definición es central en la teoría de grupos. Se refiere a los grupos que viven naturalmente dentro de otros grupos.
+La siguiente definición se refiere a los grupos que viven naturalmente dentro de otros grupos.
 
 %--------------------------------------
 \begin{definition}
@@ -115,7 +113,7 @@ Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph
 Para probar que $(H, \circ)$ es un subgrupo de $(G, \circ)$ debemos, incluso antes de verificar los axiomas, comprobar que $H$ sea cerrado bajo la operación binaria $\circ$. En otras palabras, necesitamos que $\circ$ restringida a $H \times H$ tenga recorrido contenido en $H$. 
 
 
-Notemos que, \textit{a priori}, no sabemos si el nuetro y los inversos de un subgrupo coinciden con los del grupo más grande. Demostraremos a continuación que eso efectivamente ocurre.
+Notemos que, \textit{a priori}, no sabemos si el neutro y los inversos de un subgrupo coinciden con los del grupo más grande. Demostraremos a continuación que eso efectivamente ocurre.
 
 
 \begin{proposition}
@@ -127,18 +125,17 @@ Sea $(H, \circ)$ un subgrupo del grupo $(G, \circ)$. Las siguientes afirmaciones
 	\end{enumerate}
 \end{proposition}
 
-%--------
-%A continuación demostraremos la proposición.
-\begin{proof}[Demostración de 1]
-Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, se cumple que $e_2 \circ e_1 = e_2$.
+
+\begin{proof} \text{ }
+\begin{enumerate}
+\item Como $e_1$ es el neutro en $(G, \circ)$, $e_2\in H$ y $H \subseteq G$, se cumple que $e_2 \circ e_1 = e_2$.
 Por otro lado, sabemos que $e_2$ es el neutro en $(H, \circ)$, por lo que $e_2 \circ e_2 = e_2$
 (notemos que se usa la misma operación en $H$ y en $G$).
 De esto concluimos que $e_2 \circ e_1 = e_2 \circ e_2$. Usando la proposición \ref{cancelacion_grupos} concluimos que $e_1 = e_2$.
-\end{proof}
-\begin{proof}[Demostración de 2]
-	Sea $a^{-1}$ el inverso de $a$ en $(G, \circ)$. Queremos probar que $b = a^{-1}$. Por la primera propiedad de esta proposición, sabemos que $(G, \circ)$ y $(H,
+\item Sea $a^{-1}$ el inverso de $a$ en $(G, \circ)$. Queremos probar que $b = a^{-1}$. Por la primera propiedad de esta proposición, sabemos que $(G, \circ)$ y $(H,
 \circ)$ tienen el mismo neutro, que llamaremos $e$. 
 Dado que $a^{-1}$ es el inverso de $a$ en $(G, \circ)$, tenemos que $a \circ a^{-1} = e$. Además, dado que $b$ es el inverso de $a$ en $(H, \circ)$, se cumple que $a \circ b = e$. Luego $a \circ a^{-1} = a \circ b$. Usando la proposición \ref{cancelacion_grupos} concluimos que $a^{-1} = b$.
+\end{enumerate}
 \end{proof}
 
 \begin{example} \label{ejemplo_subgrupo}
