@@ -106,9 +106,13 @@ Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus 
 La siguiente definición se refiere a los grupos que viven naturalmente dentro de otros grupos.
 
 %--------------------------------------
-\begin{definition}
+\begin{definition}[Subgrupo]
 Sea $(G,\circ)$ un grupo. Se dice que un subconjunto $H \subseteq G$ es un \emph{subgrupo} de $(G,\circ)$ si $(H, \circ)$ es un grupo (con la misma operación). \hfill$\blacksquare$
 \end{definition}
+
+\begin{remark}
+	Todos los subgrupos de un grupo abeliano son abelianos. \hfill$\blacksquare$
+	\end{remark}
 
 Para probar que $(H, \circ)$ es un subgrupo de $(G, \circ)$ debemos, incluso antes de verificar los axiomas, comprobar que $H$ sea cerrado bajo la operación binaria $\circ$. En otras palabras, necesitamos que $\circ$ restringida a $H \times H$ tenga recorrido contenido en $H$. 
 
@@ -250,65 +254,47 @@ Resumiremos nuestra discusión del ejemplo \ref{ejemplo_clases_laterales} en la 
 Sea $m$ un entero positivo, y considere los grupos abelianos $(\mathbb{Z}, +)$ y $(\mathbb{Z}_m, +)$. Entonces $$\faktor{\mathbb{Z}}{m \mathbb{Z}} \; \simeq \; \mathbb{Z}_m.$$
 \end{prop}
 
-Los grupos isomorfos a algún $\mathbb{Z}_m$ son tan ubicuos que tienen un nombre propio.
 
-\begin{definition}[Grupo cíclico finito]
-Se dice que un grupo $G$ es \emph{cíclico} de $m$ elementos si es isomorfo a $(\mathbb{Z}_m, +)$.
-\end{definition}
-
-
-% Ale: aquí voy.
-
-
-La siguiente definición será clave para nuestros propósitos.
+La siguiente es otra definición clave en la teoría de grupos.
 
 \begin{definition}[Orden de un elemento]\label{def_orden}
-	Sea $(G,\circ)$ un grupo y $a \in G$. El \emph{orden} de $a$ es el menor entero positivo $m$ tal que $a^m = e$, donde
-        $e$ es el elemento neutro del grupo. Si este valor $m$ no existe, decimos que $a$ tiene orden infinito. Denotamos al orden del elemento $a$ en $G$ como $O_G(a)$.
+	Sea $(G,\circ)$ un grupo con neutro $e$, y sea $a \in G$. El \emph{orden} de $a$, denotado $\ord{G}(a)$, es el menor entero positivo $m$ tal que $a^m = e$. Si dicho $m$ no existe, decimos que $a$ tiene \emph{orden infinito}. \hfill$\blacksquare$
 \end{definition} 
-Nótese que utilizamos la misma notación de orden para denotar la cantidad de elementos de un grupo; sin embargo, esto no genera confusión ya que es claro cuando se habla de un grupo o de un elemento de un grupo. 
-A continuación definimos el conjunto generado por un elemento en un grupo, y veremos que está directamente relacionado con el orden del mismo. 
+
+Notemos que estamos usando el término «orden» en dos sentidos distintos, pues ya habíamos definido el orden de un grupo como su cardinalidad. Esto no suele generar confusión, ya que es claro cuando se habla del grupo y cuando se habla de un elemento de él. 
  
-\begin{definition}\label{def_gen}
-	El conjunto generado por un elemento $a$ en un grupo $(G,\circ)$ es el conjunto
-        \begin{eqnarray*}
-        \langle a\rangle & := & \{a^k\mid k\in\mathbb{Z}\}.
-        \end{eqnarray*}
-        Decimos que $a$ es el generador del grupo.
+\begin{definition}[Conjunto generado]\label{def_gen}
+	Sea $(G,\circ)$ un grupo, y sea $a \in G$.
+	El \emph{conjunto generado} por $a$ es
+	$$\langle a \rangle \; \coloneq \; \{a^k\; \mid \; k\in\mathbb{Z}\}.$$
+    \hfill$\blacksquare$
 \end{definition}
 
-Nótese que la definición del conjunto generado por un elemento $a$
-depende directamente del grupo $G$ al cual pertenece $a$. En
-particular, se tiene que $a^m\in G$ para cada número entero $m$, y
-por ende $\langle a\rangle\subseteq G$ (notar que utilizamos la misma
-operación $\circ$ en el grupo $G$ y la definición de $\langle
-a \rangle$). A continuación, mostraremos una propiedad fundamental de
-los conjuntos generados.
+A pesar de que la notación no lo indica, en la definición \ref{def_gen} el conjunto generado $\langle a \rangle$ depende del grupo $G$ al cual pertenece $a$. Usualmente esto está claro por contexto, pero también podemos usar la notación $\langle a \rangle_{G}$ para evitar ambigüedades.
 
 
 \begin{proposition}\label{prop-generado}
-	Si $a$ es un elemento de un grupo $(G,\circ)$, entonces $(\langle a\rangle ,\circ)$ es un subgrupo de $(G,\circ)$. 
-%        A los grupos que pueden ser generados por un solo elemento los denominamos grupos cíclicos.
+	Sea $(G,\circ)$ un grupo, y sea $a \in G$. Entonces $(\langle a\rangle , \circ)$ es un subgrupo abeliano de $(G,\circ)$. 
 \end{proposition} 
 
 
 \begin{proof}
-Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
-que $(\langle a\rangle,\circ)$ es un grupo. Nótese que la operación
-$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
-a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{Z}$,
-por lo que $b \circ c \in \langle a\rangle$ puesto que $b \circ c =
-a^{m+n}$ y $m+n \in \mathbb{Z}$. Tenemos que demostrar entonces los
-tres axiomas de grupos para $(\langle a\rangle, \circ)$. La
-asociatividad de la operación $\circ$ se cumple trivialmente puesto
-que $(G,\circ)$ es un grupo. Además, dado que $a^0 = e$, donde $e$ es
-el neutro de $(G, \circ)$, tenemos que $e \in \langle a\rangle$ y
-$(\langle a\rangle, \circ)$ tiene un elemento neutro. Finalmente, si
-$b \in \langle a\rangle$, se tiene que $b = a^n$ para
-$n \in \mathbb{Z}$, de lo cual deducimos que $b$ tiene inverso en
-$(\langle a\rangle, \circ)$ ya que $a^{-n} \in \langle
-a\rangle$ y $a^n \circ a^{-n} = a^{-n} \circ a^n = e$ por definición de la operación $a^n$.
+Como $\langle a\rangle\subseteq G$, solo hace falta demostrar
+que $(\langle a\rangle,\circ)$ es un grupo. Tenemos que verificar la clausura de la operación y los axiomas:
+\begin{itemize}
+\item Para la clausura, sean $b,c \in \langle
+a\rangle$. Sabemos que existen $n, m \in \mathbb{Z}$ tales que $b = a^m$ y $c = a^n$. Luego $b \circ c = a^{m+n} \in \langle a\rangle$, y $\circ$ es cerrada en $\langle a \rangle$.
+\item La asociatividad se hereda directamente.
+\item Por definición tenemos que $a^0$ es el neutro del grupo, y $a^0 \in \langle a \rangle$. 
+\item Si $b \in \langle a \rangle$, entonces $b = a^n$ para algún $n \in \mathbb{Z}$. Tenemos que $a^{-n} \in \langle a \rangle$ es el inverso de $b$, por lo que $\langle a \rangle$ es cerrado bajo tomar inversos.
+\item Para la conmutatividad, sean $b,c \in \langle
+	a\rangle$. Sabemos que existen $n, m \in \mathbb{Z}$ tales que $b = a^m$ y $c = a^n$. Luego $b \circ c = a^{m + n} = a^{n + m} = c \circ b$.
+\end{itemize}
 \end{proof}
+
+\begin{definition}[Grupo cíclico, generador] 
+Decimos que un grupo $(G, \circ)$ es \emph{cíclico} si existe un $a \in G$ tal que $G = \langle a \rangle$. En dicho caso, decimos que $a$ es un \emph{generador} de $G$. \hfill$\blacksquare$
+\end{definition}
 
 Si para un grupo $(G, \circ)$ existe un elemento $a \in G$ tal que
 $\langle a \rangle = G$, entonces decimos que $(G,\circ)$ es un grupo
