@@ -256,12 +256,6 @@ Sea $m$ un entero positivo, y considere los grupos abelianos $(\mathbb{Z}, +)$ y
 
 
 La siguiente es otra definición clave en la teoría de grupos.
-
-\begin{definition}[Orden de un elemento]\label{def_orden}
-	Sea $(G,\circ)$ un grupo con neutro $e$, y sea $a \in G$. El \emph{orden} de $a$, denotado $\ord{G}(a)$, es el menor entero positivo $m$ tal que $a^m = e$. Si dicho $m$ no existe, decimos que $a$ tiene \emph{orden infinito}. \hfill$\blacksquare$
-\end{definition} 
-
-Notemos que estamos usando el término «orden» en dos sentidos distintos, pues ya habíamos definido el orden de un grupo como su cardinalidad. Esto no suele generar confusión, ya que es claro cuando se habla del grupo y cuando se habla de un elemento de él. 
  
 \begin{definition}[Conjunto generado]\label{def_gen}
 	Sea $(G,\circ)$ un grupo, y sea $a \in G$.
@@ -292,130 +286,65 @@ a\rangle$. Sabemos que existen $n, m \in \mathbb{Z}$ tales que $b = a^m$ y $c = 
 \end{itemize}
 \end{proof}
 
-\begin{definition}[Grupo cíclico, generador] 
-Decimos que un grupo $(G, \circ)$ es \emph{cíclico} si existe un $a \in G$ tal que $G = \langle a \rangle$. En dicho caso, decimos que $a$ es un \emph{generador} de $G$. \hfill$\blacksquare$
+\begin{definition}[Generador, grupo cíclico] 
+Sea $(G, \circ)$ un grupo. Decimos que un elemento $a \in G$ es un \emph{generador} de $G$ si $G = \langle a \rangle$. Decimos que $(G, \circ)$ es \emph{cíclico} si tiene un generador.
+\hfill$\blacksquare$
 \end{definition}
 
-Si para un grupo $(G, \circ)$ existe un elemento $a \in G$ tal que
-$\langle a \rangle = G$, entonces decimos que $(G,\circ)$ es un grupo
-cíclico. Desde la proposición \ref{prop-generado}, podemos observar
-que para un grupo finito $(G, \circ)$ y un elemento $a \in G$, se
-tiene que $|\langle a\rangle |$ divide a $|G|$ por el teorema de
-Lagrange. En la siguiente proposición, establecemos para grupos
-finitos la relación directa que existe entre el orden de un elemento
-$a$ y el orden del grupo $\langle a \rangle$.
+\begin{remark}
+Un grupo cíclico puede tener más de un generador. Por ejemplo, vimos anteriormente vimos que $1$ es un generador de $(\mathbb{Z}_5, +)$ (ver ejemplo \ref{grupo_ciclico}). Sin embargo, también $4$ es un generador, pues $4 + 4 = 3$, $4 + 4 + 4 = 2$, $4 + 4 + 4 + 4 = 1$ y $4 + 4 + 4 + 4 + 4 = 0$ (considerando todas las sumas en módulo $5$).
+\hfill$\blacksquare$
+\end{remark}
 
-\begin{proposition}\label{prop-orden}
-Sea $a$ un elemento de un grupo finito $(G,\circ)$, y sea $m =
-|\langle a \rangle|$. Entonces se tiene que $\langle a\rangle
-= \{a^0,\ldots,a^{m-1}\}$ y $O_G(a) = m$.
+\begin{definition}[Orden de un elemento]\label{def_orden}
+	Sea $(G,\circ)$ un grupo con neutro $e$, y sea $a \in G$. El \emph{orden} de $a$, denotado $\ord{G}(a)$, es el menor entero positivo $m$ tal que $a^m = e$. Si dicho $m$ no existe, decimos que $a$ tiene \emph{orden infinito}. \hfill$\blacksquare$
+\end{definition} 
+
+\begin{remark}
+En cualquier grupo, el neutro es el único elemento con orden $1$. \hfill$\blacksquare$
+\end{remark}
+
+Estamos usando el término «orden» en dos sentidos distintos, pues ya habíamos definido el orden de un grupo como su cardinalidad. Esto no suele generar confusión, ya que es claro cuando se habla del grupo y cuando se habla de un elemento de él. 
+
+\begin{proposition} \label{prop-orden}
+Sea $(G, \circ)$ un grupo, y sea $a \in G$ un elemento con orden finito, digamos $\ord{G}(a) = m$. Entonces
+$$\langle a \rangle = \{ a^0, a^1, \dots, a^{m-1}\}.$$
+Más aún, $(\langle a \rangle, \circ) \simeq (\mathbb{Z}_m, +)$.
 \end{proposition}
-%\comentarioin{hablar sobre $a=e$ y tambien sobre grupo ciclico}
-\begin{proof}
-Dado que $G$ es un grupo finito, existen $i,j \in \mathbb{N}$ tales que
-$i < j$ y $a^i = a^j$. De esto concluimos que $a^{j-i} = e$, y sabemos
-que $O_G(a)$ es un número entero positivo. Sea $k = O_G(a)$. Tenemos
-entonces las siguientes propiedades.
-\begin{enumerate}
-\item
-$a^i \neq a^j$ para cada $i,j\in [0,k-1]$ tales que  $i \neq j$. Si
-suponemos que esto es falso, entonces existen $i,j\in [0,k-1]$ tales
-que $i < j$ y $a^i = a^j$. Pero esto implica que $a^{j-i} = e$, lo
-cual contradice la definición de $k$ puesto que $0 < j-i < k$.
 
-\item
-Para cada $i \in \mathbb{Z}$, existe $j \in [0,k-1]$ tal que $a^i =
-a^j$. Sabemos que $i = \alpha \cdot k + \beta$, con $\alpha \in \mathbb{Z}$
-y $0 \leq \beta < k$. Tenemos entonces que:
-\begin{eqnarray*}
-a^i & = & a^{\alpha \cdot k + \beta}\\
-& = & (a^k)^{\alpha} \circ a^{\beta}\\
-& = & e^{\alpha} \circ a^{\beta}\\
-& = & e \circ a^{\beta}\\
-& = & a^{\beta}.
-\end{eqnarray*}
-Por lo tanto se cumple la propiedad enunciada con $j = \beta$.
-\end{enumerate}
-De las dos propiedades anteriores deducimos que $\langle a \rangle
-= \{a^0, \ldots, a^{k-1}\}$ y $|\langle a \rangle| = |\{a^0, \ldots,
-a^{k-1}\}| = k$, lo cual concluye la demostración de la proposición
-puesto que $k = O_G(a)$.
-%Notemos que si $a=e$, donde $e$ es el neutro
-%de $(G, \circ)$, entonces la proposición se cumple puesto que $\langle
-%e \rangle = \{e\}$, $|\langle e \rangle| = 1$ y $O_G(e) =
-%1$. Supongamos que $a\neq e$.  Como $\langle a\rangle\subseteq G$ y
-%$G$ es finito, existe un número natural $k$ tal que $a^k = a^\ell$
-%para algún $\ell \in [0,k-1]$. Sea $k$ el número natural más pequeño
-%que cumple con la propiedad anterior.  Como $a\neq e$ se tiene que
-%$k\geq 2$.  A continuación mostraremos que necesariamente
-%$\ell=0$. Supongamos por contradicción que $\ell>0$. Entonces tenemos
-%que:
-%\begin{eqnarray}
-%	a^k\ = \ a^\ell
-%	&\Rightarrow & a^k\cdot a^{-\ell} \ = \ a^\ell\cdot a^{-\ell}\nonumber\\
-%	&\Rightarrow & a^{k-\ell} \ = \ a^0 \ = \ e \label{ecuacion contradiccion}
-%\end{eqnarray}
-%Como $0 < \ell < k$, tenemos que $k > k-\ell > 0$.
-%%Notemos que como $j<k$ entonces $k-j>k-k=0$. Por otro lado, como $j>0$ entonces $k-j< k-0 = k$.
-%Pero esto nos lleva a una contradicción, ya que \eqref{ecuacion
-%contradiccion} contradice nuestra elección de $k$. Así, concluimos que
-%$a^k=e$. Además, como $k$ es el menor número natural tal que $a^k
-%= a^\ell$ para algún $\ell \in [0,k-1]$,
-%%$k$ es el menor número natural que cumple esto,
-%se tiene $a^i\neq a^j$ para todo $i,j\in [0,k-1]$ con $i \neq j$.
+\begin{proof} Sea $e$ el neutro de $(G, \circ)$. Por definición, $m$ es el menor entero positivo tal que $a^m = e$.
+
+Veamos primero que $\langle a \rangle \subseteq \{ a^0, a^1, \dots, a^{m-1}\}$. Sea $b \in \langle a \rangle$ arbitrario, de modo que $b = a^k$ para algún $k \in \mathbb{Z}$. Por el algoritmo de la división de enteros, existe un $q \in \mathbb{Z}$ y un $r \in \{0, 1, \dots, m-1\}$ de modo que $k = mq+r$. Entonces $b = a^{mq+r} = \left(a^m\right)^q \circ a^r = e^q \circ a^r = a^r$. Como $a^r \in \{ a^0, a^1, \dots, a^{m-1}\}$, esto prueba que $\langle a \rangle \subseteq \{ a^0, a^1, \dots, a^{m-1}\}$. Por otro lado, es claro que $\{ a^0, a^1, \dots, a^{m-1}\} \subseteq \langle a \rangle$, así que tenemos la igualdad.
+
+Ahora estableceremos el isomorfismo. Esto, en particular, implicará que $\abs{\langle a \rangle} = m$. Consideremos la función $\phi\colon \mathbb{Z}_m \rightarrow \{ a^0, a^1, \dots, a^{m-1}\}$ dada por $\phi(k) = a^k$. Claramente $\phi$ es sobreyectiva.
+
+Para la inyectividad, sean $i, j \in \mathbb{Z}_m$ tales que $a^i = \phi(i) = \phi(j) = a^j$. Sin pérdida de generalidad, podemos asumir que $i \geq j$. Entonces $$a^{i - j} = a^i \cdot a^{-j} = a^i \cdot \left(a^j \right)^{-1} = a^i \cdot \left(a^i \right)^{-1} = e.$$
+Como $0 \leq i - j < m$, no puede ocurrir que $i-j$ sea un entero positivo, pues $m$ es el menor entero positivo $k$ tal que $a^k = e$. Esto obliga a que $i-j = 0$, es decir, $\phi$ es inyectiva.
+
+Por último, veamos que $\phi$ es un isomorfismo. Sean $i, j \in \mathbb{Z}_m$. Tenemos que
+$$\phi(i + j) = a^{i+j} = a^i \cdot a^j = \phi(i) \cdot \phi(j).$$ Esto completa la demostración.
 \end{proof}
 
-%Ahora estamos listos para demostrar la proposición \ref{prop-generado}.
+\begin{corollary}
+Si $(G, \circ)$ es un grupo abeliano finito y $a \in G$, entonces $\ord{G}(a)$ divide a $\abs{G}$.
+\end{corollary}
 
-%\begin{proof}[Demostración proposición \ref{prop-generado}]
-%Como $\langle a\rangle\subseteq G$, entonces solo hace falta demostrar
-%que $(\langle a\rangle,\circ)$ es un grupo. Para esto primero debemos demostrar que Nótese que la operación
-%$\circ$ es cerrada en $\langle a\rangle$: si $b,c \in \langle
-%a\rangle$, entonces $b = a^m$ y $c = a^n$ con $m,n \in \mathbb{N}$,
-%por lo que $b \circ c \in \langle a\rangle$ ya que $b \circ c =
-%a^{m+n}$. Tenemos que demostrar entonces los tres axiomas de grupos
-%para $(\langle a\rangle, \circ)$. La asociatividad de la operación
-%$\circ$ se cumple trivialmente puesto que $(G,\circ)$ es un
-%grupo. Además, dado que $a^0 = e$, donde $e$ es el neutro de
-%$(G, \circ)$, tenemos que $e \in \langle a\rangle$ y $(\langle
-%a\rangle, \circ)$ tiene un elemento neutro. Solo nos queda demostrar
-%entonces que cada elemento de $\langle a\rangle$ tiene un inverso.
-%
-%Para esto demostramos los tres axiomas de los grupos.
-%\begin{enumerate}
-%	\item Para todo $b,c,d\in\langle a\rangle$ se cumple que $(b\circ c )\ci%rc d=b\circ (c \circ d)$:
-%	
-%	Sea $b,c,d\in \langle a \rangle$. Como $\langle a\rangle\subseteq G$ entonces $b,c,d\in G$. Así, como $(G,\circ)$ es un grupo, entonces en particular cumple con este axioma y podemos concluir que $(b\circ c )\circ d=b\circ (c \circ d)$.
-%	\item Existe un elemento neutro en $(\langle a \rangle,\circ)$:
-%	
-%	Por la definición de $\langle a\rangle$ sabemos que $a^0=e$ pertenece al conjunto. Como $(G,\circ)$ es un grupo, y $e$ es su elemento neutro, entonces para todo $b\in G$ se cumple que $b\circ e = b$. De este forma, como $\langle a\rangle \subseteq G$ entonces para todo $b\in \langle a\rangle$ se cumple que $b\circ e=b$.
-%	\item Cada elemento en $\langle a \rangle$ tiene inverso.
-%	
-%	Sea $b\in \langle a \rangle$, lo cual implica que $b = a^n$ para algún $n\in\mathbb{N}$. Como $n = \alpha k + (n\mods k)$, con $\alpha = \lfloor \frac{n}{k}\rfloor$, entonces 
-%	\begin{eqnarray*}
-%		a^n &=& a^{\alpha k + (n\mods k)}\\
-%		&=& (a^k)^{\alpha}\circ a^{(n\mods k)}\\
-%		&=& e^{\alpha}\circ a^{(n\mods k)}\\
-%               &=& a^{(n\mods k)} 	
-%	\end{eqnarray*}	 
-%	Luego, tomando $c = a^{k-(n\mod k)}$ tenemos que 	
-%	\comentarioin{el comando $\mod$ toma mucho espacio antes, quizas podriamos ajustar el comando}
-%        \comentarioin{existe el comando {\tt mods} para el caso en que queremos sacar el espacio que coloca {\tt mod}, lo usé en este caso.}
-%	\begin{eqnarray*}
-%		b\circ b^{-1} &=& a^{(n\mod k)} \circ a^{k-(n\mod k)}\\
-%		&=& a^{k}\\
-%		&=& e
-%	\end{eqnarray*}	
-%
-%\end{enumerate}
-%
-%\end{proof}
+\begin{proof}
+Como $\langle a \rangle$ es un subgrupo de $G$, el teorema de Lagrange implica que $\abs{\langle a \rangle} = \ord{G}(a)$ divide a $\abs{G}$.
+\end{proof}
 
-Desde la proposición \ref{prop-generado} podemos observar que $O_G(a)
-= |\langle a\rangle |$ para un elemento $a$ de un grupo finito
-$(G,\circ)$, lo que nos dice que la notación de orden es consistente.
-%notacion es consistente
+\begin{remark}
+Dado un grupo $G$, un elemento $a \in G$ es un generador si y solo si $\ord{G}(a) = |G|$.
+\hfill$\blacksquare$
+\end{remark}
+
+Notemos que el orden del subgrupo generado por un elemento coincide con el orden de dicho elemento. Esta es la razón por la que el término «orden» se utiliza en ambos sentidos.
+
 %https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/05/Order-group-theory.pdf
+
+
+% Ale: aquí voy.
+
 
 Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$ definido en \ref{eq-zn-star}, donde $\cdot$ corresponde a la
 multiplicación usual en módulo $n$. Este grupo juego un rol fundamental en este documento. 
