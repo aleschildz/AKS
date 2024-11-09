@@ -1,30 +1,8 @@
-
+Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq \{0, 1, \dots, n-1\}$ forma un grupo con la operación de suma en módulo $n$. Usaremos la notación $a \mods n$ para denotar al resto de dividir el entero $a$ en $n$, y también escribiremos $a \equiv b \modl n$ cuando $(a \mods n) = (b \mods n)$.
 
 
 \textcolor{red}{Ale: hasta aquí es nuevo}
 
-En este documento suponemos que el lector tiene cierta familiaridad
-con aritmética modular. En particular, suponemos que dados tres
-números enteros $a$, $b$ y $n \geq 1$, el lector conoce la operación
-$a$ resto $n$, la cual es denotada como $a \mods n$, entiende cuando
-$a$ y $b$ son congruentes en módulo $n$, lo cual es denotado como $a
-\equiv b \modl n$, y conoce las propiedades básicas de esta relación
-de equivalencia. En particular, suponemos que conoce el pequeño
-teorema de Fermat. Además, suponemos en este documento que el lector
-conoce la definición de grupo $(G, \circ)$ y algunos resultados
-fundamentales de teoría de grupos, tales como el teorema de Lagrange y
-la extensión del pequeño teorema de Fermat para grupos finitos, el
-cual nos dice que si $G$ es finito, el orden de $G$ es $\ell$ (vale
-decir, $|G| = \ell$) y $e$ es el elemento neutro en el grupo, entonces
-para cada $g \in G$ se tiene que $g^\ell = e$ (el lector no
-familiarizado con teoría de grupos puede encontrar el material
-necesario para este documento en el apéndice \ref{app-grupos}).
-
-Recuerde que $\mathbb{Z}_n$ para $n \geq 1$ es el conjunto $\{0,
-\ldots, n-1\}$, y que las operaciones $+$ y $\cdot$ en este conjunto
-son definidas en módulo $n$. Por ejemplo, dados $a,b \in
-\mathbb{Z}_n$, se define $a + b$ en $\mathbb{Z}_n$ como $(a + b) \mods
-n$. De esta forma, tenemos que $(\mathbb{Z}_n, +)$ es un grupo.
 
 Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo,
 necesitamos definir cuando un número es invertible bajo la

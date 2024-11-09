@@ -327,7 +327,7 @@ $$\phi(i + j) = a^{i+j} = a^i \cdot a^j = \phi(i) \cdot \phi(j).$$ Esto completa
 
 Lo que dice el isomorfismo de la proposición \ref{prop-orden} es que todos los grupos cíclicos del mismo orden son esencialmente iguales.
 
-\begin{corollary}
+\begin{corollary} \label{orden de elemento divide a orden de grupo}
 Si $(G, \circ)$ es un grupo abeliano finito y $a \in G$, entonces $\ord{G}(a)$ divide a $\abs{G}$.
 \end{corollary}
 
@@ -350,6 +350,16 @@ De la demostración de la proposición \ref{prop-orden} también se desprende el
 \begin{corollary} \label{observacion orden}
 Sea $(G, \circ)$ un grupo con neutro $e$, y sea $a \in G$ un elemento con orden finito, digamos $\ord{G}(a) = m$. Dado un $k \in \mathbb{Z}$, tenemos que $a^k = e$ si y solo si $m$ divide a $k$.
 \end{corollary}
+
+El siguiente es un resultado fundamental en la teoría de grupos. Se desprende directamente de los corolarios que acabamos de discutir. Nuevamente, la hipótesis de abelianidad no es necesaria, y solo la agregamos por simplicidad.
+
+\begin{prop} \label{PTF para grupos finitos}
+Sea $(G, \circ)$ un grupo abeliano finito con neutro $e$. Entonces $a^{|G|} = e$ para todo $a \in G$.
+\end{prop}
+
+\begin{proof}
+Sea $m = \ord{G}(a)$. Por el corolario \ref{orden de elemento divide a orden de grupo} tenemos que $m$ divide a $|G|$. Luego, por el corolario \ref{observacion orden}, $a^{|G|} = e$.
+\end{proof}
 
 
 % Ale: aquí voy.
