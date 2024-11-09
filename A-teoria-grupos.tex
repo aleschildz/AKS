@@ -325,6 +325,8 @@ Por último, veamos que $\phi$ es un isomorfismo. Sean $i, j \in \mathbb{Z}_m$. 
 $$\phi(i + j) = a^{i+j} = a^i \cdot a^j = \phi(i) \cdot \phi(j).$$ Esto completa la demostración.
 \end{proof}
 
+Lo que dice el isomorfismo de la proposición \ref{prop-orden} es que todos los grupos cíclicos del mismo orden son esencialmente iguales.
+
 \begin{corollary}
 Si $(G, \circ)$ es un grupo abeliano finito y $a \in G$, entonces $\ord{G}(a)$ divide a $\abs{G}$.
 \end{corollary}
@@ -341,6 +343,13 @@ Dado un grupo $G$, un elemento $a \in G$ es un generador si y solo si $\ord{G}(a
 Notemos que el orden del subgrupo generado por un elemento coincide con el orden de dicho elemento. Esta es la razón por la que el término «orden» se utiliza en ambos sentidos.
 
 %https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/05/Order-group-theory.pdf
+
+
+De la demostración de la proposición \ref{prop-orden} también se desprende el siguiente resultado:
+
+\begin{corollary} \label{observacion orden}
+Sea $(G, \circ)$ un grupo con neutro $e$, y sea $a \in G$ un elemento con orden finito, digamos $\ord{G}(a) = m$. Dado un $k \in \mathbb{Z}$, tenemos que $a^k = e$ si y solo si $m$ divide a $k$.
+\end{corollary}
 
 
 % Ale: aquí voy.
@@ -384,7 +393,7 @@ A continuación vamos a fijarnos en los elementos de los grupos abelianos, y enu
 \end{theorem}
 
 Antes de probar el teorema \ref{orden del producto coprimos} vamos a realizar una observación que ocuparemos repetidas veces en la demostración.
-\begin{observacion}\label{observacion orden}
+\begin{observacion}
  Si $d=O_G(a)$ y $a^q =e$, donde $e$ es el neutro del grupo $G$, entonces necesariamente $d$ divide a $q$. Para ver esto, supongamos por contradicción que $d$ no divide a $q$. Esto quiere decir que $q = d\alpha + \beta$ con $0<\beta<d$. Luego, 
 \begin{eqnarray*}
 	e &=& a^q \\

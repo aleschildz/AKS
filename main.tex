@@ -16,6 +16,7 @@
 \usepackage{xspace}
 \usepackage{hyperref}
 \usepackage{faktor}
+\usepackage{xcolor}
 %\usepackage{bbold}
 %\usepackage[lighttt]{lmodern}
 
@@ -132,21 +133,18 @@ María Alejandra Schild\\
 %%%	%aqui poner de que trata el documento
 	\begin{abstract}
 \noindent El test de primalidad AKS \cite{AKS04} es el primer algoritmo
-determinista que decide en tiempo polinomial si un entero dado es
-primo.
+determinista capaz de decidir en tiempo polinomial si un entero positivo es primo.
           %Antes de este test no existían algoritmos que resolvieran este problema en tiempo polinomial de forma determinista.
-En este documento se hace una revisión detallada y autocontenida del algoritmo y de la demostración de su correctitud. Para ello se utilizan herramientas de teoría
-de números y de álgebra abstacta. Al final del documento se incluye el material 
-necesario para comprender dichos resultados.
+En este documento haremos una revisión detallada y autocontenida de su funcionamiento y correctitud. Anexamos al final todo el material necesario para comprender las herramientas de teoría de números y de álgebra abstracta utilizadas.
 \end{abstract}
 
 
 \section{Introducción}
 \input{1-intro}
 
-\section{Notación y algunos conceptos usados en el algoritmo}
+\section{Motivación}
 \label{sec-notacion}
-\input{2-notacion}
+\input{2-motivacion}
 
     
 \section{El lema central}
