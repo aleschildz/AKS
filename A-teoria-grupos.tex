@@ -94,7 +94,7 @@ Dejamos de ejercicio al lector verificar que la potenciación tiene las siguient
 
 
 \begin{example} \label{grupo_ciclico}
-Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo. En efecto, se puede verificar que $\circ$ es asociativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
+Sea $n$ un entero positivo. Consideremos el conjunto de $n$ elementos $\mathbb{Z}_n \coloneq \left\{ 0, 1, \dots, n-1 \right\}$, y sea $\circ$ la operación de suma módulo $n$, es decir, $a \circ b$ es el resto de dividir $a+b$ en $n$. Entonces $(G, \circ)$ es un grupo abeliano. En efecto, se puede verificar que $\circ$ es asociativa y conmutativa, que $0$ es el elemento neutro, y que el inverso de $a \in \mathbb{Z}_n$ es $n-a \in \mathbb{Z}_n$ (excepto si $a = 0$, que es su propio inverso).
 Este grupo tiene una propiedad particular: hay un elemento (el $1$) tal que sus potencias generan todos los elementos del grupo. En otras palabras, todo elemento de $\mathbb{Z}_n$ es una potencia del elemento $1$. Por ejemplo, en $\mathbb{Z}_5$, tenemos que $2 = 1 + 1$, $3 = 1 + 1 + 1$, $4 = 1 + 1 + 1 + 1$ y $0 = 1 + 1 + 1 + 1 + 1$ (considerando la suma en módulo $5$).
 \hfill$\blacksquare$
 \end{example}
@@ -365,7 +365,7 @@ Sea $m = \ord{G}(a)$. Por el corolario \ref{orden de elemento divide a orden de 
 % Ale: aquí voy.
 
 
-Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$ definido en \ref{eq-zn-star}, donde $\cdot$ corresponde a la
+Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$, donde $\cdot$ corresponde a la
 multiplicación usual en módulo $n$. Este grupo juego un rol fundamental en este documento. 
 %Un caso particular de los grupos generados por un
 %elemento es cuando $(G,\circ) = (\mathbb{Z}_n^*,\cdot)$, donde $\cdot$

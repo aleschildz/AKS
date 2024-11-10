@@ -1,40 +1,25 @@
-Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq \{0, 1, \dots, n-1\}$ forma un grupo con la operación de suma en módulo $n$. Usaremos la notación $a \mods n$ para denotar al resto de dividir el entero $a$ en $n$, y también escribiremos $a \equiv b \modl n$ cuando $(a \mods n) = (b \mods n)$.
+Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq \{0, 1, \dots, n-1\}$ forma un grupo abeliano con la operación de suma en módulo $n$. Usaremos la notación $a \mods n$ para denotar al resto de dividir el entero $a$ en $n$, y también escribiremos $a \equiv b \modl n$ cuando $(a \mods n) = (b \mods n)$.
+
+Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo, necesitamos entender cuándo un número es invertible bajo la multiplicación en $\mathbb{Z}_n$. Un entero $a$ se dice \emph{invertible} en módulo $n$ si existe un entero $b$ tal que $a \cdot b \equiv 1 \modl n$. Por ejemplo, el número 2 es invertible en módulo 9
+puesto que $2 \cdot 5 \equiv 1 \modl 9$, mientras que el número 3 no es invertible en módulo 9, pues para cualquier entero $b$ tenemos que el resto de dividir $3b$ en $9$ es $0$, $3$ o $6$. De hecho, es sencillo probar que $a$ es
+invertible en módulo $n$ si y solo si $a$ y $n$ son coprimos, vale decir, el máximo común divisor de $a$ y $n$ es 1, lo cual es denotado como $\MCD(a,n) = 1$. \textcolor{red}{Ale: Ese es el lema de Bézout; supongo que se ve en el curso de matemáticas discretas. ¿Lo vamos a dejar sin demostrar?} Así, podemos concluir que, para $n \geq 2$,
+$(\mathbb{Z}_n, \cdot)$ no es un grupo porque $0$ no es
+invertible. Más aún, tenemos que $(\mathbb{Z}_n - \{0\},
+\cdot)$ es un grupo si y solo si $n$ es un número primo, ya que $n$ es primo si y solo si todos los números en el conjunto $\{1, \ldots,
+n-1\}$ son coprimos con $n$, lo que equivale a que todos sean invertibles en módulo $n$.
+
+En general, para un entero $n \geq 1$, definimos $\mathbb{Z}_n^*$ como el conjunto de los $a \in \{1, \dots, n-1\}$ tales que $\MCD(a, n) = 1$. Por lo que discutimos en el párrafo anterior, $(\mathbb{Z}_n^*, \cdot)$ es un grupo abeliano. El orden de este grupo, que corresponde a la cantidad de enteros entre $1$ y $n-1$ que son coprimos con $n$ es una función fundamental en teoría de números.
+
+\begin{definition}[Función $\varphi$ de Euler]
+Dado un entero $n \geq 1$, definimos $\varphi(n) \coloneqq |\mathbb{Z}_n^*|$
+\end{definition}
+
+Notemos que $\varphi(n) = n - 1$ si y solo si
+$n$ es un número primo. \textcolor{red}{Ale: aquí pondría una proposición que diga cuál es la función phi de la potencia de un primo, y que es una función multiplicativa.}
 
 
 \textcolor{red}{Ale: hasta aquí es nuevo}
 
-
-Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo,
-necesitamos definir cuando un número es invertible bajo la
-multiplicación en $\mathbb{Z}_n$.  Un número $a$ se dice invertible en
-módulo $n$, con $n \geq 1$, si existe un número $b$ tal que $a \cdot b
-\equiv 1 \modl n$. Por ejemplo, el número 2 es invertible en módulo 9
-puesto que $2 \cdot 5 \equiv 1 \modl 9$, mientras que el número 3 no
-es invertible en módulo 9. De hecho, es simple demostrar que $a$ es
-invertible en módulo $n$ si y solo si $a$ y $n$ son coprimos, vale
-decir, el máximo común divisor de $a$ y $n$ es 1, lo cual es denotado
-como $\MCD(a,n) = 1$.  Así, podemos concluir que para $n \geq 2$,
-$(\mathbb{Z}_n, \cdot)$ no es un grupo puesto que $0$ no es
-invertible. Pero aún más, podemos concluir que $(\mathbb{Z}_n - \{0\},
-\cdot)$ es un grupo si y solo si $n$ es un número primo, puesto que si
-$n$ es primo entonces todos los números en el conjunto $\{1, \ldots,
-n-1\}$ son coprimos con $n$, y por lo tanto invertibles en módulo $n$.
-
-Dado un número natural $n \geq 1$, el conjunto de los coprimos de $n$
-menores a este número es definido como el conjunto
-$\mathbb{Z}_n^*$:
-\begin{eqnarray} \label{eq-zn-star}
-  \mathbb{Z}_n^* & = & \{ a \in \mathbb{N} \mid a < n \text{ y }
-  \MCD(a,n) = 1\}.
-\end{eqnarray}
-Por la discusión en el párrafo anterior, $\mathbb{Z}_n^*$ también
-corresponde al conjunto de todos los números menores a $n$ que
-son invertibles en módulo $n$. De hecho, es posible demostrar que
-$(\mathbb{Z}_n^*, \cdot)$ es un grupo. En el test de primalidad AKS
-juega un papel fundamental la función $\phi$ de Euler, la cual es
-definida como el orden del grupo $\mathbb{Z}_n^*$, vale decir,
-$\phi(n) = |\mathbb{Z}_n^*|$. Nótese que $\phi(n) = n -1$ si y solo si
-$n$ es un número primo.
 
 Dado que $(\mathbb{Z}_n^*, \cdot)$ es un grupo de orden $\phi(n)$ cuyo
 neutro es el número 1, tenemos que $a^{\phi(n)} \equiv 1 \modl n$ para
