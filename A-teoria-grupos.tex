@@ -365,82 +365,99 @@ Sea $m = \ord{G}(a)$. Por el corolario \ref{orden de elemento divide a orden de 
 % Ale: aquí voy.
 
 
-A continuación vamos a fijarnos en los elementos de los grupos abelianos, y enunciar dos propiedades que son útiles para este documento.
-%\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
-\begin{theorem}\label{orden del producto coprimos}
-	Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Si $m$ y $n$ son coprimos, entonces $a\circ b$ tiene orden $O_G(a\circ b)=mn$.
-\end{theorem}
+Los siguientes resultados exponen las primeras conexiones entre la teoría de grupos y la teoría de números.
 
-Antes de probar el teorema \ref{orden del producto coprimos} vamos a realizar una observación que ocuparemos repetidas veces en la demostración.
-\begin{observacion}
- Si $d=O_G(a)$ y $a^q =e$, donde $e$ es el neutro del grupo $G$, entonces necesariamente $d$ divide a $q$. Para ver esto, supongamos por contradicción que $d$ no divide a $q$. Esto quiere decir que $q = d\alpha + \beta$ con $0<\beta<d$. Luego, 
-\begin{eqnarray*}
-	e &=& a^q \\
-	 &=&  a^{d\alpha  + \beta} \\ 
-	 &=&  a^{d\alpha }\cdot a^{\beta}\\
-	 &=&  (a^{d})^{\alpha }\cdot a^{\beta}\\
-	 &=&  e^{\alpha}\cdot a^{\beta}\\
-	 &=&  a^{\beta} 
-\end{eqnarray*} 
-Lo que es una contradicción, ya que $0<\beta < d$ y $d = O_G(a)$ es el menor elemento mayor a cero tal que~$a^d = e$.   
-\end{observacion}
-\begin{proof}[Demostración del teorema \ref{orden del producto coprimos}]
-	Sea $r=O_G(a\circ b)$. Debemos demostrar que $r = mn$. Sabemos que 
+%\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
+\begin{prop}\label{orden del producto coprimos}
+	Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ con $\ord{G}(a)=m$ y $\ord{G}(b)=n$. Si $m$ y $n$ son coprimos, entonces $\ord{G}(a\circ b)=mn$.
+\end{prop}
+
+\begin{proof}
+	Sea $e$ el neutro. Sea $r=\ord{G}(a\circ b)$. Debemos demostrar que $r = mn$. Tenemos que 
 	\begin{eqnarray*}
 		(a\circ b)^{mn} &=& a^{mn}\circ b^{mn}\\
                 &=& (a^m)^n\circ (b^n)^m\\
 		&=&e^n\circ e^m \\
-		 &=&  e
+		 &=&  e.
 	\end{eqnarray*}
-Luego, por la observación \ref{observacion orden} tenemos que $r$ divide a $mn$ y por ende $r\leq mn$. Nos hace falta demostrar que $mn\leq r$. Para esto notemos que como $e \ = \ (a\circ b)^r$, entonces
+Luego, por el corolario \ref{observacion orden}, tenemos que $r$ divide a $mn$, y por lo tanto $r\leq mn$. Nos falta probar que $mn\leq r$. Para ello, notemos que, como $e = (a\circ b)^r$, entonces
 \begin{eqnarray*}
 	 e \ = \ e^n & =&  (a\circ b)^{rn} \\
 	 & = & a^{rn} \circ b^{rn}\\
 	 & = & a^{rn} \circ (b^{n})^{r}\\
 	 & = & a^{rn} \circ e^{r}\\
-	 &=& a^{rn}
+	 &=& a^{rn}.
 \end{eqnarray*}
- De la misma forma tenemos que
+ De la misma forma, tenemos que
 \begin{eqnarray*}
 	 e \ = \ e^m & =&  (a\circ b)^{rm} \\
 	 & = & a^{rm} \circ b^{rm}\\
 	 & = & (a^{m})^r \circ b^{rm}\\
 	 & = & e^{r} \circ b^{rm}\\
-	 &=& b^{rm}
+	 &=& b^{rm}.
 \end{eqnarray*}
-Luego $a^{rn}=e$ y $b^{rm} = e$. De esto podemos concluir por la observación \ref{observacion orden} que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, entonces necesariamente $m \divi r$ y $n\divi r$. Asi, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$, y por tanto $mn\leq r$. 
+Como $a^{rn}=e$ y $b^{rm} = e$, usando el corolario \ref{observacion orden} deducimos que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, necesariamente $m \divi r$ y $n\divi r$. Así, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$. Esto concluye la demostración. 
 \end{proof}
 
-Como consecuencia del teorema \ref{orden del producto coprimos} podemos mostrar el siguiente resultado, que es una versión generalizada del mismo.
+Podemos generalizar la proposición \ref{orden del producto coprimos} de la siguiente manera. 
+
 \begin{corollary}\label{corolario orden}
-Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ de órdenes $O_G(a)=m$ y $O_G(b)=n$. Entonces existe un elemento $c\in G$ que tiene orden $O_G(c)=\MCM(m,n)$.
+Sea $(G,\circ)$ un grupo abeliano, y sean $a,b\in G$ con $\ord{G}(a)=m$ y $\ord{G}(b)=n$. Entonces existe un elemento $c\in G$ tal que $\ord{G}(c)=\MCM(m,n)$.
 \end{corollary}
 \begin{proof}
-Sean $p_1,...,p_k$ los divisores primos de $m$ o de $n$. Luego, podemos escribir $m$ y $n$ como 
-$$m \ = \ \prod\limits_{i=1}^k p_i^{\alpha_i} \ \quad\text{y}\quad \ n \ = \ \prod\limits_{i=1}^k p_i^{\beta_i}$$ donde $\alpha_i,\beta_i \geq 0$ (son iguales a 0 cuando el primo no es divisor del número). Defina
-$$m' \ = \ \prod\limits_{i\,:\,\alpha_i\geq \beta_i} p_i^{\alpha_i} \ \quad\text{y}\quad \ n' \ = \ \prod\limits_{i\,:\,\beta_i> \alpha_i} p_i^{\beta_i}$$
-Por ejemplo, si $m=2^3\cdot 3^2\cdot 5^1$ y $n=2^1\cdot 3^2\cdot 7^1$, $m' = 2^3\cdot 3^2\cdot 5^1$ y $n' = 7^1$. Notemos que las siguientes afirmaciones sobre $m'$ y $n'$ se cumplen:
+Sea $e$ el neutro. Sean $p_1,\dots,p_k$ todos los primos que dividen a $m$ o a $n$. Podemos escribir $m$ y $n$ como 
+$$m \ = \ \prod\limits_{i=1}^k p_i^{\alpha_i} \ \qquad\text{y}\qquad \ n \ = \ \prod\limits_{i=1}^k p_i^{\beta_i},$$ donde $\alpha_i,\beta_i \geq 0$ (son iguales a 0 cuando el primo $p_i$ no es divisor del número). Además, sabemos que
+$$\MCM(m, n) \ = \ \prod\limits_{i=1}^k p_i^{\max(\alpha_i,\, \beta_i)}.$$
+
+Ahora definimos
+$$m' \ = \ \prod\limits_{i\,:\,\alpha_i\geq \beta_i} p_i^{\alpha_i} \ \qquad\text{y}\qquad \ n' \ = \ \prod\limits_{i\,:\,\beta_i> \alpha_i} p_i^{\beta_i}.$$
+Por ejemplo, si $m=2^3\cdot 3^2\cdot 5^1$ y $n=2^1\cdot 3^2\cdot 7^1$, entonces $m' = 2^3\cdot 3^2\cdot 5^1$ y $n' = 7^1$. Notemos que las siguientes afirmaciones sobre $m'$ y $n'$ se cumplen:
 \begin{itemize}
 	\item $m'$ divide a $m$
 	\item $n'$ divide a $n$
 	\item $m'$ y $n'$ son coprimos
 	\item $\MCM(m,n) = m'n'$
 \end{itemize}
-Considere los elementos $a' = a^{\frac{m}{m'}}$ y $b' = b^{\frac{n}{n'}}$. Vamos a mostrar que $O_G(a')=m'$ y $O_G(b')=n'$. Primero, sea $k=O_G(a')$. Entonces $$e\ = \ (a')^k\ = \ (a^{\frac{m}{m'}})^k \ = \ a^{\frac{mk}{m'}}$$
-Por la observación \ref{observacion orden}, como $O_G(a) = m$ entonces $m$ divide a $\frac{mk}{m'}$, y por ende $m'$ debe dividir a $k$ (ya que $\frac{mk}{m'}\in \mathbb{Z}$). De esto concluimos que $m'\leq k$. Por otro lado, $$(a')^{m'} \ = \ (a^{\frac{m}{m'}})^{m'} \ = \ a^m \ = \ e$$ 
+Sean $q_1 = \frac{m}{m'}$ y $q_2 = \frac{n}{n'}$, y consideremos los elementos $a' = a^{q_1}$ y $b' = b^{q_2}$. Vamos a mostrar que $\ord{G}(a')=m'$ y $\ord{G}(b')=n'$. Primero, sea $k=\ord{G}(a')$. Entonces $$e\ = \ (a')^k\ = \ (a^{q_1})^k \ = \ a^{q_1k}$$
+Por el corolario \ref{observacion orden}, tenemos que $\ord{G}(a) = m$ divide a $q_1k$. Es decir, existe un $q_3 \in \mathbb{Z}$ tal que $q_3 m = q_1k$, de lo que se deduce que $q_3 m' = k$. Como $k$ y $m'$ son enteros positivos, eso implica que $m' \leq k$. Por otro lado, $$(a')^{m'} \ = \ (a^{q_1})^{m'} \ = \ a^m \ = \ e$$ 
 %Nuevamente, por la observación \ref{observacion orden} necesariamente $k$ divide a $m'$, y
-Dado que $k=O_G(a')$, concluimos que se cumple $k\leq m'$. Luego, $O_G(a')=k=m'$. De forma análoga, se puede mostrar que $O_G(b')=n'$.
+Como $k=\ord{G}(a')$, deducimos que $k\leq m'$. Luego, $\ord{G}(a')=k=m'$. De forma análoga, se puede mostrar que $\ord{G}(b')=n'$.
 
 %Una propiedad importante que se sigue del teorema \ref{orden del producto coprimos} y el corolario \ref{corolario orden} es la siguiente.
 
-Por último, defina $c=a'\circ b'$. Como sabemos que $(G,\circ)$ es un grupo abeliano, $a',b'\in G$ con $O_G(a') = m'$ y $O_G(b')= n'$, y $m'$, $n'$ son coprimos, se deduce por el teorema \ref{orden del producto coprimos} que $O_G(c) = m'n' = \MCM(m,n)$. Con esto concluimos la demostración.
+Por último, definimos $c=a'\circ b'$. Como $(G,\circ)$ es un grupo abeliano, y $a',b'\in G$ son tales que $\ord{G}(a') = m'$, $\ord{G}(b')= n'$, y $\MCD(m', n') = 1$, la proposición \ref{orden del producto coprimos} nos permite concluir que $\ord{G}(c) = m'n' = \MCM(m,n)$. Esto concluye la demostración.
 \end{proof}
-Como último resultado sobre teoría de grupos que será útil para este
-documento, presentamos y demostramos el teorema de Cauchy.
-\begin{theorem}[{\bf Cauchy}]\label{teo cauchy}
-Sea $p$ un número primo que divide el orden de un grupo finito
+
+El último resultado que demostraremos en esta sección es el teorema de Cauchy. Nuevamente, por simplicidad solo demostraremos el caso abeliano (que es el que necesitaremos más adelante), pero hacemos notar que el teorema es válido para cualquier grupo finito. En cierto sentido, es un recíproco parcial del teorema de Lagrange.
+
+\begin{theorem}[{Teorema de Cauchy}]\label{teo cauchy}
+Sea $p$ un número primo que divide al orden de un grupo abeliano finito
 $(G,\circ)$. Entonces existe un elemento de $G$ que tiene orden $p$.
 \end{theorem}
+
+\begin{proof}
+Dejaremos fijo $p$ y haremos inducción en $n = |G|$. 
+
+Notemos que el resultado es vacuamente cierto si $p$ no divide a $n$, por lo que solo debemos revisar los casos en que $n$ sea efectivamente un múltiplo de $p$. 
+
+El caso base es $n = p$. Como $p \geq 2$, existe un elemento $a \in G$ con $\ord{G}(a) > 1$ (ya que el único elemento con orden $1$ es el nuetro). Por el teorema de Lagrange, tenemos que $\ord{G}(a)$ divide a $n = p$, y, como $p$ es primo, necesariamente $\ord{G}(a) = p$.
+
+Ahora veamos el paso inductivo. Nuevamente consideramos un elemento $a \in G$ con $\ord{G}(a) = m > 1$. Tenemos dos casos:
+\begin{itemize}
+\item El primer caso es que $p$ divide a $m$. Entonces $a^{\frac{m}{p}}$ es un elemento de orden $p$.
+\item El segundo caso es que $p$ no divide a $m$. Sabemos que $\langle a \rangle$ es un subgrupo, así que podemos considerar el cociente $H = \faktor{G}{\langle a \rangle}$, que también será un grupo abeliano. Notemos que
+$$|G| = \left|\faktor{G}{\langle a \rangle}\right| \cdot \left|\langle a \rangle\right|.$$
+Como $p$ divide a $|G|$ y no divide a $\left|\langle a \rangle\right| = m$, tenemos que $p$ divide a $|H|$. Como $H$ es un grupo abeliano con $|H| < |G| = n$, podemos aplicar la hipótesis de inducción: existe un $B \in H$ con $\ord{H}(B) = p$. Dicho $B$ es una clase lateral de $G$ bajo $\langle a \rangle$, es decir $B = c \circ \langle a \rangle$ para algún $c \in G$. Sea $k = \ord{G}(c)$. Notemos que, como elementos del cociente $H$, se cumple que
+$$B^k = (c \circ \langle a \rangle)^k = c^k \circ \langle a \rangle = e \circ \langle a \rangle,$$
+por lo que $\ord{H}(B)$ divide a $k$. Como $p$ divide a $\ord{H}(B)$, $p$ también divide a $k = \ord{G}(c)$. Entonces $c^{\frac{k}{p}}$ es un elemento de orden $p$.
+\end{itemize}
+Como en ambos casos encontramos un elemento que tiene orden $p$, esto completa la inducción.
+\end{proof}
+
+
+% Ale: no estoy segura de si los lemas que estaban demostrando a continuación son necesarios para el documento, o si solo eran un camino para demostrar la versión no abeliana del teorema de Cauchy. Por el momento, escribiré una demostración simplificada para el caso abeliano, y dejaré la original comentada.
+
+\begin{comment}
 Para demostrar el teorema \ref{teo cauchy}, vamos a demostrar el lema \ref{tcf}, que es una versión más fuerte del teorema de Cauchy.
 \begin{lemma}\label{tcf}
 Sea $p$ un número primo que divide el orden de un grupo finito
@@ -541,7 +558,7 @@ es decir, $r=p\cdot k$ elementos distintos $g\in G$ tales que $g \cdot
 g \cdot \ldots \cdot g = g^p = e$, los cuales corresponden a las
 soluciones de la ecuación $x^p=e$.
 \end{proof}
-Habiéndo demostrado el lema \ref{tcf}, podemos hacer la demostración del teorema de Cauchy.
+Habiendo demostrado el lema \ref{tcf}, podemos hacer la demostración del teorema de Cauchy.
 \begin{proof}[Demostración del teorema \ref{teo cauchy}]
 Supongamos que $(G,\circ)$ es un grupo finito, y $p$ es un número
 primo que divide el orden de $G$. Por el lema \ref{tcf}, sabemos que
@@ -564,4 +581,5 @@ $\beta \in [1,m-1]$. Pero esto contradice el hecho que $O_G(a) = m$,
 puesto que $a^{\beta}=e$. De esta forma concluimos que $O_G(a) = p$,
 lo que demuestra que existe un elemento de $G$ que tiene orden $p$.
 \end{proof}
+\end{comment}
 %\comentarioin{Bernardo: hay que cerrar de alguna forma este preliminar? o se corta aqui nomas?}
