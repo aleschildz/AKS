@@ -365,37 +365,6 @@ Sea $m = \ord{G}(a)$. Por el corolario \ref{orden de elemento divide a orden de 
 % Ale: aquí voy.
 
 
-Recuerde el grupo $(\mathbb{Z}_n^*,\cdot)$, donde $\cdot$ corresponde a la
-multiplicación usual en módulo $n$. Este grupo juego un rol fundamental en este documento. 
-%Un caso particular de los grupos generados por un
-%elemento es cuando $(G,\circ) = (\mathbb{Z}_n^*,\cdot)$, donde $\cdot$
-%corresponde a la multiplicación usual.
-En este contexto, denotamos al grupo $\langle a \rangle$ generado por
-$a\in \mathbb{Z}_n^*$ como $\langle a\rangle_n$.
-%\begin{eqnarray*}
-%\langle a\rangle_n & := & \{a^k\mods n \mid k\in\mathbb{Z}\}.
-%\end{eqnarray*}
-Con este grupo, podemos definir un caso particular de los conceptos
-introducidos en las definiciones \ref{def_orden} y \ref{def_gen}: el
-orden multiplicativo. Este concepto se utiliza reiteradas veces a lo
-largo de este documento.
-
-%\comentario{sacar definicion siguiente y decirlo en un parrafo, dejarlo como ejercicio (ya se vio en la sección 2, en vez de hablar de $O_Z_r^*(a)$ hablamos de $O_r(a)$.}
-
-\begin{definition}\label{def_ord_mult}
-	 Sea $a\in \mathbb{Z}$ y $n\in \mathbb{N}$ tal que $n \geq 1$. Si $\MCD(a,n)=1$, decimos que el orden multiplicativo de $a$ en módulo $n$ es
-         \begin{eqnarray*}
-         O_n(a) & := & |\langle a\rangle _n|.
-         \end{eqnarray*}
-\end{definition}
-Nótese que en la definición anterior no nos restringimos solamente a
-los elementos $a\in\mathbb{Z}_n^*$, sino que también incluimos todos
-aquellos naturales tales que $(a \mods n) \in \mathbb{Z}_n^*$. Como $a \equiv (a\mods n) \modl n$, lo anterior es consistente y está bien
-definido.
-%Finalmente, nótese que $O_n(a)$ es el orden de un elemento
-%$a$ que pertenece al grupo $(\mathbb{Z}_n^*,\cdot)$, vale decir,
-%$O_n(a) = O_{\mathbb{Z}_n^*}(a)$.
-
 A continuación vamos a fijarnos en los elementos de los grupos abelianos, y enunciar dos propiedades que son útiles para este documento.
 %\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
 \begin{theorem}\label{orden del producto coprimos}

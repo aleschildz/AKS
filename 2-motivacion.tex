@@ -18,6 +18,19 @@ Notemos que $\varphi(n) = n - 1$ si y solo si
 $n$ es un número primo. \textcolor{red}{Ale: aquí pondría una proposición que diga cuál es la función phi de la potencia de un primo, y que es una función multiplicativa.}
 
 
+Cuando estemos trabajando con el grupo $(\mathbb{Z}_n^*, \cdot)$, usaremos la notación $\langle a\rangle_n$ para denotar a $\langle a \rangle$, el subgrupo generador por $a$. Esta precisión adicional se introduce para evitar ambigüedad cuando se trabajan con varios grupos $(\mathbb{Z}_n^*, \cdot)$ (con parámetros $n$ distintos) a la vez.
+
+\begin{definition}[Orden multiplicativo]\label{def_ord_mult}
+	 Sean $a, n\in \mathbb{Z}$ tales que $n \geq 1$ y $\MCD(a,n)=1$. Decimos que el \emph{orden multiplicativo} de $a$ en módulo $n$ es
+         \begin{eqnarray*}
+         \ord{n}(a) \coloneqq \ord{\mathbb{Z}_n^*}(b) = |\langle b \rangle _n|,
+         \end{eqnarray*}
+	donde $b$ es el resto de dividir $a$ en $n$.
+\end{definition}
+
+La definición \ref{def_ord_mult} es correcta pues, si $\MCD(a, n) = 1$, entonces $b \in \mathbb{Z}_n^*$.
+
+
 \textcolor{red}{Ale: hasta aquí es nuevo}
 
 
