@@ -144,7 +144,7 @@ Dado que $a^{-1}$ es el inverso de $a$ en $(G, \circ)$, tenemos que $a \circ a^{
 
 \begin{example} \label{ejemplo_subgrupo}
 Sea $m$ un entero positivo. Definimos el conjunto
-$m\mathbb{Z} \coloneq \left\{mk \;\; \mid \;\; k \in \mathbb{Z}\right\}$ de los múltiplos de $m$. Notemos que $m\mathbb{Z}$ es cerrado bajo la operación de suma: si $mk_1$ y $mk_2$ son elementos de $m\mathbb{Z}$, entonces $mk_1 + mk_2 = m(k_1 + k_2) \in m\mathbb{Z}$. Dejamos al lector verificar que $m\mathbb{Z}$ es un subgrupo de $(\mathbb{Z}, +)$. \hfill$\blacksquare$
+$m\mathbb{Z} \coloneq \left\{mk \mid k \in \mathbb{Z}\right\}$ de los múltiplos de $m$. Notemos que $m\mathbb{Z}$ es cerrado bajo la operación de suma: si $mk_1$ y $mk_2$ son elementos de $m\mathbb{Z}$, entonces $mk_1 + mk_2 = m(k_1 + k_2) \in m\mathbb{Z}$. Dejamos al lector verificar que $m\mathbb{Z}$ es un subgrupo de $(\mathbb{Z}, +)$. \hfill$\blacksquare$
 \end{example}
 
 
@@ -152,7 +152,7 @@ A continuación hablaremos sobre clases laterales y grupos cocientes. Puesto que
 
 \begin{definition}[Clases laterales] \label{definicion_clase_lateral}
 Sea $(G, \circ)$ un grupo abeliano, y sea $H$ un subgrupo de $G$. Dado un elemento $g \in G$, definimos la \emph{clase lateral} de $g$ bajo $H$ como el conjunto
-$$g \circ H \coloneq \left\{ g \circ h \;\; \mid \;\, h \in H \right\}.$$ Al conjunto de las clases laterales de $G$ bajo $H$ se le denota $\faktor{G}{H}$.
+$$g \circ H \coloneq \left\{ g \circ h \mid h \in H \right\}.$$ Al conjunto de las clases laterales de $G$ bajo $H$ se le denota $\faktor{G}{H}$.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -210,11 +210,20 @@ Si $(G, \circ)$ es un grupo abeliano finito y $H$ es un subgrupo de $G$, entonce
 Por la proposición \ref{lema:rel bin} sabemos que $|G|$ es la suma de las cardinalidades de todas las clases laterales de $G$ bajo $H$. Por otro lado, la proposición \ref{cardinalidad_clases_laterales} nos dice que cada una de dichas clases laterales tiene cardinalidad $|H|$. Luego $$|G| = \left| \faktor{G}{H}\right| \cdot |H|,$$ de lo que se deduce el resultado. 
 \end{proof}
 
+\begin{example} \label{ejemplo_lagrange}
+Supongamos que $G$ es un grupo abeliano de orden $6$, y queremos encontrar todos sus subgrupos. En primer lugar, tenemos los subgrupos triviales $\{e\} \subseteq G$ y $G \subseteq G$. Lo que nos dice el teorema de Lagrange es que cualquier otro subgrupo necesariamente debe tener orden $2$ o $3$, pues estos son los divisores no triviales de $6$. Así, sabemos de antemano que, por ejemplo, no puede existir un subgrupo de orden $4$.
+\hfill$\blacksquare$
+\end{example}
+
+Notemos que el teorema \ref{teo:lagrange} no garantiza que para cada divisor de $|G|$ habrá un subgrupo con ese orden. Más adelante veremos un recíproco parcial de este resultado para el caso de los divisores primos de $|G|$ (teorema \ref{teo cauchy}).
+
+
+A continuación estudiaremos cómo se comporta la operación del grupo con las clases laterales. Veamos el siguiente ejemplo.
 
 \begin{example} \label{ejemplo_clases_laterales}
 Continuamos con el ejemplo \ref{ejemplo_subgrupo}. Consideremos el grupo $(\mathbb{Z}, +)$ junto con el subgrupo $4\mathbb{Z}$. Dado $a \in \mathbb{Z}$, tenemos que $a + 4\mathbb{Z}$ es el conjunto de enteros de la forma $a + 4k$ para algún $k \in \mathbb{Z}$. Notemos que, si $r$ es el resto de dividir $a$ en $4$, entonces $a + 4\mathbb{Z} = r + 4\mathbb{Z}$. Por lo tanto, tenemos que
 $$\faktor{\mathbb{Z}}{4\mathbb{Z}} = \left\{ 4\mathbb{Z},\, 1+4\mathbb{Z},\, 2+4\mathbb{Z},\, 3+4\mathbb{Z}\right\}.$$
-Notemos que, si $a$ es cualquier elemento de $1+4\mathbb{Z}$ y $b$ es cualquier elemento de $2+4\mathbb{Z}$, entonces $a+b$ tendrá resto $3$ al dividirse en $4$, por lo que $a+b \in 3+\mathbb{Z}$. El mismo razonamiento sirve para cualquier otro par de clases laterales. Esto indica que, ultimadamente, no importa los representantes concretos que saquemos de las clases laterales, pues la operación del grupo se comporta bien entre ellas.  
+Notemos que, si $a$ es cualquier elemento de $1+4\mathbb{Z}$ y $b$ es cualquier elemento de $2+4\mathbb{Z}$, entonces $a+b$ tendrá resto $3$ al dividirse en $4$, por lo que $a+b \in 3+4\mathbb{Z}$. El mismo razonamiento sirve para cualquier otro par de clases laterales. Esto indica que, ultimadamente, no importa los representantes concretos que saquemos de las clases laterales, pues la operación del grupo se comporta bien entre ellas.  
 \hfill$\blacksquare$
 \end{example}
 
@@ -226,7 +235,9 @@ $$\left(a \circ H \right) \ast \left( b \circ H \right) \coloneqq  (a \circ b) \
 \end{prop}
 
 \begin{proof}
-Lo primero que debemos mostrar es que $\ast$ está bien definida, es decir, que $\left(a \circ H \right) \ast \left( b \circ H \right)$ no depende de los representantes concretos $a$ y $b$. Para ello, tomaremos representantes distintos, $a' \in a \circ H$ y $b' \in b \circ H$, y mostraremos que $(a \circ b) \circ H = (a' \circ b') \circ H$. Tenemos que existen $h_1, h_2 \in H$ tales que $a' = a \circ h_1$ y $b' = b \circ h_2$. Por lo tanto, $a' \circ b' = (a \circ b) \circ (h_1 \circ h_2)$. Como $h_1 \circ h_2 \in H$, esto último muestra que $a' \circ b' \in (a \circ b) \circ H$, y luego $(a \circ b) \circ H = (a' \circ b') \circ H$. Concluimos que $\ast$ está bien definida.
+Sea $e$ el neutro de $G$.
+
+Lo primero que debemos mostrar es que $\ast$ está bien definida, es decir, que $\left(a \circ H \right) \ast \left( b \circ H \right)$ no depende de los representantes concretos $a$ y $b$. Para ello, consideremos $a', b' \in G$ tales que $a \circ H = a' \circ H$ y $b \circ H = b' \circ H$. Queremos probar que $(a \circ b) \circ H = (a' \circ b') \circ H$. Como $e \in H$ y $a' = a' \circ e$, tenemos que $a' \in a' \circ H$. Como $a' \circ H = a \circ H$, se sigue que $a' \in a \circ H$. Análogamente, tenemos que $b' \in b \circ H$. Luego existen $h_1, h_2 \in H$ tales que $a' = a \circ h_1$ y $b' = b \circ h_2$. Por lo tanto, $a' \circ b' = (a \circ b) \circ (h_1 \circ h_2)$. Como $h_1 \circ h_2 \in H$, esto último muestra que $a' \circ b' \in (a \circ b) \circ H$, y luego $(a \circ b) \circ H = (a' \circ b') \circ H$. Concluimos que $\ast$ está bien definida.
 
 Ahora debemos probar que $\left(\faktor{G}{H},\, \ast\right)$ es un grupo abeliano. La asociatividad y la conmutatividad se heredan directamente de $\circ$ hacia $\ast$. Dejamos al lector verificar que el elemento neutro es $H = e \circ H$, y que el inverso de $a \circ H$ es $a^{-1} \circ H$.
 \end{proof}
@@ -239,7 +250,7 @@ $$\forall\, a, b \in G_1 \qquad \phi(a \circ_1 b) = \phi(a) \circ_2 \phi(b).$$
 Si existe un isomorfismo, se dice que los grupos $G_1$ y $G_2$ son \emph{isomorfos}, y se escribe $G_1 \simeq G_2$. \hfill$\blacksquare$
 \end{definition}
 
-En otras palabras, un isomorfismo es una biyección entre los grupos que también biyecta las relaciones definidas por las operaciones binarias. Uno puede pensar que son traductores. Por lo tanto, según la definición \ref{isomorfismo_de_grupo}, operar dos elementos $a, b \in G_1$ y luego aplicar el traductor $\phi$ tiene el mismo efecto que aplicar el traductor a $a$ y a $b$ por separado, y luego operarlos según la operación de $G_2$.
+En otras palabras, un isomorfismo es una biyección entre los grupos que también induce una biyección entre las relaciones definidas por las operaciones binarias. Uno puede pensar que son traductores. Por lo tanto, según la definición \ref{isomorfismo_de_grupo}, operar dos elementos $a, b \in G_1$ y luego aplicar el traductor $\phi$ tiene el mismo efecto que aplicar el traductor a $a$ y a $b$ por separado, y luego operarlos según la operación de $G_2$.
 
 No es difícil convencerse de que dos grupos isomorfos tienen exactamente las misma propiedades. Por ejemplo, si $G_1 \simeq G_2$, entonces $G_1$ es abeliano si y solo si $G_2$ es abeliano, o $G_1$ tiene un subgrupo de $n$ elementos si y solo si $G_2$ tiene un subgrupo de $n$ elementos.
 
@@ -362,9 +373,6 @@ Sea $m = \ord{G}(a)$. Por el corolario \ref{orden de elemento divide a orden de 
 \end{proof}
 
 
-% Ale: aquí voy.
-
-
 Los siguientes resultados exponen las primeras conexiones entre la teoría de grupos y la teoría de números.
 
 %\comentarioin{nuevo teorema y corolario para no usar isomorfismos}
@@ -396,7 +404,7 @@ Luego, por el corolario \ref{observacion orden}, tenemos que $r$ divide a $mn$, 
 	 & = & e^{r} \circ b^{rm}\\
 	 &=& b^{rm}.
 \end{eqnarray*}
-Como $a^{rn}=e$ y $b^{rm} = e$, usando el corolario \ref{observacion orden} deducimos que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, necesariamente $m \divi r$ y $n\divi r$. Así, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$. Esto concluye la demostración. 
+Como $a^{rn}=e$ y $b^{rm} = e$, usando el corolario \ref{observacion orden} deducimos que $m \divi rn$ y $n\divi rm$. Como $m$ y $n$ son coprimos, necesariamente $m \divi r$ y $n\divi r$. Así, tenemos que $mn\divi r$, ya que $\MCD(m,n)=1$. De eso se sigue que $mn \leq r$, y esto concluye la demostración. 
 \end{proof}
 
 Podemos generalizar la proposición \ref{orden del producto coprimos} de la siguiente manera. 
@@ -436,20 +444,20 @@ $(G,\circ)$. Entonces existe un elemento de $G$ que tiene orden $p$.
 \end{theorem}
 
 \begin{proof}
-Dejaremos fijo $p$ y haremos inducción en $n = |G|$. 
+Dejaremos fijo $p$ y haremos inducción en $n \coloneqq |G|$. 
 
 Notemos que el resultado es vacuamente cierto si $p$ no divide a $n$, por lo que solo debemos revisar los casos en que $n$ sea efectivamente un múltiplo de $p$. 
 
-El caso base es $n = p$. Como $p \geq 2$, existe un elemento $a \in G$ con $\ord{G}(a) > 1$ (ya que el único elemento con orden $1$ es el nuetro). Por el teorema de Lagrange, tenemos que $\ord{G}(a)$ divide a $n = p$, y, como $p$ es primo, necesariamente $\ord{G}(a) = p$.
+El caso base es $n = p$. Como $p \geq 2$, existe un elemento $a \in G$ con $\ord{G}(a) > 1$ (ya que el único elemento con orden $1$ es el neutro). Por el teorema de Lagrange, tenemos que $\ord{G}(a)$ divide a $p$, y, como $p$ es primo, necesariamente $\ord{G}(a) = p$.
 
-Ahora veamos el paso inductivo. Nuevamente consideramos un elemento $a \in G$ con $\ord{G}(a) = m > 1$. Tenemos dos casos:
+Para el paso inductivo, nuevamente consideramos un elemento $a \in G$ con $\ord{G}(a) = m > 1$. Hay dos casos:
 \begin{itemize}
 \item El primer caso es que $p$ divide a $m$. Entonces $a^{\frac{m}{p}}$ es un elemento de orden $p$.
 \item El segundo caso es que $p$ no divide a $m$. Sabemos que $\langle a \rangle$ es un subgrupo, así que podemos considerar el cociente $H = \faktor{G}{\langle a \rangle}$, que también será un grupo abeliano. Notemos que
 $$|G| = \left|\faktor{G}{\langle a \rangle}\right| \cdot \left|\langle a \rangle\right|.$$
-Como $p$ divide a $|G|$ y no divide a $\left|\langle a \rangle\right| = m$, tenemos que $p$ divide a $|H|$. Como $H$ es un grupo abeliano con $|H| < |G| = n$, podemos aplicar la hipótesis de inducción: existe un $B \in H$ con $\ord{H}(B) = p$. Dicho $B$ es una clase lateral de $G$ bajo $\langle a \rangle$, es decir $B = c \circ \langle a \rangle$ para algún $c \in G$. Sea $k = \ord{G}(c)$. Notemos que, como elementos del cociente $H$, se cumple que
+Como $p$ divide a $|G|$ y no divide a $\left|\langle a \rangle\right| = m$, tenemos que $p$ divide a $|H|$. Como $H$ es un grupo abeliano con $|H| < |G| = n$, podemos aplicar la hipótesis de inducción: existe un $B \in H$ con $\ord{H}(B) = p$. Dicho $B$ es una clase lateral de $G$ bajo $\langle a \rangle$, es decir $B = c \circ \langle a \rangle$ para algún $c \in G$. Sea $k = \ord{G}(c)$. Notemos que, por definición de la operación en el grupo cociente $H$ (proposición \ref{grupo_cociente}), se cumple que
 $$B^k = (c \circ \langle a \rangle)^k = c^k \circ \langle a \rangle = e \circ \langle a \rangle,$$
-por lo que $\ord{H}(B)$ divide a $k$. Como $p$ divide a $\ord{H}(B)$, $p$ también divide a $k = \ord{G}(c)$. Entonces $c^{\frac{k}{p}}$ es un elemento de orden $p$.
+por lo que $\ord{H}(B)$ divide a $k$ por el corolario \ref{observacion orden}. Como $\ord{H}(B) = p$ y $k = \ord{G}(c)$, tenemos que $c^{\frac{k}{p}}$ es un elemento de orden $p$.
 \end{itemize}
 Como en ambos casos encontramos un elemento que tiene orden $p$, esto completa la inducción.
 \end{proof}

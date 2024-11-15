@@ -2,7 +2,14 @@ Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq 
 
 Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo, necesitamos entender cuándo un número es invertible bajo la multiplicación en $\mathbb{Z}_n$. Un entero $a$ se dice \emph{invertible} en módulo $n$ si existe un entero $b$ tal que $a \cdot b \equiv 1 \modl n$. Por ejemplo, el número 2 es invertible en módulo 9
 puesto que $2 \cdot 5 \equiv 1 \modl 9$, mientras que el número 3 no es invertible en módulo 9, pues para cualquier entero $b$ tenemos que el resto de dividir $3b$ en $9$ es $0$, $3$ o $6$. De hecho, es sencillo probar que $a$ es
-invertible en módulo $n$ si y solo si $a$ y $n$ son coprimos, vale decir, el máximo común divisor de $a$ y $n$ es 1, lo cual es denotado como $\MCD(a,n) = 1$. \textcolor{red}{Ale: Ese es el lema de Bézout; supongo que se ve en el curso de matemáticas discretas. ¿Lo vamos a dejar sin demostrar?} Así, podemos concluir que, para $n \geq 2$,
+invertible en módulo $n$ si y solo si $a$ y $n$ son coprimos, es decir, si el máximo común divisor de $a$ y $n$ es 1, lo cual es denotado como $\MCD(a,n) = 1$. El argumento utiliza el siguiente resultado bien conocido en teoría de números:
+
+\begin{prop}[Lema de Bézout] \label{bezout}
+Para todo par de enteros positivos $a$ y $b$ existen $x, y \in \mathbb{Z}$ tales que $ax+by = \MCD(a, b)$.
+\end{prop}
+
+En nuestro caso, si $\MCD(a, n) = 1$, entonces existen $x, y \in \mathbb{Z}$ tales que $ax+ny = 1$. Luego $ax \equiv 1 \modl n$, y entonces $a$ es invertible en módulo $n$.
+Así, podemos concluir que, para $n \geq 2$,
 $(\mathbb{Z}_n, \cdot)$ no es un grupo porque $0$ no es
 invertible. Más aún, tenemos que $(\mathbb{Z}_n - \{0\},
 \cdot)$ es un grupo si y solo si $n$ es un número primo, ya que $n$ es primo si y solo si todos los números en el conjunto $\{1, \ldots,
@@ -15,7 +22,7 @@ Dado un entero $n \geq 1$, definimos $\varphi(n) \coloneqq |\mathbb{Z}_n^*|$. \h
 \end{definition}
 
 Notemos que $\varphi(n) = n - 1$ si y solo si
-$n$ es un número primo. \textcolor{red}{Ale: aquí pondría una proposición que diga cuál es la función phi de la potencia de un primo, y que es una función multiplicativa.}
+$n$ es un número primo. Por lo tanto, calcular la función $\varphi$ de un número es al menos igual de difícil que verificar si este es primo.
 
 
 Cuando estemos trabajando con el grupo $(\mathbb{Z}_n^*, \cdot)$, usaremos la notación $\langle a\rangle_n$ para denotar a $\langle a \rangle$, el subgrupo generador por $a$. Esta precisión adicional se introduce para evitar ambigüedad cuando se trabajan con varios grupos $(\mathbb{Z}_n^*, \cdot)$ (con parámetros $n$ distintos) a la vez.
