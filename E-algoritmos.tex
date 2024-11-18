@@ -1,0 +1,234 @@
+%{\bf Supuestos para el análisis de complejidad:} 
+Para el análisis de los algoritmos mostrados en esta sección, es importante considerar que las operaciones aritméticas (suma, resta, multiplicación, división, resto, $\lfloor \log n \rfloor$, $\lfloor \frac{n+m}{2} \rfloor$), de comparación ($=$, $<$, $\leq$, $>$, $\geq$) y de asignación ($:=$) para números enteros pueden ser realizados en tiempo polinomial en el largo de la entrada. Por ejemplo, existe un algoritmo tal que, dados dos números enteros $n$ y $m$, calcula $n\cdot m$ en tiempo $O(\poly(\log n, \log m))$, vale decir, en tiempo polinomial en el largo de las entradas $n$ y $m$. De esta forma, el análisis de los algoritmos se enfoca en las otras operaciones realizadas en ellos.
+% Además, si demostramos que un algoritmo puede ser ejecutado en tiempo polinomial bajo este supuesto, entonces sabemos que también pueden ser ejecutado en tiempo polinomial considerando el tiempo real de ejecución de las operaciones aritméticas y de comparación, ya que cada una de ellas puede ser llevada a cabo en tiempo polinomial. 
+
+
+\subsection{Algoritmo de exponenciación rápida}
+\label{app-fast_exp}
+\begin{algorithm}[H]
+\caption{\quad\textbf{EXP}}
+\label{alg:fast_exp}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $n, k$, donde $n$ es un entero y $k$ es un natural positivo\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $n^k$
+\begin{algorithmic}[1]
+	\IF {$k = 0$}
+		\RETURN $1$
+    \ELSIF {$k = 1$} 
+       \RETURN $n$
+    \ELSIF {$k$ es par}
+       \STATE $val :=\textbf{EXP}(n,\frac{k}{2})$
+       \RETURN $val\cdot val$
+    \ELSE
+   	   \STATE $val :=\textbf{EXP}(n,\frac{k-1}{2})$
+	   \RETURN $val\cdot val\cdot n$   
+	   \ENDIF         
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:fast_exp} es un algoritmo recursivo. El número de llamadas recursivas realizadas por el algoritmo 
+%tiempo de ejecución del algoritmo 
+está dado por la siguiente ecuación de recurrencia:
+% bajo los supuestos hechos en este capítulo:
+\begin{eqnarray*}
+	T(k) &=& 
+	\begin{cases}
+	T(\lfloor\frac{k}{2}\rfloor) + 1& \text{si } k > 2\\
+	1 & \text{si } k = 2 
+	\end{cases}
+\end{eqnarray*}
+De esto concluimos la cantidad de llamadas recursivas realizadas por el algoritmo \ref{alg:fast_exp} es $O(\log k)$, vale decir, lineal en el tamaño de la entrada~$k$. Además, las operaciones artiméticas, de comparación y de asignación pueden ser realizadas en tiempo $O(\poly_1(\log n^k)) = O(\poly_1(k \cdot \log n))$, dado que los números enteros utilizados en los distintos pasos del algoritmo están acotados por $n^k$. Por lo tanto, el algoritmo \ref{alg:fast_exp} funciona en tiempo $O(\log k \cdot \poly_1(k \cdot \log n))$, vale decir, en tiempo $O(\poly_2(\log n,k))$. 
+	
+\subsection{Algoritmo para verificar si existe un $m\in \{i,...,j\}$ tal que $n = m^k$}
+\label{app-tiene_raiz_entera}
+\begin{algorithm}[H]
+\caption{\quad\textbf{TieneRaízEntera}}
+\label{alg:tiene_raiz_entera}
+\hspace*{\algorithmicindent} \textbf{Input:} una secuencia $n,k,i,j$, donde $n,k,i,j$ son números naturales  tales que $i \leq j \leq n$\\
+\hspace*{\algorithmicindent} \textbf{Output:} \textbf{true} si existe un $m\in \{i,...,j\}$ tal que $n = m^k$, \textbf{false} si no 
+\begin{algorithmic}[1]
+   	\IF {$i=j$}
+   		\IF {\textbf{EXP}$(i,k)=n$}
+   			\RETURN \TRUE
+   		\ELSE
+   			\RETURN \FALSE
+   		\ENDIF
+   	\ELSIF {$i<j$}
+   		\STATE $p:=\lfloor \frac{i+j}{2}\rfloor$
+   		\STATE $val:=\textbf{EXP}(p,k)$
+   		\IF {$val = n$}
+   			\RETURN \TRUE
+   		\ELSIF {$val<n$}
+   			\RETURN \textbf{TieneRaízEntera}$(n,k,p+1,j)$
+   		\ELSE
+                        \RETURN \textbf{TieneRaízEntera}$(n,k,i,p-1)$
+%			\IF {$i \leq p -1$}  				
+%			\ELSE
+%				\RETURN \FALSE
+%			\ENDIF
+   		\ENDIF
+        \ELSE
+                \RETURN \FALSE
+   	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:tiene_raiz_entera} en el peor caso realiza  $O(\log (j - i))$ llamadas recursivas, vale decir, $O(\log n)$ llamadas recursivas puesto que $j - i \leq j \leq n$. 
+Dado el análisis de la sección~\ref{app-fast_exp}, las llamadas a la función \textbf{EXP} pueden ser realizadas en tiempo $O(\poly_1(\log n,k))$, dado que estas llamadas son de la forma \textbf{EXP}$(p,k)$ con $p \leq j \leq n$. Además, las operaciones artiméticas, de comparación y de asignación son realizadas en tiempo $O(\poly_2(\log n, k))$, dado que $i \leq j \leq n$. 
+%Dados los supuestos iniciales de esta sección, en cada una de estas llamadas lo que predomina en orden de complejidad es la llamada a la función \textbf{EXP}, que demora $O(\log k)$ en el peor caso (\ref{app-fast_exp}). 
+De esta forma, concluimos que el algoritmo \ref{alg:tiene_raiz_entera} funciona en tiempo
+%está función tiene complejidad $O(\log (j-i)\cdot\log k)$.   
+$O(\log n \cdot (\poly_1(\log n,k) + \poly_2(\log n, k))$, vale decir, en tiempo $O(\poly_3(\log n, k))$.
+
+
+\subsection{Algoritmo para verificar si un número es potencia de otro}
+\label{app-es_potencia}
+\begin{algorithm}[H]
+\caption{\quad\textbf{EsPotencia}}
+\label{alg:es_potencia}
+\hspace*{\algorithmicindent} \textbf{Input:} un número natural $n>1$\\
+\hspace*{\algorithmicindent} \textbf{Output:} \textbf{true} si $n = a^b$ para $a,b \in \mathbb{N}$ tales que $b \geq 2$, \textbf{false} si no lo es
+\begin{algorithmic}[1]
+   \IF {$n\leq 3$}
+    	\RETURN \FALSE
+    \ELSE
+    	\FOR {$k = 2$ \TO $\lfloor \log n\rfloor$}
+    		\IF {\textbf{TieneRaízEntera}$(n,k,1,n)$}
+    			\RETURN \TRUE
+    		\ENDIF
+		\ENDFOR    		
+    	\RETURN \FALSE
+    \ENDIF	 
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:es_potencia} realiza a lo más $(\lfloor \log n\rfloor - 1)$ llamadas al algoritmo \textbf{TieneRaízEntera}$(n,k,1,n)$ presentado en la sección~\ref{app-tiene_raiz_entera}, el cual tiene orden de complejidad $O(\poly_1(\log n, k))$. Como $k \leq \lfloor \log n\rfloor \leq \log n$ para $n > 1$, 
+%De esta forma 
+concluimos que  
+%O(\log n\cdot \log (\log n))\leq O(\log n^2)$ en el peor caso (ver \ref{app-tiene_raiz_entera}).  De esta forma, este 
+el algoritmo \ref{alg:es_potencia} funciona en tiempo $O(\log n \cdot \poly_1(\log n, \log n))$, vale decir, en tiempo~$O(\poly_2(\log n))$.
+%\comentario{revisar los de $\log \log n$}
+
+
+\subsection{Algoritmo para calcular el máximo común divisor entre dos números}
+\label{app-mcd}
+\begin{algorithm}[H]
+\caption{\quad\textbf{MCD}}
+\label{alg:mcd}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $a,b$, donde $a$ y $b$ son números naturales\\
+\hspace*{\algorithmicindent} \textbf{Output:} el máximo común divisor de $a$ y $b$
+\begin{algorithmic}[1]
+   	\IF {$a = 0$ \AND $b=0$}
+    	\RETURN \textbf{error}
+    \ELSIF {$a=0$}
+    	\RETURN $b$
+    \ELSIF {$b=0$}
+    	\RETURN $a$
+    \ELSIF {$a\geq b$}
+    	\RETURN $\textbf{MCD}(b,\, a \mods b)$
+	\ELSE
+		\RETURN $\textbf{MCD}(a,\, b \mods a)$    	
+   	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+Para demostrar que el algoritmo es correcto, es necesario demostrar que para $a \geq b > 0$, se tiene que $\MCD(a,\, b) = \MCD(b,\, a \!\! \mod b)$. 
+Para el análisis de la complejidad del algoritmo \ref{alg:mcd} podemos usar el hecho de que si $a\geq b > 0$, entonces $a \!\! \mod b<\frac{a}{2}$. Las demostraciones de estas dos propiedades quedan propuestas para el lector. De esta forma, 
+%si suponemos sin perdida de generalidad que $a \geq b$,
+tenemos que el algoritmo \ref{alg:mcd} calcula $\MCD(a,b)$ 
+%concluimos que el algoritmo  (sin pérdida de generalidad) que $a\geq b$, la complejidad del algoritmo \ref{alg:mcd}  es 
+% $\MCD$ queda 
+y funciona en orden~$O(\max\{\log a,\log b\})$.
+%\comentario{no se si explicar mas aca}
+%\comentario{Marcelo: basta considerar números naturales para este algoritmo?}
+
+
+\subsection{Algoritmo para calcular el orden multiplicativo $O_r(n)$}
+\label{app-orden_multiplicativo}
+\begin{algorithm}[H]
+\caption{\quad\textbf{OrdenMultiplicativo}}
+\label{alg:mult_ord}
+\hspace*{\algorithmicindent} \textbf{Input:} un par $n,r$, donde $n$ y $r$ son números naturales tales que $n,r > 1$\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $O_r(n)$ si $\MCD (n,r) = 1$, el valor -1 en caso contrario.
+\begin{algorithmic}[1]
+   	\IF {$\textbf{MCD}(n,r) \neq 1$}
+    	\RETURN -1
+   	\ENDIF
+	\STATE{$\textit{val} :=1$}
+   	\FOR {$k := 1$ \TO $r-1$}
+%   		\IF {$k=1$}
+%   			\STATE $val:= n\mod r$
+%   			\IF {$val = 1$}
+%   				\RETURN $k$
+%   			\ENDIF
+%   		\ELSE
+   			\STATE $\textit{val} := (val\cdot n)\mod r$
+   			\IF {$\textit{val} = 1$}
+   				\RETURN $k$
+   			\ENDIF
+   		%\ENDIF
+   	\ENDFOR
+   			
+\end{algorithmic}
+\end{algorithm}
+El algoritmo \ref{alg:mult_ord} comienza calculando el máximo común divisor entre $n$ y $r$, lo cual de acuerdo al análisis realizado en la sección \ref{app-mcd} toma tiempo $O(\max\{\log n, \log r\})$. Luego, entra al ciclo, y en el peor de los casos retorna cuando $k = r-1$, es decir, realiza $O(r)$ iteraciones. 
+Además, las operaciones artiméticas, de comparación y de asignación realizadas en el ciclo toman tiempo $O(\poly_1(\log n, \log r))$. De esta forma, 
+%De esta forma, bajo los supuestos realizados en esta sección, 
+concluimos que el algoritmo es de orden $O(\max\{\log n, \log r\} + r \cdot \poly_1(\log n, \log r))$, vale decir, es de orden~$O(\poly_2(\log n, r))$. 
+%\comentario{Marcelo: por favor revisar versión simplificada del algoritmo}
+
+%\subsection{Algoritmo para hacer módulo polinomio (esto lo pensaba sacar)}
+%\label{app-mod-pol}
+%\begin{algorithm}[H]
+%\caption{ModPol}
+%\label{alg:mod_pol}
+%\hspace*{\algorithmicindent} \textbf{Input:} una tupla $(q(X), n, r)$, donde $q(X)$ está en su forma canónica (en forma de lista?)\\
+%\hspace*{\algorithmicindent} \textbf{Output:} 
+%\begin{algorithmic}[1]
+%	\IF {$\deg(q(X))\geq r$}
+%		\FOR {$i = r$ \TO $\deg(q(X))$}
+%			\STATE $q[i\mod r] = q[i\mod r] + q[i]$
+%		\ENDFOR	
+%	\ENDIF	
+%	%aca hacer modulo n
+%	\FOR {$coeficiente$ \textbf{in} $q(X)$}
+%		\STATE $coeficiente = coeficiente \mod n$
+%	\ENDFOR
+%	\RETURN $q(X)$        
+%\end{algorithmic}
+%\end{algorithm}
+%\comentario{explicar por que tiene complejidad polinomial, y arreglar input output, hacer modulo a los coeficientes}
+
+%El algoritmo \ref{alg:mod_pol} retorna el polinomio $q(X)$ en $F_n[X]/(X^r-1)$. Este ocupa el hecho de que $X^r\equiv 1 \modulo$. De esta forma, $X^i\equiv X^{i\mod r}$ para $1\leq i\leq deg(q)$. 
+
+
+\subsection{Algoritmo de exponenciación rápida para polinomios en módulo $(X^r-1,n)$}
+\label{app-fast_exp_mod}
+\begin{algorithm}[H]
+\caption{\quad\textbf{ExpMod}}
+\label{alg:fast_exp_mod}
+\hspace*{\algorithmicindent} \textbf{Input:} una tupla $(q(X), k, r, n)$\\
+\hspace*{\algorithmicindent} \textbf{Output:} el valor de $q(X)^k \!\! \modulo$
+\begin{algorithmic}[1]
+	\IF {$k = 0$}
+		\RETURN $1$
+    \ELSIF {$k = 1$}
+    	\RETURN $q(X)  \!\! \modulo$
+   	\ELSIF {$k$ es par}
+    	\STATE $val :=\textbf{ExpMod}(q(X),\frac{k}{2}, r, n)$
+      	\RETURN $(val\cdot val)  \!\! \modulo$
+   	\ELSE
+   		\STATE $val :=\textbf{ExpMod}(q(X),\frac{k-1}{2}, r, n)$
+	  	\RETURN $(val\cdot val\cdot q(X))  \!\! \modulo$   
+	  	\ENDIF         
+\end{algorithmic}
+\end{algorithm}
+%\comentario{explicar por que tiene complejidad polinomial, y arreglar input output, hacer modulo a los coeficientes}
+%\comentario{el algoritmo lo hice para $X^r -1$ porque facilita mucho}
+
+Para analizar la complejidad de este algoritmo, primero es necesario mencionar cuál es la complejidad 
+de las operaciones aritméticas para polinomios. Un polinomio 
+\begin{eqnarray*}
+q(X) & = & \sum_{i=0}^{k-1} a_i X^i
+\end{eqnarray*}
+es representado como una tupla $(a_{k-1}, \ldots, a_0)$ con $k$ elementos. En particular, si consideramos polinomios en módulo $n$, entonces cada coeficiente $a_i \in \{0, \ldots, n-1\}$, y el tamaño de la tupla $(a_{k-1}, \ldots, a_0)$ es $O(k \cdot \log n)$. De manera general, un polinomio $q(X)$ en módulo $n$ es representado por una tupla de tamaño $O(\grado(q(X)) \cdot \log n)$, donde $\grado(q(X))$ es el grado del polinomio $q(X)$. Las operaciones aritméticas suma, resta, multiplicación, división y resto para polinomios en módulo $n$ pueden ser realizados en tiempo polinomial en el largo de la entrada. Por ejemplo, existe un algoritmo tal que, dados dos polinomios $q_1(X)$ y $q_2(X)$, calcula $q_1(X) \cdot q_2(X)$ en módulo $n$ en tiempo $O(\poly(\grado(q_1(X)) \cdot \log n,\, \grado(q_2(X)) \cdot \log n))$, vale decir, en tiempo polonomial en el largo de las entradas $q_1(X)$ y $q_2(X)$. Nótese que $O(\poly(\grado(q_1(X)) \cdot \log n,\, \grado(q_2(X)) \cdot \log n))$ es equivalente a $O(\poly_1(\grado(q_1(X)), \grado(q_2(X)), \log n))$, por lo que esta última notación es usada cuando consideramos la complejidad de las operaciones aritméticas para polinomios en módulo $n$. 
+
+
+El algoritmo \ref{alg:fast_exp_mod} realiza $O(\log k)$ llamadas recursivas.
+% en las que debe hacer multiplicación de polinomios, y obtener la representación del polinomio en el anillo $F_n[X]/(X^r-1)$. Para realizar la operación $p(X)\modulo$ para un polinomio $p(X)$ cualquiera se necesitan $O(deg(p(X)))$.
+En cada una de estas llamadas debe realizar operaciones aritmeticas y de comparación para números naturales, por ejemplo verificar si $k$ es par, y operaciones aritmeticas y de asignación ($:=$) para polinomios en módulo $n$, por ejemplo calcular $q(X) \!\! \modulo$. Dado que $\grado(X^r - 1) = r$ y los polinomios almacenados en la variable $val$ son de grado menor a $r$, tenemos que cada llamada recursiva puede ser realizada en tiempo $O(\poly_1(\log k, \grado(q(X)), r, \log n))$. Concluimos entonces que el algoritmo \ref{alg:fast_exp_mod} funciona en tiempo $O(\log k \cdot \poly_1(\log k, \grado(q(X)), r, \log n))$, vale decir, en tiempo $O(\poly_2(\log k, \grado(q(X)), r, \log n))$.
