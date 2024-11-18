@@ -1,1 +1,36 @@
 \subsection{Definiciones y propiedades básicas}
+
+Un anillo es una estructura algebraica que cuenta con dos operaciones internas, a diferencia de los grupos, que solo cuentan con una. En el contexto de un anillo, a la primera de estas operaciones se le llama \emph{suma}, y a la segunda, \emph{multiplicación}. En ese sentido, usaremos los símbolos «$+$» y «$\cdot$» para referirnos a ellas, a pesar de que la naturaleza de estas operaciones puede ser muy distinta dependiendo del anillo concreto en el que estemos trabajando.
+
+\begin{definition}[Anillo, anillo conmutativo]
+    Un \emph{anillo} es una terna $(R, +, \cdot)$, donde $R$ es un conjunto y $+ \colon R \times R \to R$ y $\cdot \colon R \times R \to R$ son funciones (totales) que satisfacen los siguientes axiomas\footnote{Algunos autores 
+    no incluyen el axioma $3$ en la definición de anillo, y usan el término \emph{anillo con identidad} para referirse a la estructura algebraica que nosotros llamamos simplemente \emph{anillo}. No hay una convención universal sobre esto, por lo que sugerimos siempre revisar la definición precisa de anillo en el material que se esté utilizando.}
+    \begin{enumerate}
+        \item $(R, +)$ es un grupo abeliano.
+        \item $\cdot$ es asociativa: para todos $a,b,c \in R$ se cumple que $(a \cdot b) \cdot c = a \cdot (b
+\cdot c)$.
+
+	\item Existe un elemento $\1 \in G$ (llamado \emph{identidad}) tal que para todo $a \in R$ se cumple que $a \cdot \1 = \1 \cdot a = a$
+
+   \item $\cdot$ distribuye sobre $+$, es decir, para todos $a, b, c \in R$ se cumple que $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$ y $(a+b) \cdot c = (a \cdot c ) + (b \cdot c).$
+    \end{enumerate}
+    Decimos que $(R, +, \cdot)$ es un \emph{anillo conmutativo} si es un anillo en el que la operación $\cdot$ es conmutativa.\hfill$\blacksquare$
+    \end{definition}
+
+Notemos que el axioma $4$ es el único que conecta ambas operaciones, y lo hace de la misma manera en que interactúan la suma y multiplicación usuales.
+
+En el apéndice de teoría de grupos discutimos que el símbolo $e$ estaba siempre reservado para el neutro. Sin embargo, en el contexto de un anillo, usaremos el símbolo $\0$ para referirnos al neutro de la operación $+$. La letra negrita sirve para diferenciar dicho elemento del número $0$. Siempre usaremos la notación aditiva para el grupo $(R, +$), de modo que $-a \in R$ denotará al inverso de $a \in R$ bajo $+$. En la misma línea, dados $a \in R$ y $n \in \mathbb{Z}$, escribiremos $na$ para denotar a la $n$-ésima potencia de $a$ bajo $+$.
+
+También usaremos la negrita para diferenciar el elemento $\1 \in R$ del número $1$. Para que esta notación tenga sentido, primero debemos probar que la identidad de un anillo es única. La demostración es idéntica a la que hicimos para grupos.
+
+\begin{proposition}
+    La identidad de un anillo es única.
+\end{proposition}
+    
+    \begin{proof}
+    Sea $(R, +, \cdot)$ un anillo, y supongamos que $\1, \1' \in G$ son ambos identidades. Como $\1$ es identidad, tenemos que $\1 \circ \1' = \1'$. Pero $\1'$ también es identidad, así que $\1 \circ \1' = \1$. Por transitividad, concluimos que $\1 = \1'$.
+    \end{proof}
+
+Dado un $a \in R$ y un entero positivo $n$, escribiremos $a^n$ para denotar al elemento $a$ operado bajo $\cdot$ consigo mismo $n$ veces. También definimos $a^0 = \1$. Notemos que, \textit{a priori}, no tiene sentido escribir $a^n$ si $n$ es un entero negativo, pues podría no existir un inverso para $a$ bajo $\cdot$.
+
+Es usual omitir el símbolo «$\cdot$» para escribir multiplicaciones. Esta notación se debe a que, a menos que un par de paréntesis indique lo contrario, la convención es que las multiplicaciones se realizan antes que las sumas. De este modo, los axiomas de distributividad se suelen escribir como $a(b+c) = ab+ac$ y $(a+b)c = ac + bc$.
