@@ -1,16 +1,11 @@
 \subsection{Definiciones y propiedades básicas}
 %\comentarioin{Habíamos hablado de poner $\oplus,\otimes$ para denotar la suma y multiplicacion en un cuerpo, y así dejar $q\cdot$ para denotar la suma de $q$ veces un cuerpo. Sin embargo, empecé a cambiar las cosas y la notación se volvió muy fea y además engorrosa (no podíamos denotar $-a$ por ejemplo. Creo que lo mejor es escribir la suma de $q$ términos de $a$ como $qa$ o $\textbf{q}a$. En cambio, cuando en el cuerpo estámos hablando del elemento neutro, preferí poner la notación $\mathbb{0},\mathbb{1}$ para denotarlos}
 \begin{definition}[Cuerpo]
-Una tupla $(F, +,\cdot)$, dónde $F$ es un conjunto y $ +,\cdot :F\times F\to F$ son funciones (totales), es un cuerpo si:
-\begin{enumerate}
-	\item $(F,+)$ es un grupo abeliano
-
-	\item $(F\setminus \{\0\},\cdot)$ es un grupo abeliano, con $\0$ el elemento neutro de $(F,+)$
-
-   \item La operación $\cdot$ distribuye sobre $+$, es decir, se cumple que para todo $a,b,c$ en $F$:
-    $$(a+b)\cdot c \ = \ (a \cdot c ) + (b\cdot c)$$
-\end{enumerate}
+Dado un conjunto $F$ y dos funciones (totales) $+ \colon R \times R \to R$ y $\cdot \colon R \times R \to R$, decimos que la terna $(F, +, \cdot)$ es un \emph{cuerpo} si $(F, +, \cdot)$ es un anillo conmutativo en el que $F^\ast = F \setminus \{\0\}$, es decir, en el que todos los elementos distintos a $\0$ tienen inverso multiplicativo. 
+\hfill$\blacksquare$
 \end{definition}
+
+La notación utilizada para trabajar con cuerpos es idéntica a la de anillos. Notemos que ahora también tienen sentido las expresiones $a^{-1}$ y $a^{-n}$ con $n$ un entero positivo, siempre que $a \neq \0$.
 
 %\begin{definition}[Cuerpo]
 %Un conjunto $F$ y dos funciones (totales) $\circ,+ : F\times
@@ -22,26 +17,9 @@ Una tupla $(F, +,\cdot)$, dónde $F$ es un conjunto y $ +,\cdot :F\times F\to F$
 %	$$(a+b)\circ(c + d) \ = \ (a \circ c ) + (a\circ d)+(b \circ c ) + (b\circ d)$$
 %\end{enumerate}
 %\end{definition}
-Dado un cuerpo $(F,+,\cdot)$, hablamos de adición o suma para
-referirnos a $+$, y de multiplicación para referirnos a $\cdot$. El
-elemento neutro de la suma es $\0$ y el de la multiplicación es
-$\1$. Además, para $a\in F$ decimos que $-a$ es su inverso bajo $+$ y
-$a^{-1}$ es su inverso bajo $\cdot$.
-%También, el elemento neutro de la
-%suma es $\0$ y el de la multiplicación es $\1$.
-También, dado $n \in \mathbb{N}$, usamos las siguientes
-abreviaciones:
-\begin{eqnarray*}
-		na & = & \underbrace{a +\ldots + a}_\text{$n$ veces}\\
-                (-n)a & = & n(-a)\\
-		a^n & = & \underbrace{a \cdot \ldots \cdot a}_\text{$n$ veces}\\
-		a^{-n} & = & (a^{-1})^n
-\end{eqnarray*}
-En particular, tenemos que $0a = \0$ y $a^0 = \1$. Por último, con el
-objetivo de no sobrecargar la notación, la multiplicación
-tiene preferencia sobre la adición, es decir, $a\cdot b + c\cdot d
-= (a\cdot b)+(c\cdot d)$.
-%\comentarioin{Aca poner que $a+\cdots +a = qa$ sin el $\cdot$.}
+
+\textcolor{red}{Ale: hasta aquí es nuevo}
+
 A continuación presentamos algunas propiedades básicas que se cumplen
 en los cuerpos.
 

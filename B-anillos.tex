@@ -33,4 +33,101 @@ También usaremos la negrita para diferenciar el elemento $\1 \in R$ del número
 
 Dado un $a \in R$ y un entero positivo $n$, escribiremos $a^n$ para denotar al elemento $a$ operado bajo $\cdot$ consigo mismo $n$ veces. También definimos $a^0 = \1$. Notemos que, \textit{a priori}, no tiene sentido escribir $a^n$ si $n$ es un entero negativo, pues podría no existir un inverso para $a$ bajo $\cdot$.
 
-Es usual omitir el símbolo «$\cdot$» para escribir multiplicaciones. Esta notación se debe a que, a menos que un par de paréntesis indique lo contrario, la convención es que las multiplicaciones se realizan antes que las sumas. De este modo, los axiomas de distributividad se suelen escribir como $a(b+c) = ab+ac$ y $(a+b)c = ac + bc$.
+Con el objetivo de no sobrecargar la notación, es usual omitir el símbolo «$\cdot$» para escribir multiplicaciones. Además, a menos que un par de paréntesis indique lo contrario, la convención es que las multiplicaciones se realizan antes que las sumas. Así, los axiomas de distributividad se suelen escribir como $a(b+c) = ab+ac$ y $(a+b)c = ac + bc$. 
+
+Nos centraremos en el estudio de los anillos conmutativos, pues no necesitaremos trabajar con ningún anillo no conmutativo en este documento.
+
+\begin{example} 
+Sabemos que $(\mathbb{Z}, +)$ es un grupo abeliano (ejemplo \ref{ejemplo_Z}). Si consideramos además la multiplicación usual de enteros, obtenemos un anillo conmutativo: $(\mathbb{Z}, +, \cdot)$. \hfill$\blacksquare$
+\end{example}
+
+\begin{example}
+Dado un entero $n \geq 1$, sabemos que $(\mathbb{Z}, +)$ es un grupo abeliano (ejemplo \ref{grupo_ciclico}). Si consideramos además la multiplicación usual en módulo $n$, obtenemos un anillo conmutativo: $(\mathbb{Z}_n, +, \cdot)$. \hfill$\blacksquare$
+\end{example}
+
+A continuación presentamos algunas propiedades básicas de los anillos conmutativos.
+
+\begin{proposition}\label{propiedades_anillos}
+    Sea $(R, +, \cdot)$ un anillo conmutativo. Se cumplen las siguientes propiedades:
+    \begin{enumerate}
+    \item Para todo $a\in R$ se cumple que $a\cdot \0 =\0\cdot a= \0$
+    
+    \item Para todo $a,b\in R$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
+    
+    \item Para todo $a \in R$ y $n \in \mathbb{Z}$ se cumple que $-(na) = (-n)a = n(-a)$.
+    
+    \item Para todo $a \in F$ y $p,q \in \mathbb{Z}$ se cumple que $(pq)a = p(qa)$.
+    
+    \item Para todo $a,b\in R$ y $n \in \mathbb{Z}$ se cumple que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$. De esto y la propiedad 4 se concluye que para todo $a,b\in R$ y $n,m \in \mathbb{Z}$, se cumple que $(nm)(a\cdot b) = (na)\cdot (mb)$.   
+    \end{enumerate}
+    \end{proposition}
+    
+    \begin{proof} \hfill
+        \begin{enumerate}
+            \item 
+            Sabemos que $\0+\0 = \0$, pues $\0$ es el neutro aditivo. Luego:
+            \begin{eqnarray*}
+    \0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
+                &\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0
+            \end{eqnarray*}
+        Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición \ref{cancelacion_grupos}). Así, obtenemos que $a \cdot \0 = \0$. Por la conmutatividad de la multiplicación, también tenemos que $\0 \cdot a=\0 $.
+    
+        \item Tenemos que:
+            \begin{eqnarray*} (-a)\cdot b + a \cdot b & = & ((-a) +
+            a) \cdot b\\ & = & \0 \cdot b\\ 
+            & = & \0 \quad\quad\quad \text{por la propiedad 1}
+            \end{eqnarray*}
+    Así, tenemos que $-(a \cdot b) = (-a)\cdot b$. Además, por esta propiedad y la 
+            conmutatividad de la multiplicación obtenemos $a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b)$.
+    
+            \item Si $p = 0$, concluimos que $-(pa) = (-p)a = p(-a)$ por
+            la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
+            F$). Si $p > 0$, tenemos que:
+    \begin{eqnarray*}
+    (-p)a + pa & = & p(-a) + pa\\
+    & = & \underbrace{(-a) +\cdots + (-a)}_\text{$p$ veces} \ + \ \underbrace{a +\cdots + a}_\text{$p$ veces}\\ 
+    & = & \underbrace{((-a) + a) + \cdots + ((-a) + a)}_\text{$p$ veces}\\
+    & = & \underbrace{\0 + \cdots + \0}_\text{$p$ veces}\\
+    & = & \0
+    \end{eqnarray*}
+    Por lo tanto, $-(pa) = (-p)a$. Además, por definición tenemos que $p(-a) = (-p)a = -(pa)$. El caso $p < 0$ es dejado como ejercicio para el lector (para resolverlo es útil considerar el caso $p > 0$ y la propiedad $p = -|p|$). 
+    
+    \item Si $p = 0$ o $q = 0$, concluimos que $(pq)a = p(qa)$ por
+            la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
+            F$). Si $p > 0$ y $q > 0$, tenemos que:
+    \begin{eqnarray*}
+    (pq)a &=& \underbrace{a +\cdots + a}_\text{$pq$ veces}\\
+     &=& \underbrace{c +\cdots + c}_\text{$p$ veces} \quad\quad\quad \text{para }
+     c = \underbrace{a +\cdots + a}_\text{$q$ veces}\\
+     & = & \underbrace{qa +\cdots + qa}_\text{$p$ veces}\\
+     & = & p(qa)
+    \end{eqnarray*}
+    Si $p < 0$ y $q < 0$, tenemos por la propiedad anterior que:
+    \begin{eqnarray*}
+    (pq)a &=& ((-p)(-q))a\\
+     &=& (-p)((-q)a)\\
+     &=& (-p)(-(qa)) \quad\quad\quad \text{por la propiedad 3}\\
+     &=& p(-(-(qa))) \quad\quad\quad \text{por la propiedad 3}\\
+     &=& p(qa)
+    \end{eqnarray*}
+    Los casos faltantes pueden ser demostrados utilizando las mismas ideas, y son dejados como ejercicios para el lector.
+    
+        \item Si $p = 0$, concluimos que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$ por la propiedad 1 y la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in F$). Si $p > 0$, tenemos que:
+        \begin{eqnarray*}
+            p(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$p$ veces}\\
+            &=&(\underbrace{a +\cdots + a}_\text{$p$ veces}) \cdot b\\
+            &=&(pa) \cdot b
+        \end{eqnarray*}		
+    Además, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = p(b \cdot a) = (pb) \cdot a = a \cdot (pb)$. Si $p < 0$, utilizando la propiedad anterior concluimos que:
+        \begin{eqnarray*}
+            p(a\cdot b)&=& (-|p|)(a \cdot b)\\
+            &=& |p|(-(a \cdot b))\\
+            &=& |p|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
+            &=& (|p|(-a)) \cdot b\\
+            &=& ((-|p|)(a)) \cdot b\\
+            &=& (pa) \cdot b
+        \end{eqnarray*}
+        Finalmente, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = a \cdot (pb)$. 
+        \qedhere
+        \end{enumerate}
+    \end{proof}
