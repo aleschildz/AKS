@@ -52,13 +52,13 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
     \begin{enumerate}
     \item Para todo $a\in R$ se cumple que $a\cdot \0 =\0\cdot a= \0$
     
-    \item Para todo $a,b\in R$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
+    \item Para todos $a,b\in R$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
     
-    \item Para todo $a \in R$ y $n \in \mathbb{Z}$ se cumple que $-(na) = (-n)a = n(-a)$.
+    \item Para todos $a \in R$ y $n \in \mathbb{Z}$ se cumple que $-(na) = (-n)a = n(-a)$.
     
-    \item Para todo $a \in F$ y $p,q \in \mathbb{Z}$ se cumple que $(pq)a = p(qa)$.
+    \item Para todo $a \in R$ y $n,m \in \mathbb{Z}$ se cumple que $(nm)a = n(ma)$.
     
-    \item Para todo $a,b\in R$ y $n \in \mathbb{Z}$ se cumple que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$. De esto y la propiedad 4 se concluye que para todo $a,b\in R$ y $n,m \in \mathbb{Z}$, se cumple que $(nm)(a\cdot b) = (na)\cdot (mb)$.   
+    \item Para todos $a,b\in R$ y $n \in \mathbb{Z}$ se cumple que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$. De esto y la propiedad 4 se concluye que, para todo $a,b\in R$ y $n,m \in \mathbb{Z}$, se cumple que $(nm)(a\cdot b) = (na)\cdot (mb)$.   
     \end{enumerate}
     \end{proposition}
     
@@ -68,66 +68,65 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
             Sabemos que $\0+\0 = \0$, pues $\0$ es el neutro aditivo. Luego:
             \begin{eqnarray*}
     \0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
-                &\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0
+                &\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0.
             \end{eqnarray*}
         Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición \ref{cancelacion_grupos}). Así, obtenemos que $a \cdot \0 = \0$. Por la conmutatividad de la multiplicación, también tenemos que $\0 \cdot a=\0 $.
     
         \item Tenemos que:
             \begin{eqnarray*} (-a)\cdot b + a \cdot b & = & ((-a) +
             a) \cdot b\\ & = & \0 \cdot b\\ 
-            & = & \0 \quad\quad\quad \text{por la propiedad 1}
+            & = & \0 \quad\quad\quad \text{por la propiedad 1}.
             \end{eqnarray*}
-    Así, tenemos que $-(a \cdot b) = (-a)\cdot b$. Además, por esta propiedad y la 
-            conmutatividad de la multiplicación obtenemos $a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b)$.
+    Luego $-(a \cdot b) = (-a)\cdot b$. Usando esto y la 
+            conmutatividad de la multiplicación, obtenemos que $$a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b).$$
     
-            \item Si $p = 0$, concluimos que $-(pa) = (-p)a = p(-a)$ por
-            la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
-            F$). Si $p > 0$, tenemos que:
+            \item Si $n = 0$, entonces $-(na) = (-n)a = n(-a) = \0$ por definición de la notación $kc$ (para $k \in \mathbb{Z}$ y $c \in
+            R$). Si $n > 0$, tenemos que $(-n)a = n(-a)$ por definición. Por otro lado, se cumple que
     \begin{eqnarray*}
-    (-p)a + pa & = & p(-a) + pa\\
-    & = & \underbrace{(-a) +\cdots + (-a)}_\text{$p$ veces} \ + \ \underbrace{a +\cdots + a}_\text{$p$ veces}\\ 
-    & = & \underbrace{((-a) + a) + \cdots + ((-a) + a)}_\text{$p$ veces}\\
-    & = & \underbrace{\0 + \cdots + \0}_\text{$p$ veces}\\
-    & = & \0
+    (-n)a + na & = & n(-a) + na\\
+    & = & \underbrace{(-a) +\cdots + (-a)}_\text{$n$ veces} \ + \ \underbrace{a +\cdots + a}_\text{$n$ veces}\\ 
+    & = & \underbrace{((-a) + a) + \cdots + ((-a) + a)}_\text{$n$ veces}\\
+    & = & \underbrace{\0 + \cdots + \0}_\text{$n$ veces}\\
+    & = & \0.
     \end{eqnarray*}
-    Por lo tanto, $-(pa) = (-p)a$. Además, por definición tenemos que $p(-a) = (-p)a = -(pa)$. El caso $p < 0$ es dejado como ejercicio para el lector (para resolverlo es útil considerar el caso $p > 0$ y la propiedad $p = -|p|$). 
+    Luego $-(na) = (-n)a$. Dejamos el caso $n < 0$ como ejercicio para el lector (para resolverlo es útil considerar el caso $n > 0$ y la propiedad $n = -|n|$). 
     
-    \item Si $p = 0$ o $q = 0$, concluimos que $(pq)a = p(qa)$ por
-            la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
-            F$). Si $p > 0$ y $q > 0$, tenemos que:
+    \item Si $n = 0$ o $m = 0$, entonces $(nm)a = n(ma) = \0$ por definición de la notación $kc$ (para $k \in \mathbb{Z}$ y $c \in
+            R$). Si $n > 0$ y $m > 0$, tenemos que
     \begin{eqnarray*}
-    (pq)a &=& \underbrace{a +\cdots + a}_\text{$pq$ veces}\\
-     &=& \underbrace{c +\cdots + c}_\text{$p$ veces} \quad\quad\quad \text{para }
-     c = \underbrace{a +\cdots + a}_\text{$q$ veces}\\
-     & = & \underbrace{qa +\cdots + qa}_\text{$p$ veces}\\
-     & = & p(qa)
+    (nm)a &=& \underbrace{a +\cdots + a}_\text{$nm$ veces}\\
+     &=& \underbrace{c +\cdots + c}_\text{$n$ veces} \quad\quad\quad \text{para }
+     c = \underbrace{a +\cdots + a}_\text{$m$ veces}\\
+     & = & \underbrace{ma +\cdots + ma}_\text{$n$ veces}\\
+     & = & n(ma).
     \end{eqnarray*}
-    Si $p < 0$ y $q < 0$, tenemos por la propiedad anterior que:
+    Si $n < 0$ y $m < 0$, entonces $-n > 0$ y $-m > 0$, y podemos usar el caso que acabamos de probar:
     \begin{eqnarray*}
-    (pq)a &=& ((-p)(-q))a\\
-     &=& (-p)((-q)a)\\
-     &=& (-p)(-(qa)) \quad\quad\quad \text{por la propiedad 3}\\
-     &=& p(-(-(qa))) \quad\quad\quad \text{por la propiedad 3}\\
-     &=& p(qa)
+    (nm)a &=& ((-n)(-m))a\\
+     &=& (-n)((-m)a)\\
+     &=& (-n)(-(ma)) \quad\quad\quad \text{por la propiedad 3}\\
+     &=& n(-(-(ma))) \quad\quad\quad \text{por la propiedad 3}\\
+     &=& n(ma)
     \end{eqnarray*}
-    Los casos faltantes pueden ser demostrados utilizando las mismas ideas, y son dejados como ejercicios para el lector.
+    Los casos faltantes son análogos: los dejados como ejercicios para el lector.
     
-        \item Si $p = 0$, concluimos que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$ por la propiedad 1 y la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in F$). Si $p > 0$, tenemos que:
+        \item Si $n = 0$, tenemos que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$ por la propiedad 1 y la definición de la notación $kc$ (para $k \in \mathbb{Z}$ y $c \in F$). Si $n > 0$, tenemos que:
         \begin{eqnarray*}
-            p(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$p$ veces}\\
-            &=&(\underbrace{a +\cdots + a}_\text{$p$ veces}) \cdot b\\
-            &=&(pa) \cdot b
+            n(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$n$ veces}\\
+            &=&(\underbrace{a +\cdots + a}_\text{$n$ veces}) \cdot b\\
+            &=&(na) \cdot b
         \end{eqnarray*}		
-    Además, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = p(b \cdot a) = (pb) \cdot a = a \cdot (pb)$. Si $p < 0$, utilizando la propiedad anterior concluimos que:
+    Utilizando esta propiedad y la conmutatividad de la multiplicación, obtenemos que $$n(a\cdot b) = n(b \cdot a) = (nb) \cdot a = a \cdot (nb).$$ Si $n < 0$, entonces 
+    $n = -|n|$ con $|n| > 0$. Utilizando el caso que acabamos de probar, tenemos que
         \begin{eqnarray*}
-            p(a\cdot b)&=& (-|p|)(a \cdot b)\\
-            &=& |p|(-(a \cdot b))\\
-            &=& |p|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
-            &=& (|p|(-a)) \cdot b\\
-            &=& ((-|p|)(a)) \cdot b\\
-            &=& (pa) \cdot b
+            n(a\cdot b)&=& (-|n|)(a \cdot b)\\
+            &=& |n|(-(a \cdot b))\\
+            &=& |n|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
+            &=& (|n|(-a)) \cdot b\\
+            &=& ((-|n|)(a)) \cdot b\\
+            &=& (na) \cdot b
         \end{eqnarray*}
-        Finalmente, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = a \cdot (pb)$. 
+        Finalmente, utilizando eso y la conmutatividad de la multiplicación obtenemos $n(a\cdot b) = a \cdot (nb)$. 
         \qedhere
         \end{enumerate}
     \end{proof}
