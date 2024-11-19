@@ -18,132 +18,24 @@ La notación utilizada para trabajar con cuerpos es idéntica a la de anillos. N
 %\end{enumerate}
 %\end{definition}
 
+\begin{proposition} \label{cuerpos_son_dominios_integrales}
+Todo cuerpo es un dominio integral.
+\end{proposition}
+
+\begin{proof} 
+Sea $(F, +, \cdot)$ un cuerpo, y sean $a, b \in F$ tales que $a \cdot b = \0$. Queremos probar que $a = \0$ o bien $b = \0$.
+
+Supongamos que $b \neq \0$ (si no, no hay nada que demostrar). Entonces $b$ tiene un inverso multiplicativo, $b^{-1}$. Si multiplicamos ambos lados de la ecuación $a \cdot b = \0$ por $b^{-1}$, obtendremos $a = \0 \cdot b^{-1} = \0$, donde la última igualdad es por la propiedad 1 de la proposición \ref{propiedades_anillos}.
+\end{proof}
+
+Hacemos notar que no todo dominio integral es un cuerpo. Veamos el siguiente ejemplo.
+
+\begin{example}
+Sabemos que $(\mathbb{Z}, +, \cdot)$ es un dominio integral. Sin embargo, este no es un cuerpo, ya que, por ejemplo, $2 \neq \0$ y $2$ no tiene un inverso multiplicativo en $\mathbb{Z}$.
+\end{example}
+
 \textcolor{red}{Ale: hasta aquí es nuevo}
 
-A continuación presentamos algunas propiedades básicas que se cumplen
-en los cuerpos.
-
-%\comentarioin{Agregue el punto 3 a la siguiente proposición: es algo importante sobre cuerpos y ademas lo utilizo para demostrar que la caracteristica de un cuerpo finito es primo}
-\begin{proposition}\label{proposicion cuerpos}
-\hfill
-\begin{enumerate}
-\item Para todo $a\in F$ se cumple que $a\cdot \0 =\0\cdot a= \0$
-
-\item Para todo $a,b\in F$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
-
-\item Para todo $a \in F$ y $p \in \mathbb{Z}$ se cumple que $-(pa) = (-p)a = p(-a)$.
-
-\item Para todo $a \in F$ y $p,q \in \mathbb{Z}$ se cumple que $(pq)a = p(qa)$.
-
-\item Para todo $a,b\in F$ y $p \in \mathbb{Z}$ se cumple que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$. De esto y la propiedad 4 se concluye que para todo $a,b\in F$ y $p,q \in \mathbb{Z}$, se cumple que $(pq)(a\cdot b) = (pa)\cdot (qb)$.
-
-\item Para todo $a,b\in F$ se cumple que $a\cdot b = \0$ si y solo si $a=\0$ o $b=\0$\label{inciso prop}
-
-\end{enumerate}
-\end{proposition}
-%\comentarioin{agregue este comentario al inciso 6 porque creo que es algo muy relevante}
-En particular, el inciso \ref{inciso prop} de la proposición anterior comienza a darnos una mirada de las buenas propiedades en los cuerpos: nos permite hacer ``cancelación'' en las ecuaciones. Vamos a profundizar en esta propiedad con un ejemplo.
-\begin{example}
-Considere la estructura $(\mathbb{Z}_4,+,\cdot)$. Notemos que si
-queremos resolver la ecuación $$ 2\cdot x\ = \ 2\cdot 2,$$ no podemos
-``cancelar'' el 2 en ambos lados de la ecuación y concluir que $x =
-2$. De hecho, si bien $x =2$ es una raiz de la ecuación, $x=0$ también
-lo es. Esto es debido a que en esta estructura el elemento $2$ no
-tiene inverso multiplicativo.  En general, cuando consideramos
-$(\mathbb{Z}_n,+,\cdot)$ para $n \geq 2$ un número compuesto, no vamos
-a tener un cuerpo y
-%no estamos trabajando sobre un cuerpo,
-vamos a encontrar elementos de la estructura $a\neq 0$ y $b\neq 0$
-tales que $a\cdot b = 0$. \qed
-\end{example}
-\begin{proof}[Demostración de la proposición \ref{proposicion cuerpos}]\hfill
-	\begin{enumerate}
-		\item 
-		Sabemos que $\0+\0 = \0$. Luego:
-		\begin{eqnarray*}
-\0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
-			&\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0\\
-                        &\Rightarrow &a\cdot \0+a\cdot \0 + -(a\cdot \0) = a\cdot \0 + -(a \cdot \0)\\
-                        &\Rightarrow &a\cdot \0+ \0 = \0\\
-			&\Rightarrow &a\cdot \0 = \0 
-		\end{eqnarray*}
-	%Donde la notación $x-y = x +(-y)$.
-        Por lo tanto, $a\cdot \0
-=\0 $. Por la conmutatividad de la multiplicación también podemos
-obtener que $\0 \cdot a=\0 $.
-
-	\item Tenemos que:
-        \begin{eqnarray*} (-a)\cdot b + a \cdot b & = & ((-a) +
-        a) \cdot b\\ & = & \0 \cdot b\\ 
-        & = & \0 \quad\quad\quad \text{por la propiedad 1}
-        \end{eqnarray*}
-Así, tenemos que $-(a \cdot b) = (-a)\cdot b$. Además, por esta propiedad y la 
-        conmutatividad de la multiplicación obtenemos $a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b)$.
-
-        \item Si $p = 0$, concluimos que $-(pa) = (-p)a = p(-a)$ por
-        la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
-        F$). Si $p > 0$, tenemos que:
-\begin{eqnarray*}
-(-p)a + pa & = & p(-a) + pa\\
-& = & \underbrace{(-a) +\cdots + (-a)}_\text{$p$ veces} \ + \ \underbrace{a +\cdots + a}_\text{$p$ veces}\\ 
-& = & \underbrace{((-a) + a) + \cdots + ((-a) + a)}_\text{$p$ veces}\\
-& = & \underbrace{\0 + \cdots + \0}_\text{$p$ veces}\\
-& = & \0
-\end{eqnarray*}
-Por lo tanto, $-(pa) = (-p)a$. Además, por definición tenemos que $p(-a) = (-p)a = -(pa)$. El caso $p < 0$ es dejado como ejercicio para el lector (para resolverlo es útil considerar el caso $p > 0$ y la propiedad $p = -|p|$). 
-
-\item Si $p = 0$ o $q = 0$, concluimos que $(pq)a = p(qa)$ por
-        la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in
-        F$). Si $p > 0$ y $q > 0$, tenemos que:
-\begin{eqnarray*}
-(pq)a &=& \underbrace{a +\cdots + a}_\text{$pq$ veces}\\
- &=& \underbrace{c +\cdots + c}_\text{$p$ veces} \quad\quad\quad \text{para }
- c = \underbrace{a +\cdots + a}_\text{$q$ veces}\\
- & = & \underbrace{qa +\cdots + qa}_\text{$p$ veces}\\
- & = & p(qa)
-\end{eqnarray*}
-Si $p < 0$ y $q < 0$, tenemos por la propiedad anterior que:
-\begin{eqnarray*}
-(pq)a &=& ((-p)(-q))a\\
- &=& (-p)((-q)a)\\
- &=& (-p)(-(qa)) \quad\quad\quad \text{por la propiedad 3}\\
- &=& p(-(-(qa))) \quad\quad\quad \text{por la propiedad 3}\\
- &=& p(qa)
-\end{eqnarray*}
-Los casos faltantes pueden ser demostrados utilizando las mismas ideas, y son dejados como ejercicios para el lector.
-
-	\item Si $p = 0$, concluimos que $p(a\cdot b) = (pa)\cdot b = a \cdot (pb)$ por la propiedad 1 y la definición de la notación $nb$ (para $n \in \mathbb{Z}$ y $b \in F$). Si $p > 0$, tenemos que:
-	\begin{eqnarray*}
-		p(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$p$ veces}\\
-		&=&(\underbrace{a +\cdots + a}_\text{$p$ veces}) \cdot b\\
-		&=&(pa) \cdot b
-	\end{eqnarray*}		
-Además, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = p(b \cdot a) = (pb) \cdot a = a \cdot (pb)$. Si $p < 0$, utilizando la propiedad anterior concluimos que:
-	\begin{eqnarray*}
-		p(a\cdot b)&=& (-|p|)(a \cdot b)\\
-		&=& |p|(-(a \cdot b))\\
-		&=& |p|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
-		&=& (|p|(-a)) \cdot b\\
-		&=& ((-|p|)(a)) \cdot b\\
-		&=& (pa) \cdot b
-	\end{eqnarray*}
-	Finalmente, utilizando esta propiedad y la conmutatividad de la multiplicación obtenemos $p(a\cdot b) = a \cdot (pb)$. 
-
-	\item ($\Rightarrow$)
-	Supongamos por contradicción que $a\cdot b=\0$, $a\neq \0$ y $b \neq \0$. Luego, $b$ tiene inverso bajo $\cdot$. Así, utilizando nuevamente la primera propiedad obtenemos:
-	\begin{eqnarray*}
-		a\cdot b = \0 &\Rightarrow& a\cdot b\cdot b^{-1} = \0 \cdot b^{-1}\\
-       &\Rightarrow& a\cdot \1 = \0\\
-       &\Rightarrow& a = \0
-	\end{eqnarray*}
-	Lo cual es una contradicción ya que supusimos que $a\neq \0$.
-	
-	($\Leftarrow$)
-	Esta dirección se cumple por la propiedad 1.
-	
-	\qedhere
-	\end{enumerate}
-\end{proof}
 Por último, vamos a definir lo que es un subcuerpo. Además, introducimos el concepto de cuerpo de extensión.
 \begin{definition}
 Sea $(F,+,\cdot)$ un cuerpo y $K\subseteq F$. Decimos que $(K,
@@ -205,8 +97,8 @@ finito $(F, +, \cdot)$ satisface que $p = ab$, con $1<a, b<p$. Luego,
 \begin{eqnarray*}
 	p\1  = \0 &\Rightarrow & (a b)\1 = \0 \\
         &\Rightarrow & (a b) (\1 \cdot \1) = \0 \\
-	&\Rightarrow & (a\1) \cdot (b\1) =  \0 \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{proposicion cuerpos}}\\
-	&\Rightarrow& a \1  = \0 \ \text{ o } \ b\1  = \0 \quad\quad\quad \text{por la propiedad 6 de la proposición \ref{proposicion cuerpos}}
+	&\Rightarrow & (a\1) \cdot (b\1) =  \0 \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{propiedades_anillos}}\\
+	&\Rightarrow& a \1  = \0 \ \text{ o } \ b\1  = \0 \quad\quad\quad \text{por la proposición \ref{cuerpos_son_dominios_integrales}}
 \end{eqnarray*}
 En cualquiera de los dos casos, concluimos que existe un número $q <
 p$ tal que $q > 1$ y $q \1 = \0$, lo cual contradice el hecho de que
@@ -233,7 +125,7 @@ $q a = \0$.
 %y podemos concluir que
 Adicionalmente, como $(F,+,\cdot)$ tiene característica $p$, se tiene
 que $p x = \0 $ para todo $x \in F$, por la
-proposición \ref{proposicion cuerpos} y el hecho de que $p \1 =\0 $
+proposición \ref{propiedades_anillos} y el hecho de que $p \1 =\0 $
 (en particular, sabemos que $\1 \cdot x = x$ y $\0 \cdot x
 = \0$). Como $p$ y $q$ son primos relativos, por la identidad de
 Bézout sabemos que existen $s,t\in \mathbb{Z}$ tales que $p s + q t
@@ -249,9 +141,9 @@ Luego,
         &=& (p s + q t) a\\
         &=& (p s) a + (q t) a \quad\quad\quad \text{por la definición de $m b$ para $m \in \mathbb{Z}$ y $b \in F$}\\
         &=& (p s) (a \cdot \1) + (q t) (a \cdot \1)\\
-	&=& (pa) \cdot (s\1) + (qa)\cdot (t\1) \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{proposicion cuerpos}}\\
+	&=& (pa) \cdot (s\1) + (qa)\cdot (t\1) \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{propiedades_anillos}}\\
 	&=& \0 \cdot (s\1) + \0 \cdot (t\1)\\
-	&=& \0 + \0 \quad\quad\quad \text{por la propiedad 1 de la proposición \ref{proposicion cuerpos}}\\
+	&=& \0 + \0 \quad\quad\quad \text{por la propiedad 1 de la proposición \ref{propiedades_anillos}}\\
         &=& \0
 \end{eqnarray*}
 Pero esto es una contradicción ya que el orden de $a$ en $(F,+)$ es
@@ -336,12 +228,10 @@ el lector la demostración de este propiedad).
 Por la hipótesis de inducción, sabemos que $q(X)$ tiene a lo más $k$
 soluciones en $F$. Es importante observar que todo elemento que $d\in
 F$ que no sea $c$ o una raiz de $q(X)$ no puede ser una raiz de
-$p(X)$, ya que tendríamos que $(d-c)\neq \0$ y $q(d)\neq \0$, y por el
-inciso \ref{inciso prop} de la proposición \ref{proposicion cuerpos}
+$p(X)$, ya que tendríamos que $(d-c)\neq \0$ y $q(d)\neq \0$, y por la proposición \ref{cuerpos_son_dominios_integrales}
 sabemos inmediatamente que $p(d)\neq\0$ (si $F$ no fuera un cuerpo
 esta propiedad no necesariamente se cumpliría).  Luego, $p(X)$ tiene a
 lo más $k+1$ soluciones en $F$.
-%\comentarioin{\ref{proposicion cuerpos} inciso \ref{inciso prop} es la respuesta a :No se por qué esta demostración no funcionaría con anillos que no son cuerpos. En que parte usan que tenemos un cuerpo? Yo creo que falta eso}
 \end{proof}
 Notemos que el resultado del teorema \ref{raices en polinomios sobre
 cuerpos} no es cierto para todas las estructuras algebraicas. Por

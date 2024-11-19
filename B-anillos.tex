@@ -130,3 +130,24 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
         \qedhere
         \end{enumerate}
     \end{proof}
+
+
+En general, en un anillo no tenemos la propiedad de cancelación para la multiplicación. Veamos el siguiente ejemplo.
+
+\begin{example} \label{ejemplo_no_dominio_integral}
+Consideremos el anillo $(\mathbb{Z}_4,+,\cdot)$. Si
+queremos resolver la ecuación $$ 2\cdot x\ = \ 2\cdot 2,$$ no podemos
+``cancelar'' el $2$ en ambos lados de la ecuación y concluir que $x =
+2$. De hecho, si bien $x =2$ es una raíz de la ecuación, también lo es $x=0$. El problema aquí es que $2$ no tiene inverso multiplicativo en este anillo, por lo que no es correcto deducir que $x=2$ a partir de la ecuación $ 2\cdot x\ = \ 2\cdot 2$. En general, el anillo $(\mathbb{Z}_n,+,\cdot)$, con $n \geq 2$ un número compuesto, tendrá el mismo problema: existirán elementos $a\neq 0$ y $b\neq 0$
+tales que $a\cdot b = 0$. \hfill$\blacksquare$
+\end{example}
+
+El ejemplo \ref{ejemplo_no_dominio_integral} muestra que puede ser problemático cuando en un anillo existen dos elementos distintos de $\0$ cuyo producto sí es $\0$. La siguiente definición se refiere a los anillos en los que esto no ocurre.
+
+\begin{definition}[Dominio integral]
+Se dice que un anillo conmutativo $(R, +, \cdot)$ es un \emph{dominio integral} si, para todo par de elementos $a, b \in R$ tales que $a \cdot b = \0$, se tiene que $a = \0$ o bien $b = \0$. \hfill$\blacksquare$
+\end{definition}
+
+\begin{example}
+El anillo conmutativo $(\mathbb{Z}, +, \cdot)$ es un dominio integral. \hfill$\blacksquare$
+\end{example}
