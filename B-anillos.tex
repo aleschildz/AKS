@@ -131,6 +131,13 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
         \end{enumerate}
     \end{proof}
 
+\begin{remark} \label{obs_cero_distinto_a_uno}
+La primera propiedad de la proposición \ref{propiedades_anillos} muestra que si en un anillo conmutativo $(R, +, \cdot)$ se cumple que $\0 = \1$, entonces $R$ consiste de un solo elemento. En efecto, si eso se cumple, entonces para todo $a \in R$ se cumplirá que
+$$a = a \cdot \1 = a \cdot \0 = \0.$$
+Por lo tanto, el único anillo conmutativo en el que se cumple que $\0 = \1$ es la estructura trivial. En el caso de los cuerpos (definición \ref{definicion_cuerpo}) uno agrega la condición $\0 \neq \1$ para evitar tener que analizar ese caso por separado.
+\hfill$\blacksquare$
+\end{remark}
+
 
 En general, en un anillo no tenemos la propiedad de cancelación para la multiplicación. Veamos el siguiente ejemplo.
 
@@ -148,6 +155,45 @@ El ejemplo \ref{ejemplo_no_dominio_integral} muestra que puede ser problemático
 Se dice que un anillo conmutativo $(R, +, \cdot)$ es un \emph{dominio integral} si, para todo par de elementos $a, b \in R$ tales que $a \cdot b = \0$, se tiene que $a = \0$ o bien $b = \0$. \hfill$\blacksquare$
 \end{definition}
 
+La siguiente proposición nos dice que en los dominios integrales sí se tiene la propiedad de cancelación de la multiplicación.
+
+\begin{proposition}
+Sea $(R, +, \cdot)$ un dominio integral. Si $a, b, c \in R$ son elementos tales que $a \cdot b = a \cdot c$ y $a \neq \0$, entonces $b = c$.
+\end{proposition}
+
+\begin{proof}
+Tenemos que
+$$\0 = (a \cdot b) - (a \cdot c) = a \cdot (b-c).$$
+Como $(R, +, \cdot)$ es un dominio integral, necesariamente $a = \0$ o bien $b-c = \0$. Como sabemos que $a \neq \0$, concluimos que $b - c = \0$, y $b = c$.
+\end{proof}
+
+
 \begin{example}
-El anillo conmutativo $(\mathbb{Z}, +, \cdot)$ es un dominio integral. \hfill$\blacksquare$
+El anillo conmutativo $(\mathbb{Z}, +, \cdot)$ es un dominio integral. Por lo tanto, la ecuación $2 \cdot x = 2 \cdot 2$ que mencionamos en el ejemplo \ref{ejemplo_no_dominio_integral} sí tiene como única solución a $x = 2$ en esta estructura. 
+\hfill$\blacksquare$
 \end{example}
+
+Si bien los elementos de un anillo conmutativo no necesariamente tienen inverso multiplicativo, es posible que algunos elementos sí los tengan. A esto se refiere la siguiente definición.
+
+\begin{definition}[Unidades] \label{grupo de unidades}
+Sea $(R, +, \cdot)$ un anillo conmutativo. Una \emph{unidad} de $R$ es un elemento $a \in R$ para el que existe un $b \in R$ tal que $a \cdot b = \1$. Al conjunto de las unidades de $(R, +, \cdot)$ se le  denota $R^\ast$.
+\hfill$\blacksquare$
+
+\begin{proposition} \label{grupo_de_unidades}
+Sea $(R, +, \cdot)$ un anillo conmutativo. Entonces $(R^\ast, \cdot)$ es un grupo abeliano.
+\end{proposition}
+
+\begin{proof}
+La asociatividad y conmutatividad se heredan directamente. El elemento $\1$ sigue teniendo la propiedad de neutralidad en $R^\ast \subseteq R$. Por lo tanto, necesitamos probar que $R^\ast$ es cerrado bajo multiplicaciones, y que cada elemento de $R^\ast$ tiene un inverso multiplicativo dentro de $R^\ast$.
+
+Para la clausura de la multiplicación, tomemos $a_1, a_2 \in R^\ast$. Por definición, sabemos que existen $b_1, b_2 \in R$ tales que $a_1 \cdot b_1 = \1$ y $a_2 \cdot b_2 = \1$. Entonces 
+$$(a_1 \cdot a_2) \cdot (b_1 \cdot b_2) = (a_1 \cdot b_1) \cdot (a_2 \cdot b_2) = \1 \cdot \1 = \1,$$
+lo que muestra que $a_1 \cdot a_2$ es una unidad.
+
+Por último, tomemos un $a \in R^\ast$. Sabemos que existe un $b \in R$ tal que $a \cdot b = \1$. Necesitamos probar que $b \in R^\ast$. Para ello, basta notar que $b \cdot a = 1$, y $a \in R^\ast \subseteq R$, por lo que $b$ es también una unidad.
+\end{proof}
+
+La proposición \ref{grupo_de_unidades} implica que en un anillo conmutativo cada elemento puede tener a lo sumo un inverso multiplicativo. Además, por lo que discutimos en la observación \ref{obs_cero_distinto_a_uno}, $\0$ no puede ser una unidad a menos que el anillo consista de un solo elemento.
+
+\end{definition}
+
