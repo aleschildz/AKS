@@ -303,7 +303,7 @@ Sea $(G, \circ)$ un grupo. Decimos que un elemento $a \in G$ es un \emph{generad
 \end{definition}
 
 \begin{remark}
-Un grupo cíclico puede tener más de un generador. Por ejemplo, vimos anteriormente vimos que $1$ es un generador de $(\mathbb{Z}_5, +)$ (ver ejemplo \ref{grupo_ciclico}). Sin embargo, también $4$ es un generador, pues $4 + 4 = 3$, $4 + 4 + 4 = 2$, $4 + 4 + 4 + 4 = 1$ y $4 + 4 + 4 + 4 + 4 = 0$ (considerando todas las sumas en módulo $5$).
+Un grupo cíclico puede tener más de un generador. Por ejemplo, vimos anteriormente vimos que $1$ es un generador de $(\mathbb{Z}_5, +)$ (ver ejemplo \ref{grupo_ciclico}). Sin embargo, también $4$ es un generador, pues $4 + 4 = 3$, $4 + 4 + 4 = 2$, $4 + 4 + 4 + 4 = 1$ y $4 + 4 + 4 + 4 + 4 = 0$ (considerando las sumas en módulo $5$).
 \hfill$\blacksquare$
 \end{remark}
 
@@ -382,12 +382,7 @@ Los siguientes resultados exponen las primeras conexiones entre la teoría de gr
 
 \begin{proof}
 	Sea $e$ el neutro. Sea $r=\ord{G}(a\circ b)$. Debemos demostrar que $r = mn$. Tenemos que 
-	\begin{eqnarray*}
-		(a\circ b)^{mn} &=& a^{mn}\circ b^{mn}\\
-                &=& (a^m)^n\circ (b^n)^m\\
-		&=&e^n\circ e^m \\
-		 &=&  e.
-	\end{eqnarray*}
+	$$(a\circ b)^{mn} = a^{mn}\circ b^{mn} = (a^m)^n\circ (b^n)^m = e^n\circ e^m = e.$$
 Luego, por el corolario \ref{observacion orden}, tenemos que $r$ divide a $mn$, y por lo tanto $r\leq mn$. Nos falta probar que $mn\leq r$. Para ello, notemos que, como $e = (a\circ b)^r$, entonces
 \begin{eqnarray*}
 	 e \ = \ e^n & =&  (a\circ b)^{rn} \\
