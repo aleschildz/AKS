@@ -211,14 +211,14 @@ $$\forall r \in R \quad \forall a \in I \quad r \cdot a \in I.$$
 
 En otras palabras, la definición \ref{def_ideal} dice que los ideales son subgrupos con la suma que, además, son absorbentes respecto a la multiplicación en el siguiente sentido: si multiplicamos un elemento del ideal por cualquier elemento del anillo, el producto sigue estando en el ideal.
 
-\begin{example}
+\begin{example} \label{mZ_ideal}
 Sea $m$ un entero positivo. Vimos en el ejemplo \ref{ejemplo_subgrupo} que $m\mathbb{Z}$ es un subgrupo de $(\mathbb{Z}, +)$. Ahora afirmamos que, de hecho, $m \mathbb{Z}$ es un ideal de $(\mathbb{Z}, +, \cdot)$. En efecto, si $n \in \mathbb{Z}$ y $a \in m\mathbb{Z}$, entonces existe un $k \in \mathbb{Z}$ tal que $a = mk$. Pero entonces $na = m(nk)$, lo que muestra que $na \in m\mathbb{Z}$. 
 \end{example}
 
 Supongamos que tenemos un ideal $I$ de un anillo conmutativo $(R, +, \cdot)$
 Puesto que los ideales son, en particular, subgrupos, tenemos que $\faktor{R}{I}$ forma un grupo con la suma (según definimos en la proposición \ref{grupo_cociente}). Lo que veremos a continuación es que los ideales hacen que dicho cociente tenga la estructura de un anillo.
 
-\begin{prop}[Anillo cociente]
+\begin{prop}[Anillo cociente] \label{anillo_cociente}
 Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $I \subseteq R$ un ideal. El grupo cociente $\faktor{R}{I}$ forma un anillo conmutativo cuya multiplicación se define por\footnote{Al igual que como hicimos en la proposición \ref{grupo_cociente}, introducimos un nuevo símbolo para la multiplicación en el cociente para que la demostración sea más clara. Lo usual es usar los mismos símbolos de suma y multiplicación para el anillo original y para el cociente.}
 $$(r + I) \ast (s + I) = (r \cdot s) + I.$$
 \end{prop}
@@ -244,6 +244,16 @@ Sea $(R, +, \cdot)$ un anillo conmutativo. Dado un elemento $a \in R$, el conjun
 \begin{proof}
 Es claro que $(a)$ es absorbente con la multiplicación. Veamos que es un grupo abeliano con la suma. La asociatividad y conmutatividad se heredan directamente. Verifiquemos los tres axiomas restantes:
 \begin{itemize}
-\item
-\end{itemize}
+\item La propiedad 1 de la proposición \ref{propiedades_anillos} nos dice que $\0 = a \cdot \0$, así que $\0 \in (a)$.
+\item Sean $b_1, b_2 \in (a)$. Entonces existen $r_1, r_2 \in R$ tales que $b_1 = a \cdot r_1$ y $b_2 = a \cdot r_2$. Entonces
+$$b_1 + b_2 = (a \cdot r_1) + (a \cdot r_2) = a \cdot (r_1 + r_2),$$
+por lo que $b_1 + b_2 \in (a)$, y $(a)$ es cerrado bajo sumas.
+\item Sea $b \in (a)$, de modo que existe un $r \in R$ tal que $b = a \cdot r$. Por la propiedad 2 de la proposición \ref{propiedades_anillos} tenemos que $-b = a \cdot (-r)$. Luego $-b \in (a)$, y $(a)$ es cerrado bajo tomar inversos aditivos.
+\end{itemize} 
 \end{proof}
+
+\begin{example} 
+Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa es la noción algebraica más importante para entender este documento. Reutilizaremos esta idea en el próximo capítulo, cuando hablemos de cocientes de anillos de polinomios por un idea principal.
+\end{example}
+
+\subsection{Anillos de polinomios}

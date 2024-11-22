@@ -244,7 +244,7 @@ Ahora debemos probar que $\left(\faktor{G}{H},\, \ast\right)$ es un grupo abelia
 
 Hacemos notar que, en la proposición \ref{grupo_cociente}, $\faktor{G}{H}$ no es un subgrupo de $G$. De hecho, ni siquiera es un subconjunto de $G$. Veamos otra vez el ejemplo \ref{ejemplo_clases_laterales}. Las cuatro clases laterales no son enteros, sino subconjuntos de $\mathbb{Z}$. Ahora sabemos que esas cuatro clases laterales forman un grupo, y, si miramos con atención, notaremos que ese grupo es esencialmente idéntico al grupo de $\mathbb{Z}_4 = \left\{0, 1, 2, 3\right\}$ con la operación de suma en módulo $4$. Resulta incómodo no poder afirmar que ambos grupos son idénticos solo porque sus elementos tengan naturaleza distinta. Esto motiva la siguiente definición.
 
-\begin{definition}[Isomorfismo] \label{isomorfismo_de_grupo}
+\begin{definition}[Isomorfismo de grupos] \label{isomorfismo_de_grupo}
 Sean $(G_1, \circ_1)$ y $(G_2, \circ_2)$ dos grupos. Diremos que una función $\phi\colon G_1 \rightarrow G_2$ es un \emph{isomorfismo} si $\phi$ es una biyección y, además,
 $$\forall\, a, b \in G_1 \qquad \phi(a \circ_1 b) = \phi(a) \circ_2 \phi(b).$$
 Si existe un isomorfismo, se dice que los grupos $G_1$ y $G_2$ son \emph{isomorfos}, y se escribe $G_1 \simeq G_2$. \hfill$\blacksquare$
@@ -261,7 +261,7 @@ Se puede verificar que los números reales, $\mathbb{R}$, forman un grupo con la
 
 Resumiremos nuestra discusión del ejemplo \ref{ejemplo_clases_laterales} en la siguiente proposición.
 
-\begin{prop}
+\begin{prop} \label{isomorfismo_Z_m}
 Sea $m$ un entero positivo, y considere los grupos abelianos $(\mathbb{Z}, +)$ y $(\mathbb{Z}_m, +)$. Entonces $$\faktor{\mathbb{Z}}{m \mathbb{Z}} \; \simeq \; \mathbb{Z}_m.$$
 \end{prop}
 
