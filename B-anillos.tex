@@ -232,12 +232,12 @@ Las propiedades de asociatividad, distributividad sobre la suma y conmutatividad
 \end{proof}
 
 \begin{example}
-Consideremos el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplicación componente a componente, y sea $I \coloneqq \{ 0 \} \times \mathbb{R}$. Es claro que $(I, +)$ es un subgrupo de $(\mathbb{R}^2, +)$, pues contiene al neutro aditivo $(0, 0)$ y es cerrado bajo sumas y bajo inversos aditivos. Además, $I$ es absorbente: si multiplicamos un elemento arbitrario de $I$, que tendrá la forma $(0, c)$ por un elemento arbitrario de $\mathbb{R}^2$, que tendrá la forma $(a, b)$, obtendremos que
+Consideremos el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplicación coordenada a coordenada, y sea $I \coloneqq \{ 0 \} \times \mathbb{R}$. Es claro que $(I, +)$ es un subgrupo de $(\mathbb{R}^2, +)$, pues contiene al neutro aditivo $(0, 0)$ y es cerrado bajo sumas y bajo inversos aditivos. Además, $I$ es absorbente: si multiplicamos un elemento arbitrario de $I$, que tendrá la forma $(0, c)$ por un elemento arbitrario de $\mathbb{R}^2$, que tendrá la forma $(a, b)$, obtendremos que
 $$(a, b) \cdot (0, c) = (0, bc) \in I.$$
 Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase lateral de $\faktor{\mathbb{R}^2}{I}$ tiene exactamente un elemento de la forma $(a, 0)$. En efecto, primero notemos que, para todos $a, b \in \mathbb{R}$, los elementos $(a, b)$ y $(a, 0)$ están en la misma clase lateral, pues $(a, b) = (a, 0) + (0, b)$, y $(0, b) \in I$. Por otro lado, si $(a, 0)$ y $(a', 0)$ estuviesen en la misma clase lateral para algunos $a, a' \in \mathbb{R}$, entonces tendríamos que $(a-a', 0) \in I$, y eso solo es posible si $a = a'$. Por lo tanto, tenemos el isomorfismo $\faktor{\mathbb{R}^2}{I} \simeq \mathbb{R}$ dado por $(a, 0) + I \mapsto a$.
 
-\begin{tikzpicture}[scale=1.5] \label{dibujo_cociente}
-
+\begin{figure} \centering
+\begin{tikzpicture}[scale=1.5] 
     % Ejes
     \draw[->] (0,0) -- (5,0) node[anchor=north] {$x$};
     \draw[->] (0,0) -- (0,5) node[anchor=east] {$y$};
@@ -254,10 +254,11 @@ Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase latera
     \fill[magenta] (3,0.5) circle (2pt) node[right] {\textcolor{magenta}{$B$}};
     \fill[magenta] (4,3.5) circle (2pt) node[right] {\textcolor{magenta}{$A+B$}};
     \fill[magenta] (4,3) circle (2pt) node[right] {\textcolor{magenta}{$C+D$}};
-    
-    \end{tikzpicture}
+\end{tikzpicture}
+\caption{\label{dibujo_cociente} El cociente $\faktor{\mathbb{R}^2}{I}$ corresponde a proyectar el plano hacia el eje horizontal. Las clases laterales corresponden a rectas verticales.}
+\end{figure}
 
-Geométricamente, las clases laterales corresponden a rectas verticales (vea la ilustración \ref{dibujo_cociente})
+Geométricamente, las clases laterales corresponden a rectas verticales (vea la ilustración \ref{dibujo_cociente}). El cociente, entonces, es el conjunto de las rectas verticales, que naturalmente está en biyección con el eje horizontal. De hecho, otra forma de pensar en este cociente es que estamos proyectando el plano hacia ese eje horizontal. El hecho de que dicho cociente forme un anillo corresponde al hecho de que tomar proyecciones preserva las operaciones de suma y multiplicación cooordenada a coordenada.
 \hfill$\blacksquare$
 \end{example}
 
