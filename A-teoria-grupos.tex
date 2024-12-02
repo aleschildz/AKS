@@ -315,7 +315,7 @@ Un grupo cíclico puede tener más de un generador. Por ejemplo, vimos anteriorm
 En cualquier grupo, el neutro es el único elemento con orden $1$. \hfill$\blacksquare$
 \end{remark}
 
-Estamos usando el término «orden» en dos sentidos distintos, pues ya habíamos definido el orden de un grupo como su cardinalidad. Esto no suele generar confusión, ya que es claro cuando se habla del grupo y cuando se habla de un elemento de él. 
+Estamos usando el término <<orden>> en dos sentidos distintos, pues ya habíamos definido el orden de un grupo como su cardinalidad. Esto no suele generar confusión, ya que es claro cuando se habla del grupo y cuando se habla de un elemento de él. 
 
 \begin{proposition} \label{prop-orden}
 Sea $(G, \circ)$ un grupo, y sea $a \in G$ un elemento con orden finito, digamos $\ord{G}(a) = m$. Entonces
@@ -351,7 +351,7 @@ Dado un grupo $G$, un elemento $a \in G$ es un generador si y solo si $\ord{G}(a
 \hfill$\blacksquare$
 \end{remark}
 
-Notemos que el orden del subgrupo generado por un elemento coincide con el orden de dicho elemento. Esta es la razón por la que el término «orden» se utiliza en ambos sentidos.
+Notemos que el orden del subgrupo generado por un elemento coincide con el orden de dicho elemento. Esta es la razón por la que el término <<orden>> se utiliza en ambos sentidos.
 
 %https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2011/05/Order-group-theory.pdf
 
@@ -448,7 +448,7 @@ El caso base es $n = p$. Como $p \geq 2$, existe un elemento $a \in G$ con $\ord
 Para el paso inductivo, nuevamente consideramos un elemento $a \in G$ con $\ord{G}(a) = m > 1$. Hay dos casos:
 \begin{itemize}
 \item El primer caso es que $p$ divide a $m$. Entonces $a^{\frac{m}{p}}$ es un elemento de orden $p$.
-\item El segundo caso es que $p$ no divide a $m$. Sabemos que $\langle a \rangle$ es un subgrupo, así que podemos considerar el cociente $H = \faktor{G}{\langle a \rangle}$, que también será un grupo abeliano. Notemos que
+\item El segundo caso es que $p$ no divide a $m$. Sabemos que $\langle a \rangle$ es un subgrupo, así que podemos considerar el cociente $H \coloneqq \faktor{G}{\langle a \rangle}$, que también será un grupo abeliano. Notemos que
 $$|G| = \left|\faktor{G}{\langle a \rangle}\right| \cdot \left|\langle a \rangle\right|.$$
 Como $p$ divide a $|G|$ y no divide a $\left|\langle a \rangle\right| = m$, tenemos que $p$ divide a $|H|$. Como $H$ es un grupo abeliano con $|H| < |G| = n$, podemos aplicar la hipótesis de inducción: existe un $B \in H$ con $\ord{H}(B) = p$. Dicho $B$ es una clase lateral de $G$ bajo $\langle a \rangle$, es decir $B = c \circ \langle a \rangle$ para algún $c \in G$. Sea $k = \ord{G}(c)$. Notemos que, por definición de la operación en el grupo cociente $H$ (proposición \ref{grupo_cociente}), se cumple que
 $$B^k = (c \circ \langle a \rangle)^k = c^k \circ \langle a \rangle = e \circ \langle a \rangle,$$
