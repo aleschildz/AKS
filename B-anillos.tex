@@ -144,11 +144,15 @@ Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición 
 En general, en un anillo no tenemos la propiedad de cancelación para la multiplicación. Veamos el siguiente ejemplo.
 
 \begin{example} \label{ejemplo_no_dominio_integral}
-Consideremos el anillo $(\mathbb{Z}_4,+,\cdot)$. Si
-queremos resolver la ecuación $$ 2\cdot x\ = \ 2\cdot 2,$$ no podemos
+Consideremos el anillo $(\mathbb{Z}_6,+,\cdot)$. Si
+queremos resolver la ecuación $$ 2\cdot x\ = \ 4,$$ no podemos
 ``cancelar'' el $2$ en ambos lados de la ecuación y concluir que $x =
-2$. De hecho, si bien $x =2$ es una raíz de la ecuación, también lo es $x=0$. El problema aquí es que $2$ no tiene inverso multiplicativo en este anillo, por lo que no es correcto deducir que $x=2$ a partir de la ecuación $ 2\cdot x\ = \ 2\cdot 2$. En general, el anillo $(\mathbb{Z}_n,+,\cdot)$, con $n \geq 2$ un número compuesto, tendrá el mismo problema: existirán elementos $a\neq 0$ y $b\neq 0$
-tales que $a\cdot b = 0$. \hfill$\blacksquare$
+2$. De hecho, si bien $x =2$ es una raíz de la ecuación, también lo es $x=5$, ya que $2 \cdot 5 = 4$ en módulo $6$. El problema aquí es que $2$ no tiene inverso multiplicativo en este anillo, por lo que no es correcto deducir que $x=2$ a partir de la ecuación $ 2\cdot x\ = \ 4$. Notemos que se cumplen las siguientes equivalencias:
+$$2 \cdot x = 4 \quad
+ \Leftrightarrow \quad 2 \cdot x - 4 = 0 \quad \Leftrightarrow \quad 2 \cdot (x - 2) = 0.$$
+Por lo tanto, necesitamos que $2 \cdot (x-2)$ sea congruente a $0$ en módulo $6$. Si bien esto es cierto cuando $x=2$, también lo es cuando $x=5$, en cuyo caso el producto queda $2 \cdot 3 = 0$ (ya que $6$ es congruente a $0$ en módulo $6$). Esto muestra que en un anillo es posible multiplicar dos elementos distintos al $\0$ y obtener el $\0$, algo que no ocurre con los números reales. En general, el anillo $(\mathbb{Z}_n,+,\cdot)$, con $n \geq 2$ un número compuesto, tendrá el mismo problema: existirán elementos $a\neq 0$ y $b\neq 0$
+tales que $a\cdot b = 0$.
+ \hfill$\blacksquare$
 \end{example}
 
 El ejemplo \ref{ejemplo_no_dominio_integral} muestra que puede ser problemático cuando en un anillo existen dos elementos distintos de $\0$ cuyo producto sí es $\0$. La siguiente definición se refiere a los anillos en los que esto no ocurre.
@@ -171,7 +175,7 @@ Como $(R, +, \cdot)$ es un dominio integral, necesariamente $a = \0$ o bien $b-c
 
 
 \begin{example}
-El anillo conmutativo $(\mathbb{Z}, +, \cdot)$ es un dominio integral. Por lo tanto, la ecuación $2 \cdot x = 2 \cdot 2$ que mencionamos en el ejemplo \ref{ejemplo_no_dominio_integral} sí tiene como única solución a $x = 2$ en esta estructura. 
+El anillo conmutativo $(\mathbb{Z}, +, \cdot)$ es un dominio integral. Por lo tanto, la ecuación $2 \cdot x = 4$ que mencionamos en el ejemplo \ref{ejemplo_no_dominio_integral} sí tiene como única solución a $x = 2$ en esta estructura. 
 \hfill$\blacksquare$
 \end{example}
 
