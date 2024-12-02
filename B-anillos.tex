@@ -2,15 +2,15 @@
 
 Un anillo es una estructura algebraica que cuenta con dos operaciones internas, a diferencia de los grupos, que solo cuentan con una. En el contexto de un anillo, a la primera de estas operaciones se le llama \emph{suma}, y a la segunda, \emph{multiplicación}. En ese sentido, usaremos los símbolos <<$+$>> y <<$\cdot$>> para referirnos a ellas, a pesar de que la naturaleza de estas operaciones puede ser muy distinta dependiendo del anillo concreto en el que estemos trabajando.
 
-\begin{definition}[Anillo, anillo conmutativo]
+\begin{definition}[Anillo, anillo conmutativo, identidad]
     Un \emph{anillo} es una terna $(R, +, \cdot)$, donde $R$ es un conjunto y $+ \colon R \times R \to R$ y $\cdot \colon R \times R \to R$ son funciones (totales) que satisfacen los siguientes axiomas\footnote{Algunos autores 
-    no incluyen el axioma $3$ en la definición de anillo, y usan el término \emph{anillo con identidad} para referirse a la estructura algebraica que nosotros llamamos simplemente \emph{anillo}. No hay una convención universal sobre esto, por lo que sugerimos siempre revisar la definición precisa de anillo en el material que se esté utilizando.}
+    no incluyen el axioma $3$ en la definición de anillo, y usan el término \emph{anillo con identidad} para referirse a la estructura algebraica que nosotros llamamos simplemente \emph{anillo}. No hay una convención universal sobre esto, por lo que sugerimos siempre revisar la definición precisa de anillo en el material que se esté utilizando.}:
     \begin{enumerate}
         \item $(R, +)$ es un grupo abeliano.
         \item $\cdot$ es asociativa: para todos $a,b,c \in R$ se cumple que $(a \cdot b) \cdot c = a \cdot (b
 \cdot c)$.
 
-	\item Existe un elemento $\1 \in G$ (llamado \emph{identidad}) tal que para todo $a \in R$ se cumple que $a \cdot \1 = \1 \cdot a = a$
+	\item Existe un elemento $\1 \in R$ (llamado \emph{identidad}) tal que para todo $a \in R$ se cumple que $a \cdot \1 = \1 \cdot a = a$
 
    \item $\cdot$ distribuye sobre $+$, es decir, para todos $a, b, c \in R$ se cumple que $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$ y $(a+b) \cdot c = (a \cdot c ) + (b \cdot c).$
     \end{enumerate}
@@ -28,31 +28,49 @@ También usaremos la negrita para diferenciar el elemento $\1 \in R$ del número
 \end{proposition}
     
     \begin{proof}
-    Sea $(R, +, \cdot)$ un anillo, y supongamos que $\1, \1' \in G$ son ambos identidades. Como $\1$ es identidad, tenemos que $\1 \circ \1' = \1'$. Pero $\1'$ también es identidad, así que $\1 \circ \1' = \1$. Por transitividad, concluimos que $\1 = \1'$.
+    Sea $(R, +, \cdot)$ un anillo, y supongamos que $\1, \1' \in R$ son ambos identidades. Como $\1$ es identidad, tenemos que $\1 \cdot \1' = \1'$. Pero $\1'$ también es identidad, así que $\1 \cdot \1' = \1$. Por transitividad, concluimos que $\1 = \1'$.
     \end{proof}
 
 Dado un $a \in R$ y un entero positivo $n$, escribiremos $a^n$ para denotar al elemento $a$ operado bajo $\cdot$ consigo mismo $n$ veces. También definimos $a^0 = \1$. Notemos que, \textit{a priori}, no tiene sentido escribir $a^n$ si $n$ es un entero negativo, pues podría no existir un inverso para $a$ bajo $\cdot$.
 
-Con el objetivo de no sobrecargar la notación, es usual omitir el símbolo <<$\cdot$>> para escribir multiplicaciones. Además, a menos que un par de paréntesis indique lo contrario, la convención es que las multiplicaciones se realizan antes que las sumas. Así, los axiomas de distributividad se suelen escribir como $a(b+c) = ab+ac$ y $(a+b)c = ac + bc$. 
+Con el objetivo de no sobrecargar la notación, es usual omitir el símbolo <<$\cdot$>> para escribir multiplicaciones. Además, a menos que un par de paréntesis indique lo contrario, la convención es que la multiplicación tiene mayor prioridad que la suma. Así, los axiomas de distributividad se suelen escribir como $a(b+c) = ab+ac$ y $(a+b)c = ac + bc$. 
 
 Nos centraremos en el estudio de los anillos conmutativos, pues no necesitaremos trabajar con ningún anillo no conmutativo en este documento.
 
 \begin{example} 
-Sabemos que $(\mathbb{Z}, +)$ es un grupo abeliano (ejemplo \ref{ejemplo_Z}). Si consideramos además la multiplicación usual de enteros, obtenemos un anillo conmutativo: $(\mathbb{Z}, +, \cdot)$. \hfill$\blacksquare$
+Sabemos que $(\mathbb{Z}, +)$ es un grupo abeliano (ejemplo \ref{ejemplo_Z}). Si consideramos además la multiplicación usual de enteros, obtenemos el anillo conmutativo $(\mathbb{Z}, +, \cdot)$. \hfill$\blacksquare$
 \end{example}
 
 \begin{example}
-Dado un entero $n \geq 1$, sabemos que $(\mathbb{Z}, +)$ es un grupo abeliano (ejemplo \ref{grupo_ciclico}). Si consideramos además la multiplicación usual en módulo $n$, obtenemos un anillo conmutativo: $(\mathbb{Z}_n, +, \cdot)$. \hfill$\blacksquare$
+Dado un entero $n \geq 1$, sabemos que $(\mathbb{Z}_n, +)$ es un grupo abeliano (ejemplo \ref{grupo_ciclico}). Si consideramos además la multiplicación usual en módulo $n$, obtenemos un anillo conmutativo: $(\mathbb{Z}_n, +, \cdot)$. \hfill$\blacksquare$
 \end{example}
 
 A continuación presentamos algunas propiedades básicas de los anillos conmutativos.
 
+\begin{proposition}[Propiedad absorbente del neutro aditivo] \label{propiedad absorbente}
+    Sea $(R, +, \cdot)$ un anillo conmutativo y $a \in R$ un elemento cualquiera. Entonces se cumple que $a\cdot \0 =\0\cdot a= \0$.
+\end{proposition}
+
+\begin{proof}
+Sabemos que $\0+\0 = \0$, pues $\0$ es el neutro aditivo. Luego:
+    \begin{eqnarray*}
+\0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
+        &\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0.
+    \end{eqnarray*}
+Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición \ref{cancelacion_grupos}). Así, obtenemos que $a \cdot \0 = \0$. Por la conmutatividad de la multiplicación, también tenemos que $\0 \cdot a=\0 $.
+\end{proof}
+
+\begin{remark} \label{obs_cero_distinto_a_uno}
+    La proposición \ref{propiedad absorbente} muestra que si en un anillo conmutativo $(R, +, \cdot)$ se cumple que $\0 = \1$, entonces $R$ tiene un solo elemento. En efecto, si eso se cumple, entonces para todo $a \in R$ se tendrá que
+    $$a = a \cdot \1 = a \cdot \0 = \0.$$
+    Por lo tanto, el único anillo conmutativo en el que se cumple que $\0 = \1$ es la estructura trivial. En el caso de los cuerpos (definición \ref{definicion_cuerpo}) uno agrega la condición $\0 \neq \1$ para evitar tener que analizar ese caso por separado.
+    \hfill$\blacksquare$
+\end{remark}
+
 \begin{proposition}\label{propiedades_anillos}
     Sea $(R, +, \cdot)$ un anillo conmutativo. Se cumplen las siguientes propiedades:
     \begin{enumerate}
-    \item Para todo $a\in R$ se cumple que $a\cdot \0 =\0\cdot a= \0$
-    
-    \item Para todos $a,b\in R$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$
+    \item Para todos $a,b\in R$ se cumple que $(-a)\cdot b=-(a\cdot b) = a\cdot (-b)$.
     
     \item Para todos $a \in R$ y $n \in \mathbb{Z}$ se cumple que $-(na) = (-n)a = n(-a)$.
     
@@ -64,18 +82,10 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
     
     \begin{proof} \hfill
         \begin{enumerate}
-            \item 
-            Sabemos que $\0+\0 = \0$, pues $\0$ es el neutro aditivo. Luego:
-            \begin{eqnarray*}
-    \0+\0 = \0		&\Rightarrow & a\cdot(\0+\0) = a\cdot \0\\
-                &\Rightarrow &a\cdot \0+a\cdot \0 = a\cdot \0.
-            \end{eqnarray*}
-        Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición \ref{cancelacion_grupos}). Así, obtenemos que $a \cdot \0 = \0$. Por la conmutatividad de la multiplicación, también tenemos que $\0 \cdot a=\0 $.
-    
         \item Tenemos que:
             \begin{eqnarray*} (-a)\cdot b + a \cdot b & = & ((-a) +
             a) \cdot b\\ & = & \0 \cdot b\\ 
-            & = & \0 \quad\quad\quad \text{por la propiedad 1}.
+            & = & \0 \quad\quad\quad \text{por la propiedad absorbente del $\0$}.
             \end{eqnarray*}
     Luego $-(a \cdot b) = (-a)\cdot b$. Usando esto y la 
             conmutatividad de la multiplicación, obtenemos que $$a\cdot (-b) = (-b) \cdot a = -(b\cdot a) = -(a\cdot b).$$
@@ -104,13 +114,13 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
     \begin{eqnarray*}
     (nm)a &=& ((-n)(-m))a\\
      &=& (-n)((-m)a)\\
-     &=& (-n)(-(ma)) \quad\quad\quad \text{por la propiedad 3}\\
-     &=& n(-(-(ma))) \quad\quad\quad \text{por la propiedad 3}\\
+     &=& (-n)(-(ma)) \quad\quad\quad \text{por la propiedad 2}\\
+     &=& n(-(-(ma))) \quad\quad\quad \text{por la propiedad 2}\\
      &=& n(ma)
     \end{eqnarray*}
     Los casos faltantes son análogos: los dejados como ejercicios para el lector.
     
-        \item Si $n = 0$, tenemos que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$ por la propiedad 1 y la definición de la notación $kc$ (para $k \in \mathbb{Z}$ y $c \in F$). Si $n > 0$, tenemos que:
+        \item Si $n = 0$, tenemos que $n(a\cdot b) = (na)\cdot b = a \cdot (nb)$ por la propiedad absorbente del $\0$ y la definición de la notación $kc$ (para $k \in \mathbb{Z}$ y $c \in F$). Si $n > 0$, tenemos que:
         \begin{eqnarray*}
             n(a\cdot b)&=&\underbrace{a\cdot b +\cdots + a\cdot b}_\text{$n$ veces}\\
             &=&(\underbrace{a +\cdots + a}_\text{$n$ veces}) \cdot b\\
@@ -121,7 +131,7 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
         \begin{eqnarray*}
             n(a\cdot b)&=& (-|n|)(a \cdot b)\\
             &=& |n|(-(a \cdot b))\\
-            &=& |n|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 2}\\
+            &=& |n|((-a) \cdot b) \quad\quad\quad \text{por la propiedad 1}\\
             &=& (|n|(-a)) \cdot b\\
             &=& ((-|n|)(a)) \cdot b\\
             &=& (na) \cdot b
@@ -130,14 +140,6 @@ A continuación presentamos algunas propiedades básicas de los anillos conmutat
         \qedhere
         \end{enumerate}
     \end{proof}
-
-\begin{remark} \label{obs_cero_distinto_a_uno}
-La primera propiedad de la proposición \ref{propiedades_anillos} muestra que si en un anillo conmutativo $(R, +, \cdot)$ se cumple que $\0 = \1$, entonces $R$ consiste de un solo elemento. En efecto, si eso se cumple, entonces para todo $a \in R$ se cumplirá que
-$$a = a \cdot \1 = a \cdot \0 = \0.$$
-Por lo tanto, el único anillo conmutativo en el que se cumple que $\0 = \1$ es la estructura trivial. En el caso de los cuerpos (definición \ref{definicion_cuerpo}) uno agrega la condición $\0 \neq \1$ para evitar tener que analizar ese caso por separado.
-\hfill$\blacksquare$
-\end{remark}
-
 
 En general, en un anillo no tenemos la propiedad de cancelación para la multiplicación. Veamos el siguiente ejemplo.
 
@@ -275,11 +277,11 @@ Sea $(R, +, \cdot)$ un anillo conmutativo. Dado un elemento $a \in R$, el conjun
 \begin{proof}
 Es claro que $(a)$ es absorbente con la multiplicación. Veamos que es un grupo abeliano con la suma. La asociatividad y conmutatividad se heredan directamente. Verifiquemos los tres axiomas restantes:
 \begin{itemize}
-\item La propiedad 1 de la proposición \ref{propiedades_anillos} nos dice que $\0 = a \cdot \0$, así que $\0 \in (a)$.
+\item La proposición \ref{propiedad absorbente} nos dice que $\0 = a \cdot \0$, así que $\0 \in (a)$.
 \item Sean $b_1, b_2 \in (a)$. Entonces existen $r_1, r_2 \in R$ tales que $b_1 = a \cdot r_1$ y $b_2 = a \cdot r_2$. Entonces
 $$b_1 + b_2 = (a \cdot r_1) + (a \cdot r_2) = a \cdot (r_1 + r_2),$$
 por lo que $b_1 + b_2 \in (a)$, y $(a)$ es cerrado bajo sumas.
-\item Sea $b \in (a)$, de modo que existe un $r \in R$ tal que $b = a \cdot r$. Por la propiedad 2 de la proposición \ref{propiedades_anillos} tenemos que $-b = a \cdot (-r)$. Luego $-b \in (a)$, y $(a)$ es cerrado bajo tomar inversos aditivos.
+\item Sea $b \in (a)$, de modo que existe un $r \in R$ tal que $b = a \cdot r$. Por la propiedad 1 de la proposición \ref{propiedades_anillos} tenemos que $-b = a \cdot (-r)$. Luego $-b \in (a)$, y $(a)$ es cerrado bajo tomar inversos aditivos.
 \end{itemize} 
 \end{proof}
 

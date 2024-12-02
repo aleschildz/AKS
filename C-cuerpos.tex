@@ -25,7 +25,7 @@ Todo cuerpo es un dominio integral.
 \begin{proof} 
 Sea $(F, +, \cdot)$ un cuerpo, y sean $a, b \in F$ tales que $a \cdot b = \0$. Queremos probar que $a = \0$ o bien $b = \0$.
 
-Supongamos que $b \neq \0$ (si no, no hay nada que demostrar). Entonces $b$ tiene un inverso multiplicativo, $b^{-1}$. Si multiplicamos ambos lados de la ecuación $a \cdot b = \0$ por $b^{-1}$, obtendremos $a = \0 \cdot b^{-1} = \0$, donde la última igualdad es por la propiedad 1 de la proposición \ref{propiedades_anillos}.
+Supongamos que $b \neq \0$ (si no, no hay nada que demostrar). Entonces $b$ tiene un inverso multiplicativo, $b^{-1}$. Si multiplicamos ambos lados de la ecuación $a \cdot b = \0$ por $b^{-1}$, obtendremos $a = \0 \cdot b^{-1} = \0$, donde la última igualdad es por la proposición \ref{propiedad absorbente}.
 \end{proof}
 
 Hacemos notar que no todo dominio integral es un cuerpo. Veamos el siguiente ejemplo.
@@ -97,7 +97,7 @@ finito $(F, +, \cdot)$ satisface que $p = ab$, con $1<a, b<p$. Luego,
 \begin{eqnarray*}
 	p\1  = \0 &\Rightarrow & (a b)\1 = \0 \\
         &\Rightarrow & (a b) (\1 \cdot \1) = \0 \\
-	&\Rightarrow & (a\1) \cdot (b\1) =  \0 \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{propiedades_anillos}}\\
+	&\Rightarrow & (a\1) \cdot (b\1) =  \0 \quad\quad\quad \text{por la propiedad 4 de la proposición \ref{propiedades_anillos}}\\
 	&\Rightarrow& a \1  = \0 \ \text{ o } \ b\1  = \0 \quad\quad\quad \text{por la proposición \ref{cuerpos_son_dominios_integrales}}
 \end{eqnarray*}
 En cualquiera de los dos casos, concluimos que existe un número $q <
@@ -141,9 +141,9 @@ Luego,
         &=& (p s + q t) a\\
         &=& (p s) a + (q t) a \quad\quad\quad \text{por la definición de $m b$ para $m \in \mathbb{Z}$ y $b \in F$}\\
         &=& (p s) (a \cdot \1) + (q t) (a \cdot \1)\\
-	&=& (pa) \cdot (s\1) + (qa)\cdot (t\1) \quad\quad\quad \text{por la propiedad 5 de la proposición \ref{propiedades_anillos}}\\
+	&=& (pa) \cdot (s\1) + (qa)\cdot (t\1) \quad\quad\quad \text{por la propiedad 4 de la proposición \ref{propiedades_anillos}}\\
 	&=& \0 \cdot (s\1) + \0 \cdot (t\1)\\
-	&=& \0 + \0 \quad\quad\quad \text{por la propiedad 1 de la proposición \ref{propiedades_anillos}}\\
+	&=& \0 + \0 \quad\quad\quad \text{por la proposición \ref{propiedad absorbente}}\\
         &=& \0
 \end{eqnarray*}
 Pero esto es una contradicción ya que el orden de $a$ en $(F,+)$ es
