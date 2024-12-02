@@ -3,8 +3,8 @@
 Un anillo es una estructura algebraica que cuenta con dos operaciones internas, a diferencia de los grupos, que solo cuentan con una. En el contexto de un anillo, a la primera de estas operaciones se le llama \emph{suma}, y a la segunda, \emph{multiplicación}. En ese sentido, usaremos los símbolos <<$+$>> y <<$\cdot$>> para referirnos a ellas, a pesar de que la naturaleza de estas operaciones puede ser muy distinta dependiendo del anillo concreto en el que estemos trabajando.
 
 \begin{definition}[Anillo, anillo conmutativo, identidad]
-    Un \emph{anillo} es una terna $(R, +, \cdot)$, donde $R$ es un conjunto y $+ \colon R \times R \to R$ y $\cdot \colon R \times R \to R$ son funciones (totales) que satisfacen los siguientes axiomas\footnote{Algunos autores 
-    no incluyen el axioma $3$ en la definición de anillo, y usan el término \emph{anillo con identidad} para referirse a la estructura algebraica que nosotros llamamos simplemente \emph{anillo}. No hay una convención universal sobre esto, por lo que sugerimos siempre revisar la definición precisa de anillo en el material que se esté utilizando.}:
+    Un \emph{anillo} es una terna $(R, +, \cdot)$, donde $R$ es un conjunto y $+ \colon R \times R \to R$ y $\cdot \colon R \times R \to R$ son funciones (totales) que satisfacen los siguientes axiomas:\footnote{Algunos autores 
+    no incluyen el axioma $3$ en la definición de anillo, y usan el término \emph{anillo con identidad} para referirse a la estructura algebraica que nosotros llamamos simplemente \emph{anillo}. No hay una convención universal sobre esto, por lo que sugerimos siempre revisar la definición precisa de anillo en el material que se esté utilizando.}
     \begin{enumerate}
         \item $(R, +)$ es un grupo abeliano.
         \item $\cdot$ es asociativa: para todos $a,b,c \in R$ se cumple que $(a \cdot b) \cdot c = a \cdot (b
@@ -155,10 +155,20 @@ tales que $a\cdot b = 0$.
  \hfill$\blacksquare$
 \end{example}
 
-El ejemplo \ref{ejemplo_no_dominio_integral} muestra que puede ser problemático cuando en un anillo existen dos elementos distintos de $\0$ cuyo producto sí es $\0$. La siguiente definición se refiere a los anillos en los que esto no ocurre.
+El ejemplo \ref{ejemplo_no_dominio_integral} muestra que puede ser problemático cuando en un anillo existen dos elementos distintos de $\0$ cuyo producto sí es $\0$. La siguiente definición le da nombre a esto.
+
+\begin{definition}[Divisores de cero] \label{def_divisores_de_cero}
+Sea $(R, +, \cdot)$ un anillo conmutativo. Diremos que un elemento $a \in R \setminus \{\0\}$ es un \emph{divisor de cero} de $R$ si existe un $b \in R \setminus \{\0\}$ tal que $a \cdot b = \0$.
+\hfill$\blacksquare$
+\end{definition}
+
+\begin{example} 
+Continuando con el ejemplo \ref{ejemplo_no_dominio_integral}, $2$ y $3$ son divisores de cero en $(\mathbb{Z}_6, +, \cdot)$.
+\hfill$\blacksquare$
+\end{example}
 
 \begin{definition}[Dominio integral]
-Se dice que un anillo conmutativo $(R, +, \cdot)$ es un \emph{dominio integral} si, para todo par de elementos $a, b \in R$ tales que $a \cdot b = \0$, se tiene que $a = \0$ o bien $b = \0$. \hfill$\blacksquare$
+Se dice que un anillo conmutativo $(R, +, \cdot)$ es un \emph{dominio integral} si, para todo par de elementos $a, b \in R$ tales que $a \cdot b = \0$, se tiene que $a = \0$ o bien $b = \0$. En otras palabras, $R$ es un dominio integral si no tiene divisores de cero. \hfill$\blacksquare$
 \end{definition}
 
 La siguiente proposición nos dice que en los dominios integrales sí se tiene la propiedad de cancelación de la multiplicación.
@@ -196,7 +206,7 @@ Para la clausura de la multiplicación, tomemos $a_1, a_2 \in R^\ast$. Por defin
 $$(a_1 \cdot a_2) \cdot (b_1 \cdot b_2) = (a_1 \cdot b_1) \cdot (a_2 \cdot b_2) = \1 \cdot \1 = \1,$$
 lo que muestra que $a_1 \cdot a_2$ es una unidad.
 
-Por último, tomemos un $a \in R^\ast$. Sabemos que existe un $b \in R$ tal que $a \cdot b = \1$. Necesitamos probar que $b \in R^\ast$. Para ello, basta notar que $b \cdot a = 1$, y $a \in R^\ast \subseteq R$, por lo que $b$ es también una unidad.
+Por último, tomemos un $a \in R^\ast$. Sabemos que existe un $b \in R$ tal que $a \cdot b = \1$. Necesitamos probar que $b \in R^\ast$. Para ello, basta notar que $b \cdot a = 1$, y $a \in R$, por lo que $b$ es también una unidad.
 \end{proof}
 
 La proposición \ref{grupo_de_unidades} implica que en un anillo conmutativo cada elemento puede tener a lo sumo un inverso multiplicativo. Además, por lo que discutimos en la observación \ref{obs_cero_distinto_a_uno}, $\0$ no puede ser una unidad a menos que el anillo consista de un solo elemento.
@@ -222,17 +232,17 @@ Sea $m$ un entero positivo. Vimos en el ejemplo \ref{ejemplo_subgrupo} que $m\ma
 \end{example}
 
 Supongamos que tenemos un ideal $I$ de un anillo conmutativo $(R, +, \cdot)$
-Puesto que los ideales son, en particular, subgrupos, tenemos que $\faktor{R}{I}$ forma un grupo con la suma (según definimos en la proposición \ref{grupo_cociente}). Lo que veremos a continuación es que los ideales hacen que dicho cociente tenga la estructura de un anillo.
+Puesto que los ideales son, en particular, subgrupos, tenemos que $\faktor{R}{I}$ forma un grupo con la suma\footnote{Aquí estamos incurriendo en un abuso de notación, pues estamos usando la letra <<$R$>> tanto para denotar al anillo conmutativo $(R, +, \cdot)$ como al grupo abeliano $(R, +)$. En general, suele ser claro por contexto a qué estructura algebraica nos referimos. Sin embargo, en este caso sí es relevante considerar que \textit{a priori} solo tenemos una estructura aditiva definida en el cociente $\faktor{R}{I}$.} (según definimos en la proposición \ref{grupo_cociente}). Lo que veremos a continuación es que los ideales hacen que dicho cociente tenga la estructura de un anillo.
 
 \begin{prop}[Anillo cociente] \label{anillo_cociente}
-Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $I \subseteq R$ un ideal. El grupo cociente $\faktor{R}{I}$ forma un anillo conmutativo cuya multiplicación se define por\footnote{Al igual que como hicimos en la proposición \ref{grupo_cociente}, introducimos un nuevo símbolo para la multiplicación en el cociente para que la demostración sea más clara. Lo usual es usar los mismos símbolos de suma y multiplicación para el anillo original y para el cociente.}
-$$(r + I) \ast (s + I) = (r \cdot s) + I.$$
+Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $I \subseteq R$ un ideal. El grupo cociente $\faktor{R}{I}$ forma un anillo conmutativo cuya multiplicación se define por:\footnote{Al igual que como hicimos en la proposición \ref{grupo_cociente}, introducimos un nuevo símbolo para la multiplicación en el cociente para que la demostración sea más clara. Lo usual es usar los mismos símbolos de suma y multiplicación para el anillo original y para el cociente.}
+$$(r + I) \ast (s + I) \coloneqq (r \cdot s) + I.$$
 \end{prop}
 
 \begin{proof}
 Ya sabemos que $\faktor{R}{I}$ es un grupo abeliano con la suma. Veamos que la operación $\ast$ está bien definida. Para ello, consideremos $r, r', s, s' \in R$ tales que $r + I = r'+  I$ y $s + I = s' + I$. Queremos probar que $(r \cdot s) + I  = (r' \cdot s') +I$. Como $\0 \in I$ y $r' = r' + \0$, tenemos que $r' \in r' + I$. Como $r' + I = r + I$, se sigue que $r' \in r + I$. Análogamente, tenemos que $s' \in s + I$. Luego existen $h_1, h_2 \in I$ tales que $r' = r + h_1$ y $s' = s + h_2$. Por lo tanto:
 $$r' \cdot s' = (r + h_1) \cdot (s + h_2) = (r \cdot s) + (r \cdot h_2) + (s \cdot h_1) + (h_1 \cdot h_2).$$
-Como $h_1, h_2 \in I$ e $I$ es absorbente con la multiplicación, tenemos que $r \cdot h_2 \in I$, que $s \cdot h_1 z\in I$ y que $h_1 \cdot h_2 \in I$. Como $I$ es cerrado bajo sumas, también $(r \cdot h_2) + (s \cdot h_1) + (h_1 \cdot h_2) \in I$. Esto muestra que $r' \cdot s' \in (r \cdot s) + I$. Como también $r' \cdot s' \in (r' \cdot s') + I$ (ya que $\0 \in I$), y las clases laterales forman una partición del conjunto $R$, esto implica que $(r \cdot s) + I = (r' \cdot s') + I$. Concluimos que $\ast$ está bien definida.
+Como $h_1, h_2 \in I$ e $I$ es absorbente con la multiplicación, tenemos que $r \cdot h_2 \in I$, que $s \cdot h_1 \in I$ y que $h_1 \cdot h_2 \in I$. Como $I$ es cerrado bajo la suma, también $(r \cdot h_2) + (s \cdot h_1) + (h_1 \cdot h_2) \in I$. Esto muestra que $r' \cdot s' \in (r \cdot s) + I$. Como también $r' \cdot s' \in (r' \cdot s') + I$ (ya que $\0 \in I$), y las clases laterales forman una partición del conjunto $R$, esto implica que $(r \cdot s) + I = (r' \cdot s') + I$. Concluimos que $\ast$ está bien definida.
 
 Las propiedades de asociatividad, distributividad sobre la suma y conmutatividad de $\ast$ se heredan directamente de la multiplicación en el anillo $R$. Por último, es fácil verificar que la clase $1 + I$ es el neutro multiplicativo en el cociente. 
 \end{proof}
@@ -242,7 +252,7 @@ Consideremos el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplica
 $$(a, b) \cdot (0, c) = (0, bc) \in I.$$
 Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase lateral de $\faktor{\mathbb{R}^2}{I}$ tiene exactamente un elemento de la forma $(a, 0)$. En efecto, primero notemos que, para todos $a, b \in \mathbb{R}$, los elementos $(a, b)$ y $(a, 0)$ están en la misma clase lateral, pues $(a, b) = (a, 0) + (0, b)$, y $(0, b) \in I$. Por otro lado, si $(a, 0)$ y $(a', 0)$ estuviesen en la misma clase lateral para algunos $a, a' \in \mathbb{R}$, entonces tendríamos que $(a-a', 0) \in I$, y eso solo es posible si $a = a'$. Por lo tanto, tenemos el isomorfismo $\faktor{\mathbb{R}^2}{I} \simeq \mathbb{R}$ dado por $(a, 0) + I \mapsto a$.
 
-\begin{figure} \centering
+\begin{figure}[ht!] \centering
 \begin{tikzpicture}[scale=1.5] 
     % Ejes
     \draw[->] (0,0) -- (5,0) node[anchor=north] {$x$};
@@ -264,7 +274,7 @@ Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase latera
 \caption{\label{dibujo_cociente} El cociente $\faktor{\mathbb{R}^2}{I}$ corresponde a proyectar el plano hacia el eje horizontal. Las clases laterales corresponden a rectas verticales.}
 \end{figure}
 
-Geométricamente, las clases laterales corresponden a rectas verticales (vea la ilustración \ref{dibujo_cociente}). El cociente, entonces, es el conjunto de las rectas verticales, que naturalmente está en biyección con el eje horizontal. De hecho, otra forma de pensar en este cociente es que estamos proyectando el plano hacia ese eje horizontal. El hecho de que dicho cociente forme un anillo corresponde al hecho de que tomar proyecciones preserva las operaciones de suma y multiplicación cooordenada a coordenada.
+Geométricamente, las clases laterales corresponden a rectas verticales (ver la ilustración \ref{dibujo_cociente}). El cociente, entonces, es el conjunto de las rectas verticales, que naturalmente está en biyección con el eje horizontal. De hecho, otra forma de pensar en este cociente es que estamos proyectando el plano hacia ese eje horizontal. El hecho de que dicho cociente forme un anillo corresponde al hecho de que tomar proyecciones preserva las operaciones de suma y multiplicación cooordenada a coordenada.
 \hfill$\blacksquare$
 \end{example}
 
@@ -281,16 +291,16 @@ Sea $(R, +, \cdot)$ un anillo conmutativo. Dado un elemento $a \in R$, el conjun
 \begin{proof}
 Es claro que $(a)$ es absorbente con la multiplicación. Veamos que es un grupo abeliano con la suma. La asociatividad y conmutatividad se heredan directamente. Verifiquemos los tres axiomas restantes:
 \begin{itemize}
-\item La proposición \ref{propiedad absorbente} nos dice que $\0 = a \cdot \0$, así que $\0 \in (a)$.
 \item Sean $b_1, b_2 \in (a)$. Entonces existen $r_1, r_2 \in R$ tales que $b_1 = a \cdot r_1$ y $b_2 = a \cdot r_2$. Entonces
 $$b_1 + b_2 = (a \cdot r_1) + (a \cdot r_2) = a \cdot (r_1 + r_2),$$
-por lo que $b_1 + b_2 \in (a)$, y $(a)$ es cerrado bajo sumas.
+por lo que $b_1 + b_2 \in (a)$, y $(a)$ es cerrado bajo la suma.
+\item La proposición \ref{propiedad absorbente} nos dice que $\0 = a \cdot \0$, así que $\0 \in (a)$.
 \item Sea $b \in (a)$, de modo que existe un $r \in R$ tal que $b = a \cdot r$. Por la propiedad 1 de la proposición \ref{propiedades_anillos} tenemos que $-b = a \cdot (-r)$. Luego $-b \in (a)$, y $(a)$ es cerrado bajo tomar inversos aditivos.
 \end{itemize} 
 \end{proof}
 
 \begin{example} 
-Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa es la noción algebraica más importante para entender este documento. Reutilizaremos esta idea en el próximo capítulo, cuando hablemos de cocientes de anillos de polinomios por un idea principal. \hfill$\blacksquare$
+Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente\footnote{Nuevamente, aquí estamos usando usando la notación $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ para referirnos al mismo tiempo a un grupo abeliano y a un anillo conmutativo. Si bien esta diferencia debe quedar clara por contexto, hacemos notar que la estructura de grupo abeliano es la que se obtiene simplemente ignorando la operación de multiplicación en la estructura de anillo conmutativo.} $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa noción algebraica será muy importante para entender este documento. Reutilizaremos esta idea en el próximo capítulo, cuando hablemos de cocientes de anillos de polinomios por un idea principal. \hfill$\blacksquare$
 \end{example}
 
 \subsection{Anillos de polinomios}
