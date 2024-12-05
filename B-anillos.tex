@@ -141,6 +141,18 @@ Como $(R, +)$ es un grupo abeliano, podemos cancelar $a \cdot \0$ (proposición 
         \end{enumerate}
     \end{proof}
 
+También hay una noción de isomorfismo para anillos, que veremos a continuación.
+
+\begin{definition}[Isomorfismo de anillos]
+    Sean $(R_1, +_1, \circ_1)$ y $(R_2, +_2, \circ_2)$ dos anillos. Diremos que una función $\phi\colon R_1 \rightarrow R_2$ es un \emph{isomorfismo} si $\phi$ es una biyección y, además,
+    $$\forall\, a, b \in R_1 \qquad \phi(a +_1 b) = \phi(a) +_2 \phi(b) \quad \land \quad \phi(a \circ_1 b) = \phi(a) \circ_2 \phi(b).$$
+    Si existe un isomorfismo, se dice que los anillos $R_1$ y $R_2$ son \emph{isomorfos}, y se escribe $R_1 \simeq R_2$. \hfill$\blacksquare$
+    \end{definition}
+    
+    En otras palabras, un isomorfismo es una biyección entre los anillos que también induce una biyección entre las relaciones definidas por las operaciones binarias. 
+    Al igual que en el caso de grupos, no es difícil convencerse de que dos anillos isomorfos tienen exactamente las misma propiedades. Por ejemplo, si $R_1 \simeq R_2$, entonces $R_1$ es conmutativo si y solo si $R_2$ es conmutativo.
+
+
 En general, en un anillo no tenemos la propiedad de cancelación para la multiplicación. Veamos el siguiente ejemplo.
 
 \begin{example} \label{ejemplo_no_dominio_integral}
@@ -220,7 +232,7 @@ En el caso del anillo conmutativo $(\mathbb{Z}, +, \cdot)$, sus unidades son $\{
 Ahora nos gustaría tener una noción de cociente para anillos. Para ello, la siguiente definición será clave.
 
 \begin{definition}[Ideal] \label{def_ideal}
-Sea $(R, +, \cdot)$ un anillo conmutativo. Diremos que un subconjunto $I \subseteq R$ es un \emph{ideal} si $(I, +)$ es un grupo que, además, tiene la siguiente propiedad:
+Sea $(R, +, \cdot)$ un anillo conmutativo. Diremos que un subconjunto $I \subseteq R$ es un \emph{ideal} si $(I, +)$ es un grupo que, además, tiene la siguiente propiedad absorbente:
 $$\forall r \in R \quad \forall a \in I \quad r \cdot a \in I.$$
 \hfill$\blacksquare$
 \end{definition}
@@ -244,13 +256,13 @@ Ya sabemos que $\faktor{R}{I}$ es un grupo abeliano con la suma. Veamos que la o
 $$r' \cdot s' = (r + h_1) \cdot (s + h_2) = (r \cdot s) + (r \cdot h_2) + (s \cdot h_1) + (h_1 \cdot h_2).$$
 Como $h_1, h_2 \in I$ e $I$ es absorbente con la multiplicación, tenemos que $r \cdot h_2 \in I$, que $s \cdot h_1 \in I$ y que $h_1 \cdot h_2 \in I$. Como $I$ es cerrado bajo la suma, también $(r \cdot h_2) + (s \cdot h_1) + (h_1 \cdot h_2) \in I$. Esto muestra que $r' \cdot s' \in (r \cdot s) + I$. Como también $r' \cdot s' \in (r' \cdot s') + I$ (ya que $\0 \in I$), y las clases laterales forman una partición del conjunto $R$, esto implica que $(r \cdot s) + I = (r' \cdot s') + I$. Concluimos que $\ast$ está bien definida.
 
-Las propiedades de asociatividad, distributividad sobre la suma y conmutatividad de $\ast$ se heredan directamente de la multiplicación en el anillo $R$. Por último, es fácil verificar que la clase $1 + I$ es el neutro multiplicativo en el cociente. 
+Las propiedades de asociatividad, distributividad sobre la suma y conmutatividad de $\ast$ se heredan directamente de la multiplicación en el anillo $R$. Por último, es fácil verificar que la clase $\1 + I$ es el neutro multiplicativo en el cociente. 
 \end{proof}
 
 \begin{example}
-Consideremos el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplicación coordenada a coordenada, y sea $I \coloneqq \{ 0 \} \times \mathbb{R}$. Es claro que $(I, +)$ es un subgrupo de $(\mathbb{R}^2, +)$, pues contiene al neutro aditivo $(0, 0)$ y es cerrado bajo sumas y bajo inversos aditivos. Además, $I$ es absorbente: si multiplicamos un elemento arbitrario de $I$, que tendrá la forma $(0, c)$ por un elemento arbitrario de $\mathbb{R}^2$, que tendrá la forma $(a, b)$, obtendremos que
+Consideremos el anillo conmutativo formado por el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplicación coordenada a coordenada. Sea $I \coloneqq \{ 0 \} \times \mathbb{R}$. Es claro que $(I, +)$ es un subgrupo de $(\mathbb{R}^2, +)$, pues contiene al neutro aditivo $(0, 0)$ y es cerrado bajo sumas y bajo inversos aditivos. Además, $I$ es absorbente: si multiplicamos un elemento arbitrario de $I$, que tendrá la forma $(0, c)$ por un elemento arbitrario de $\mathbb{R}^2$, que tendrá la forma $(a, b)$, obtendremos que
 $$(a, b) \cdot (0, c) = (0, bc) \in I.$$
-Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase lateral de $\faktor{\mathbb{R}^2}{I}$ tiene exactamente un elemento de la forma $(a, 0)$. En efecto, primero notemos que, para todos $a, b \in \mathbb{R}$, los elementos $(a, b)$ y $(a, 0)$ están en la misma clase lateral, pues $(a, b) = (a, 0) + (0, b)$, y $(0, b) \in I$. Por otro lado, si $(a, 0)$ y $(a', 0)$ estuviesen en la misma clase lateral para algunos $a, a' \in \mathbb{R}$, entonces tendríamos que $(a-a', 0) \in I$, y eso solo es posible si $a = a'$. Por lo tanto, tenemos el isomorfismo $\faktor{\mathbb{R}^2}{I} \simeq \mathbb{R}$ dado por $(a, 0) + I \mapsto a$.
+Por lo tanto, tenemos que $I$ es un ideal. Ahora afirmamos que cada clase lateral de $\faktor{\mathbb{R}^2}{I}$ tiene exactamente un elemento de la forma $(a, 0)$. En efecto, primero notemos que, para todos $a, b \in \mathbb{R}$, los elementos $(a, b)$ y $(a, 0)$ están en la misma clase lateral, pues $(a, b) = (a, 0) + (0, b)$, y $(0, b) \in I$. Por otro lado, si $(a, 0)$ y $(a', 0)$ estuviesen en la misma clase lateral para algunos $a, a' \in \mathbb{R}$, entonces tendríamos que $(a-a', 0) \in I$, y eso solo es posible si $a = a'$. Por lo tanto, tenemos el isomorfismo $\left(\faktor{\mathbb{R}^2}{I}, +, \cdot\right) \simeq (\mathbb{R}, +, \cdot)$ dado por $(a, 0) + I \mapsto a$.
 
 \begin{figure}[ht!] \centering
 \begin{tikzpicture}[scale=1.5] 
