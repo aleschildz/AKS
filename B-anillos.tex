@@ -337,3 +337,15 @@ cuando $a + I = b + I$, es decir, cuando se tenga la igualdad en el cociente. \h
 La notación de la definición \ref{notacion_modulo} generaliza la notación usual de aritmética modular. Por ejemplo, como vimos en el ejemplo \ref{modulo_n}, decir que $9 \equiv 2 \modu (7)$ corresponde a decir que los enteros $2$ y $9$ coinciden cuando consideramos el cociente sobre $7\mathbb{Z}$, el ideal generado por $7$.
 
 \subsection{Anillos de polinomios}
+
+\begin{definition}[Polinomios en una indeterminada, coeficientes] \label{def_polinomio}
+Sea $(R, +, \cdot)$ un anillo conmutativo. Un \emph{polinomio} en la indeterminada $X$ y con coeficientes en $R$ es una expresión formal de la forma
+$$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n,$$
+donde $n$ es un entero positivo y $a_0, a_1, \dots, a_n \in R$. Se dice que $a_0, a_1, \dots, a_n$ son los \emph{coeficientes} de $p(X)$.
+
+Al conjunto de todos los polinomios en la indeterminada $X$ y con coeficientes en $R$ lo denotamos $R[X]$. 
+\hfill$\blacksquare$
+\end{definition}
+
+En la definición \ref{def_polinomio}, <<expresión formal>> significa que un polinomio no debe entenderse \textit{a priori} como una función, sino como un objeto en sí mismo. En ese sentido, las distintas potencias de $X$ solo sirven para separar los coeficientes. De hecho, podríamos haber definido los polinomios con coeficientes en $R$ simplemente como tuplas $(a_0, a_1, \dots, a_n)$ de elementos de $R$. Las razones por las que se prefiere la primera notación quedarán claras a medida que avancemos en esta sección.
+
