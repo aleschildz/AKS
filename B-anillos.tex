@@ -259,7 +259,7 @@ Como $h_1, h_2 \in I$ e $I$ es absorbente con la multiplicación, tenemos que $r
 Las propiedades de asociatividad, distributividad sobre la suma y conmutatividad de $\ast$ se heredan directamente de la multiplicación en el anillo $R$. Por último, es fácil verificar que la clase $\1 + I$ es el neutro multiplicativo en el cociente. 
 \end{proof}
 
-\begin{example}
+\begin{example} \label{ejemplo_cociente_R2}
 Consideremos el anillo conmutativo formado por el conjunto $\mathbb{R}^2$ con las operaciones de suma y multiplicación coordenada a coordenada. Sea $I \coloneqq \{ 0 \} \times \mathbb{R}$. Es claro que $(I, +)$ es un subgrupo de $(\mathbb{R}^2, +)$, pues contiene al neutro aditivo $(0, 0)$ y es cerrado bajo sumas y bajo inversos aditivos. Además, $I$ es absorbente: si multiplicamos un elemento arbitrario de $I$, que tendrá la forma $(0, c)$ por un elemento arbitrario de $\mathbb{R}^2$, que tendrá la forma $(a, b)$, obtendremos que
 $(a, b) \cdot (0, c) = (0, bc) \in I$.
 Luego $I$ es un ideal. 
@@ -320,9 +320,20 @@ por lo que $s \cdot b \in \gen{a_1, \dots, a_n}$, y $\gen{a_1, \dots, a_n}$ es a
 Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, \dots, a_n$ elementos de $R$. El ideal $\gen{a_1, \dots, a_n}$ descrito en la proposición \ref{ideal_generado} se llama el \emph{ideal generado} por los elementos $a_1, \dots, a_n$. En particular, a los ideales generados por un solo elemento se les llama \emph{ideales principales}.
 \end{definition}
 
-
-\begin{example} 
-Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente\footnote{Nuevamente, aquí estamos usando usando la notación $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ para referirnos al mismo tiempo a un grupo abeliano y a un anillo conmutativo. Si bien esta diferencia debe quedar clara por contexto, hacemos notar que la estructura de grupo abeliano es la que se obtiene simplemente ignorando la operación de multiplicación en la estructura de anillo conmutativo.} $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa noción algebraica será muy importante para entender este documento. Reutilizaremos esta idea en el próximo capítulo, cuando hablemos de cocientes de anillos de polinomios por un idea principal. \hfill$\blacksquare$
+\begin{example} \label{modulo_n}
+Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente\footnote{Nuevamente, aquí estamos usando usando la notación $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ para referirnos al mismo tiempo a un grupo abeliano y a un anillo conmutativo. Si bien esta diferencia debe quedar clara por contexto, hacemos notar que la estructura de grupo abeliano es la que se obtiene simplemente ignorando la operación de multiplicación en la estructura de anillo conmutativo.} $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa será la noción algebraica más importante para entender este documento. \hfill$\blacksquare$
 \end{example}
+
+Notemos que el ideal $I$ del ejemplo \ref{ejemplo_cociente_R2} es también un ideal principal, generado por el elemento $(0, 1)$. De hecho, cualquier elemento $(0, b)$ con $b \neq 0$ generará el mismo ideal. En general, es común que un mismo ideal sea generado por varios conjuntos distintos de elementos del anillo.
+
+Antes de terminar esta sección, introduciremos una notación que usaremos constantemente.
+
+\begin{definition}[Notación de módulo] \label{notacion_modulo}
+Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $I \subseteq R$ un ideal. Dados $a, b \in R$, escribiremos
+$$a \equiv b \modu I$$
+cuando $a + I = b + I$, es decir, cuando se tenga la igualdad en el cociente. \hfill$\blacksquare$
+\end{definition}
+
+La notación de la definición \ref{notacion_modulo} generaliza la notación usual de aritmética modular. Por ejemplo, como vimos en el ejemplo \ref{modulo_n}, decir que $9 \equiv 2 \modu (7)$ corresponde a decir que los enteros $2$ y $9$ coinciden cuando consideramos el cociente sobre $7\mathbb{Z}$, el ideal generado por $7$.
 
 \subsection{Anillos de polinomios}
