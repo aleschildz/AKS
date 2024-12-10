@@ -292,9 +292,15 @@ Geométricamente, las clases laterales corresponden a rectas verticales (ver la 
 \hfill$\blacksquare$
 \end{example}
 
-\begin{remark}
+\begin{remark} \label{1_en_ideal}
 En la definición \ref{def_ideal} es importante notar que no requerimos que $\1 \in I$. De hecho, si $I$ es un ideal que contiene al $\1$, entonces la propiedad absorbente implica que $I = R$, ya que $a = a \cdot \1$ para todo $a \in R$. Esto se condice con el hecho de que, si $\1 \in I$, entonces $\0 + I = \1 + I$ como clases laterales, lo que implicaría que el cociente $\faktor{R}{I}$ consiste de un solo elemento por la observación \ref{obs_cero_distinto_a_uno}.
+\hfill$\blacksquare$
 \end{remark}
+
+\begin{example}
+Dado cualquier anillo conmutativo $(R, +, \cdot)$, tenemos que $\{\0\}$ y $R$ son ideales, llamados \emph{ideales triviales}. El cociente sobre el primero es isomorfo al mismo anillo $(R, +, \cdot)$, y el cociente sobre el segundo es un anillo con un solo elemento, como mencionamos en la observación \ref{1_en_ideal}.
+\hfill$\blacksquare$
+\end{example}
 
 La siguiente proposición nos da una forma sencilla de construir ideales.
 
@@ -341,7 +347,7 @@ La notación de la definición \ref{notacion_modulo} generaliza la notación usu
 \begin{definition}[Polinomios en una indeterminada, coeficientes] \label{def_polinomio}
 Sea $(R, +, \cdot)$ un anillo conmutativo. Un \emph{polinomio} en la indeterminada $X$ y con coeficientes en $R$ es una expresión formal de la forma
 $$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n,$$
-donde $n$ es un entero positivo y $a_0, a_1, \dots, a_n \in R$. Se dice que $a_0, a_1, \dots, a_n$ son los \emph{coeficientes} de $p(X)$.
+donde $n$ es un entero no negativo y $a_0, a_1, \dots, a_n \in R$. Se dice que $a_0, a_1, \dots, a_n$ son los \emph{coeficientes} de $p(X)$.
 
 Al conjunto de todos los polinomios en la indeterminada $X$ y con coeficientes en $R$ lo denotamos $R[X]$. 
 \hfill$\blacksquare$
@@ -349,3 +355,28 @@ Al conjunto de todos los polinomios en la indeterminada $X$ y con coeficientes e
 
 En la definición \ref{def_polinomio}, <<expresión formal>> significa que un polinomio no debe entenderse \textit{a priori} como una función, sino como un objeto en sí mismo. En ese sentido, las distintas potencias de $X$ solo sirven para separar los coeficientes. De hecho, podríamos haber definido los polinomios con coeficientes en $R$ simplemente como tuplas $(a_0, a_1, \dots, a_n)$ de elementos de $R$. Las razones por las que se prefiere la primera notación quedarán claras a medida que avancemos en esta sección.
 
+El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualmente se omiten aquellos con $a_k=\0$, y simplemente se escribe $X^k$ cuando $a_k = \1$.
+
+\begin{definition}[Grado, polinomio nulo, polinomio constante]
+Sea $R$ un anillo conmutativo, y consideremos un polinomio $p(X) \in R[X]$. Digamos que
+$$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n.$$
+El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. Si dicho entero no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
+\hfill$\blacksquare$
+\end{definition}
+
+Uno puede definir la suma y multiplicación de polinomios en $R[X]$ de la manera usual, con la salvedad de que los coeficientes deben operarse según la suma y multiplicación del anillo $R$. Dejamos como ejercicio para el lector verificar que, para cualquier anillo conmutativo $R$, $R[X]$ forma un anillo con estas operaciones. El polinomio nulo es el neutro aditivo, y el inverso aditivo de $p(X)$ se obtiene tomando el inverso aditivo de cada coeficiente. La identidad es el polinomio constante igual a $\1$.
+
+\begin{example}
+Consideremos los polinomios 
+$$p(X) = 2X^2 + 3X + 4 \quad , \quad q(X) = 4X^3 + X^2 \quad , \quad r(X) = 2X^4 + 3X^3 + X^2 + 3$$
+en el anillo de polinomios $\mathbb{Z}_5[X]$. Tenemos que
+\begin{align*}
+(p(X) \cdot q(X)) + r(X) &= \left((2 \cdot 4)X^5 + (2 \cdot 1 + 3 \cdot 4)X^4 + (3 \cdot 1 + 4 \cdot 4)X^3 + (4 \cdot 1)X^2 \right) + r(X) \\
+&= (3X^5 + 4X^4 + 4X^3 + 4X^2) + (2X^4 + 3X^3 + X^2 + 3) \\
+&= 3X^5 + (4 + 2)X^4 + (4 + 3)X^3 + (4 + 1)X^2 + 3 \\
+&= 3X^5 + X^4 + 2X^3 + 3.
+\end{align*}
+\hfill$\blacksquare$
+
+
+\end{example}
