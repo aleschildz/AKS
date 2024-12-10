@@ -323,7 +323,7 @@ por lo que $s \cdot b \in \gen{a_1, \dots, a_n}$, y $\gen{a_1, \dots, a_n}$ es a
 \end{proof}
 
 \begin{definition}[Ideal generado, ideal principal]
-Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, \dots, a_n$ elementos de $R$. El ideal $\gen{a_1, \dots, a_n}$ descrito en la proposición \ref{ideal_generado} se llama el \emph{ideal generado} por los elementos $a_1, \dots, a_n$. En particular, a los ideales generados por un solo elemento se les llama \emph{ideales principales}.
+Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, \dots, a_n$ elementos de $R$. El ideal $\gen{a_1, \dots, a_n}$ descrito en la proposición \ref{ideal_generado} se llama el \emph{ideal generado} por los elementos $a_1, \dots, a_n$. En particular, a los ideales que pueden ser generados por un solo elemento se les llama \emph{ideales principales}.
 \end{definition}
 
 \begin{example} \label{modulo_n}
@@ -403,3 +403,25 @@ Ahora veamos qué ocurre si $R$ es dominio integral. El coeficiente líder de $p
 $$\mathrm{gr}(p(X) \cdot q(X)) = m + n = \mathrm{gr}(p(X)) + \mathrm{gr}(q(X)).$$
 Esto de paso muestra que $p(X) \cdot q(X) \neq \0(X)$, por lo que podemos concluir que $R[X]$ es dominio integral.
 \end{proof}
+
+A continuación daremos la definición formal del anillo de polinomios en dos indeterminadas.
+
+\begin{definition}[Polinomios en dos indeterminadas] \label{polinomios_dos_indeterminadas}
+Sea $R$ un anillo conmutativo. Definimos el anillo de polinomios en las indeterminadas $X$ e $Y$ y con coeficientes en $R$, denotado $R[X][Y]$, como el anillo $(R[X])[Y]$. En otras palabras, es el anillo de polinomios con indeterminada $Y$ y coeficientes en el anillo de polinomios $R[X]$.
+\hfill$\blacksquare$
+\end{definition}
+
+Podría parecer que la definición \ref{polinomios_dos_indeterminadas} es asimétrica, en el sentido de que una indeterminada tendría preferencia sobre la otra. Sin embargo, se puede probar que $(R[X])[Y] \simeq (R[Y])[X]$, por lo que realmente no es necesario hacer dicha distinción. De hecho, es usual presentar un polinomio en $R[X][Y]$ como una suma de términos de la forma $c X^i Y^j$ en lugar de agruparlos para que quede un polinomio en $Y$ con coeficientes en $R[X]$ o un polinomio en $X$ con coeficientes en $R[Y]$. 
+
+La suma y multiplicación en $R[X][Y]$ se comportan de la manera usual, salvo que las operaciones en los coeficientes corresponden a las del anillo $R$.
+
+\begin{example}
+El polinomio $$p(X, Y) \coloneqq 2X^2Y^2 + 3Y^2 + X^2 + 2$$ en $\mathbb{Z}_4[X][Y]$ puede reescribirse como $$(2X^2 + 3)Y^2 + (X^2+2),$$ que es un polinomio en $(\mathbb{Z}_4[X])[Y]$, pero también como $$(2Y^2 + 1)X^2 + (3Y^2 + 2),$$ que es un polinomio en $(\mathbb{Z}_4[Y])[X]$. En cualquier caso, multiplicar este polinomio por $2X-Y$ resulta en
+\begin{align*}
+p(X, Y) \cdot (2X-Y) &=
+(2X^2Y^2 + 3Y^2 + X^2 + 2) \cdot (2X-Y) \\ &= (2 \cdot 2)X^3Y^2 + (3 \cdot 2)XY^2 + (1 \cdot 2)X^3 + (2 \cdot 2)X - 2X^2Y^3 - 3Y^3 - X^2Y - 2Y \\
+&= 0 \cdot X^3Y^2 + 2XY^2 + 2X^3 + 0 \cdot X + 2X^2Y^3 + Y^3 + 3X^2Y + 2Y \\
+&= (2X^2 + 1)Y^3 + (2X)Y^2 + (3X^2 + 2)Y + (2X^3).
+\end{align*}
+\hfill$\blacksquare$
+\end{example}
