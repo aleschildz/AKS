@@ -357,10 +357,10 @@ En la definición \ref{def_polinomio}, <<expresión formal>> significa que un po
 
 El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualmente se omiten aquellos con $a_k=\0$, y simplemente se escribe $X^k$ cuando $a_k = \1$.
 
-\begin{definition}[Grado, polinomio nulo, polinomio constante]
+\begin{definition}[Grado, coeficiente líder, polinomio nulo, polinomio constante]
 Sea $R$ un anillo conmutativo, y consideremos un polinomio $p(X) \in R[X]$. Digamos que
 $$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n.$$
-El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. Si dicho entero no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
+El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. En ese caso, a $a_m$ se le llama el \emph{coeficiente líder} de $p(X)$. Si tal $m$ no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -377,6 +377,29 @@ en el anillo de polinomios $\mathbb{Z}_5[X]$. Tenemos que
 &= 3X^5 + X^4 + 2X^3 + 3.
 \end{align*}
 \hfill$\blacksquare$
-
-
 \end{example}
+
+La siguiente proposición es una propiedad bien conocida de los polinomios. Dejamos la demostración como ejercicio para el lector.
+
+\begin{proposition}
+Sea $R$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
+$$\mathrm{gr}(p(X) + q(X)) \leq \max\left( \mathrm{gr}(p(X)),\, \mathrm{gr}(q(X))\right).$$
+Además, si $\mathrm{gr}(p(X)) \neq \mathrm{gr}(q(X))$, entonces se cumple la igualdad.
+\end{proposition}
+
+
+Notemos que, en general, $R[X]$ no es un dominio integral. Por ejemplo, en $\mathbb{Z}_2[X]$ tenemos que $2X \cdot 2X = \0(X)$. Como probaremos a continuación, esto solo ocurre cuando el anillo de coeficientes no es un dominio integral.
+
+\begin{proposition}
+Sea $R$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
+$$\mathrm{gr}(p(X) \cdot q(X)) \leq \mathrm{gr}(p(X)) + \mathrm{gr}(q(X)).$$
+Además, si $R$ es un dominio integral, entonces $R[X]$ es también un dominio integral, y la desigualdad anterior se vuelve una igualdad.
+\end{proposition}
+
+\begin{proof}
+Digamos que $p(X) = a_mX^m + \cdot + a_1X + a_0$ y $q(X) = b_nX^n + \cdot + b_1x+b_0$, con $\mathrm{gr}(p(X)) = m$ y $\mathrm{gr}(q(X)) = n$ (de modo que $a_m \neq \0$ y $b_n \neq \0$). Notemos que al hacer la multiplicación $p(X) \cdot q(X)$ solo pueden aparecer términos $c X^k$ con $k \leq n + m$, y de ahí la desigualdad.
+
+Ahora veamos qué ocurre si $R$ es dominio integral. El coeficiente líder de $p(X) \cdot q(X)$ es $a_m \cdot b_m$, que es distinto a $\0$ por la definición de dominio integral. Dicho coeficiente líder acompaña a $X^{m+n}$, por lo que 
+$$\mathrm{gr}(p(X) \cdot q(X)) = m + n = \mathrm{gr}(p(X)) + \mathrm{gr}(q(X)).$$
+Esto de paso muestra que $p(X) \cdot q(X) \neq \0(X)$, por lo que podemos concluir que $R[X]$ es dominio integral.
+\end{proof}
