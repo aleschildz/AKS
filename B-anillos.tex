@@ -305,7 +305,7 @@ Dado cualquier anillo conmutativo $(R, +, \cdot)$, tenemos que $\{\0\}$ y $R$ so
 La siguiente proposición nos da una forma sencilla de construir ideales.
 
 \begin{prop} \label{ideal_generado}
-Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, a_2, \dots, a_n$ elementos de $R$. El siguiente conjunto\footnote{Hacemos notar que esta notación puede ser confusa, pues coincide con la de tuplas. En general, debiese ser claro por contexto si la notación se refiere a una tupla o al conjunto definido aquí.} es un ideal: $$\gen{a_1, \dots, a_n} \coloneqq \{r_1 \cdot a_1 + r_2 \cdot a_2 + \cdots + r_n \cdot a_n \; \mid \; r_1, r_2, \dots, r_n \in R\}.$$
+Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, a_2, \dots, a_n$ elementos de $R$. El siguiente conjunto\footnote{Hacemos notar que esta terminología puede ser confusa, pues coincide con la de tuplas. En general, debiese ser claro por contexto si la notación se refiere a una tupla o al conjunto definido aquí.} es un ideal: $$\gen{a_1, \dots, a_n} \coloneqq \{r_1 \cdot a_1 + r_2 \cdot a_2 + \cdots + r_n \cdot a_n \; \mid \; r_1, r_2, \dots, r_n \in R\}.$$
 \end{prop}
 
 \begin{proof}
@@ -315,7 +315,7 @@ Veamos primero que $\gen{a_1, \dots, a_n}$ es un grupo abeliano con la suma. La 
 $$b + c = (r_1 + s_1) \cdot a_1 + (r_2 + s_2) \cdot a_2 + \cdots + (r_n + s_n) \cdot a_n,$$
 por lo que $b + c \in \gen{a_1, \dots, a_n}$, y $\gen{a_1, \dots, a_n}$ es cerrado bajo la suma.
 \item Usando la proposición \ref{propiedad absorbente}, tenemos que $\0 = \0 \cdot a_1 + \0 \cdot a_2 + \cdots + \0 \cdot a_n$, así que $\0 \in \gen{a_1, \dots, a_n}$.
-\item Sea $b \in \gen{a_1, \dots, a_n}$, de modo que existen $r_1, \dots, r_n \in R$ tales que $b = r_1 \cdot a_1 + \cdots + r_n \cdot a_n$. Por la propiedad 1 de la proposición \ref{propiedades_anillos} tenemos que $$-b = ( - (r_1 \cdot a_1)) + ( - (r_2 \cdot a_2)) + \cdots + ( - (r_n \cdot a_n))= (-r_1) \cdot a_1 + (-r_2) \cdot a_n + \cdots + (-r_n) \cdot a_n.$$ Luego $-b \in \gen{a_1, \dots, a_n}$, y $\gen{a_1, \dots, a_n}$ es cerrado bajo tomar inversos aditivos.
+\item Sea $b \in \gen{a_1, \dots, a_n}$, de modo que existen $r_1, \dots, r_n \in R$ tales que $b = r_1 \cdot a_1 + \cdots + r_n \cdot a_n$. Por la propiedad 3 de la proposición \ref{propiedades_potencias} (con $n=-1$) y la propiedad 1 de la proposición \ref{propiedades_anillos}, tenemos que $$-b = ( - (r_1 \cdot a_1)) + ( - (r_2 \cdot a_2)) + \cdots + ( - (r_n \cdot a_n))= (-r_1) \cdot a_1 + (-r_2) \cdot a_n + \cdots + (-r_n) \cdot a_n.$$ Luego $-b \in \gen{a_1, \dots, a_n}$, y $\gen{a_1, \dots, a_n}$ es cerrado bajo tomar inversos aditivos.
 \end{itemize} 
 Nos falta ver que $\gen{a_1, \dots, a_n}$ es absorbente con la multiplicación. Sea $b \in \gen{a_1, \dots, a_n}$, y sea $s \in R$ arbitrario. Sabemos que existen $r_1, \dots, r_n \in R$ tales que $b = r_1 \cdot a_1 + \cdots + r_n \cdot a_n$. Luego
 $$s \cdot b = (s \cdot r_1) \cdot a_1 + (s \cdot r_2) \cdot a_2 + \cdots + (s \cdot r_n) \cdot a_n,$$
@@ -327,7 +327,7 @@ Sea $(R, +, \cdot)$ un anillo conmutativo, y sean $a_1, \dots, a_n$ elementos de
 \end{definition}
 
 \begin{example} \label{modulo_n}
-Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente\footnote{Nuevamente, aquí estamos usando usando la notación $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ para referirnos al mismo tiempo a un grupo abeliano y a un anillo conmutativo. Si bien esta diferencia debe quedar clara por contexto, hacemos notar que la estructura de grupo abeliano es la que se obtiene simplemente ignorando la operación de multiplicación en la estructura de anillo conmutativo.} $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa será la noción algebraica más importante para entender este documento. \hfill$\blacksquare$
+Veamos de nuevo el ejemplo \ref{mZ_ideal}. Notemos que, en el anillo $(\mathbb{Z}, +, \cdot)$, el conjunto $m\mathbb{Z}$ es el ideal principal generado por el entero positivo $m$. Ya sabíamos que el cociente $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ es isomorfo a $(\mathbb{Z}_m, +)$ como grupo abeliano (proposición \ref{isomorfismo_Z_m}). Si miramos con atención la proposición \ref{anillo_cociente}, notaremos que, de hecho, el anillo cociente\footnote{Nuevamente, aquí estamos usando usando la notación $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ para referirnos al mismo tiempo a un grupo abeliano y a un anillo conmutativo. Si bien esta diferencia debe quedar clara por contexto, hacemos notar que la estructura de grupo abeliano es la que se obtiene simplemente ignorando la operación de multiplicación en la estructura de anillo conmutativo.} $\faktor{\mathbb{Z}}{m\mathbb{Z}}$ también tiene la misma estructura multiplicativa que el anillo $(\mathbb{Z}_m, +, \cdot)$. Rercordemos que este último anillo consiste de la suma y multiplicación usuales, salvo que estas se hacen en módulo $m$. Es decir, ver el cociente por el ideal principal de $m$ corresponde a ver las operaciones del anillo en módulo $m$. Esa será la noción algebraica más importante para entender este documento. \hfill$\blacksquare$
 \end{example}
 
 Notemos que el ideal $I$ del ejemplo \ref{ejemplo_cociente_R2} es también un ideal principal, generado por el elemento $(0, 1)$. De hecho, cualquier elemento $(0, b)$ con $b \neq 0$ generará el mismo ideal. En general, es común que un mismo ideal sea generado por varios conjuntos distintos de elementos del anillo.
@@ -341,6 +341,8 @@ cuando $a + I = b + I$, es decir, cuando se tenga la igualdad en el cociente. \h
 \end{definition}
 
 La notación de la definición \ref{notacion_modulo} generaliza la notación usual de aritmética modular. Por ejemplo, como vimos en el ejemplo \ref{modulo_n}, decir que $9 \equiv 2 \modu (7)$ corresponde a decir que los enteros $2$ y $9$ coinciden cuando consideramos el cociente sobre $7\mathbb{Z}$, el ideal generado por $7$.
+
+En la siguiente sección volveremos a usar esta notación para estudiar ciertos ideales que serán clave para el algoritmo AKS.
 
 \subsection{Anillos de polinomios}
 
@@ -364,11 +366,11 @@ El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no n
 \hfill$\blacksquare$
 \end{definition}
 
-Uno puede definir la suma y multiplicación de polinomios en $R[X]$ de la manera usual, con la salvedad de que los coeficientes deben operarse según la suma y multiplicación del anillo $R$. Dejamos como ejercicio para el lector verificar que, para cualquier anillo conmutativo $R$, $R[X]$ forma un anillo con estas operaciones. El polinomio nulo es el neutro aditivo, y el inverso aditivo de $p(X)$ se obtiene tomando el inverso aditivo de cada coeficiente. La identidad es el polinomio constante igual a $\1$.
+Uno puede definir la suma y multiplicación de polinomios en $R[X]$ de la manera usual, con la salvedad de que los coeficientes deben operarse según la suma y multiplicación del anillo $R$. Dejamos como ejercicio para el lector verificar que, para cualquier anillo conmutativo $R$, el conjunto $R[X]$ forma un anillo con estas operaciones. El polinomio nulo es el neutro aditivo, y el inverso aditivo de $p(X)$ se obtiene tomando el inverso aditivo de cada coeficiente. La identidad es el polinomio constante igual a $\1$.
 
 \begin{example}
 Consideremos los polinomios 
-$$p(X) = 2X^2 + 3X + 4 \quad , \quad q(X) = 4X^3 + X^2 \quad , \quad r(X) = 2X^4 + 3X^3 + X^2 + 3$$
+$$p(X) = 2X^2 + 3X + 4, \qquad q(X) = 4X^3 + X^2, \qquad r(X) = 2X^4 + 3X^3 + X^2 + 3$$
 en el anillo de polinomios $\mathbb{Z}_5[X]$. Tenemos que
 \begin{align*}
 (p(X) \cdot q(X)) + r(X) &= \left((2 \cdot 4)X^5 + (2 \cdot 1 + 3 \cdot 4)X^4 + (3 \cdot 1 + 4 \cdot 4)X^3 + (4 \cdot 1)X^2 \right) + r(X) \\
@@ -397,7 +399,7 @@ Además, si $R$ es un dominio integral, entonces $R[X]$ es también un dominio i
 \end{proposition}
 
 \begin{proof}
-Digamos que $p(X) = a_mX^m + \cdot + a_1X + a_0$ y $q(X) = b_nX^n + \cdot + b_1x+b_0$, con $\mathrm{gr}(p(X)) = m$ y $\mathrm{gr}(q(X)) = n$ (de modo que $a_m \neq \0$ y $b_n \neq \0$). Notemos que al hacer la multiplicación $p(X) \cdot q(X)$ solo pueden aparecer términos $c X^k$ con $k \leq n + m$, y de ahí la desigualdad.
+Digamos que $p(X) = a_mX^m + \cdots + a_1X + a_0$ y $q(X) = b_nX^n + \cdots + b_1x+b_0$, con $\mathrm{gr}(p(X)) = m$ y $\mathrm{gr}(q(X)) = n$ (de modo que $a_m \neq \0$ y $b_n \neq \0$). Notemos que al hacer la multiplicación $p(X) \cdot q(X)$ solo pueden aparecer términos $c X^k$ con $k \leq n + m$, y de ahí la desigualdad.
 
 Ahora veamos qué ocurre si $R$ es dominio integral. El coeficiente líder de $p(X) \cdot q(X)$ es $a_m \cdot b_m$, que es distinto a $\0$ por la definición de dominio integral. Dicho coeficiente líder acompaña a $X^{m+n}$, por lo que 
 $$\mathrm{gr}(p(X) \cdot q(X)) = m + n = \mathrm{gr}(p(X)) + \mathrm{gr}(q(X)).$$
@@ -407,16 +409,16 @@ Esto de paso muestra que $p(X) \cdot q(X) \neq \0(X)$, por lo que podemos conclu
 A continuación daremos la definición formal del anillo de polinomios en dos indeterminadas.
 
 \begin{definition}[Polinomios en dos indeterminadas] \label{polinomios_dos_indeterminadas}
-Sea $R$ un anillo conmutativo. Definimos el anillo de polinomios en las indeterminadas $X$ e $Y$ y con coeficientes en $R$, denotado $R[X][Y]$, como el anillo $(R[X])[Y]$. En otras palabras, es el anillo de polinomios con indeterminada $Y$ y coeficientes en el anillo de polinomios $R[X]$.
+Sea $R$ un anillo conmutativo. Definimos el anillo de polinomios en las indeterminadas $X$ e $Y$ y con coeficientes en $R$, denotado $R[X, Y]$, como el anillo $(R[X])[Y]$. En otras palabras, es el anillo de polinomios con indeterminada $Y$ y coeficientes en el anillo de polinomios $R[X]$.
 \hfill$\blacksquare$
 \end{definition}
 
-Podría parecer que la definición \ref{polinomios_dos_indeterminadas} es asimétrica, en el sentido de que una indeterminada tendría preferencia sobre la otra. Sin embargo, se puede probar que $(R[X])[Y] \simeq (R[Y])[X]$, por lo que realmente no es necesario hacer dicha distinción. De hecho, es usual presentar un polinomio en $R[X][Y]$ como una suma de términos de la forma $c X^i Y^j$ en lugar de agruparlos para que quede un polinomio en $Y$ con coeficientes en $R[X]$ o un polinomio en $X$ con coeficientes en $R[Y]$. 
+Podría parecer que la definición \ref{polinomios_dos_indeterminadas} es asimétrica, en el sentido de que una indeterminada tendría preferencia sobre la otra. Sin embargo, se puede probar que $(R[X])[Y] \simeq (R[Y])[X]$, por lo que realmente no es necesario hacer dicha distinción. De hecho, es usual presentar un polinomio en $R[X,Y]$ como una suma de términos de la forma $c X^i Y^j$ en lugar de agruparlos para que quede un polinomio en $Y$ con coeficientes en $R[X]$ o un polinomio en $X$ con coeficientes en $R[Y]$. 
 
-La suma y multiplicación en $R[X][Y]$ se comportan de la manera usual, salvo que las operaciones en los coeficientes corresponden a las del anillo $R$.
+La suma y multiplicación en $R[X,Y]$ se comportan de la manera usual, salvo que las operaciones en los coeficientes corresponden a las del anillo $R$.
 
 \begin{example}
-El polinomio $$p(X, Y) \coloneqq 2X^2Y^2 + 3Y^2 + X^2 + 2$$ en $\mathbb{Z}_4[X][Y]$ puede reescribirse como $$(2X^2 + 3)Y^2 + (X^2+2),$$ que es un polinomio en $(\mathbb{Z}_4[X])[Y]$, pero también como $$(2Y^2 + 1)X^2 + (3Y^2 + 2),$$ que es un polinomio en $(\mathbb{Z}_4[Y])[X]$. En cualquier caso, multiplicar este polinomio por $2X-Y$ resulta en
+El polinomio $$p(X, Y) \coloneqq 2X^2Y^2 + 3Y^2 + X^2 + 2$$ en $\mathbb{Z}_4[X,Y]$ puede reescribirse como $$(2X^2 + 3)Y^2 + (X^2+2),$$ que es un polinomio en $(\mathbb{Z}_4[X])[Y]$, pero también como $$(2Y^2 + 1)X^2 + (3Y^2 + 2),$$ que es un polinomio en $(\mathbb{Z}_4[Y])[X]$. En cualquier caso, multiplicar este polinomio por $2X-Y$ resulta en
 \begin{align*}
 p(X, Y) \cdot (2X-Y) &=
 (2X^2Y^2 + 3Y^2 + X^2 + 2) \cdot (2X-Y) \\ &= (2 \cdot 2)X^3Y^2 + (3 \cdot 2)XY^2 + (1 \cdot 2)X^3 + (2 \cdot 2)X - 2X^2Y^3 - 3Y^3 - X^2Y - 2Y \\
