@@ -363,7 +363,7 @@ El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualment
 \begin{definition}[Grado, coeficiente líder, polinomio nulo, polinomio constante]
 Sea $R$ un anillo conmutativo, y consideremos un polinomio $p(X) \in R[X]$. Digamos que
 $$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n.$$
-El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. En ese caso, a $a_m$ se le llama el \emph{coeficiente líder} de $p(X)$. Si tal $m$ no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
+El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. En ese caso, a $a_m$ se le llama el \emph{coeficiente líder} de $p(X)$, y se le denota $\mathrm{CL}(p(X))$. Si tal $m$ no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -384,8 +384,8 @@ en el anillo de polinomios $\mathbb{Z}_5[X]$. Tenemos que
 
 La siguiente proposición es una propiedad bien conocida de los polinomios. Dejamos la demostración como ejercicio para el lector.
 
-\begin{proposition}
-Sea $R$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
+\begin{proposition} \label{grado_suma}
+Sea $(R, +, \cdot)$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
 $$\mathrm{gr}(p(X) + q(X)) \leq \max\left( \mathrm{gr}(p(X)),\, \mathrm{gr}(q(X))\right).$$
 Además, si $\mathrm{gr}(p(X)) \neq \mathrm{gr}(q(X))$, entonces se cumple la igualdad.
 \end{proposition}
@@ -393,8 +393,8 @@ Además, si $\mathrm{gr}(p(X)) \neq \mathrm{gr}(q(X))$, entonces se cumple la ig
 
 Notemos que, en general, $R[X]$ no es un dominio integral. Por ejemplo, en $\mathbb{Z}_2[X]$ tenemos que $2X \cdot 2X = \0(X)$. Como probaremos a continuación, esto solo ocurre cuando el anillo de coeficientes no es un dominio integral.
 
-\begin{proposition}
-Sea $R$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
+\begin{proposition} \label{grado_producto}
+Sea $(R, +, \cdot)$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
 $$\mathrm{gr}(p(X) \cdot q(X)) \leq \mathrm{gr}(p(X)) + \mathrm{gr}(q(X)).$$
 Además, si $R$ es un dominio integral, entonces $R[X]$ es también un dominio integral, y la desigualdad anterior se vuelve una igualdad.
 \end{proposition}
@@ -410,7 +410,7 @@ Esto de paso muestra que $p(X) \cdot q(X) \neq \0(X)$, por lo que podemos conclu
 A continuación daremos la definición formal del anillo de polinomios en dos indeterminadas.
 
 \begin{definition}[Polinomios en dos indeterminadas] \label{polinomios_dos_indeterminadas}
-Sea $R$ un anillo conmutativo. Definimos el anillo de polinomios en las indeterminadas $X$ e $Y$ y con coeficientes en $R$, denotado $R[X, Y]$, como el anillo $(R[X])[Y]$. En otras palabras, es el anillo de polinomios con indeterminada $Y$ y coeficientes en el anillo de polinomios $R[X]$.
+Sea $(R, +, \cdot)$ un anillo conmutativo. Definimos el anillo de polinomios en las indeterminadas $X$ e $Y$ y con coeficientes en $R$, denotado $R[X, Y]$, como el anillo $(R[X])[Y]$. En otras palabras, es el anillo de polinomios con indeterminada $Y$ y coeficientes en el anillo de polinomios $R[X]$.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -432,7 +432,7 @@ p(X, Y) \cdot (2X-Y) &=
 Ahora comenzaremos a estudiar los cocientes de anillos de polinomios. Lo primero que haremos es entender qué ocurre cuando cocientamos por el ideal principal de un polinomio constante.
 
 \begin{proposition}
-Seam $(R, +, \cdot)$ un anillo conmutativo, y sea $c \in R \setminus \{ \0 \}$. Entonces\footnote{Estamos incurriendo en un abuso de notación, pues usamos el símbolo <<$(c)$>> para referirnos a dos objetos distintos. En el lado izquierdo estamos cocientando $R[X]$ por el ideal generado por $c$ en el anillo de polinomios, es decir, $(c)$ corresponde al conjunto $\{ c  \cdot p(X) \mid p(X) \in R[X] \}$. Por otro lado, en el lado derecho estamos cocientando el anillo $R$ por el ideal generado por $c$ en dicho anillo, por lo que $(c)$ corresponde al conjunto $\{ r \cdot c \mid r \in R \}$. No obstante, siempre es posible deducir la interpretación adecuada observando el anillo original que se está cocientando.}
+Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $c \in R \setminus \{ \0 \}$. Entonces\footnote{Estamos incurriendo en un abuso de notación, pues usamos el símbolo <<$(c)$>> para referirnos a dos objetos distintos. En el lado izquierdo estamos cocientando $R[X]$ por el ideal generado por $c$ en el anillo de polinomios, es decir, $(c)$ corresponde al conjunto $\{ c  \cdot p(X) \mid p(X) \in R[X] \}$. Por otro lado, en el lado derecho estamos cocientando el anillo $R$ por el ideal generado por $c$ en dicho anillo, por lo que $(c)$ corresponde al conjunto $\{ r \cdot c \mid r \in R \}$. No obstante, siempre es posible deducir la interpretación adecuada observando el anillo original que se está cocientando.}
 $$\faktor{R[X]}{(c)} \simeq \left( \faktor{R}{(c)} \right)[X]$$
 \end{proposition}
 
@@ -452,3 +452,60 @@ Para cualquier entero $n \geq 2$ se cumple que
 $$\faktor{\mathbb{Z}[X]}{(n)} \simeq \mathbb{Z}_n[X].$$
 \end{corollary}
 
+Nos gustaría enteder qué ocurre con el anillo $R[X]$ cuando cocientamos por un ideal generado por un polinomio no constante. Para ello, primero debemos tener una noción de lo que significa dividir polinomios y del resto que resulta de ello. Veremos que, para anillos conmutativos en general, solo es posible admitir divisores cuyo coeficiente líder es $\1$.
+
+\begin{definition}[Polinomio mónico]
+Un polinomio $p(X)$ se dice \emph{mónico} si $\mathrm{CL}(p(X)) = \1$.
+\end{definition}
+
+\begin{proposition}[Algoritmo de la división para polinomios]
+Sea $(R, +, \cdot)$ un anillo conmutativo, $p(X) \in R[X]$ un polinomio cualquiera y $d(X) \in R[X]$ un polinomio mónico (lo que, en particular, implica que no es el polinomio nulo). Entonces existen únicos $q(X), r(X) \in R[X]$ tales que:
+\begin{itemize}
+\item[i.] $p(X) = q(X) \cdot d(X) + r(X)$,
+\item[ii.] $\mathrm{gr}(r(X)) < \mathrm{gr}(d(X))$ (admitiendo, posiblemente, que $r(X) = \0(X)$). 
+\end{itemize}
+Además, el par $(q(X), r(X))$ puede calcularse por medio del siguiente algoritmo:
+\begin{algorithm}[H]
+    \caption{\quad\textbf{DivisionDePolinomios}}
+    \label{alg_division_polinomios}
+    \begin{algorithmic}[1]
+        \STATE $q(X),\;\; r(X) \ \coloneqq \ \0(X),\;\; p(X)$
+        \STATE $m,\;\; n,\;\; \ \coloneqq \ \mathrm{gr}(r(X)),\;\; \mathrm{gr}(d(X))$
+        \WHILE {$m \geq n$}
+            \STATE $q(X) \gets q(X) + \mathrm{CL}(r(X)) X^{m-n}$ 
+            \STATE $r(X) \gets r(X) - \mathrm{CL}(r(X)) X^{m-n} \cdot d(X)$
+            \STATE $m \gets \mathrm{gr}(r(X))$
+        \ENDWHILE
+        \RETURN q(X),\;\; r(X)
+    \end{algorithmic}
+    \end{algorithm}
+\end{proposition}
+
+
+
+\begin{proof}
+Primero probaremos la correctitud del algoritmo. 
+Notemos que cada vez que entramos a la línea 4 se cumple que $r(X) \neq \0(X)$, pues $\mathrm{gr}(r(X)) = m$, y, si $m$ fuese $-\infty$, se hubise cumplido la condición $m < n$ para salir del bucle. Por lo tanto, el coeficiente líder que solicitamos calcular siempre está bien definido.
+Como $d(X)$ es mónico y $\mathrm{gr}(d(X)) = n$, en la línea $5$ siempre se cumplirá por construcción que $\mathrm{CL}(r(X)) X^{m-n} \cdot d(X)$ tiene el mismo coeficiente líder que $r(X)$, por lo que la reasignación que hacemos ahí reduce el grado de $r(X)$ en al menos $1$. Por lo tanto, el bucle se ejecuta a lo sumo $m-n+1$ veces, tras lo cual el algoritmo termina. El polinomio $r(X)$ que retorna el algoritmo cumplirá la condición (ii) por construcción. Podemos probar por inducción que también se cumple la condición (i). En efecto, al principio inicializamos los valores de $q(X)$ y $r(X)$ de modo que trivialmente se cumpla que $p(X) = q(X) \cdot d(X) + r(X)$. Ahora supongamos que al comienzo de una iteración del bucle los valores de $q(X)$ y $r(X)$ cumplían la condición (i), y que al final de dicha iteración los nuevos valores son $q'(X)$ y $r'(X)$. Estos nuevos valores siguen cumpliendo la condición (i), pues
+\begin{align*}
+q'(X) \cdot d(X) + r'(X) &= (q(X)+\mathrm{CL}(r(X))X^{m-n}) \cdot d(X) + (r(X) - \mathrm{CL}(r(X)) X^{m-n} \cdot d(X)) \\
+&= q(X) \cdot d(X) + r(X)
+= p(X).
+\end{align*}
+Esto prueba que el algoritmo es correcto.
+
+Ahora veamos que no existe otro par de polinomios $q(X), r(X) \in R[X]$ que cumplen las condiciones (i) y (ii). Para ello, consideremos $q_1(X), q_2(X), r_1(X), r_2(X) \in R[X]$ tales:
+\begin{enumerate}
+\item $p(X) = q_1(X) \cdot d(X) + r_1(X)$,
+\item $p(X) = q_2(X) \cdot d(X) + r_2(X)$,
+\item $\mathrm{gr}(r_1(X)) < \mathrm{gr}(d(X))$,
+\item $\mathrm{gr}(r_2(X)) < \mathrm{gr}(d(X))$.
+\end{enumerate}
+Nos gustaría probar que $q_1(X) = q_2(X)$ y que $r_1(X) = r_2(X)$. Restando las ecuaciones 1 y 2, obtenemos que
+\begin{equation} \tag{5} \label{ecuacion_grados}
+r_1(X) - r_2(X) = (q_2(X) - q_1(X)) \cdot d(X).
+\end{equation}
+Usando la proposición \ref{grado_suma}, de los puntos 3 y 4 obtenemos que
+$$\mathrm{gr}(r_1(X) - r_2(X)) < \mathrm{gr}(d(X)).$$
+Viendo la ecuación \ref{ecuacion_grados}, esto significa que al multiplicar $d(X)$ por $q_2(X)-q_1(X)$ obtenemos un polinomio de grado menor que el de $d(X)$. Como $d(X)$ es mónico\footnote{Aquí realmente es necesario que $d(X)$ sea mónico: sin esa hipótesis puede pasar que la multiplicación de dos polinomios no nulos resulte en un polinomio con grado menor que la suma de los grados de los factores, como vimos en la proposición \ref{grado_producto}.}, esto solo es posible si $q_2(X) - q_1(X) = \0(X)$. Usando la ecuación \ref{ecuacion_grados} y la proposición \ref{propiedad absorbente}, deducimos también que $r_1(X) = r_2(X)$, como queríamos probar.
+\end{proof}
