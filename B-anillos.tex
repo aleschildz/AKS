@@ -431,7 +431,7 @@ p(X, Y) \cdot (2X-Y) &=
 
 Ahora comenzaremos a estudiar los cocientes de anillos de polinomios. Lo primero que haremos es entender qué ocurre cuando cocientamos por el ideal principal de un polinomio constante.
 
-\begin{proposition}
+\begin{proposition} \label{cociente_polinomio_constante}
 Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $c \in R \setminus \{ \0 \}$. Entonces\footnote{Estamos incurriendo en un abuso de notación, pues usamos el símbolo <<$(c)$>> para referirnos a dos objetos distintos. En el lado izquierdo estamos cocientando $R[X]$ por el ideal generado por $c$ en el anillo de polinomios, es decir, $(c)$ corresponde al conjunto $\{ c  \cdot p(X) \mid p(X) \in R[X] \}$. Por otro lado, en el lado derecho estamos cocientando el anillo $R$ por el ideal generado por $c$ en dicho anillo, por lo que $(c)$ corresponde al conjunto $\{ r \cdot c \mid r \in R \}$. No obstante, siempre es posible deducir la interpretación adecuada observando el anillo original que se está cocientando.}
 $$\faktor{R[X]}{(c)} \simeq \left( \faktor{R}{(c)} \right)[X]$$
 \end{proposition}
@@ -447,7 +447,7 @@ $$\phi((a_nX^n + \cdots a_1X+a_0) \modu c) = b_nX^n + \cdots + b_1X+b_0.$$
 Dejamos al lector verificar que $\phi$ es un isomorfismo. El hecho de que $\phi$ respeta las operaciones de los anillos se sigue del hecho de que operar coeficientes en $\faktor{R}{(c)}$ da el mismo resultado que hacer las mismas operaciones con coeficientes en $R$ y luego pasar al cociente.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary} 
 Para cualquier entero $n \geq 2$ se cumple que
 $$\faktor{\mathbb{Z}[X]}{(n)} \simeq \mathbb{Z}_n[X].$$
 \end{corollary}
@@ -455,11 +455,11 @@ $$\faktor{\mathbb{Z}[X]}{(n)} \simeq \mathbb{Z}_n[X].$$
 Nos gustaría enteder qué ocurre con el anillo $R[X]$ cuando cocientamos por un ideal generado por un polinomio no constante. Para ello, primero debemos tener una noción de lo que significa dividir polinomios y del resto que resulta de ello. Veremos que, para anillos conmutativos en general, solo es posible admitir divisores cuyo coeficiente líder es $\1$.
 
 \begin{definition}[Polinomio mónico]
-Un polinomio $p(X)$ se dice \emph{mónico} si $\mathrm{CL}(p(X)) = \1$.
+Un polinomio $p(X)$ se dice \emph{mónico} si $\mathrm{CL}(p(X)) = \1$. \hfill$\blacksquare$
 \end{definition}
 
-\begin{proposition}[Algoritmo de la división para polinomios]
-Sea $(R, +, \cdot)$ un anillo conmutativo, $p(X) \in R[X]$ un polinomio cualquiera y $d(X) \in R[X]$ un polinomio mónico (lo que, en particular, implica que no es el polinomio nulo). Entonces existen únicos $q(X), r(X) \in R[X]$ tales que:
+\begin{proposition}[División de polinomios] \label{div_polinomios}
+Sea $(R, +, \cdot)$ un anillo conmutativo, ${p(X) \in R[X]}$ un polinomio cualquiera y $d(X) \in R[X]$ un polinomio mónico (lo que, en particular, implica que no es el polinomio nulo). Entonces existen únicos $q(X), r(X) \in R[X]$ tales que:
 \begin{itemize}
 \item[i.] $p(X) = q(X) \cdot d(X) + r(X)$,
 \item[ii.] $\mathrm{gr}(r(X)) < \mathrm{gr}(d(X))$ (admitiendo, posiblemente, que $r(X) = \0(X)$). 
@@ -509,3 +509,26 @@ Usando la proposición \ref{grado_suma}, de los puntos 3 y 4 obtenemos que
 $$\mathrm{gr}(r_1(X) - r_2(X)) < \mathrm{gr}(d(X)).$$
 Viendo la ecuación \ref{ecuacion_grados}, esto significa que al multiplicar $d(X)$ por $q_2(X)-q_1(X)$ obtenemos un polinomio de grado menor que el de $d(X)$. Como $d(X)$ es mónico\footnote{Aquí realmente es necesario que $d(X)$ sea mónico: sin esa hipótesis puede pasar que la multiplicación de dos polinomios no nulos resulte en un polinomio con grado menor que la suma de los grados de los factores, como vimos en la proposición \ref{grado_producto}.}, esto solo es posible si $q_2(X) - q_1(X) = \0(X)$. Usando la ecuación \ref{ecuacion_grados} y la proposición \ref{propiedad absorbente}, deducimos también que $r_1(X) = r_2(X)$, como queríamos probar.
 \end{proof}
+
+\begin{definition}[Cociente, resto]
+    Sea $(R, +, \cdot)$ un anillo conmutativo, ${p(X) \in R[X]}$ un polinomio cualquiera y $d(X) \in R[X]$ un polinomio mónico. Los polinomios $q(x), r(x) \in R[X]$ descritos en la proposición \ref{div_polinomios} se llaman, respectivamente, el \emph{cociente} y el \emph{resto} de la división de $p(X)$ en $d(X)$. \hfill$\blacksquare$
+\end{definition}
+
+\begin{example} \label{ejemplo_division_polinomios}
+Consideremos polinomios con coeficientes en $\mathbb{Z}$. Calculemos el cociente y el resto de dividir $p(X) = X^4+2$ en $d(X) = X^2+X+1$. El algoritmo \ref{alg_division_polinomios} hará lo siguiente:\footnote{Por claridad, agregamos subíndices a las variables para evitar sobreescribirlas al actualizar sus valores. Esto es solo por rigurosidad matemática.}
+\begin{itemize}
+\item Inicializa $q_0(X) \coloneqq \0(X)$ y $r_0(X) \coloneqq X^4+2$.
+\item Asiga a $m$ el valor $4$ y a $n$ el valor $2$.
+\item Actualiza $q_1(X) = q_0(X) + 1 \cdot X^{4-2} = X^2$.
+\item Actualiza $r_1(X) = r_0(X) - X^2 \cdot (X^2+X+1) = -X^3 - X^2 + 2$.
+\item Disminuye el valor de $m$ de $4$ a $3$.
+\item Actualiza $q_2(X) = q_1(X) + (-1) \cdot X^{3-2} = X^2 - X$.
+\item Actualiza $r_2(X) = r_1(X) - (-X) \cdot (X^2+X+1) = X + 2$.
+\item Disminuye el valor de $m$ de $3$ a $1$.
+\item Retorna $q(X) = q_2(X) = X^2-X$ y $r(X) = r_2(X) = X+2$.
+\end{itemize}
+\hfill$\blacksquare$
+\end{example}
+
+En la proposición \ref{div_polinomios}, la hipótesis de que $d(X)$ sea mónico es necesaria. Por ejemplo, supongamos que en $\mathbb{Z}[X]$ queremos dividir $p(X) = X^2$ en $d(X) = 2X$. Puesto que el grado de $d(X)$ es $1$, necesitaríamos que el resto $r(X)$ sea una constante, digamos $r(X) = c$, con $c \in \mathbb{Z}$. Entonces el cociente $q(X)$ debiese cumplir que
+$X^2 = 2X \cdot q(X) + 1$. Ahora veamos esta última igualdad en el cociente por el ideal generado por el polinomio constante $2$: obtenemos la ecuación $X^2 = 1$. Según el isomorfismo descrito en la demostración de la proposición \ref{cociente_polinomio_constante}, tendríamos que $X^2 = 1$ como polinomios en el anillo $\mathbb{Z}_2[X]$, lo que es absurdo.
