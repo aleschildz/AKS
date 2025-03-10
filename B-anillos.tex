@@ -363,7 +363,7 @@ Al conjunto de todos los polinomios en la indeterminada $X$ y con coeficientes e
 
 En la definición \ref{def_polinomio}, <<expresión formal>> significa que un polinomio no debe entenderse \textit{a priori} como una función, sino como un objeto en sí mismo. En ese sentido, las distintas potencias de $X$ solo sirven para separar los coeficientes. De hecho, podríamos haber definido los polinomios con coeficientes en $R$ simplemente como tuplas $(a_0, a_1, \dots, a_n)$ de elementos de $R$. Las razones por las que se prefiere la primera notación quedarán claras a medida que avancemos en esta sección.
 
-El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualmente se omiten aquellos con $a_k=\0$, y simplemente se escribe $X^k$ cuando $a_k = \1$.
+El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualmente se omiten aquellos con $a_k=\0$, y simplemente se escribe $X^k$ cuando $a_k = \1$. Es importante recordar que, en un anillo de polinomios, dos polinomios son iguales si y solo si son iguales coeficiente a coeficiente (comparando entre las potencias de la indeterminada que correspondan).
 
 \begin{definition}[Grado, coeficiente líder, polinomio nulo, polinomio constante]
 Sea $R$ un anillo conmutativo, y consideremos un polinomio $p(X) \in R[X]$. Digamos que
@@ -534,8 +534,10 @@ Consideremos polinomios con coeficientes en $\mathbb{Z}$. Calculemos el cociente
 \item Disminuye el valor de $m$ de $3$ a $1$.
 \item Retorna $q(X) = q_2(X) = X^2-X$ y $r(X) = r_2(X) = X+2$.
 \end{itemize}
+Concluimos que el cociente de esta división es $X^2-X$, y que el resto es $X+2$. Notemos que este último tiene grado menor que $2$, que corresponde al grado del divisor. Dejamos al lector verificar que efectivamente se cumple que
+$$X^4+1 = (X^2-X)(X^2+X+1) + (X+2).$$
 \hfill$\blacksquare$
 \end{example}
 
 En la proposición \ref{div_polinomios}, la hipótesis de que $d(X)$ sea mónico es necesaria. Por ejemplo, supongamos que en $\mathbb{Z}[X]$ queremos dividir $p(X) = X^2$ en $d(X) = 2X$. Puesto que el grado de $d(X)$ es $1$, necesitaríamos que el resto $r(X)$ sea una constante, digamos $r(X) = c$, con $c \in \mathbb{Z}$. Entonces el cociente $q(X)$ debiese cumplir que
-$X^2 = 2X \cdot q(X) + c$. Ahora veamos esta última igualdad en el cociente por el ideal generado por el polinomio constante $2$: obtenemos la ecuación $X^2 = c$. Según el isomorfismo descrito en la demostración de la proposición \ref{cociente_polinomio_constante}, tendríamos que $X^2 = c$ como polinomios en el anillo $\mathbb{Z}_2[X]$, lo que es absurdo.
+$X^2 = 2X \cdot q(X) + c$. Viendo esta última igualdad en el cociente por el ideal generado por el polinomio constante $2$, obtenemos que $X^2 \equiv c \modu (2)$. Según el isomorfismo descrito en la demostración de la proposición \ref{cociente_polinomio_constante}, tendríamos que $X^2 = c$ como polinomios en el anillo $\mathbb{Z}_2[X]$, es decir, $X^2$ y $c$ serían el mismo polinomio en dicho anillo. Pero esto es absurdo, pues en un anillo de polinomios se cumple que dos polinomios son iguales si y solo si son iguales coeficiente a coeficiente.

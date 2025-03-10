@@ -1,7 +1,7 @@
-Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq \{0, 1, \dots, n-1\}$ forma un grupo abeliano con la operación de suma en módulo $n$. Usaremos la notación $a \mods n$ para denotar al resto de dividir el entero $a$ en $n$, y también escribiremos $a \equiv b \modl n$ cuando $(a \mods n) = (b \mods n)$.
+Recordemos que, dado un entero positivo $n$, el conjunto $\mathbb{Z}_n \coloneq \{0, 1, \dots, n-1\}$ forma un grupo abeliano con la operación de suma en módulo $n$. Usaremos la notación $a \minimodu n$ para denotar al resto de dividir el entero $a$ en $n$, y también escribiremos $a \equiv b \modu n$ cuando $(a \minimodu n) = (b \minimodu n)$.
 
-Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo, necesitamos entender cuándo un número es invertible bajo la multiplicación en $\mathbb{Z}_n$. Un entero $a$ se dice \emph{invertible} en módulo $n$ si existe un entero $b$ tal que $a \cdot b \equiv 1 \modl n$. Por ejemplo, el número 2 es invertible en módulo 9
-puesto que $2 \cdot 5 \equiv 1 \modl 9$, mientras que el número 3 no es invertible en módulo 9, pues para cualquier entero $b$ tenemos que el resto de dividir $3b$ en $9$ es $0$, $3$ o $6$. De hecho, es sencillo probar que $a$ es
+Para contestar la pregunta de si $(\mathbb{Z}_n, \cdot)$ es un grupo, necesitamos entender cuándo un número es invertible bajo la multiplicación en $\mathbb{Z}_n$. Un entero $a$ se dice \emph{invertible} en módulo $n$ si existe un entero $b$ tal que $a \cdot b \equiv 1 \modu n$. Por ejemplo, el número 2 es invertible en módulo 9
+puesto que $2 \cdot 5 \equiv 1 \modu 9$, mientras que el número 3 no es invertible en módulo 9, pues para cualquier entero $b$ tenemos que el resto de dividir $3b$ en $9$ es $0$, $3$ o $6$. De hecho, es sencillo probar que $a$ es
 invertible en módulo $n$ si y solo si $a$ y $n$ son coprimos, es decir, si el máximo común divisor de $a$ y $n$ es 1, lo cual es denotado como $\MCD(a,n) = 1$. El argumento utiliza el siguiente resultado bien conocido en teoría de números:
 
 \begin{prop}[Lema de Bézout] \label{bezout}
@@ -44,14 +44,14 @@ La definición \ref{def_ord_mult} es correcta pues, si $\MCD(a, n) = 1$, entonce
 
 
 Dado que $(\mathbb{Z}_n^*, \cdot)$ es un grupo de orden $\phi(n)$ cuyo
-neutro es el número 1, tenemos que $a^{\phi(n)} \equiv 1 \modl n$ para
+neutro es el número 1, tenemos que $a^{\phi(n)} \equiv 1 \modu n$ para
 cada $a \in \mathbb{Z}_n^*$. De esta forma, sabemos que para cada $a
 \in \mathbb{Z}_n^*$, existe algún valor $r \geq 1$ tal que $a^r \equiv
-1 \modl n$, y el siguiente número, conocido como el orden de $a$ en
+1 \modu n$, y el siguiente número, conocido como el orden de $a$ en
 $n$, está bien definido:
 \begin{eqnarray*}
   O_n(a) & = & \min \{ r \in \mathbb{N} \mid 1 \leq r \leq \phi(n)
-  \ \text{ y } \ a^r \equiv 1 \modl n \}.
+  \ \text{ y } \ a^r \equiv 1 \modu n \}.
 \end{eqnarray*}
 Este valor también juega un rol fundamental en test de primalidad AKS.
 
