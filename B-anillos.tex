@@ -337,12 +337,17 @@ Antes de terminar esta sección, introduciremos una notación que usaremos const
 \begin{definition}[Notación de módulo] \label{notacion_modulo}
 Sea $(R, +, \cdot)$ un anillo conmutativo, y sea $I \subseteq R$ un ideal. Dados $a, b \in R$, escribiremos
 $$a \equiv b \modu I$$
-cuando $a + I = b + I$, es decir, cuando se tenga la igualdad en el cociente. También escribiremos $(a \modu I)$ para referirnos al elemento $a+I$ en el anillo cociente. Cuando $I$ sea un ideal principal, es decir, $I = (c)$ para algún $c \in R$, escribiremos simplemente $a \equiv b \modu c$ y $(a \modu c)$.
+cuando $a + I = b + I$, es decir, cuando se tenga la igualdad en el cociente. También escribiremos $(a \minimodu I)$ para referirnos al elemento $a+I$ en el anillo cociente. Cuando $I$ sea un ideal principal, es decir, $I = (c)$ para algún $c \in R$, escribiremos simplemente $a \equiv b \modu c$ y $(a \minimodu c)$.
 \hfill$\blacksquare$
 \end{definition}
 
-La notación de la definición \ref{notacion_modulo} generaliza la notación usual de aritmética modular. Por ejemplo, como vimos en el ejemplo \ref{modulo_n}, decir que $9 \equiv 2 \modu (7)$ corresponde a decir que los enteros $2$ y $9$ coinciden cuando consideramos el cociente sobre $7\mathbb{Z}$, el ideal generado por $7$.
 
+\begin{remark}
+Según la definición \ref{notacion_modulo}, $a \equiv b \modu I$ si y solo si $(a \minimodu I) = (b \minimodu I)$. 
+\hfill$\blacksquare$
+\end{remark}
+
+La notación de la definición \ref{notacion_modulo} generaliza la notación usual de aritmética modular. Por ejemplo, como vimos en el ejemplo \ref{modulo_n}, decir que $9 \equiv 2 \modu (7)$ corresponde a decir que los enteros $2$ y $9$ coinciden cuando consideramos el cociente sobre $7\mathbb{Z}$, el ideal generado por $7$.
 En la siguiente sección volveremos a usar esta notación para estudiar ciertos ideales que serán clave para el algoritmo AKS.
 
 \subsection{Anillos de polinomios}
@@ -363,7 +368,7 @@ El orden en el que se escriben los términos $a_k X^k$ es irrelevante. Usualment
 \begin{definition}[Grado, coeficiente líder, polinomio nulo, polinomio constante]
 Sea $R$ un anillo conmutativo, y consideremos un polinomio $p(X) \in R[X]$. Digamos que
 $$p(X) = a_0 + a_1X + a_2X^2 + \cdots + a_n X^n.$$
-El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. En ese caso, a $a_m$ se le llama el \emph{coeficiente líder} de $p(X)$, y se le denota $\mathrm{CL}(p(X))$. Si tal $m$ no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
+El \emph{grado} de $p(X)$, denotado $\mathrm{gr}(p(X))$, es el mayor entero no negativo $m$ tal que $a_m \neq \0$. En ese caso, a $a_m$ se le llama el \emph{coeficiente líder} de $p(X)$, y se le denota $\mathrm{cl}(p(X))$. Si tal $m$ no existe, es decir, si todos los coeficientes de $p(X)$ son iguales a $\0$, entonces definimos $\mathrm{gr}(p(X)) = -\infty$, en cuyo caso a $p(X)$ lo llamamos \emph{polinomio nulo} y escribimos $p(X) = \0(X)$. Por otro lado, si $\mathrm{gr}(p(X)) = 0$, es decir, si $p(X) = a_0$, decimos que $p(X)$ es un \emph{polinomio constante}.
 \hfill$\blacksquare$
 \end{definition}
 
@@ -391,7 +396,7 @@ Además, si $\mathrm{gr}(p(X)) \neq \mathrm{gr}(q(X))$, entonces se cumple la ig
 \end{proposition}
 
 
-Notemos que, en general, $R[X]$ no es un dominio integral. Por ejemplo, en $\mathbb{Z}_2[X]$ tenemos que $2X \cdot 2X = \0(X)$. Como probaremos a continuación, esto solo ocurre cuando el anillo de coeficientes no es un dominio integral.
+Notemos que, en general, $R[X]$ no es un dominio integral. Por ejemplo, en $\mathbb{Z}_4[X]$ tenemos que $2X \cdot 2X = \0(X)$. Como probaremos a continuación, esto solo ocurre cuando el anillo de coeficientes no es un dominio integral.
 
 \begin{proposition} \label{grado_producto}
 Sea $(R, +, \cdot)$ un anillo conmutativo y $p(X), q(X) \in R[X]$. Entonces
@@ -438,11 +443,11 @@ $$\faktor{R[X]}{(c)} \simeq \left( \faktor{R}{(c)} \right)[X]$$
 
 \begin{proof}
 Definimos $\phi\colon \faktor{R[X]}{(c)} \rightarrow \left( \faktor{R}{(c)} \right)[X]$ dada por
-$$\phi((a_nX^n + \cdots + a_1X + a_0) \modu c) = (a_n \modu c)X^n + \cdots + (a_1 \modu c)X + (a_0 \modu c).$$
-Lo primero que debemos hacer es probar que $\phi$ está bien definida. Para ello, sean $p(X) = a_nX^n + \cdots a_1X + a_0$ y $q(X) = b_mX^m + \cdots + b_1X + b_0$ dos polinomios en $R[X]$ tales que $p(X) \equiv q(X) \modu c$. Esto significa que existe un polinomio $h(X)$ en $R[X]$ tal que $p(X) - q(X) = c \cdot h(X)$. Viendo los coeficientes del polinomio $p(X)- q(X)$, esto muestra que, para cada $i$ el coeficiente $a_i - b_i$ de $p(X)-q(X)$ es de la forma $r \cdot c$ con $r \in R$. Entonces $a_i \equiv b_i \modu c$ para cada $i$, de lo que se sigue que $\phi(p(X)) = \phi(q(X))$. Esto demuestra que $\phi$ está bien definida, y al mismo tiempo prueba que $\phi$ es inyectiva. En efecto, si suponemos que $$\phi(p(X) \modu c) = \phi(q(X) \modu c),$$ entonces $a_i \equiv b_i \modu c$ para cada $i$, y, por lo tanto, $p(X) \modu c = q(X) \modu c$.
+$$\phi((a_nX^n + \cdots + a_1X + a_0) \minimodu c) = (a_n \minimodu c)X^n + \cdots + (a_1 \minimodu c)X + (a_0 \minimodu c).$$
+Lo primero que debemos hacer es probar que $\phi$ está bien definida. Para ello, sean $p(X) = a_nX^n + \cdots a_1X + a_0$ y $q(X) = b_mX^m + \cdots + b_1X + b_0$ dos polinomios en $R[X]$ tales que $p(X) \equiv q(X) \modu c$. Esto significa que existe un polinomio $h(X)$ en $R[X]$ tal que $p(X) - q(X) = c \cdot h(X)$. Viendo los coeficientes del polinomio $p(X)- q(X)$, esto muestra que, para cada $i$ el coeficiente $a_i - b_i$ de $p(X)-q(X)$ es de la forma $r \cdot c$ con $r \in R$. Entonces $a_i \equiv b_i \modu c$ para cada $i$, de lo que se sigue que $\phi(p(X)) = \phi(q(X))$. Esto demuestra que $\phi$ está bien definida, y al mismo tiempo prueba que $\phi$ es inyectiva. En efecto, si suponemos que $$\phi(p(X) \minimodu c) = \phi(q(X) \minimodu c),$$ entonces $a_i \equiv b_i \modu c$ para cada $i$, y, por lo tanto, $p(X) \minimodu c = q(X) \minimodu c$.
 
-La sobreyectividad es clara: dado un polinomio $b_nX^n + \cdots b_1X + b_0 \in \left( \faktor{R}{(c)} \right)[X]$, elegimos $a_0, a_1, \dots, a_n \in R$ tales que $b_i = a_i \modu c$ para cada $i$, y entonces
-$$\phi((a_nX^n + \cdots a_1X+a_0) \modu c) = b_nX^n + \cdots + b_1X+b_0.$$
+La sobreyectividad es clara: dado un polinomio $b_nX^n + \cdots b_1X + b_0 \in \left( \faktor{R}{(c)} \right)[X]$, elegimos $a_0, a_1, \dots, a_n \in R$ tales que $b_i = (a_i \minimodu c)$ para cada $i$, y entonces
+$$\phi((a_nX^n + \cdots a_1X+a_0) \minimodu c) = b_nX^n + \cdots + b_1X+b_0.$$
 
 Dejamos al lector verificar que $\phi$ es un isomorfismo. El hecho de que $\phi$ respeta las operaciones de los anillos se sigue del hecho de que operar coeficientes en $\faktor{R}{(c)}$ da el mismo resultado que hacer las mismas operaciones con coeficientes en $R$ y luego pasar al cociente.
 \end{proof}
@@ -455,7 +460,7 @@ $$\faktor{\mathbb{Z}[X]}{(n)} \simeq \mathbb{Z}_n[X].$$
 Nos gustaría enteder qué ocurre con el anillo $R[X]$ cuando cocientamos por un ideal generado por un polinomio no constante. Para ello, primero debemos tener una noción de lo que significa dividir polinomios y del resto que resulta de ello. Veremos que, para anillos conmutativos en general, solo es posible admitir divisores cuyo coeficiente líder es $\1$.
 
 \begin{definition}[Polinomio mónico]
-Un polinomio $p(X)$ se dice \emph{mónico} si $\mathrm{CL}(p(X)) = \1$. \hfill$\blacksquare$
+Un polinomio $p(X)$ se dice \emph{mónico} si $\mathrm{cl}(p(X)) = \1$. \hfill$\blacksquare$
 \end{definition}
 
 \begin{proposition}[División de polinomios] \label{div_polinomios}
@@ -469,14 +474,16 @@ Además, el par $(q(X), r(X))$ puede calcularse por medio del siguiente algoritm
     \caption{\quad\textbf{DivisionDePolinomios}}
     \label{alg_division_polinomios}
     \begin{algorithmic}[1]
-        \STATE $q(X),\;\; r(X) \ \coloneqq \ \0(X),\;\; p(X)$
-        \STATE $m,\;\; n,\;\; \ \coloneqq \ \mathrm{gr}(r(X)),\;\; \mathrm{gr}(d(X))$
+        \STATE $q(X) \coloneqq \0(X)$
+        \STATE $r(X) \coloneqq p(X)$
+        \STATE $m \coloneqq \mathrm{gr}(r(X))$
+        \STATE $n \coloneqq \mathrm{gr}(d(X))$
         \WHILE {$m \geq n$}
-            \STATE $q(X) \gets q(X) + \mathrm{CL}(r(X)) X^{m-n}$ 
-            \STATE $r(X) \gets r(X) - \mathrm{CL}(r(X)) X^{m-n} \cdot d(X)$
+            \STATE $q(X) \gets q(X) + \mathrm{cl}(r(X)) X^{m-n}$ 
+            \STATE $r(X) \gets r(X) - \mathrm{cl}(r(X)) X^{m-n} \cdot d(X)$
             \STATE $m \gets \mathrm{gr}(r(X))$
         \ENDWHILE
-        \RETURN q(X),\;\; r(X)
+        \RETURN $q(X),\;\; r(X)$
     \end{algorithmic}
     \end{algorithm}
 \end{proposition}
@@ -486,9 +493,9 @@ Además, el par $(q(X), r(X))$ puede calcularse por medio del siguiente algoritm
 \begin{proof}
 Primero probaremos la correctitud del algoritmo. 
 Notemos que cada vez que entramos a la línea 4 se cumple que $r(X) \neq \0(X)$, pues $\mathrm{gr}(r(X)) = m$, y, si $m$ fuese $-\infty$, se hubise cumplido la condición $m < n$ para salir del bucle. Por lo tanto, el coeficiente líder que solicitamos calcular siempre está bien definido.
-Como $d(X)$ es mónico y $\mathrm{gr}(d(X)) = n$, en la línea $5$ siempre se cumplirá por construcción que $\mathrm{CL}(r(X)) X^{m-n} \cdot d(X)$ tiene el mismo coeficiente líder que $r(X)$, por lo que la reasignación que hacemos ahí reduce el grado de $r(X)$ en al menos $1$. Por lo tanto, el bucle se ejecuta a lo sumo $m-n+1$ veces, tras lo cual el algoritmo termina. El polinomio $r(X)$ que retorna el algoritmo cumplirá la condición (ii) por construcción. Podemos probar por inducción que también se cumple la condición (i). En efecto, al principio inicializamos los valores de $q(X)$ y $r(X)$ de modo que trivialmente se cumpla que $p(X) = q(X) \cdot d(X) + r(X)$. Ahora supongamos que al comienzo de una iteración del bucle los valores de $q(X)$ y $r(X)$ cumplían la condición (i), y que al final de dicha iteración los nuevos valores son $q'(X)$ y $r'(X)$. Estos nuevos valores siguen cumpliendo la condición (i), pues
+Como $d(X)$ es mónico y $\mathrm{gr}(d(X)) = n$, en la línea $5$ siempre se cumplirá por construcción que $\mathrm{cl}(r(X)) X^{m-n} \cdot d(X)$ tiene el mismo coeficiente líder que $r(X)$, por lo que la reasignación que hacemos ahí reduce el grado de $r(X)$ en al menos $1$. Por lo tanto, el bucle se ejecuta a lo sumo $m-n+1$ veces, tras lo cual el algoritmo termina. El polinomio $r(X)$ que retorna el algoritmo cumplirá la condición (ii) por construcción. Podemos probar por inducción que también se cumple la condición (i). En efecto, al principio inicializamos $q(X) \coloneq \0(X)$ y $r(X) \coloneq p(X)$ de modo que trivialmente se cumpla que $p(X) = q(X) \cdot d(X) + r(X)$. Ahora supongamos que al comienzo de una iteración del bucle los valores de $q(X)$ y $r(X)$ cumplían la condición (i), y que al final de dicha iteración los nuevos valores son $q'(X)$ y $r'(X)$. Estos nuevos valores siguen cumpliendo la condición (i), pues
 \begin{align*}
-q'(X) \cdot d(X) + r'(X) &= (q(X)+\mathrm{CL}(r(X))X^{m-n}) \cdot d(X) + (r(X) - \mathrm{CL}(r(X)) X^{m-n} \cdot d(X)) \\
+q'(X) \cdot d(X) + r'(X) &= (q(X)+\mathrm{cl}(r(X))X^{m-n}) \cdot d(X) + (r(X) - \mathrm{cl}(r(X)) X^{m-n} \cdot d(X)) \\
 &= q(X) \cdot d(X) + r(X)
 = p(X).
 \end{align*}
@@ -531,4 +538,4 @@ Consideremos polinomios con coeficientes en $\mathbb{Z}$. Calculemos el cociente
 \end{example}
 
 En la proposición \ref{div_polinomios}, la hipótesis de que $d(X)$ sea mónico es necesaria. Por ejemplo, supongamos que en $\mathbb{Z}[X]$ queremos dividir $p(X) = X^2$ en $d(X) = 2X$. Puesto que el grado de $d(X)$ es $1$, necesitaríamos que el resto $r(X)$ sea una constante, digamos $r(X) = c$, con $c \in \mathbb{Z}$. Entonces el cociente $q(X)$ debiese cumplir que
-$X^2 = 2X \cdot q(X) + 1$. Ahora veamos esta última igualdad en el cociente por el ideal generado por el polinomio constante $2$: obtenemos la ecuación $X^2 = 1$. Según el isomorfismo descrito en la demostración de la proposición \ref{cociente_polinomio_constante}, tendríamos que $X^2 = 1$ como polinomios en el anillo $\mathbb{Z}_2[X]$, lo que es absurdo.
+$X^2 = 2X \cdot q(X) + c$. Ahora veamos esta última igualdad en el cociente por el ideal generado por el polinomio constante $2$: obtenemos la ecuación $X^2 = c$. Según el isomorfismo descrito en la demostración de la proposición \ref{cociente_polinomio_constante}, tendríamos que $X^2 = c$ como polinomios en el anillo $\mathbb{Z}_2[X]$, lo que es absurdo.
