@@ -139,7 +139,7 @@ Marcelo Arenas\\
 \texttt{marenas@ing.puc.cl}
 \and
 María Alejandra Schild\\
-\texttt{aleschildz@mat.uc.cl}}
+\texttt{aleschildz@uc.cl}}
 
 \date{\today}
 
@@ -152,34 +152,14 @@ María Alejandra Schild\\
 	\begin{abstract}
 \noindent El test de primalidad AKS \cite{AKS04} es el primer algoritmo
 determinista capaz de decidir en tiempo polinomial si un entero positivo es primo.
-          %Antes de este test no existían algoritmos que resolvieran este problema en tiempo polinomial de forma determinista.
-En este documento haremos una revisión detallada y autocontenida de su funcionamiento y correctitud. Anexamos al final todo el material necesario para comprender las herramientas de teoría de números y de álgebra abstracta utilizadas.
+En este documento haremos una revisión detallada y autocontenida de su funcionamiento y correctitud, incluyendo todo el material necesario para comprender las herramientas de teoría de números y de álgebra abstracta utilizadas.
 \end{abstract}
 
 
 \section{Introducción}
 \input{1-intro}
 
-\section{Preliminares y motivación}
-\label{sec-notacion}
-\input{2-motivacion}
-
-    
-\section{El lema central}
-\label{sec-lema-central}
-\input{3-lema-central}
-	
-\section{El algoritmo y su correctitud}
-\label{sec-algoritmo-correctitud}
-\input{4-algoritmo-correctitud}
-
-\bibliographystyle{abbrv}
-\bibliography{referencias}
-
-\appendix
-
 \newpage
-
 
 \section{Teoría de grupos}
 \label{app-grupos}
@@ -196,6 +176,26 @@ En este documento haremos una revisión detallada y autocontenida de su funciona
 \section{Teoría de Cuerpos}
 \label{app-cuerpos}
 \input{C-cuerpos.tex}
+
+\newpage
+
+\section{Motivación del algoritmo}
+\label{sec-motivacion}
+\input{2-motivacion}
+
+    
+\section{El lema central}
+\label{sec-lema-central}
+\input{3-lema-central}
+	
+\section{El algoritmo y su correctitud}
+\label{sec-algoritmo-correctitud}
+\input{4-algoritmo-correctitud}
+
+\bibliographystyle{abbrv}
+\bibliography{referencias}
+
+\appendix
 
 \newpage
 
